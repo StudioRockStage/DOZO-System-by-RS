@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOZO Release Dashboard v2.5.0</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0f14 0%, #1a1a24 100%);
+      color: #E6C185;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1a1b1f 0%, #252631 100%);
+      border-radius: 15px;
+      border: 2px solid #E6C185;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #E6C185;
+    }
+    
+    .subtitle {
+      color: #A5A1A2;
+      font-size: 1.1rem;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .card {
+      background: linear-gradient(135deg, #1b1c20 0%, #22232a 100%);
+      border: 2px solid #E6C185;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card h2 {
+      color: #E6C185;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .release-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(230, 193, 133, 0.3);
+    }
+    
+    .release-item:hover {
+      border-color: #E6C185;
+      background: rgba(230, 193, 133, 0.1);
+    }
+    
+    .version {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    
+    .status {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+    
+    .status.success {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+      border: 1px solid #4caf50;
+    }
+    
+    .status.warning {
+      background: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
+      border: 1px solid #ffc107;
+    }
+    
+    .info {
+      font-size: 0.9rem;
+      color: #A5A1A2;
+      margin: 0.3rem 0;
+    }
+    
+    .hash {
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #7a7a7a;
+      word-break: break-all;
+      margin-top: 0.5rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      margin: 0.5rem 0.5rem 0 0;
+      background: linear-gradient(135deg, #E6C185 0%, #f5d9a0 100%);
+      color: #1a1b1f;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(230, 193, 133, 0.4);
+    }
+    
+    .log-entry {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.8rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      border-left: 3px solid #E6C185;
+    }
+    
+    .log-time {
+      font-size: 0.8rem;
+      color: #7a7a7a;
+    }
+    
+    .log-event {
+      font-weight: 600;
+      color: #fff;
+      margin: 0.3rem 0;
+    }
+    
+    .log-details {
+      font-size: 0.9rem;
+      color: #A5A1A2;
+    }
+    
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 0.8rem;
+    }
+    
+    .phase-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      text-align: center;
+      border-radius: 10px;
+      border: 2px solid rgba(230, 193, 133, 0.3);
+    }
+    
+    .phase-item.completed {
+      border-color: #4caf50;
+    }
+    
+    .phase-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #E6C185;
+    }
+    
+    .phase-status {
+      font-size: 0.75rem;
+      color: #A5A1A2;
+      margin-top: 0.3rem;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #A5A1A2;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      border-top: 2px solid #E6C185;
+      color: #A5A1A2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧩 DOZO Release Dashboard</h1>
+      <p class="subtitle">Public Sync & Release Management v2.5.0</p>
+    </header>
+
+    <div class="grid">
+      <!-- Releases -->
+      <div class="card">
+        <h2>📦 Releases Disponibles</h2>
+        <div id="releases-container" class="loading">Cargando...</div>
+      </div>
+
+      <!-- Phases -->
+      <div class="card">
+        <h2>📋 Estado de Fases</h2>
+        <div id="phases-container" class="loading">Cargando...</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Hashes -->
+      <div class="card">
+        <h2>🔐 Hashes SHA-256</h2>
+        <div id="hashes-container" class="loading">Cargando...</div>
+      </div>
+
+      <!-- Logs -->
+      <div class="card">
+        <h2>📄 Logs de Sistema</h2>
+        <div id="logs-container" class="loading">Cargando...</div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 RockStage Solutions – DOZO System v2.5.0</p>
+      <p>Dashboard actualizado automáticamente</p>
+    </footer>
+  </div>
+
+  <script>
+    async function loadDashboard() {
+      try {
+        // Cargar releases
+        const releasesRes = await fetch('/api/releases');
+        const releasesData = await releasesRes.json();
+        
+        const releasesContainer = document.getElementById('releases-container');
+        if (releasesData.releases && releasesData.releases.length > 0) {
+          releasesContainer.innerHTML = releasesData.releases.map(r => `
+            <div class="release-item">
+              <div class="version">v${r.version}</div>
+              <div class="status ${r.notarized ? 'success' : 'warning'}">${r.status}</div>
+              <div class="info">📦 ${r.filename}</div>
+              <div class="info">💾 ${r.size}</div>
+              <div class="info">📅 ${r.modified}</div>
+              <a href="${r.downloadUrl}" class="btn" download>⬇️ Descargar</a>
+            </div>
+          `).join('');
+        } else {
+          releasesContainer.innerHTML = '<p class="info">No hay releases disponibles</p>';
+        }
+
+        // Cargar phases
+        const phasesRes = await fetch('/api/phases');
+        const phasesData = await phasesRes.json();
+        
+        const phasesContainer = document.getElementById('phases-container');
+        if (phasesData.phases) {
+          const phasesGrid = document.createElement('div');
+          phasesGrid.className = 'phase-grid';
+          phasesGrid.innerHTML = phasesData.phases.map(p => `
+            <div class="phase-item ${p.status.includes('Completed') ? 'completed' : ''}">
+              <div class="phase-number">${p.phase}</div>
+              <div class="phase-status">${p.reportCount} rep.</div>
+            </div>
+          `).join('');
+          phasesContainer.innerHTML = '';
+          phasesContainer.appendChild(phasesGrid);
+          
+          const summary = document.createElement('div');
+          summary.className = 'info';
+          summary.style.marginTop = '1rem';
+          summary.textContent = `Completadas: ${phasesData.summary.completed}/${phasesData.summary.total}`;
+          phasesContainer.appendChild(summary);
+        }
+
+        // Cargar hashes
+        const hashesRes = await fetch('/api/hashes');
+        const hashesData = await hashesRes.json();
+        
+        const hashesContainer = document.getElementById('hashes-container');
+        if (hashesData.releases && hashesData.releases.length > 0) {
+          hashesContainer.innerHTML = hashesData.releases.map(h => `
+            <div class="release-item">
+              <div class="info">📦 ${h.filename}</div>
+              <div class="info">v${h.version}</div>
+              <div class="hash">${h.sha256}</div>
+            </div>
+          `).join('');
+        } else {
+          hashesContainer.innerHTML = '<p class="info">No hay hashes disponibles</p>';
+        }
+
+        // Cargar logs (últimos 5)
+        const logsRes = await fetch('/api/logs');
+        const logsData = await logsRes.json();
+        
+        const logsContainer = document.getElementById('logs-container');
+        if (logsData.logs && logsData.logs.length > 0) {
+          const recentLogs = logsData.logs.slice(-5).reverse();
+          logsContainer.innerHTML = recentLogs.map(log => {
+            const date = new Date(log.timestamp);
+            return `
+              <div class="log-entry">
+                <div class="log-time">${date.toLocaleString()}</div>
+                <div class="log-event">${log.event}</div>
+                <div class="log-details">${log.details}</div>
+              </div>
+            `;
+          }).join('');
+        } else {
+          logsContainer.innerHTML = '<p class="info">No hay logs disponibles</p>';
+        }
+
+      } catch (error) {
+        console.error('Error loading dashboard:', error);
+        document.querySelectorAll('.loading').forEach(el => {
+          el.textContent = 'Error cargando datos';
+        });
+      }
+    }
+
+    // Cargar al inicio
+    window.addEventListener('load', loadDashboard);
+
+    // Actualizar cada 30 segundos
+    setInterval(loadDashboard, 30000);
+  </script>
+</body>
+</html>

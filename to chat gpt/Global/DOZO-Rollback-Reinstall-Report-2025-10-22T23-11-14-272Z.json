@@ -1,0 +1,48 @@
+{
+  "started_at": "2025-10-22T23:11:14.277Z",
+  "context": "DOZO Local Rollback & Reinstall v1.0.0",
+  "actions": [
+    {
+      "step": "Verificando estado de Docker",
+      "status": "OK",
+      "timestamp": "2025-10-22T23:11:14.408Z"
+    },
+    {
+      "step": "Desactivando y eliminando plugin del contenedor",
+      "status": "OK",
+      "timestamp": "2025-10-22T23:11:14.651Z"
+    },
+    {
+      "step": "Limpiando base de datos y cachés",
+      "status": "OK",
+      "timestamp": "2025-10-22T23:11:14.745Z"
+    },
+    {
+      "step": "Verificando WP-CLI y unzip en contenedor",
+      "status": "OK",
+      "timestamp": "2025-10-22T23:11:21.661Z"
+    },
+    {
+      "step": "Reinstalando plugin base desde ZIP",
+      "status": "OK",
+      "timestamp": "2025-10-22T23:11:23.744Z"
+    },
+    {
+      "step": "Validando reinstalación y estructura",
+      "status": "OK",
+      "timestamp": "2025-10-22T23:11:24.248Z"
+    },
+    {
+      "cleaned_files": 3
+    },
+    {
+      "step": "Limpieza del workspace DOZO",
+      "status": "OK",
+      "timestamp": "2025-10-22T23:11:24.251Z"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "status": "SUCCESS",
+  "finished_at": "2025-10-22T23:11:24.251Z"
+}

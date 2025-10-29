@@ -1,0 +1,85 @@
+{
+  "action": "Dual Build Reconstruction",
+  "status": "success",
+  "timestamp": "2025-10-19T09:05:04.228Z",
+  "dozo_version": "7.9",
+  "audit_summary": {
+    "issues_found": 1,
+    "issues_corrected": true
+  },
+  "builds": {
+    "v100": {
+      "filename": "warranty-system-rs-v1.0.0.zip",
+      "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.0.zip",
+      "size": 2778134,
+      "size_formatted": "2.65 MB",
+      "sha256": "f99c81218718d8311a2a5c2e1d4bac7b6029fcac9f77affd0eff294e6b78ecaf",
+      "version": "1.0.0",
+      "features": [
+        "Base Warranty System RS",
+        "Integración WooCommerce",
+        "Panel administración premium",
+        "Notificaciones email",
+        "Compatible HPOS",
+        "Text domain unificado"
+      ]
+    },
+    "v101": {
+      "filename": "warranty-system-rs-v1.0.1.zip",
+      "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.1.zip",
+      "size": 2794459,
+      "size_formatted": "2.67 MB",
+      "sha256": "0eb14cd1d2929dbdee0fd88d456ab9873a7358568d85f848cd73b4c2cb47004e",
+      "version": "1.0.1",
+      "features": [
+        "Todo lo de v1.0.0",
+        "SmartCategoryPanel v1.1.0",
+        "Menú admin Smart Categories",
+        "Shortcode [rs_smart_category_panel]",
+        "Assets CSS/JS optimizados"
+      ]
+    }
+  },
+  "cleanup": {
+    "files_removed": 0,
+    "directories_removed": 0
+  },
+  "validation": {
+    "v100": {
+      "exists": true,
+      "size_ok": true,
+      "sha256_valid": true,
+      "has_main_file": true,
+      "correct_structure": true
+    },
+    "v101": {
+      "exists": true,
+      "size_ok": true,
+      "sha256_valid": true,
+      "larger_than_v100": true,
+      "has_smart_panel": true
+    },
+    "text_domain": "warranty-system-rs",
+    "folder_name": "warranty-system-rs",
+    "all_passed": true
+  },
+  "standardization": {
+    "text_domain": "warranty-system-rs",
+    "folder_name": "warranty-system-rs",
+    "main_file": "warranty-system-rs.php",
+    "plugin_name": "Warranty System RS",
+    "author": "RockStage Solutions"
+  },
+  "wordpress_compatibility": {
+    "update_system": "compatible",
+    "auto_updates": "enabled",
+    "version_format": "semver",
+    "update_path": "v1.0.0 → v1.0.1"
+  },
+  "next_steps": [
+    "Subir warranty-system-rs-v1.0.1.zip al servidor de actualizaciones",
+    "Actualizar update.json con versión 1.0.1",
+    "Probar actualización en WordPress staging",
+    "Deploy en producción"
+  ]
+}

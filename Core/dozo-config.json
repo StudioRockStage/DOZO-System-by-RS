@@ -1,0 +1,20 @@
+{
+  "systemVersion": "2.0.0",
+  "author": "RockStage Solutions",
+  "autoUpdate": true,
+  "reportingEnabled": true,
+  "defaultProject": "Warranty System RS",
+  "aiSync": {
+    "chatgpt": true,
+    "cursor": true,
+    "claude": true
+  },
+  "integrations": {
+    "github": true,
+    "wordpress": true,
+    "woocommerce": true
+  }
+}
+
+
+

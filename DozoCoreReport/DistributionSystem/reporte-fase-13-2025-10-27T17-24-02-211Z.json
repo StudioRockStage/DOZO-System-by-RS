@@ -1,0 +1,29 @@
+{
+  "fase": "13",
+  "version": "2.3.0",
+  "estado": "COMPLETADA",
+  "timestamp": "2025-10-27T17:24:02.215Z",
+  "steps": [
+    "electron-builder verificado: 24.13.3",
+    "package.json cargado correctamente",
+    "package.json actualizado con configuración de build",
+    "Builds anteriores limpiados",
+    "electron-builder ejecutado correctamente",
+    "Hash SHA-256 generado y guardado"
+  ],
+  "errors": [],
+  "warnings": [
+    "No hay certificado válido - build unsigned"
+  ],
+  "dmg": "DOZO-Control-Center-RockStage-2.3.0.dmg",
+  "dmgSize": "89.63 MB",
+  "signed": false,
+  "sha256": "4709994602f9338cae60675f50ebb7898d088ab2777158e370a1729eec441c9f",
+  "summary": {
+    "dmgGenerated": true,
+    "signed": false,
+    "errors": 0,
+    "warnings": 1,
+    "steps": 6
+  }
+}

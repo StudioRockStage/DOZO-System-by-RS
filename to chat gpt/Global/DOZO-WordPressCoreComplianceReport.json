@@ -1,0 +1,66 @@
+{
+  "started_at": "2025-10-21T03:20:17.726Z",
+  "build": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zip",
+  "results": [
+    {
+      "test": "Archivo ZIP detectado",
+      "status": "OK",
+      "info": ""
+    },
+    {
+      "test": "Estructura del ZIP",
+      "status": "OK",
+      "info": ""
+    },
+    {
+      "test": "Cabeceras del plugin",
+      "status": "OK",
+      "info": {
+        "PluginName": "Warranty System RS",
+        "Version": "1.0.0",
+        "Author": "RockStage Solutions",
+        "UpdateURI": "https://updates.vapedot.mx/warranty-system-rs/update.json",
+        "TextDomain": "warranty-system-rs"
+      }
+    },
+    {
+      "test": "Verificación ABSPATH",
+      "status": "OK",
+      "info": ""
+    },
+    {
+      "test": "Compatibilidad PHP/WP",
+      "status": "OK",
+      "info": {
+        "requiresPhp": "7.4",
+        "requiresWp": "6.0",
+        "testedUpTo": "6.7.1"
+      }
+    },
+    {
+      "test": "Hooks detectados",
+      "status": "OK",
+      "info": {
+        "hookCount": 6
+      }
+    },
+    {
+      "test": "Validación sintaxis PHP",
+      "status": "OK",
+      "info": {
+        "hasFunctions": true,
+        "hasClasses": false
+      }
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "status": "WP_COMPATIBLE_OK",
+  "compatibility": {
+    "requiresPhp": "7.4",
+    "requiresWp": "6.0",
+    "testedUpTo": "6.7.1"
+  },
+  "finished_at": "2025-10-21T03:20:17.738Z",
+  "hash": "ffd3e42124fc15c6a7fef4d02803d34497d409e165326a6c98a1309d63f58f6b"
+}

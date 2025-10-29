@@ -1,0 +1,86 @@
+{
+  "started_at": "2025-10-21T01:43:15.453Z",
+  "srcDirOriginal": "/Users/davidalejandroperezrea/Documents/Respaldo WS/warranty system",
+  "workingDir": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Plugins/Warranty System/warranty-system-rs",
+  "actions": [
+    {
+      "copied_to_working": true,
+      "from": "/Users/davidalejandroperezrea/Documents/Respaldo WS/warranty system",
+      "to": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Plugins/Warranty System/warranty-system-rs"
+    },
+    {
+      "renamed_main_file": {
+        "from": "rockstage-warranty-system.php",
+        "to": "warranty-system-rs.php"
+      }
+    },
+    {
+      "added_ABSPATH": true
+    },
+    {
+      "normalized_headers": true
+    },
+    {
+      "created_index_php": true
+    },
+    {
+      "cleaned_root": [
+        "AUDIT-SUMMARY.txt",
+        "Admin Panels",
+        "CHANGELOG.md",
+        "DEPLOYMENT-CHECKLIST-v3.7.md",
+        "DOZO-V7.5-SMARTSYNC-LAYOUT.md",
+        "DOZO-V7.5.1-FORCE-MODE.md",
+        "DOZO-V7.5.2-FINAL-REPORT.md",
+        "INSTALL-CLAUDE-PANEL.md",
+        "NEXT-STEPS.md",
+        "QA-DEEP-REPORT.md",
+        "QA-summary.txt",
+        "QUICK-START-v3.5.md",
+        "TESTING-GUIDE-v3.7.md",
+        "backup-dozo",
+        "dozo_update.log",
+        "logs"
+      ]
+    }
+  ],
+  "warnings": [
+    "Falta directorio: admin",
+    "Falta directorio: public"
+  ],
+  "steps": [
+    {
+      "msg": "Verificando carpeta fuente estable..."
+    },
+    {
+      "msg": "Copiando archivos a directorio de trabajo..."
+    },
+    {
+      "msg": "Renombrando archivo principal: rockstage-warranty-system.php → warranty-system-rs.php"
+    },
+    {
+      "msg": "Ejecutando DeepSync Validation y normalización de cabeceras"
+    },
+    {
+      "msg": "Creando index.php de seguridad"
+    },
+    {
+      "msg": "Limpieza del ROOT del plugin"
+    },
+    {
+      "msg": "Empaquetando versión base warranty-system-rs.zip"
+    },
+    {
+      "msg": "Guardando reporte final"
+    }
+  ],
+  "result_zip": {
+    "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zip",
+    "size": 184610,
+    "size_human": "180 KB",
+    "sha256": "11c05ad5d057e983d91fd472768fcefc16790f41ed553dae6b08f95f71fefcf2"
+  },
+  "finished_at": "2025-10-21T01:43:15.870Z",
+  "status": "SUCCESS",
+  "ready_for_deployment": true
+}

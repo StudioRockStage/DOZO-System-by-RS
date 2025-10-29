@@ -1,0 +1,98 @@
+/* @dozo:sync auto */
+/* DOZO v7.2.2: Design Panel Styles */
+
+:root {
+    --rs-primary: #FF8C00;
+    --rs-primary-hover: #FFA500;
+    --rs-bg-light: #f9fafb;
+    --rs-border: #e5e7eb;
+    --rs-text-primary: #1f2937;
+    --rs-text-secondary: #6b7280;
+}
+
+.rs-design-panel {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.rs-theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.rs-theme-card {
+    border: 2px solid var(--rs-border);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rs-theme-card:hover {
+    border-color: var(--rs-primary);
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.rs-theme-card.selected {
+    border-color: var(--rs-primary);
+    box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+}
+
+.rs-theme-preview {
+    height: 80px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.rs-theme-card h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--rs-text-primary);
+}
+
+.rs-theme-card p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--rs-text-secondary);
+}
+
+#designPreview {
+    background: var(--rs-bg-light);
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    min-height: 200px;
+    transition: all 0.3s ease;
+}
+
+#designPreview.has-selection {
+    border-color: var(--rs-primary);
+    background: rgba(255, 140, 0, 0.03);
+}
+
+.rs-form-section {
+    margin-bottom: 32px;
+}
+
+.rs-form-section h3 {
+    margin: 0 0 16px;
+    color: var(--rs-text-primary);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.rs-spinner {
+    animation: spin 1s linear infinite;
+}
+

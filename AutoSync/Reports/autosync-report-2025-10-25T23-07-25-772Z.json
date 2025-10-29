@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "Lucky Stage",
+    "Price Craft",
+    "Warranty System",
+    "warranty-system-rs",
+    "woocommerce"
+  ],
+  "timestamp": "2025-10-25T23:07:25.773Z"
+}

@@ -1,0 +1,167 @@
+/**
+ * RockStage Icon System - DOZO Semantic
+ * Simple, lightweight icon system using data attributes
+ * Compatible with Lucide icon names
+ */
+
+.rs-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: currentColor;
+    flex-shrink: 0;
+}
+
+.rs-icon--xs {
+    width: 14px;
+    height: 14px;
+}
+
+.rs-icon--sm {
+    width: 18px;
+    height: 18px;
+}
+
+.rs-icon--lg {
+    width: 32px;
+    height: 32px;
+}
+
+.rs-icon--xl {
+    width: 48px;
+    height: 48px;
+}
+
+/* Icon rendering via pseudo-element with SVG data-uri */
+.rs-icon::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Lucide Icons - Basic Set */
+.rs-icon[data-icon="folder-cog"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Crect x='3' y='5' width='18' height='14' rx='2' stroke-width='2'/%3E%3Cpath d='M3 9H21' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="refresh-cw"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M21 2v6h-6M3 12a9 9 0 0115-6.7L21 8M3 22v-6h6M21 12a9 9 0 01-15 6.7L3 16' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="folder"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17V7Z' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="calendar"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Crect x='3' y='6' width='18' height='15' rx='2' stroke-width='2'/%3E%3Cpath d='M3 10H21M7 3V7M17 3V7' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="clock"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Ccircle cx='12' cy='12' r='9' stroke-width='2'/%3E%3Cpath d='M12 7V12L15 15' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="type"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M7 8H17M7 12H17M7 16H12' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="zap"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M13 2L3 14H12L11 22L21 10H12L13 2Z' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="check"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M5 13L9 17L19 7' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="rotate-ccw"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74M21 3v6h-6' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='9' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="table"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Crect x='3' y='5' width='18' height='14' rx='2' stroke-width='2'/%3E%3Cpath d='M3 9H21M7 13H7.01M7 17H7.01M11 13H17M11 17H17' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="check-circle"]::before,
+.rs-icon[data-icon="check-circle-2"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Ccircle cx='12' cy='12' r='9' stroke-width='2'/%3E%3Cpath d='M8 12L11 15L16 9' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="x-circle"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Ccircle cx='12' cy='12' r='9' stroke-width='2'/%3E%3Cpath d='M15 9L9 15M9 9L15 15' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="edit-2"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M17 3L21 7L8 20H4V16L17 3Z' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="trash-2"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M3 6H21M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="info"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Ccircle cx='12' cy='12' r='9' stroke-width='2'/%3E%3Cpath d='M12 11V16M12 8H12.01' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.rs-icon[data-icon="save"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath d='M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z' stroke-width='2'/%3E%3Cpolyline points='17 21 17 13 7 13 7 21' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+/* Icon colors based on context */
+.rs-icon-wrapper--primary .rs-icon {
+    color: var(--rs-orange);
+}
+
+.rs-icon-wrapper--secondary .rs-icon {
+    color: #6b7280;
+}
+
+.rs-icon-wrapper--success .rs-icon {
+    color: #10b981;
+}
+
+.rs-icon-wrapper--error .rs-icon {
+    color: #ef4444;
+}
+
+.rs-icon-button--edit .rs-icon {
+    color: var(--rs-orange-dark);
+}
+
+.rs-icon-button--delete .rs-icon {
+    color: #991b1b;
+}
+
+/* Icon wrapper base */
+.rs-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rs-icon-wrapper--primary {
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.15), rgba(255, 140, 0, 0.05));
+}
+
+.rs-icon-wrapper--secondary {
+    background: rgba(107, 114, 128, 0.1);
+}
+
+.rs-icon-wrapper--success {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.rs-icon-wrapper--error {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+
+

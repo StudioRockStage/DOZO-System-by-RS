@@ -1,0 +1,572 @@
+/* ============================================
+   ROCKSTAGE WARRANTY SYSTEM - PUBLIC STYLES
+   Based on "Formulario Público - Tema RockStage (Orange Modern).html"
+   Namespaced with .rs- prefix for Astra/Spectra compatibility
+   ============================================ */
+
+:root {
+    --rs-orange: #FF8C00;
+    --rs-orange-light: #FFA500;
+    --rs-orange-dark: #cc7000;
+}
+
+/* Scoped reset only for warranty form */
+.rs-warranty-form-container,
+.rs-warranty-form-container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.rs-warranty-form-container {
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    background: #f8f9fa;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    isolation: isolate; /* CSS containment for Astra/Spectra */
+}
+
+/* Header */
+.rs-form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.rs-logo-container {
+    margin-bottom: 24px;
+}
+
+.rs-logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--rs-orange), var(--rs-orange-dark));
+    box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+}
+
+.rs-logo-badge svg {
+    color: white;
+}
+
+.rs-form-header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.rs-form-header p {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+/* Form Card */
+.rs-form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 32px;
+}
+
+/* Progress Steps */
+.rs-progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.rs-progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e5e7eb;
+    z-index: 0;
+}
+
+.rs-progress-line {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rs-orange), var(--rs-orange-dark));
+    transition: width 0.5s ease;
+    z-index: 1;
+    width: 0%;
+}
+
+.rs-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.rs-step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #9ca3af;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.rs-step.active .rs-step-circle {
+    border-color: var(--rs-orange);
+    background: linear-gradient(135deg, var(--rs-orange), var(--rs-orange-dark));
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+}
+
+.rs-step.completed .rs-step-circle {
+    border-color: #10b981;
+    background: #10b981;
+    color: white;
+}
+
+.rs-step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    text-align: center;
+}
+
+.rs-step.active .rs-step-label {
+    color: var(--rs-orange-dark);
+}
+
+/* Step Content */
+.rs-step-content {
+    display: none;
+}
+
+.rs-step-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.rs-step-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.rs-step-description {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 32px;
+}
+
+/* Form Elements */
+.rs-form-group {
+    margin-bottom: 24px;
+}
+
+.rs-form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rs-form-label.required::after {
+    content: '*';
+    color: #ef4444;
+    margin-left: 4px;
+}
+
+.rs-form-input,
+.rs-form-select,
+.rs-form-textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.rs-form-input:focus,
+.rs-form-select:focus,
+.rs-form-textarea:focus {
+    outline: none;
+    border-color: var(--rs-orange);
+    box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.1);
+}
+
+.rs-form-help {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 8px;
+}
+
+/* File Upload */
+.rs-file-upload-area {
+    border: 2px dashed #e5e7eb;
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rs-file-upload-area:hover,
+.rs-file-upload-area.dragover {
+    border-color: var(--rs-orange);
+    background: rgba(255, 140, 0, 0.05);
+}
+
+.rs-file-upload-area svg {
+    color: var(--rs-orange);
+    margin-bottom: 16px;
+}
+
+.rs-file-upload-area p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.rs-file-upload-area span {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.rs-file-list {
+    margin-top: 16px;
+    display: grid;
+    gap: 12px;
+}
+
+.rs-file-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.rs-file-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--rs-orange);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rs-file-info {
+    flex: 1;
+}
+
+.rs-file-name {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+.rs-file-size {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.rs-file-remove {
+    padding: 8px;
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.rs-file-remove:hover {
+    background: #fee2e2;
+}
+
+/* Terms Box */
+.rs-terms-box {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.rs-terms-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.rs-terms-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #374151;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.rs-terms-box ul {
+    margin-left: 20px;
+    margin-bottom: 12px;
+}
+
+.rs-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #374151;
+}
+
+.rs-checkbox-label input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Form Actions */
+.rs-form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.rs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.rs-btn-primary {
+    background: linear-gradient(135deg, var(--rs-orange), var(--rs-orange-dark));
+    color: white;
+    box-shadow: 0 4px 16px rgba(255, 140, 0, 0.3);
+}
+
+.rs-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+}
+
+.rs-btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.rs-btn-secondary:hover {
+    background: #e5e7eb;
+}
+
+.rs-btn-whatsapp {
+    background: #25d366;
+    color: white;
+}
+
+.rs-btn-whatsapp:hover {
+    background: #20ba5a;
+    transform: translateY(-2px);
+}
+
+/* Success Screen */
+.rs-success-screen {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.rs-success-icon-large {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.rs-success-screen h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.rs-success-screen p {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.rs-warranty-number-display {
+    background: #f9fafb;
+    border: 2px solid var(--rs-orange);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 24px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.rs-warranty-number-display .warranty-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--rs-orange);
+    display: block;
+    margin-top: 8px;
+}
+
+.rs-success-message {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 24px;
+}
+
+/* WhatsApp Float Button */
+.rs-whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25d366;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.rs-whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .rs-form-header h1 {
+        font-size: 28px;
+    }
+    
+    .rs-form-card {
+        padding: 24px;
+    }
+    
+    .rs-form-actions {
+        flex-direction: column;
+    }
+    
+    .rs-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .rs-progress-steps {
+        flex-wrap: wrap;
+    }
+    
+    .rs-step-label {
+        font-size: 11px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .rs-warranty-form-container {
+        background: #0a0a0a;
+    }
+    
+    .rs-form-card {
+        background: #1a1a1a;
+        border-color: rgba(255, 140, 0, 0.2);
+    }
+    
+    .rs-form-header h1 {
+        color: #ffffff;
+    }
+    
+    .rs-form-input,
+    .rs-form-select,
+    .rs-form-textarea {
+        background: #2a2a2a;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+    }
+    
+    .rs-terms-box {
+        background: #2a2a2a;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+    }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .rs-progress-line {
+        transition: none;
+    }
+}
+

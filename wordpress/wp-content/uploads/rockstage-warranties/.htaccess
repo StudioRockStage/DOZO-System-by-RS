@@ -1,0 +1,5 @@
+Options -Indexes
+<Files ~ "\.(jpg|jpeg|png|gif|mp4|mov|avi)$">
+    Order allow,deny
+    Allow from all
+</Files>

@@ -1,0 +1,87 @@
+{
+  "action": "DOZO Core & Versions Validation",
+  "status": "success",
+  "timestamp": "2025-10-19T08:31:09.134Z",
+  "system": {
+    "dozo_version": "7.9",
+    "project": "Warranty System RS",
+    "active_version": "1.0.1",
+    "build_status": "consolidado"
+  },
+  "build_info": {
+    "filename": "warranty-system-rs-v1.0.1.zip",
+    "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.1.zip",
+    "size": 2792117,
+    "size_formatted": "2.66 MB",
+    "sha256": "1c11f2270be7d29217223cf746a5ca2ae2b93a588f4136d77c2259cceeece02e"
+  },
+  "dozo_core_validation": {
+    "file": "DOZO-Core.json",
+    "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Workflow DB/DOZO-Core.json",
+    "status": "valid",
+    "validations": {
+      "file_exists": true,
+      "file_readable": true,
+      "project_name": {
+        "expected": "Warranty System RS",
+        "actual": "Warranty System RS",
+        "valid": true
+      },
+      "active_version": {
+        "expected": "1.0.1",
+        "actual": "1.0.1",
+        "valid": true
+      },
+      "build_status": {
+        "expected": "consolidado",
+        "actual": "consolidado",
+        "valid": true
+      },
+      "build_path": {
+        "expected": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.1.zip",
+        "actual": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.1.zip",
+        "valid": true
+      }
+    }
+  },
+  "versions_validation": {
+    "file": "Versions.json",
+    "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Workflow DB/Versions.json",
+    "status": "valid",
+    "validations": {
+      "file_exists": true,
+      "file_readable": true,
+      "version_actual": {
+        "expected": "1.0.1",
+        "actual": "1.0.1",
+        "valid": true
+      },
+      "build_path": {
+        "expected": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.1.zip",
+        "actual": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.1.zip",
+        "valid": true
+      },
+      "estado": {
+        "expected": "consolidado",
+        "actual": "consolidado",
+        "valid": true
+      },
+      "sha256": {
+        "expected": "1c11f2270be7d29217223cf746a5ca2ae2b93a588f4136d77c2259cceeece02e",
+        "actual": "1c11f2270be7d29217223cf746a5ca2ae2b93a588f4136d77c2259cceeece02e",
+        "valid": true,
+        "needs_update": false
+      }
+    },
+    "auto_corrections": {
+      "sha256_updated": false
+    }
+  },
+  "summary": {
+    "total_validations": 8,
+    "passed": 8,
+    "corrected": 0,
+    "failed": 0
+  },
+  "recommendations": []
+}

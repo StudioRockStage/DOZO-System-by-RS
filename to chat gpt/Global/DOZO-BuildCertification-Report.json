@@ -1,0 +1,68 @@
+{
+  "action": "Build Certification",
+  "status": "certified",
+  "timestamp": "2025-10-19T08:34:05.183Z",
+  "plugin": {
+    "name": "Warranty System RS",
+    "version": "1.0.1",
+    "author": "RockStage Solutions"
+  },
+  "build": {
+    "filename": "warranty-system-rs-v1.0.1.zip",
+    "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs-v1.0.1.zip",
+    "size": 2792117,
+    "size_formatted": "2.66 MB",
+    "sha256": "1c11f2270be7d29217223cf746a5ca2ae2b93a588f4136d77c2259cceeece02e"
+  },
+  "validations": {
+    "size_check": "OK",
+    "essential_files_check": "OK",
+    "integrity_check": "OK",
+    "overall": "OK"
+  },
+  "essential_files": {
+    "required": [
+      "rockstage-warranty-system.php",
+      "includes/",
+      "admin/",
+      "public/",
+      "assets/",
+      "templates/"
+    ],
+    "found": [
+      "rockstage-warranty-system.php",
+      "includes/",
+      "admin/",
+      "public/",
+      "assets/",
+      "templates/"
+    ],
+    "missing": []
+  },
+  "certification": {
+    "certified_by": "RockStage Solutions",
+    "certified_date": "2025-10-19T08:34:05.183Z",
+    "dozo_version": "7.9",
+    "status": "estable",
+    "ready_for_deploy": true
+  },
+  "features": [
+    "Base Warranty System RS v1.0.0",
+    "SmartCategoryPanel v1.1.0 integrado",
+    "Menú admin Smart Categories",
+    "Shortcode [rs_smart_category_panel]",
+    "Assets CSS/JS optimizados",
+    "Compatible con WooCommerce",
+    "Compatible con HPOS",
+    "Nomenclatura unificada",
+    "Text domain: warranty-system-rs"
+  ],
+  "operations_completed": [
+    "Fatal Recovery v1.0.0",
+    "SmartCategoryPanel Integration v1.0.1",
+    "Deploy Preparation v1.0.1",
+    "Build Relocation & Core Update",
+    "Core & Versions Validation",
+    "Build Certification v1.0.1"
+  ]
+}

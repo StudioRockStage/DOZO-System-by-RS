@@ -1,0 +1,5 @@
+DOZO Control Center – RockStage v2.3.0
+DMG: DOZO-Control-Center-RockStage-2.3.0.dmg
+SHA-256: 4709994602f9338cae60675f50ebb7898d088ab2777158e370a1729eec441c9f
+Generado: 2025-10-27T17:24:02.215Z
+Firmado: No

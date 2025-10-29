@@ -1,0 +1,113 @@
+{
+  "timestamp": "2025-10-20T20:00:44.418Z",
+  "status": "REMOTE_SYNC_SUCCESSFUL",
+  "connection": {
+    "status": "SUCCESS",
+    "host": "82.29.86.182",
+    "port": 21,
+    "remotePath": "/public_html/updates/warranty-system-rs",
+    "fileCount": 2,
+    "files": [
+      {
+        "name": "update.json",
+        "size": 188,
+        "type": "file",
+        "permissions": 14
+      },
+      {
+        "name": "warranty-system-rs-v1.0.1.zip",
+        "size": 2794459,
+        "type": "file",
+        "permissions": 14
+      }
+    ]
+  },
+  "updateJson": {
+    "status": "VALID",
+    "content": {
+      "version": "1.0.1",
+      "download_url": "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip",
+      "tested": "6.7.1",
+      "requires": "6.0",
+      "requires_php": "7.4"
+    },
+    "httpAccess": {
+      "accessible": true,
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "headers": {
+        "connection": "Keep-Alive",
+        "keep-alive": "timeout=5, max=100",
+        "content-type": "application/json",
+        "last-modified": "Mon, 20 Oct 2025 18:36:18 GMT",
+        "etag": "\"b5-68f68122-db21f102b7bb6001;;;\"",
+        "accept-ranges": "bytes",
+        "content-length": "181",
+        "date": "Mon, 20 Oct 2025 20:00:45 GMT",
+        "server": "LiteSpeed",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests"
+      }
+    }
+  },
+  "zipFile": {
+    "ftpStatus": "FOUND",
+    "fileName": "warranty-system-rs-v1.0.1.zip",
+    "size": 2794459,
+    "sizeReadable": "2.67 MB",
+    "sha256": "0eb14cd1d2929dbdee0fd88d456ab9873a7358568d85f848cd73b4c2cb47004e",
+    "httpAccess": {
+      "accessible": true,
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "headers": {
+        "connection": "Keep-Alive",
+        "keep-alive": "timeout=5, max=100",
+        "content-type": "application/zip",
+        "last-modified": "Mon, 20 Oct 2025 18:34:01 GMT",
+        "etag": "\"2bb539-68f68099-2d1730352215071b;;;\"",
+        "accept-ranges": "bytes",
+        "content-length": "2864441",
+        "date": "Mon, 20 Oct 2025 20:00:46 GMT",
+        "server": "LiteSpeed",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests"
+      }
+    }
+  },
+  "permissions": {
+    "checked": [
+      {
+        "name": "update.json",
+        "type": "file",
+        "current": "644",
+        "expected": "rwrr"
+      },
+      {
+        "name": "warranty-system-rs-v1.0.1.zip",
+        "type": "file",
+        "current": "644",
+        "expected": "rwrr"
+      }
+    ],
+    "corrected": [],
+    "status": "CHECKED"
+  },
+  "wordpressSimulation": {
+    "updateJsonReceived": {
+      "version": "1.0.0",
+      "download_url": "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs.zip",
+      "tested": "6.7.1",
+      "requires": "6.0",
+      "requires_php": "7.4"
+    },
+    "remoteVersion": "1.0.0",
+    "installedVersion": "0.9.9",
+    "updateDetected": true,
+    "status": "UPDATE_DETECTED",
+    "zipDownloadable": true
+  },
+  "errors": []
+}

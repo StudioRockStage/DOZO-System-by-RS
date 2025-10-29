@@ -1,0 +1,665 @@
+/**
+ * RockStage Semantic Components - DOZO Integration Layer
+ * Translation of generic HTML to semantic RockStage components
+ * 
+ * RockStage Adaptation Rules:
+ * - Background: #F8F9FA
+ * - Text: #212529
+ * - Accent: #FF8C00
+ * - Grays: #E5E7EB, #D1D5DB, #6B7280
+ * - Typography: Space Grotesk (UI), JetBrains Mono (data)
+ * - Cards: border-radius 20px, shadow rgba(0,0,0,0.08)
+ * - Buttons: hover translateY(-2px), shadow
+ * - Selects/Toggles: orange/gray tones
+ */
+
+:root {
+    --rs-orange: #FF8C00;
+    --rs-orange-light: #FFA500;
+    --rs-orange-dark: #cc7000;
+    --rs-bg-primary: #F8F9FA;
+    --rs-text-primary: #212529;
+    --rs-text-secondary: #6B7280;
+    --rs-border: #E5E7EB;
+    --rs-border-light: #D1D5DB;
+    --rs-radius-card: 20px;
+    --rs-radius-input: 10px;
+    --rs-radius-btn: 12px;
+    --rs-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --rs-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --rs-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --rs-font-ui: 'Space Grotesk', -apple-system, sans-serif;
+    --rs-font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ===================================================================
+   RS-CARD (Semantic Card Component)
+   =================================================================== */
+
+.rs-card {
+    background: white;
+    border-radius: var(--rs-radius-card);
+    padding: 32px;
+    border: 1px solid var(--rs-border);
+    margin-bottom: 24px;
+    box-shadow: var(--rs-shadow-sm);
+    transition: all 0.4s ease;
+}
+
+.rs-card:hover {
+    border-color: rgba(255, 140, 0, 0.3);
+    box-shadow: var(--rs-shadow-md);
+}
+
+.rs-card--config {
+    /* Variant for configuration cards */
+}
+
+.rs-card--table {
+    /* Variant for table cards */
+    padding: 0;
+}
+
+.rs-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.rs-card--table .rs-card-header {
+    padding: 24px 32px 20px 32px;
+    margin-bottom: 0;
+}
+
+.rs-card-header-content {
+    flex: 1;
+}
+
+.rs-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+    font-family: var(--rs-font-ui);
+}
+
+.rs-card-description {
+    font-size: 14px;
+    color: var(--rs-text-secondary);
+    margin: 4px 0 0 0;
+    font-family: var(--rs-font-ui);
+}
+
+/* ===================================================================
+   RS-FIELD (Semantic Form Field)
+   =================================================================== */
+
+.rs-field {
+    margin-bottom: 24px;
+}
+
+.rs-field-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--rs-font-ui);
+}
+
+.rs-field-help {
+    font-size: 13px;
+    color: #9ca3af;
+    margin: 6px 0 0 0;
+    font-family: var(--rs-font-ui);
+}
+
+/* ===================================================================
+   RS-INPUT & RS-SELECT (Semantic Form Controls)
+   =================================================================== */
+
+.rs-input,
+.rs-select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--rs-border-light);
+    border-radius: var(--rs-radius-input);
+    font-size: 15px;
+    font-weight: 500;
+    color: #374151;
+    background: #f9fafb;
+    transition: all 0.3s ease;
+    font-family: var(--rs-font-ui);
+}
+
+.rs-input:focus,
+.rs-select:focus {
+    outline: none;
+    border-color: var(--rs-orange);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+}
+
+.rs-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236b7280' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 44px;
+}
+
+/* ===================================================================
+   RS-BTN (Semantic Button Component)
+   =================================================================== */
+
+.rs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: var(--rs-radius-btn);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--rs-font-ui);
+    text-decoration: none;
+}
+
+.rs-btn--primary {
+    background: linear-gradient(135deg, var(--rs-orange), var(--rs-orange-dark));
+    color: white;
+    box-shadow: 0 4px 16px rgba(255, 140, 0, 0.3);
+}
+
+.rs-btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+}
+
+.rs-btn--secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid var(--rs-border-light);
+}
+
+.rs-btn--secondary:hover {
+    background: #e5e7eb;
+    transform: translateY(-2px);
+}
+
+.rs-btn--ghost {
+    background: transparent;
+    color: #374151;
+    border: 1px solid var(--rs-border);
+}
+
+.rs-btn--ghost:hover {
+    background: #f9fafb;
+    border-color: rgba(255, 140, 0, 0.3);
+}
+
+.rs-btn--icon {
+    /* Variant for buttons with icons */
+}
+
+/* ===================================================================
+   RS-GRID (Semantic Grid Layout)
+   =================================================================== */
+
+.rs-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.rs-grid--2col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.rs-grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.rs-grid--4col {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+    .rs-grid--2col,
+    .rs-grid--3col,
+    .rs-grid--4col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===================================================================
+   RS-TOGGLE (Semantic Toggle Switch)
+   =================================================================== */
+
+.rs-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: var(--rs-radius-input);
+    border: 1px solid var(--rs-border);
+    transition: all 0.3s ease;
+}
+
+.rs-toggle-wrapper:hover {
+    background: white;
+    border-color: rgba(255, 140, 0, 0.3);
+}
+
+.rs-toggle-info {
+    flex: 1;
+}
+
+.rs-toggle-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+    font-family: var(--rs-font-ui);
+}
+
+.rs-toggle-description {
+    font-size: 13px;
+    color: var(--rs-text-secondary);
+    font-family: var(--rs-font-ui);
+}
+
+.rs-toggle {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 32px;
+}
+
+.rs-toggle input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.rs-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--rs-border-light);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.rs-toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.rs-toggle input:checked + .rs-toggle-slider {
+    background: linear-gradient(135deg, var(--rs-orange), var(--rs-orange-dark));
+}
+
+.rs-toggle input:checked + .rs-toggle-slider::before {
+    transform: translateX(24px);
+}
+
+/* ===================================================================
+   RS-PREVIEW (Semantic Preview Component)
+   =================================================================== */
+
+.rs-preview {
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 140, 0, 0.05));
+    border: 2px solid rgba(255, 140, 0, 0.3);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.rs-preview-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--rs-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rs-preview-icon .rs-icon {
+    color: white;
+    width: 24px;
+    height: 24px;
+}
+
+.rs-preview-content {
+    flex: 1;
+}
+
+.rs-preview-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--rs-orange-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    font-family: var(--rs-font-ui);
+}
+
+.rs-preview-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--rs-orange-dark);
+    font-family: var(--rs-font-mono);
+}
+
+/* ===================================================================
+   RS-ACTIONS (Semantic Action Container)
+   =================================================================== */
+
+.rs-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.rs-actions--end {
+    justify-content: flex-end;
+}
+
+.rs-actions--gap {
+    gap: 12px;
+}
+
+.rs-actions--inline {
+    gap: 8px;
+}
+
+/* ===================================================================
+   RS-TABLE (Semantic Table Component)
+   =================================================================== */
+
+.rs-table-wrapper {
+    background: #f9fafb;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--rs-border);
+}
+
+.rs-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.rs-table thead {
+    background: #f9fafb;
+}
+
+.rs-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--rs-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--rs-border);
+    font-family: var(--rs-font-ui);
+}
+
+.rs-table td {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #4b5563;
+    border-bottom: 1px solid #f3f4f6;
+    font-family: var(--rs-font-ui);
+}
+
+.rs-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.rs-table tbody tr:hover {
+    background: rgba(255, 140, 0, 0.03);
+}
+
+.rs-table tbody tr.inactive {
+    opacity: 0.6;
+}
+
+.rs-table-footer {
+    padding: 20px;
+    background: #f9fafb;
+    border-top: 1px solid var(--rs-border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rs-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--rs-text-secondary);
+    font-family: var(--rs-font-ui);
+}
+
+.rs-info-item .rs-icon {
+    color: var(--rs-orange);
+}
+
+/* ===================================================================
+   RS-BADGE (Semantic Badge Component)
+   =================================================================== */
+
+.rs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--rs-font-ui);
+}
+
+.rs-badge--success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.rs-badge--error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.rs-badge--warning {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.rs-badge--info {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+}
+
+/* ===================================================================
+   RS-ICON-BUTTON (Semantic Icon-only Button)
+   =================================================================== */
+
+.rs-icon-button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rs-icon-button--edit {
+    background: rgba(255, 140, 0, 0.1);
+    color: var(--rs-orange-dark);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.rs-icon-button--edit:hover {
+    background: rgba(255, 140, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.rs-icon-button--delete {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.rs-icon-button--delete:hover {
+    background: #fca5a5;
+    transform: translateY(-2px);
+}
+
+/* ===================================================================
+   RS-ACTION-BAR (Semantic Action Bar)
+   =================================================================== */
+
+.rs-action-bar {
+    background: white;
+    border: 1px solid var(--rs-border);
+    border-radius: var(--rs-radius-card);
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--rs-shadow-lg);
+    margin-top: 32px;
+}
+
+.rs-action-bar-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rs-action-bar-text {
+    font-size: 14px;
+    color: var(--rs-text-secondary);
+    font-family: var(--rs-font-ui);
+}
+
+.rs-action-bar-text strong {
+    color: #111827;
+    font-weight: 700;
+}
+
+.rs-text-muted {
+    color: var(--rs-text-secondary);
+}
+
+/* ===================================================================
+   RS-STATS-INLINE (Semantic Inline Stats)
+   =================================================================== */
+
+.rs-stats-inline {
+    display: flex;
+    gap: 12px;
+}
+
+/* ===================================================================
+   RESPONSIVE LAYOUT
+   =================================================================== */
+
+@media (max-width: 768px) {
+    .rs-card {
+        padding: 20px;
+    }
+    
+    .rs-table-wrapper {
+        overflow-x: auto;
+    }
+    
+    .rs-table {
+        min-width: 900px;
+    }
+    
+    .rs-action-bar {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .rs-actions--gap {
+        width: 100%;
+    }
+    
+    .rs-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ===================================================================
+   ACCESSIBILITY (WCAG 2.1 AA)
+   =================================================================== */
+
+.rs-btn:focus-visible,
+.rs-input:focus-visible,
+.rs-select:focus-visible,
+.rs-icon-button:focus-visible {
+    outline: 2px solid var(--rs-orange);
+    outline-offset: 2px;
+}
+
+.rs-toggle input[type="checkbox"]:focus-visible + .rs-toggle-slider {
+    box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.3);
+}
+
+/* ===================================================================
+   REDUCED MOTION (Accessibility)
+   =================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .rs-btn,
+    .rs-card,
+    .rs-input,
+    .rs-select,
+    .rs-toggle-slider,
+    .rs-icon-button {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+

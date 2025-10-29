@@ -1,0 +1,70 @@
+{
+  "process": "DOZO Base Autodiagnostic v1.0.0",
+  "timestamp": "2025-10-19T16:46:20.051057",
+  "checks": {
+    "folder_existence": {
+      "Latest Builds": {
+        "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS",
+        "status": "exists"
+      },
+      "Latest Updates": {
+        "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Updates",
+        "status": "exists"
+      },
+      "Empaquetado": {
+        "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Empaquetado",
+        "status": "exists"
+      },
+      "Global": {
+        "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/to chat gpt/Global",
+        "status": "exists"
+      },
+      "Workflow DB": {
+        "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Workflow DB",
+        "status": "exists"
+      }
+    },
+    "zip_validation": {
+      "exists": true,
+      "size_bytes": 2864441,
+      "size_mb": 2.73,
+      "integrity": "ok",
+      "total_files": 785,
+      "root_folder": "ok",
+      "main_file": "warranty-system-rs/warranty-system-rs.php",
+      "version": "1.0.0",
+      "text_domain": "warranty-system-rs",
+      "folders": {
+        "admin": true,
+        "public": true,
+        "includes": true,
+        "assets": true,
+        "templates": true,
+        "tools": true
+      }
+    },
+    "structure_validation": {},
+    "permissions": {
+      "read": true,
+      "write": true,
+      "zip_permissions": "644"
+    },
+    "dozo_core_files": {
+      "DOZO-Core.json": {
+        "exists": true,
+        "valid_json": true
+      },
+      "Versions.json": {
+        "exists": true,
+        "valid_json": true
+      },
+      "ActivePlugin.json": {
+        "exists": true,
+        "valid_json": true
+      }
+    }
+  },
+  "issues": [],
+  "corrections": [],
+  "status": "ok"
+}

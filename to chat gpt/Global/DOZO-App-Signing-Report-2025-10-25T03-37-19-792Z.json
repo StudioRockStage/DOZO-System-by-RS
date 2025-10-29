@@ -1,0 +1,16 @@
+{
+  "started_at": "2025-10-25T03:37:19.800Z",
+  "status": "COMPLETED_WITH_WARNINGS",
+  "steps": [
+    "DMG encontrado",
+    "Checksum generado"
+  ],
+  "warnings": [
+    "Firma omitida: no se detectó certificado Apple Developer válido"
+  ],
+  "errors": [
+    "Error en validación de firma (puede ser omitido si no hay certificado)"
+  ],
+  "checksum": "fb33fce9a3ee5c2741b26901ed41b53e38c3a3f449da89b9c59f82c1d08e4023",
+  "finished_at": "2025-10-25T03:37:19.960Z"
+}

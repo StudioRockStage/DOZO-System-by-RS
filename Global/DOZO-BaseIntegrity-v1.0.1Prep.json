@@ -1,0 +1,92 @@
+{
+  "timestamp": "2025-10-20T23:12:39.799Z",
+  "version": "1.0.0",
+  "status": "READY_WITH_WARNINGS",
+  "environment": {
+    "directories": {
+      "Warranty System": true,
+      "Warranty System RS": true,
+      "Global": true
+    },
+    "status": "READY"
+  },
+  "abspathFix": {
+    "originalSize": 12435,
+    "status": "ADDED",
+    "action": "INSERTED",
+    "position": "AFTER_HEADER",
+    "finalSize": 12472
+  },
+  "zipIntegrity": {
+    "file": "warranty-system-rs.zip",
+    "size": 277032,
+    "sizeReadable": "0.26 MB",
+    "sha256": "d62acc4d9040d403d66a9fc9c3fe28e2f98c4f5a93da607a97f9a53b57a45270",
+    "rootFolders": [
+      "warranty-system-rs"
+    ],
+    "rootFolderCorrect": true,
+    "directories": {
+      "includes": true,
+      "assets": true,
+      "templates": true,
+      "tools": true
+    },
+    "mainFileHasABSPATH": false,
+    "stats": {
+      "totalEntries": 91,
+      "files": 73,
+      "directories": 18
+    },
+    "status": "VALIDATED"
+  },
+  "installSimulation": {
+    "targetPath": "/wp-content/plugins/warranty-system-rs/",
+    "detectedPlugin": {
+      "name": "Warranty System RS",
+      "version": "1.0.0",
+      "author": "RockStage Solutions",
+      "description": "Sistema completo de gestión de garantías para RockStage con verificación automática, panel de administración premium y actualizaciones automáticas.",
+      "updateUri": "https://updates.vapedot.mx/warranty-system-rs/update.json",
+      "textDomain": "warranty-system-rs"
+    },
+    "identificationCorrect": true,
+    "status": "SUCCESS"
+  },
+  "remoteUpdate": {
+    "data": {
+      "version": "1.0.0",
+      "download_url": "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs.zip",
+      "tested": "6.7.1",
+      "requires": "6.0",
+      "requires_php": "7.4"
+    },
+    "versionCorrect": true,
+    "urlCorrect": true,
+    "status": "HTTP_200"
+  },
+  "localSync": {
+    "updated": [
+      "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Plugins/Warranty System/warranty-system-rs.php"
+    ],
+    "skipped": [],
+    "cleaned": [],
+    "status": "SYNCED"
+  },
+  "finalPackaging": {
+    "file": "warranty-system-rs.zip",
+    "size": 271383,
+    "sizeReadable": "0.26 MB",
+    "sha256": "97ba79df8db241f27156ecfafde0e93664b8ad008a1b18dbf3c5f5b696b5bd57",
+    "buildType": "GOLDEN_BUILD_v1.0.0-FINAL",
+    "securityFilesAdded": 1,
+    "developmentFilesCleaned": 2,
+    "status": "SUCCESS"
+  },
+  "errors": [],
+  "warnings": [
+    "ZIP contiene versión sin ABSPATH"
+  ],
+  "readyForNextRelease": true,
+  "message": "La versión base está lista, pero hay advertencias menores que revisar."
+}

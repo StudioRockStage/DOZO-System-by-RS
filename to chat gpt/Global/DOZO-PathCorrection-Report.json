@@ -1,0 +1,25 @@
+{
+  "correction": "Claude AI path fixed to relative mode",
+  "affected_file": "warranty-system-rs.php",
+  "previous_value": "dirname(ABSPATH",
+  "new_value": "plugin_dir_path(__FILE__) . '../Claude AI/DISEÑOS Warranty System by RockStage/Shortcodes/'",
+  "status": "success",
+  "timestamp": "2025-10-19T21:42:14.190Z",
+  "paths_corrected": {
+    "RS_CLAUDE_TEMPLATES_PATH": {
+      "from": "dirname(ABSPATH",
+      "to": "plugin_dir_path(__FILE__) . '../Claude AI/DISEÑOS Warranty System by RockStage/Shortcodes/'"
+    },
+    "RS_CLAUDE_DESIGN_PATH": {
+      "from": "dirname(ABSPATH",
+      "to": "plugin_dir_path(__FILE__) . '../Claude AI/DISEÑOS Warranty System by RockStage/'"
+    }
+  },
+  "benefits": [
+    "Portabilidad mejorada - funciona en cualquier instalación WordPress",
+    "No requiere carpeta Claude AI al mismo nivel que WordPress",
+    "Compatible con instalaciones en subdirectorios",
+    "Rutas relativas más seguras y mantenibles"
+  ],
+  "new_sha256": "be92ebfe66292caab2d7a47a1e894645046a1af4b737c7f5af24221a71fceff5"
+}

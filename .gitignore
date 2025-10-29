@@ -1,0 +1,30 @@
+# DOZO exclusions
+/Backup/
+/Latest Builds/
+/Claude AI/
+/Cursor AI/
+/ChatGPT AI/
+/Shared/
+/Workflow DB/
+*.zip
+*.log
+*.mp4
+*.mov
+*.dmg
+*.iso
+*.tar
+*.gz
+*.rar
+*.7z
+*.bak
+*.old
+node_modules/
+vendor/
+
+# Distribution build exclusions
+/DistributionBuild/
+/Electron Framework.framework/
+/*.dmg
+/*.pkg
+/*.app
+*.DS_Store

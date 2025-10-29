@@ -1,0 +1,14 @@
+{
+  "autoRepair": true,
+  "deepScan": true,
+  "backupBeforeFix": true,
+  "logRetention": "30d",
+  "notification": {
+    "enabled": true,
+    "onError": true,
+    "onRepair": true
+  }
+}
+
+
+

@@ -1,0 +1,16 @@
+{
+  "current": "2.3.0",
+  "releases": [
+    {
+      "version": "2.3.0",
+      "filename": "DOZO-Control-Center-RockStage-v2.3.0.dmg",
+      "size": "89.63 MB",
+      "date": "2025-10-27T17:43:10.843Z",
+      "modified": "27 de octubre de 2025",
+      "status": "⚠️ Unsigned Build",
+      "notarized": false,
+      "downloadUrl": "/releases/DOZO-Control-Center-RockStage-v2.3.0.dmg"
+    }
+  ],
+  "lastUpdated": "2025-10-28T17:06:02.623Z"
+}

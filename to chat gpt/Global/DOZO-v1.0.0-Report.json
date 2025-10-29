@@ -1,0 +1,38 @@
+{
+  "status": "success",
+  "version": "1.0.0",
+  "source": "v7.5.5 (Warranty_System_v7.5.5_20251015_174919.zip)",
+  "output": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Updates/warranty-system-rs-v1.0.0.zip",
+  "missing": [],
+  "analysis": {
+    "files": {
+      "total": 618,
+      "php": 377,
+      "js": 96,
+      "css": 79
+    },
+    "classes": [],
+    "hooks": {
+      "actions": [
+        "admin_notices",
+        "admin_notices",
+        "before_woocommerce_init",
+        "init",
+        "plugins_loaded"
+      ],
+      "filters": [
+        "plugin_action_links_"
+      ]
+    },
+    "structure": {
+      "includes": true,
+      "assets": true,
+      "admin": true
+    },
+    "dependencies": {
+      "woocommerce": true,
+      "hpos": true
+    }
+  },
+  "checked": "2025-10-19T06:05:29.757Z"
+}

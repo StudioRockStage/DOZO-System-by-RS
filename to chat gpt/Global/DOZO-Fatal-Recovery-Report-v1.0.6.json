@@ -1,0 +1,104 @@
+{
+  "status": "success",
+  "plugin": "Warranty System RS",
+  "version": "1.0.6",
+  "author": "RockStage Solutions",
+  "timestamp_start": "2025-10-19T05:55:52.093Z",
+  "steps": [
+    {
+      "step": 1,
+      "name": "Verificación de requisitos",
+      "status": "completed",
+      "details": {
+        "source_files": {
+          "php": 34,
+          "js": 7,
+          "css": 6,
+          "total": 61
+        }
+      }
+    },
+    {
+      "step": 2,
+      "name": "Preparación de directorios",
+      "status": "completed"
+    },
+    {
+      "step": 3,
+      "name": "Copia de estructura",
+      "status": "completed",
+      "details": {
+        "files_copied": 52
+      }
+    },
+    {
+      "step": 4,
+      "name": "Creación de archivo principal",
+      "status": "completed"
+    },
+    {
+      "step": 5,
+      "name": "Actualización de versiones",
+      "status": "completed",
+      "details": {
+        "files_updated": [
+          "warranty-system-rs.php",
+          "includes/class-warranty-core.php",
+          "includes/class-warranty-admin.php"
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "name": "Validación de hooks",
+      "status": "completed",
+      "details": {
+        "total": 4,
+        "found": 4,
+        "hooks": [
+          "plugins_loaded",
+          "register_activation_hook",
+          "register_deactivation_hook",
+          "init"
+        ],
+        "missing": [],
+        "valid": true
+      }
+    },
+    {
+      "step": 7,
+      "name": "Creación de paquete ZIP",
+      "status": "completed",
+      "details": {
+        "output": "/Users/davidalejandroperezrea/Documents/Dozo System by RS/Empaquetado/Ready/warranty-system-rs-v1.0.6.zip",
+        "size_mb": "0.18"
+      }
+    },
+    {
+      "step": 8,
+      "name": "Limpieza de versiones antiguas",
+      "status": "completed",
+      "details": {
+        "cleaned_files": [
+          "warranty-system-rs-v1.0.0.zip"
+        ]
+      }
+    }
+  ],
+  "output_zip": "/Users/davidalejandroperezrea/Documents/Dozo System by RS/Empaquetado/Ready/warranty-system-rs-v1.0.6.zip",
+  "zip_size": 193861,
+  "timestamp_end": "2025-10-19T05:55:52.165Z",
+  "duration_seconds": 0.07,
+  "validated_hooks": [
+    "plugins_loaded",
+    "register_activation_hook",
+    "register_deactivation_hook",
+    "init"
+  ],
+  "file_stats": {
+    "php": 34,
+    "js": 7,
+    "css": 6,
+    "total": 52
+  }
+}

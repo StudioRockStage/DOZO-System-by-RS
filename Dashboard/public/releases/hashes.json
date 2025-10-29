@@ -1,0 +1,11 @@
+{
+  "releases": [
+    {
+      "version": "2.3.0",
+      "filename": "DOZO-Control-Center-RockStage-v2.3.0.dmg",
+      "sha256": "4709994602f9338cae60675f50ebb7898d088ab2777158e370a1729eec441c9f",
+      "algorithm": "SHA-256"
+    }
+  ],
+  "lastUpdated": "2025-10-28T17:06:02.623Z"
+}

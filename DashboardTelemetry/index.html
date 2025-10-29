@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOZO Telemetry Dashboard v2.2.0</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header>
+    <h1>🧩 DOZO Telemetry Dashboard</h1>
+    <p>RockStage DOZO System – Monitoreo Activo Multi-IA v2.2.0</p>
+    <div class="status-bar">
+      <span id="last-update">Última actualización: --:--:--</span>
+      <span id="report-name">Reporte: Cargando...</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="metrics">
+      <div class="card cpu-card">
+        <h2>⚙️ CPU</h2>
+        <p id="cpu" class="metric-value">--</p>
+        <p id="cpu-model" class="metric-subtitle">--</p>
+      </div>
+      <div class="card mem-card">
+        <h2>💾 Memoria</h2>
+        <p id="mem" class="metric-value">--</p>
+        <div id="mem-bar" class="progress-bar">
+          <div id="mem-fill" class="progress-fill"></div>
+        </div>
+        <p id="mem-percent" class="metric-subtitle">--</p>
+      </div>
+      <div class="card uptime-card">
+        <h2>⏱️ Uptime</h2>
+        <p id="uptime" class="metric-value">--</p>
+        <p id="hostname" class="metric-subtitle">--</p>
+      </div>
+    </section>
+
+    <section class="telemetry">
+      <div class="telemetry-header">
+        <h2>🔍 Integridad del Sistema</h2>
+        <button id="refresh-btn" onclick="updateDashboard()">🔄 Actualizar</button>
+      </div>
+      <div id="integrity-container">
+        <div class="integrity-section">
+          <h3>📦 Archivos Críticos</h3>
+          <pre id="integrity-files" class="integrity-box"></pre>
+        </div>
+        <div class="integrity-section">
+          <h3>📁 Directorios</h3>
+          <pre id="integrity-dirs" class="integrity-box"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-status">
+      <h2>🧠 Sincronización Multi-IA</h2>
+      <div id="ai-bridge" class="ai-grid">
+        <div class="ai-card cursor">
+          <h3>Cursor AI</h3>
+          <p class="ai-status-indicator">🟡 Cargando...</p>
+          <p class="ai-capabilities">--</p>
+        </div>
+        <div class="ai-card claude">
+          <h3>Claude AI</h3>
+          <p class="ai-status-indicator">🟡 Cargando...</p>
+          <p class="ai-capabilities">--</p>
+        </div>
+        <div class="ai-card chatgpt">
+          <h3>ChatGPT</h3>
+          <p class="ai-status-indicator">🟡 Cargando...</p>
+          <p class="ai-capabilities">--</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="health-analysis">
+      <h2>🏥 Análisis de Salud del Sistema</h2>
+      <div id="health-container">
+        <div class="health-card">
+          <h3>Estado General</h3>
+          <p id="overall-status" class="status-badge">--</p>
+        </div>
+        <div class="health-card">
+          <h3>⚠️ Advertencias</h3>
+          <ul id="warnings-list"></ul>
+        </div>
+        <div class="health-card">
+          <h3>💡 Recomendaciones</h3>
+          <ul id="recommendations-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase-audit">
+      <h2>📋 Auditoría de Fases</h2>
+      <div id="phases-grid" class="phases-container"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 RockStage Solutions – DOZO System v2.2.0</p>
+    <p>Autor: David Alejandro Pérez Rea</p>
+  </footer>
+  
+  <script src="dashboard.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-10-20T20:18:18.448Z",
+  "status": "UPDATE_ALIGNMENT_WITH_WARNINGS",
+  "localPlugin": {
+    "path": "/Users/davidalejandroperezrea/Documents/Dozo System by RS/Latest Builds/Warranty System RS/warranty-system-rs",
+    "status": "FOUND",
+    "info": {
+      "name": "Warranty System RS",
+      "version": "1.0.0",
+      "description": "Sistema completo de gestión de garantías para RockStage con verificación automática, panel de administración premium y actualizaciones automáticas.",
+      "author": "RockStage Solutions",
+      "updateUri": ""
+    },
+    "directories": [
+      "AUDIT-SUMMARY.txt",
+      "Admin Panels",
+      "CHANGELOG.md",
+      "DEPLOYMENT-CHECKLIST-v3.7.md",
+      "DOZO-V7.5-SMARTSYNC-LAYOUT.md",
+      "DOZO-V7.5.1-FORCE-MODE.md",
+      "DOZO-V7.5.2-FINAL-REPORT.md",
+      "INSTALL-CLAUDE-PANEL.md",
+      "NEXT-STEPS.md",
+      "QA-DEEP-REPORT.md",
+      "QA-summary.txt",
+      "QUICK-START-v3.5.md",
+      "README.md",
+      "TESTING-GUIDE-v3.7.md",
+      "assets",
+      "backup-dozo",
+      "dozo_update.log",
+      "includes",
+      "logs",
+      "templates",
+      "tools",
+      "uninstall.php",
+      "warranty-system-rs.php"
+    ]
+  },
+  "updateUrl": {
+    "status": "NOT_CONFIGURED"
+  },
+  "zipStructure": {
+    "status": "CORRECT",
+    "folderName": "warranty-system-rs"
+  },
+  "remoteValidation": {
+    "updateJson": {
+      "version": "1.0.0",
+      "download_url": "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs.zip",
+      "tested": "6.7.1",
+      "requires": "6.0",
+      "requires_php": "7.4"
+    },
+    "status": "VALID",
+    "zipSize": "2.73 MB",
+    "zipAccessible": true
+  },
+  "versionComparison": {
+    "localVersion": "1.0.0",
+    "remoteVersion": "1.0.0",
+    "status": "UP_TO_DATE",
+    "updateAvailable": false
+  },
+  "wordPressCheck": {
+    "wpCliAvailable": false,
+    "status": "WP_CLI_NOT_AVAILABLE"
+  },
+  "errors": [],
+  "warnings": [
+    "Directorios faltantes: admin, public",
+    "Update URI no configurado en el plugin",
+    "Versión remota: 1.0.0 (esperada: 1.0.1)",
+    "WP-CLI no disponible para ejecutar force-check"
+  ]
+}

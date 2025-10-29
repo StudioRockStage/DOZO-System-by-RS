@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPCIÓN B - Diseño Compacto | DOZO Log Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --rs-primary: #78413F;
+            --rs-secondary: #080B0E;
+            --rs-neutral-dark: #393E40;
+            --rs-neutral-light: #A68281;
+            --rs-accent: #733A38;
+            --rs-bg: #0a0b0e;
+            --rs-text: #FFFFFF;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--rs-bg);
+            color: var(--rs-text);
+            margin: 0;
+            display: grid;
+            grid-template-areas: "header header" "sidebar main";
+            grid-template-columns: 320px 1fr;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+        
+        .header {
+            grid-area: header;
+            background: var(--rs-secondary);
+            padding: 20px 32px;
+            border-bottom: 2px solid var(--rs-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            font-size: 12px;
+            color: var(--rs-neutral-light);
+        }
+        
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 32px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--rs-primary);
+        }
+        
+        .header-actions button {
+            padding: 10px 20px;
+            background: var(--rs-primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .header-actions button:hover {
+            background: var(--rs-accent);
+        }
+        
+        .sidebar {
+            grid-area: sidebar;
+            background: var(--rs-secondary);
+            padding: 24px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 32px;
+        }
+        
+        .sidebar-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            letter-spacing: 1.5px;
+            color: var(--rs-primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(120, 65, 63, 0.3);
+        }
+        
+        .filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .filter-item {
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-item:hover,
+        .filter-item.active {
+            background: rgba(120, 65, 63, 0.15);
+            border-color: var(--rs-primary);
+        }
+        
+        .filter-count {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--rs-neutral-light);
+            text-transform: uppercase;
+        }
+        
+        .main {
+            grid-area: main;
+            padding: 32px;
+            overflow-y: auto;
+        }
+        
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .main-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .view-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .view-btn.active {
+            background: var(--rs-primary);
+            border-color: var(--rs-primary);
+        }
+        
+        .table-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: rgba(120, 65, 63, 0.2);
+        }
+        
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--rs-primary);
+            font-weight: 700;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        td {
+            padding: 18px 20px;
+            font-size: 14px;
+        }
+        
+        .log-name {
+            font-weight: 600;
+            color: white;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+        
+        .status-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22C55E;
+        }
+        
+        .status-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #F59E0B;
+        }
+        
+        .status-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+        
+        .type-badge {
+            padding: 4px 12px;
+            background: rgba(120, 65, 63, 0.2);
+            border: 1px solid var(--rs-primary);
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--rs-primary);
+            text-transform: uppercase;
+        }
+        
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .icon-btn:hover {
+            background: rgba(120, 65, 63, 0.2);
+            border-color: var(--rs-primary);
+        }
+        
+        @media (max-width: 1024px) {
+            body {
+                grid-template-areas: "header" "main";
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <h1>DOZO LOG VIEWER</h1>
+            <span>Opción B - Compacto</span>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="🔍 Buscar logs...">
+        </div>
+        <div class="header-actions">
+            <button>🔄 Actualizar</button>
+        </div>
+    </header>
+    
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Filtros por Tipo</h3>
+            <div class="filter-list">
+                <div class="filter-item active">
+                    <span>Todos</span>
+                    <span class="filter-count">6</span>
+                </div>
+                <div class="filter-item">
+                    <span>Consolidation</span>
+                    <span class="filter-count">2</span>
+                </div>
+                <div class="filter-item">
+                    <span>Compliance</span>
+                    <span class="filter-count">2</span>
+                </div>
+                <div class="filter-item">
+                    <span>Deploy</span>
+                    <span class="filter-count">1</span>
+                </div>
+                <div class="filter-item">
+                    <span>Update</span>
+                    <span class="filter-count">1</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Estado</h3>
+            <div class="filter-list">
+                <div class="filter-item active">
+                    <span>✅ Success</span>
+                    <span class="filter-count">3</span>
+                </div>
+                <div class="filter-item active">
+                    <span>⚠️ Warning</span>
+                    <span class="filter-count">2</span>
+                </div>
+                <div class="filter-item active">
+                    <span>❌ Error</span>
+                    <span class="filter-count">1</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Estadísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #22C55E;">3</div>
+                    <div class="stat-label">Success</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #F59E0B;">2</div>
+                    <div class="stat-label">Warning</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #EF4444;">1</div>
+                    <div class="stat-label">Error</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <main class="main">
+        <div class="main-header">
+            <h2 class="main-title">Logs Recientes</h2>
+            <div class="view-toggle">
+                <button class="view-btn active">📊 Tabla</button>
+                <button class="view-btn">📋 Cards</button>
+                <button class="view-btn">📈 Timeline</button>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estado</th>
+                        <th>Nombre del Log</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="status-badge status-success">✅ Success</span>
+                        </td>
+                        <td class="log-name">DOZO-Consolidation-Report.json</td>
+                        <td>
+                            <span class="type-badge">Consolidation</span>
+                        </td>
+                        <td style="color: var(--rs-neutral-light);">2025-10-22 15:30</td>
+                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Consolidación exitosa</td>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" title="Ver">👁️</button>
+                                <button class="icon-btn" title="Descargar">⬇️</button>
+                                <button class="icon-btn" title="Compartir">📤</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="status-badge status-warning">⚠️ Warning</span>
+                        </td>
+                        <td class="log-name">DOZO-Compliance-Check.json</td>
+                        <td>
+                            <span class="type-badge">Compliance</span>
+                        </td>
+                        <td style="color: var(--rs-neutral-light);">2025-10-22 14:15</td>
+                        <td style="color: var(--rs-neutral-light); font-size: 13px;">3 validaciones pendientes</td>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" title="Ver">👁️</button>
+                                <button class="icon-btn" title="Descargar">⬇️</button>
+                                <button class="icon-btn" title="Resolver">🔧</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="status-badge status-error">❌ Error</span>
+                        </td>
+                        <td class="log-name">DOZO-Deploy-Failed.json</td>
+                        <td>
+                            <span class="type-badge">Deploy</span>
+                        </td>
+                        <td style="color: var(--rs-neutral-light);">2025-10-22 12:00</td>
+                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Error en FTP connection</td>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" title="Ver">👁️</button>
+                                <button class="icon-btn" title="Reintentar">🔄</button>
+                                <button class="icon-btn" title="Reportar">🚨</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="status-badge status-success">✅ Success</span>
+                        </td>
+                        <td class="log-name">DOZO-Update-Channel.json</td>
+                        <td>
+                            <span class="type-badge">Update</span>
+                        </td>
+                        <td style="color: var(--rs-neutral-light);">2025-10-21 16:45</td>
+                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Canal verificado</td>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" title="Ver">👁️</button>
+                                <button class="icon-btn" title="Descargar">⬇️</button>
+                                <button class="icon-btn" title="Compartir">📤</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="status-badge status-success">✅ Success</span>
+                        </td>
+                        <td class="log-name">DOZO-Base-Validation.json</td>
+                        <td>
+                            <span class="type-badge">Consolidation</span>
+                        </td>
+                        <td style="color: var(--rs-neutral-light);">2025-10-21 14:20</td>
+                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Validación completa</td>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" title="Ver">👁️</button>
+                                <button class="icon-btn" title="Descargar">⬇️</button>
+                                <button class="icon-btn" title="Compartir">📤</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="status-badge status-warning">⚠️ Warning</span>
+                        </td>
+                        <td class="log-name">DOZO-Security-Audit.json</td>
+                        <td>
+                            <span class="type-badge">Compliance</span>
+                        </td>
+                        <td style="color: var(--rs-neutral-light);">2025-10-21 10:30</td>
+                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2 permisos incorrectos</td>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" title="Ver">👁️</button>
+                                <button class="icon-btn" title="Descargar">⬇️</button>
+                                <button class="icon-btn" title="Resolver">🔧</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    
+</body>
+</html>

@@ -1,0 +1,130 @@
+{
+  "started_at": "2025-10-22T02:57:18.609Z",
+  "system": "darwin 24.6.0",
+  "steps": [
+    {
+      "timestamp": "2025-10-22T02:57:18.617Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.617Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Plugins"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.617Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Plugins/Warranty System"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.617Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.618Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.618Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Workflow DB"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.618Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/to chat gpt"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.618Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/to chat gpt/Global"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.618Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Backup"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.618Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Archive"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.619Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Archive/SessionLogs"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.619Z",
+      "message": "✓ Ya existe: /Users/davidalejandroperezrea/Documents/DOZO System by RS/Archive/Trash"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.629Z",
+      "message": "⚠️  Homebrew NO detectado"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.629Z",
+      "message": "   Para instalar: /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.632Z",
+      "message": "⚠️  PHP NO detectado - Instalar con: brew install php"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.635Z",
+      "message": "⚠️  Composer NO detectado - Instalar con: brew install composer"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.665Z",
+      "message": "✅ Node.js detectado: v22.20.0"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:18.993Z",
+      "message": "✅ npm detectado: 10.9.3"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.044Z",
+      "message": "✅ Git detectado: git version 2.50.1 (Apple Git-155)"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.046Z",
+      "message": "⚠️  WP-CLI NO detectado - Instalar con: brew install wp-cli"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.049Z",
+      "message": "⚠️  Docker NO detectado - Descargar de: https://www.docker.com/products/docker-desktop"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.049Z",
+      "message": "✅ package.json encontrado"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.049Z",
+      "message": "✅ adm-zip instalado"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.049Z",
+      "message": "✅ basic-ftp instalado"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.049Z",
+      "message": "✅ docker-compose.yml creado en: /Users/davidalejandroperezrea/Documents/DOZO System by RS/docker-compose.yml"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.050Z",
+      "message": "✅ start-wordpress.sh creado"
+    },
+    {
+      "timestamp": "2025-10-22T02:57:19.050Z",
+      "message": "✅ stop-wordpress.sh creado"
+    }
+  ],
+  "installed": {
+    "node": "v22.20.0",
+    "npm": "10.9.3",
+    "git": "git version 2.50.1 (Apple Git-155)",
+    "adm-zip": "INSTALLED",
+    "basic-ftp": "INSTALLED"
+  },
+  "validation": {
+    "homebrew": "NOT_INSTALLED",
+    "php": "NOT_INSTALLED",
+    "composer": "NOT_INSTALLED",
+    "wpcli": "NOT_INSTALLED",
+    "docker": "NOT_INSTALLED"
+  },
+  "status": "COMPLETED",
+  "finished_at": "2025-10-22T02:57:19.050Z"
+}

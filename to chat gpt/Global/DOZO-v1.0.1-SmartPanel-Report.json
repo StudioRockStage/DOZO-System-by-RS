@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "version": "1.0.1",
+  "enhancement": "SmartCategoryPanel v1.1.0",
+  "base": "v1.0.0",
+  "output": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Updates/warranty-system-rs-v1.0.1-with-smart-panel.zip",
+  "features_added": [
+    "Smart Category Panel en Admin Menu",
+    "Shortcode [rs_smart_category_panel] para frontend",
+    "Assets CSS/JS para el panel",
+    "Integración automática en plugin principal"
+  ],
+  "files_created": [
+    "admin/smart-category-panel.php",
+    "public/smart-category-panel.php",
+    "assets/smart-category-panel/panel.css",
+    "assets/smart-category-panel/panel.js"
+  ],
+  "timestamp": "2025-10-19T08:15:33.043Z"
+}

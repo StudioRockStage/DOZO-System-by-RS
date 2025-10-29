@@ -1,0 +1,467 @@
+/**
+ * RockStage Warranty System - Public Form JavaScript
+ * Based on script-formulario-rockstage.js
+ */
+
+// GLOBAL STATE
+let currentStep = 1;
+let uploadedFiles = [];
+let formData = {};
+
+// INITIALIZATION
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ RockStage Warranty Form - Initialized');
+    
+    setupFileUpload();
+    setupWhatsAppButton();
+    updateProgress();
+});
+
+// STEP NAVIGATION
+function nextStep(stepNumber) {
+    if (!validateStep(currentStep)) {
+        return;
+    }
+    
+    saveStepData(currentStep);
+    
+    // Mark current as completed
+    const currentStepEl = document.querySelector(`.rs-step[data-step="${currentStep}"]`);
+    if (currentStepEl) {
+        currentStepEl.classList.add('completed');
+        currentStepEl.classList.remove('active');
+    }
+    
+    // Hide current
+    const currentContent = document.getElementById(`step${currentStep}`);
+    if (currentContent) {
+        currentContent.classList.remove('active');
+    }
+    
+    // Update step
+    currentStep = stepNumber;
+    
+    // Show next
+    const nextContent = document.getElementById(`step${stepNumber}`);
+    if (nextContent) {
+        nextContent.classList.add('active');
+    }
+    
+    // Mark next as active
+    const nextStepEl = document.querySelector(`.rs-step[data-step="${stepNumber}"]`);
+    if (nextStepEl) {
+        nextStepEl.classList.add('active');
+    }
+    
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(stepNumber) {
+    const currentContent = document.getElementById(`step${currentStep}`);
+    if (currentContent) {
+        currentContent.classList.remove('active');
+    }
+    
+    const currentStepEl = document.querySelector(`.rs-step[data-step="${currentStep}"]`);
+    if (currentStepEl) {
+        currentStepEl.classList.remove('active');
+    }
+    
+    currentStep = stepNumber;
+    
+    const prevContent = document.getElementById(`step${stepNumber}`);
+    if (prevContent) {
+        prevContent.classList.add('active');
+    }
+    
+    const prevStepEl = document.querySelector(`.rs-step[data-step="${stepNumber}"]`);
+    if (prevStepEl) {
+        prevStepEl.classList.add('active');
+        prevStepEl.classList.remove('completed');
+    }
+    
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+    const progressLine = document.getElementById('progressLine');
+    if (!progressLine) return;
+    
+    const progress = ((currentStep - 1) / 3) * 100;
+    progressLine.style.width = progress + '%';
+}
+
+// VALIDATION
+function validateStep(step) {
+    switch(step) {
+        case 1:
+            const name = document.getElementById('customer_name').value;
+            const email = document.getElementById('customer_email').value;
+            const phone = document.getElementById('customer_phone').value;
+            const order = document.getElementById('order_number').value;
+            
+            if (!name || !email || !phone || !order) {
+                showNotification('Por favor completa todos los campos', 'error');
+                return false;
+            }
+            
+            if (!isValidEmail(email)) {
+                showNotification('Email inválido', 'error');
+                return false;
+            }
+            return true;
+            
+        case 2:
+            const product = document.getElementById('product_id').value;
+            if (!product) {
+                showNotification('Selecciona un producto', 'error');
+                return false;
+            }
+            return true;
+            
+        case 3:
+            const description = document.getElementById('description').value;
+            if (!description || description.length < 20) {
+                showNotification('Descripción debe tener al menos 20 caracteres', 'error');
+                return false;
+            }
+            if (uploadedFiles.length === 0) {
+                showNotification('Sube al menos 1 foto o video', 'error');
+                return false;
+            }
+            return true;
+            
+        case 4:
+            const termsChecked = document.getElementById('termsCheckbox').checked;
+            if (!termsChecked) {
+                showNotification('Debes aceptar los términos y condiciones', 'error');
+                return false;
+            }
+            return true;
+            
+        default:
+            return true;
+    }
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// SAVE STEP DATA
+function saveStepData(step) {
+    switch(step) {
+        case 1:
+            formData.customer = {
+                name: document.getElementById('customer_name').value,
+                email: document.getElementById('customer_email').value,
+                phone: document.getElementById('customer_phone').value,
+                orderNumber: document.getElementById('order_number').value
+            };
+            break;
+        case 2:
+            formData.product = {
+                id: document.getElementById('product_id').value,
+                purchaseDate: document.getElementById('purchase_date').value
+            };
+            break;
+        case 3:
+            formData.problem = {
+                description: document.getElementById('description').value,
+                files: uploadedFiles
+            };
+            break;
+    }
+}
+
+// FILE UPLOAD
+function setupFileUpload() {
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const fileInput = document.getElementById('fileInput');
+    
+    if (!fileUploadArea || !fileInput) return;
+    
+    fileUploadArea.addEventListener('click', () => fileInput.click());
+    
+    fileUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.add('dragover');
+    });
+    
+    fileUploadArea.addEventListener('dragleave', () => {
+        fileUploadArea.classList.remove('dragover');
+    });
+    
+    fileUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.remove('dragover');
+        handleFiles(e.dataTransfer.files);
+    });
+    
+    fileInput.addEventListener('change', function() {
+        handleFiles(this.files);
+    });
+}
+
+function handleFiles(files) {
+    Array.from(files).forEach(file => {
+        const isImage = file.type.startsWith('image/');
+        const isVideo = file.type.startsWith('video/');
+        
+        if (!isImage && !isVideo) {
+            showNotification('Solo imágenes y videos', 'error');
+            return;
+        }
+        
+        const maxPhotoSize = (rsWarranty.fileLimits.maxPhotoSize || 5242880);
+        const maxVideoSize = (rsWarranty.fileLimits.maxVideoSize || 52428800);
+        
+        if (isImage && file.size > maxPhotoSize) {
+            showNotification(`Imagen muy grande (máx ${Math.round(maxPhotoSize/1024/1024)}MB)`, 'error');
+            return;
+        }
+        
+        if (isVideo && file.size > maxVideoSize) {
+            showNotification(`Video muy grande (máx ${Math.round(maxVideoSize/1024/1024)}MB)`, 'error');
+            return;
+        }
+        
+        const currentPhotos = uploadedFiles.filter(f => f.type.startsWith('image/')).length;
+        const maxPhotos = rsWarranty.fileLimits.maxPhotos || 5;
+        
+        if (isImage && currentPhotos >= maxPhotos) {
+            showNotification(`Máximo ${maxPhotos} fotos`, 'error');
+            return;
+        }
+        
+        uploadedFiles.push(file);
+        addFileToList(file);
+    });
+}
+
+function addFileToList(file) {
+    const fileList = document.getElementById('fileList');
+    if (!fileList) return;
+    
+    const isVideo = file.type.startsWith('video/');
+    
+    const fileItem = document.createElement('div');
+    fileItem.className = 'rs-file-item';
+    fileItem.dataset.filename = file.name;
+    
+    const iconSvg = isVideo ? 
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="24" height="24">
+            <rect x="2" y="5" width="20" height="14" rx="2" stroke-width="2"/>
+            <path d="M9 9L15 12L9 15V9Z" fill="currentColor"/>
+        </svg>` :
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="24" height="24">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
+            <path d="M21 15L16 10L5 21" stroke-width="2"/>
+        </svg>`;
+    
+    fileItem.innerHTML = `
+        <div class="rs-file-icon">${iconSvg}</div>
+        <div class="rs-file-info">
+            <div class="rs-file-name">${file.name}</div>
+            <div class="rs-file-size">${formatFileSize(file.size)}</div>
+        </div>
+        <button class="rs-file-remove" onclick="removeFile('${file.name}')" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M18 6L6 18M6 6L18 18" stroke-width="2"/>
+            </svg>
+        </button>
+    `;
+    
+    fileList.appendChild(fileItem);
+}
+
+function removeFile(filename) {
+    uploadedFiles = uploadedFiles.filter(f => f.name !== filename);
+    
+    const fileItem = document.querySelector(`.rs-file-item[data-filename="${filename}"]`);
+    if (fileItem) {
+        fileItem.remove();
+    }
+    
+    showNotification('Archivo eliminado', 'info');
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+}
+
+// FORM SUBMISSION
+function submitForm() {
+    if (!validateStep(4)) {
+        return;
+    }
+    
+    saveStepData(4);
+    
+    // Show loading
+    showNotification('Enviando solicitud...', 'info');
+    
+    // Prepare FormData for file upload
+    const ajaxFormData = new FormData();
+    ajaxFormData.append('action', 'rs_submit_warranty');
+    ajaxFormData.append('nonce', rsWarranty.nonce);
+    
+    // Add customer data
+    ajaxFormData.append('customer_name', formData.customer.name);
+    ajaxFormData.append('customer_email', formData.customer.email);
+    ajaxFormData.append('customer_phone', formData.customer.phone);
+    ajaxFormData.append('order_id', formData.customer.orderNumber);
+    
+    // Add product data
+    ajaxFormData.append('product_id', formData.product.id);
+    ajaxFormData.append('purchase_date', formData.product.purchaseDate);
+    
+    // Add problem description
+    ajaxFormData.append('description', formData.problem.description);
+    
+    // Add uploaded files
+    uploadedFiles.forEach((file, index) => {
+        const fileType = file.type.startsWith('video/') ? 'video_demostracion' : 'foto_defecto';
+        ajaxFormData.append(fileType, file);
+    });
+    
+    // Send AJAX request to WordPress
+    jQuery.ajax({
+        url: rsWarranty.ajaxUrl,
+        type: 'POST',
+        data: ajaxFormData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            if (response.success) {
+                const warrantyNumber = response.data.warranty_number || generateWarrantyNumber();
+                
+                // Hide all steps
+                document.querySelectorAll('.rs-step-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show success screen
+                const successScreen = document.getElementById('successScreen');
+                if (successScreen) {
+                    successScreen.classList.add('active');
+                    
+                    const warrantyNumberEl = successScreen.querySelector('.warranty-number');
+                    if (warrantyNumberEl) {
+                        warrantyNumberEl.textContent = warrantyNumber;
+                    }
+                }
+                
+                showNotification('¡Solicitud enviada exitosamente!', 'success');
+                
+                console.log('✅ Warranty Created:', response.data);
+            } else {
+                showNotification(response.data.message || 'Error al enviar la solicitud', 'error');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('❌ AJAX Error:', error);
+            showNotification('Error de conexión. Por favor intenta nuevamente.', 'error');
+        }
+    });
+}
+
+function generateWarrantyNumber() {
+    const prefix = 'GAR-RS';
+    const year = new Date().getFullYear();
+    const random = Math.floor(Math.random() * 99999).toString().padStart(5, '0');
+    return `${prefix}-${year}-${random}`;
+}
+
+// WHATSAPP
+function setupWhatsAppButton() {
+    // Already handled in HTML
+}
+
+function openWhatsApp() {
+    let phone = '5215512345678';
+    let message = 'Hola, tengo una consulta sobre mi garantía';
+    
+    if (typeof rsWarranty !== 'undefined' && rsWarranty.whatsapp) {
+        phone = rsWarranty.whatsapp.number || phone;
+        message = rsWarranty.whatsapp.message || message;
+    }
+    
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+}
+
+// NOTIFICATION SYSTEM
+function showNotification(message, type = 'info') {
+    document.querySelectorAll('.rs-notification').forEach(n => n.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = 'rs-notification rs-notification-' + type;
+    
+    const colors = {
+        success: '#10b981',
+        error: '#ef4444',
+        warning: '#f59e0b',
+        info: '#3b82f6'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        padding: 16px 24px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        border-left: 4px solid ${colors[type]};
+        z-index: 10000;
+        max-width: 400px;
+        animation: slideInRight 0.3s ease;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #111827;
+    `;
+    
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 4000);
+}
+
+// Add animation styles
+if (!document.getElementById('rs-notification-styles')) {
+    const style = document.createElement('style');
+    style.id = 'rs-notification-styles';
+    style.textContent = `
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// EXPOSE TO GLOBAL
+window.nextStep = nextStep;
+window.prevStep = prevStep;
+window.submitForm = submitForm;
+window.removeFile = removeFile;
+window.openWhatsApp = openWhatsApp;
+
+console.log('✅ RockStage Warranty Form - All functions loaded');
+

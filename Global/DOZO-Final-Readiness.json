@@ -1,0 +1,155 @@
+{
+  "timestamp": "2025-10-20T22:38:11.782Z",
+  "status": "WARNING",
+  "baseFiles": {
+    "files": {
+      "phpMain": {
+        "exists": true,
+        "path": "/Users/davidalejandroperezrea/Documents/Dozo System by RS/Plugins/Warranty System/warranty-system-rs.php",
+        "size": 14730,
+        "sizeReadable": "14.38 KB"
+      },
+      "zipBase": {
+        "exists": true,
+        "path": "/Users/davidalejandroperezrea/Documents/Dozo System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zip",
+        "size": 277032,
+        "sizeReadable": "0.26 MB"
+      },
+      "updateJson": {
+        "url": "https://updates.vapedot.mx/warranty-system-rs/update.json",
+        "accessible": true,
+        "statusCode": 200
+      }
+    },
+    "zipFiles": [
+      "warranty-system-rs.zip"
+    ],
+    "status": "CHECKED"
+  },
+  "zipValidation": {
+    "sha256": "d62acc4d9040d403d66a9fc9c3fe28e2f98c4f5a93da607a97f9a53b57a45270",
+    "size": 277032,
+    "sizeReadable": "0.26 MB",
+    "rootFolders": [
+      "warranty-system-rs"
+    ],
+    "rootFolderCorrect": true,
+    "directories": {
+      "required": {
+        "includes": true,
+        "assets": true,
+        "templates": true,
+        "tools": true
+      },
+      "optional": {}
+    },
+    "mainFilePresent": true,
+    "totalEntries": 91,
+    "status": "VALIDATED"
+  },
+  "phpValidation": {
+    "header": {
+      "name": "Warranty System RS",
+      "version": "1.0.0",
+      "description": "Sistema completo de gestión de garantías para RockStage con verificación automática, panel de administración premium y actualizaciones automáticas.",
+      "author": "RockStage Solutions",
+      "updateUri": "https://updates.vapedot.mx/warranty-system-rs/update.json",
+      "textDomain": "warranty-system-rs",
+      "domainPath": "/languages"
+    },
+    "fieldsValidation": {
+      "name": {
+        "expected": "Warranty System RS",
+        "actual": "Warranty System RS",
+        "match": true
+      },
+      "version": {
+        "expected": "1.0.0",
+        "actual": "1.0.0",
+        "match": true
+      },
+      "author": {
+        "expected": "RockStage Solutions",
+        "actual": "RockStage Solutions",
+        "match": true
+      }
+    },
+    "updateUriConfigured": true,
+    "status": "VALIDATED"
+  },
+  "remoteValidation": {
+    "updateJson": {
+      "version": "1.0.0",
+      "download_url": "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs.zip",
+      "tested": "6.7.1",
+      "requires": "6.0",
+      "requires_php": "7.4"
+    },
+    "fieldsValidation": {
+      "version": {
+        "expected": "1.0.0",
+        "actual": "1.0.0",
+        "match": true
+      },
+      "tested": {
+        "expected": "6.7.1",
+        "actual": "6.7.1",
+        "match": true
+      },
+      "requires": {
+        "expected": "6.0",
+        "actual": "6.0",
+        "match": true
+      },
+      "requires_php": {
+        "expected": "7.4",
+        "actual": "7.4",
+        "match": true
+      }
+    },
+    "zipAccessible": true,
+    "remoteZipSize": "2.73 MB",
+    "sizesMatch": false,
+    "status": "VALIDATED"
+  },
+  "congruence": {
+    "versions": {
+      "php": "1.0.0",
+      "remote": "1.0.0",
+      "expected": "1.0.0"
+    },
+    "status": "COHERENT",
+    "coherent": true
+  },
+  "permissions": {
+    "items": [
+      {
+        "name": ".DS_Store",
+        "type": "file",
+        "permissions": "644"
+      },
+      {
+        "name": "DOZO-CleanupReport.json",
+        "type": "file",
+        "permissions": "644"
+      },
+      {
+        "name": "DOZO-FileMap.json",
+        "type": "file",
+        "permissions": "644"
+      },
+      {
+        "name": "warranty-system-rs.zip",
+        "type": "file",
+        "permissions": "644"
+      }
+    ],
+    "suspectFiles": [],
+    "status": "CHECKED"
+  },
+  "errors": [],
+  "warnings": [
+    "Tamaño local (0.26 MB) vs remoto (2.73 MB)"
+  ],
+  "readiness": "READY_WITH_WARNINGS"
+}

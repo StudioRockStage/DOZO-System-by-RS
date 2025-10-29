@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-10-21T03-07-17-208Z",
+  "file": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zip",
+  "filename": "warranty-system-rs.zip",
+  "sha256": "ffd3e42124fc15c6a7fef4d02803d34497d409e165326a6c98a1309d63f58f6b",
+  "size_bytes": 210049,
+  "size_kb": 205,
+  "validations": {
+    "wp_compliance": "PASSED",
+    "channel_recheck": "PASSED",
+    "base_verify": "FAILED"
+  },
+  "summary": {
+    "total": 3,
+    "passed": 2,
+    "failed": 1,
+    "skipped": 0
+  },
+  "final_status": "SOME_VALIDATIONS_FAILED ⚠️"
+}

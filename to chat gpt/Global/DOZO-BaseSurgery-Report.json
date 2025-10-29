@@ -1,0 +1,35 @@
+{
+  "base_zip_used": "warranty-system-rs.zip",
+  "output_zip": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Empaquetado/Ready/warranty-system-rs.zip",
+  "size_bytes": 242923,
+  "size_readable": "0.23 MB",
+  "sha256": "bb43af9a9300e298e9b0e6b03cbf5e7232077a75646cc426eeb457afff77f9f8",
+  "fixed": {
+    "root_folder": "warranty-system-rs",
+    "main_php": "warranty-system-rs.php",
+    "headers": [
+      "Plugin Name",
+      "Version",
+      "Text Domain",
+      "Update URI",
+      "Requires",
+      "Requires PHP"
+    ],
+    "basename": "RS_WARRANTY_PLUGIN_BASENAME = plugin_basename(__FILE__)",
+    "settings_link": true,
+    "admin_menu_minimum": "injected",
+    "missing_dirs": [],
+    "present_dirs": [
+      "includes",
+      "assets",
+      "templates",
+      "tools"
+    ]
+  },
+  "notes": [
+    "ZIP reempaquetado con una única carpeta raíz warranty-system-rs/",
+    "Listo para subir manualmente e instalar desde WP",
+    "Si ya estaba instalado, desactivar/eliminar e instalar este paquete limpio"
+  ],
+  "timestamp": "2025-10-20T21:00:22.751Z"
+}

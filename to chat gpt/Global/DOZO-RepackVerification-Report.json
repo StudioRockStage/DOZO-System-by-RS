@@ -1,0 +1,77 @@
+{
+  "action": "Repack Verification",
+  "status": "❌ Failed",
+  "timestamp": "2025-10-19T21:54:32.499Z",
+  "dozo_version": "7.9",
+  "plugin": {
+    "name": "Warranty System RS",
+    "version": "1.0.0",
+    "build_file": "warranty-system-rs.zip",
+    "sha256": "c927600b5f3b8f0f48d0b191792a48be9d663da99e8578af354162b4ebf9c6d8",
+    "size": 2778128,
+    "size_formatted": "2.65 MB"
+  },
+  "validation": {
+    "environment_prepared": true,
+    "zip_file_exists": true,
+    "internal_paths": {
+      "claude_templates_valid": false,
+      "claude_design_valid": false,
+      "all_relative": false,
+      "issues": [
+        {
+          "path": "RS_CLAUDE_TEMPLATES_PATH",
+          "issue": "Formato desconocido"
+        },
+        {
+          "path": "RS_CLAUDE_DESIGN_PATH",
+          "issue": "Formato desconocido"
+        }
+      ]
+    },
+    "installation_simulation": {
+      "folder_name": "warranty-system-rs",
+      "folder_correct": true,
+      "main_file_exists": true,
+      "required_dirs_present": false,
+      "found_dirs": [
+        "includes",
+        "tools",
+        "templates",
+        "assets"
+      ],
+      "missing_dirs": [
+        "admin",
+        "public"
+      ],
+      "versioned_folders": [
+        "DEPLOYMENT-CHECKLIST-v3.7.md",
+        "QUICK-START-v3.5.md",
+        "TESTING-GUIDE-v3.7.md"
+      ]
+    },
+    "plugin_headers": {
+      "all_correct": true,
+      "headers_found": {
+        "Plugin Name": "Warranty System RS",
+        "Version": "1.0.0",
+        "Author": "RockStage Solutions",
+        "Text Domain": "warranty-system-rs"
+      },
+      "issues": []
+    },
+    "load_simulation": {
+      "syntax_valid": true,
+      "core_classes_found": 0,
+      "core_classes_missing": 3,
+      "fatal_errors": 0,
+      "load_success": true
+    }
+  },
+  "summary": {
+    "total_checks": 9,
+    "passed": 6,
+    "failed": 3,
+    "warnings": 0
+  }
+}

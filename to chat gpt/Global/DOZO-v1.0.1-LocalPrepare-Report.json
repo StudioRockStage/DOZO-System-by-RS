@@ -1,0 +1,43 @@
+{
+  "action": "Local Prepare for Deploy v1.0.1",
+  "status": "ready_for_manual_deploy",
+  "timestamp": "2025-10-19T08:20:17.351Z",
+  "files_prepared": {
+    "zip": {
+      "name": "warranty-system-rs-v1.0.1.zip",
+      "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Empaquetado/Ready/warranty-system-rs-v1.0.1.zip",
+      "sha256": "1c11f2270be7d29217223cf746a5ca2ae2b93a588f4136d77c2259cceeece02e",
+      "size": 2792117,
+      "size_formatted": "2.66 MB"
+    },
+    "update_json": {
+      "name": "update.json",
+      "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Empaquetado/Ready/update.json"
+    }
+  },
+  "deploy_target": {
+    "method": "manual_ftp_required",
+    "server": "ftp.vapedot.mx",
+    "remote_path": "/public_html/updates/warranty-system-rs/",
+    "urls": {
+      "zip": "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip",
+      "json": "https://updates.vapedot.mx/warranty-system-rs/update.json"
+    }
+  },
+  "next_steps": [
+    "Leer DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md",
+    "Verificar credenciales FTP",
+    "Subir archivos manualmente",
+    "Validar URLs públicas",
+    "Probar actualización en WordPress"
+  ],
+  "ftp_troubleshooting": {
+    "reason": "Login incorrect (530)",
+    "suggested_credentials": {
+      "host": "ftp.vapedot.mx",
+      "port": 21,
+      "user": "u461169968.vapedotmx",
+      "note": "Verificar password en cPanel"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+    "version": "7.0",
+    "created": "2025-10-22 23:01:24",
+    "plugin_version": "1.0.0",
+    "events": [],
+    "metrics": {
+        "total_diagnostics": 0,
+        "total_cleanups": 0,
+        "total_syncs": 0,
+        "total_errors": 0
+    },
+    "issues": [
+        {
+            "id": "core_1534_method_outside_class",
+            "file": "class-warranty-core.php",
+            "line": 1534,
+            "error_type": "syntax_error",
+            "fix": "moved_ajax_get_health_score_inside_class",
+            "status": "archived",
+            "applied_at": "2025-10-22 23:01:24",
+            "verified_at": "2025-10-22 23:02:30",
+            "verification_count": 3,
+            "archived_at": "2025-10-22 23:02:30"
+        },
+        {
+            "id": "reaper_326_method_outside_class",
+            "file": "class-dozo-reaper-cleaner.php",
+            "line": 326,
+            "error_type": "syntax_error",
+            "fix": "moved_method_inside_class",
+            "status": "archived",
+            "applied_at": "2025-10-22 23:01:24",
+            "verified_at": "2025-10-22 23:02:30",
+            "verification_count": 3,
+            "archived_at": "2025-10-22 23:02:30"
+        },
+        {
+            "id": "reaper_duplicate_init",
+            "file": "class-dozo-reaper-cleaner.php",
+            "line": 320,
+            "error_type": "duplicate_code",
+            "fix": "removed_duplicate_initialization",
+            "status": "archived",
+            "applied_at": "2025-10-22 23:01:24",
+            "verified_at": "2025-10-22 23:02:30",
+            "verification_count": 3,
+            "archived_at": "2025-10-22 23:02:30"
+        },
+        {
+            "id": "reaper_brace_imbalance",
+            "file": "class-dozo-reaper-cleaner.php",
+            "line": 347,
+            "error_type": "syntax_error",
+            "fix": "balanced_braces",
+            "status": "archived",
+            "applied_at": "2025-10-22 23:01:24",
+            "verified_at": "2025-10-22 23:02:30",
+            "verification_count": 3,
+            "archived_at": "2025-10-22 23:02:30"
+        }
+    ]
+}

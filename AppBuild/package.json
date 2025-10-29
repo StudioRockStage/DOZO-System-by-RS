@@ -1,0 +1,24 @@
+{
+  "name": "dozo-control-center",
+  "productName": "DOZO Control Center – RockStage",
+  "version": "1.0.0",
+  "author": "RockStage Solutions",
+  "description": "Sistema avanzado de monitoreo y desarrollo de plugins WordPress.",
+  "main": "main.js",
+  "build": {
+    "appId": "com.rockstage.dozo",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg",
+      "icon": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Dashboard/public/assets/rockstage-icon.icns"
+    },
+    "dmg": {
+      "background": null,
+      "icon": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Dashboard/public/assets/rockstage-icon.icns",
+      "artifactName": "DOZO-Control-Center-RockStage-${version}.dmg"
+    },
+    "directories": {
+      "output": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/DistributionBuild"
+    }
+  }
+}

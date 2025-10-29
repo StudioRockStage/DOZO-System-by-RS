@@ -1,0 +1,13 @@
+{
+  "started_at": "2025-10-25T03:41:56.513Z",
+  "status": "COMPLETED",
+  "steps": [
+    "Icono verificado",
+    "Electron-builder verificado",
+    "Empaquetado completado",
+    "Archivo generado: DOZO-Control-Center-RockStage-1.0.0.dmg"
+  ],
+  "warnings": [],
+  "errors": [],
+  "finished_at": "2025-10-25T03:42:10.651Z"
+}

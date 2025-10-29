@@ -1,0 +1,40 @@
+{
+  "started_at": "2025-10-22T22:59:20.431Z",
+  "context": "DOZO Local Plugin Deployment v1.0.0",
+  "steps": [],
+  "warnings": [],
+  "errors": [
+    "Error al activar el plugin (verifica logs)."
+  ],
+  "actions": [
+    {
+      "zip_verified": true,
+      "entries": 71
+    },
+    {
+      "structure_validated": true
+    },
+    {
+      "test": "ABSPATH check",
+      "status": "OK"
+    },
+    {
+      "test": "Headers syntax",
+      "status": "OK"
+    },
+    {
+      "test": "Hooks registration",
+      "status": "OK"
+    },
+    {
+      "test": "Admin panel visibility",
+      "status": "OK"
+    },
+    {
+      "test": "PHP syntax",
+      "status": "OK"
+    }
+  ],
+  "plugin_zip": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zip",
+  "finished_at": "2025-10-22T22:59:20.955Z"
+}

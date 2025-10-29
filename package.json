@@ -1,0 +1,89 @@
+{
+  "name": "dozo-control-center",
+  "version": "2.6.0",
+  "main": "AppBuild/main.js",
+  "description": "DOZO System by RockStage Solutions - Complete WordPress/WooCommerce Management System with Electron AutoPath Repair",
+  "author": "RockStage Solutions",
+  "license": "MIT",
+  "build": {
+    "appId": "com.rockstage.dozo",
+    "productName": "DOZO Control Center – RockStage",
+    "directories": {
+      "output": "DistributionBuild"
+    },
+    "files": [
+      "AppBuild/**/*",
+      "Dashboard/public/**/*",
+      "Core/**/*",
+      "!node_modules/**/*",
+      "!DozoCoreReport/**/*",
+      "!*.md",
+      "!*.log"
+    ],
+    "extraResources": [
+      {
+        "from": "Dashboard/public",
+        "to": "Dashboard/public",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.productivity",
+      "icon": "AppBuild/assets/rockstage-icon.icns",
+      "artifactName": "DOZO-Control-Center-RockStage-${version}.dmg",
+      "identity": null
+    },
+    "dmg": {
+      "title": "DOZO Control Center – RockStage ${version}",
+      "icon": "AppBuild/assets/rockstage-icon.icns",
+      "background": null,
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:mac:dev": "electron-builder --mac --dir",
+    "dist": "electron-builder --mac",
+    "env-check": "node AppBuild/env-check.js",
+    "dashboard": "cd DashboardTelemetry && node telemetry-server.js",
+    "release-dashboard": "node server/server.js",
+    "phase-11": "node dozo-phase-11.js",
+    "phase-12": "node dozo-phase-12.js",
+    "phase-13": "node dozo-phase-13.js",
+    "phase-14": "node dozo-phase-14.js",
+    "phase-15": "node dozo-phase-15.js",
+    "phase-16": "node dozo-phase-16.js",
+    "github-setup": "node dozo-github-autosetup.js",
+    "sync-github": "node dozo-phase-16.js"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "type": "module"
+}

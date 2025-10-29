@@ -1,0 +1,18 @@
+DOZO Control Center – RockStage v2.3.0
+Fase: 14 - Notarization & Public Release
+DMG: DOZO-Control-Center-RockStage-2.3.0.dmg
+SHA-256: 4709994602f9338cae60675f50ebb7898d088ab2777158e370a1729eec441c9f
+
+Estado de Seguridad:
+- Firmado digitalmente: No
+- Notarizado por Apple: No
+- Ticket aplicado: No
+
+Generado: 2025-10-27T17:43:10.407Z
+Build ID: 2025-10-27T17-43-10-402Z
+
+Verificación:
+Para verificar la integridad del DMG, ejecuta:
+  shasum -a 256 DOZO-Control-Center-RockStage-2.3.0.dmg
+
+El resultado debe coincidir con: 4709994602f9338cae60675f50ebb7898d088ab2777158e370a1729eec441c9f

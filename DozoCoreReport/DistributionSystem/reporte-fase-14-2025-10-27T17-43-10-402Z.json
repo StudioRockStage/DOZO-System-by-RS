@@ -1,0 +1,49 @@
+{
+  "fase": "14",
+  "version": "2.4.0",
+  "estado": "COMPLETADA_CON_ADVERTENCIAS",
+  "timestamp": "2025-10-27T17:43:10.407Z",
+  "steps": [
+    "DMG localizado: DOZO-Control-Center-RockStage-2.3.0.dmg",
+    "Hash SHA-256 generado y guardado",
+    "DMG publicado en PublicRelease/"
+  ],
+  "errors": [],
+  "warnings": [
+    "No hay certificado Developer ID Application disponible",
+    "DMG no firmado - no hay certificado disponible",
+    "Credenciales de Apple ID no configuradas"
+  ],
+  "codesigning": {
+    "attempted": true,
+    "successful": false,
+    "certificate": null
+  },
+  "notarization": {
+    "attempted": true,
+    "successful": false,
+    "ticketStapled": false
+  },
+  "release": {
+    "published": true,
+    "location": "/Users/davidalejandroperezrea/Documents/Dozo System by RS/PublicRelease/DOZO-Control-Center-RockStage-v2.3.0.dmg",
+    "sha256": "4709994602f9338cae60675f50ebb7898d088ab2777158e370a1729eec441c9f",
+    "name": "DOZO-Control-Center-RockStage-v2.3.0.dmg",
+    "size": "89.63 MB"
+  },
+  "dmg": {
+    "name": "DOZO-Control-Center-RockStage-2.3.0.dmg",
+    "path": "/Users/davidalejandroperezrea/Documents/Dozo System by RS/DistributionBuild/DOZO-Control-Center-RockStage-2.3.0.dmg",
+    "size": "89.63 MB",
+    "modified": "2025-10-27T17:24:47.020Z"
+  },
+  "summary": {
+    "signed": false,
+    "notarized": false,
+    "published": true,
+    "errors": 0,
+    "warnings": 3,
+    "steps": 3,
+    "readyForPublicRelease": false
+  }
+}

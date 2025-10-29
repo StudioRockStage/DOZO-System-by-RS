@@ -1,0 +1,24 @@
+{
+  "plugins": [
+    {
+      "name": "Warranty System RS",
+      "version": "1.0.0",
+      "author": "RockStage Solutions",
+      "lastSync": null
+    },
+    {
+      "name": "PriceCraft",
+      "version": "1.0.0",
+      "author": "RockStage Solutions",
+      "lastSync": null
+    },
+    {
+      "name": "Lucky Stage",
+      "version": "1.0.0",
+      "author": "RockStage Solutions",
+      "lastSync": null
+    }
+  ],
+  "lastCheck": "2025-10-25T23:07:25.807Z"
+}
+

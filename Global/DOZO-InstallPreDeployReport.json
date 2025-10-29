@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-10-20T22:50:15.312Z",
+  "status": "INSTALLABLE_WITH_WARNINGS",
+  "zipIntegrity": {
+    "file": "warranty-system-rs.zip",
+    "path": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zip",
+    "size": 277032,
+    "sizeReadable": "0.26 MB",
+    "sha256": "d62acc4d9040d403d66a9fc9c3fe28e2f98c4f5a93da607a97f9a53b57a45270",
+    "rootFolders": [
+      "warranty-system-rs"
+    ],
+    "mainFilePresent": true,
+    "directories": {
+      "includes": true,
+      "assets": true,
+      "templates": true,
+      "tools": true
+    },
+    "stats": {
+      "totalEntries": 91,
+      "files": 73,
+      "directories": 18
+    },
+    "status": "VALID"
+  },
+  "installSimulation": {
+    "targetPath": "/wp-content/plugins/warranty-system-rs/",
+    "pluginInfo": {
+      "name": "Warranty System RS",
+      "version": "1.0.0",
+      "description": "Sistema completo de gestión de garantías para RockStage con verificación automática, panel de administración premium y actualizaciones automáticas.",
+      "author": "RockStage Solutions",
+      "updateUri": "https://updates.vapedot.mx/warranty-system-rs/update.json",
+      "textDomain": "warranty-system-rs"
+    },
+    "nameCorrect": true,
+    "versionCorrect": true,
+    "activatable": true,
+    "hasWPHooks": true,
+    "status": "SIMULATED"
+  },
+  "updateValidation": {
+    "updateJson": {
+      "version": "1.0.0",
+      "download_url": "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs.zip",
+      "tested": "6.7.1",
+      "requires": "6.0",
+      "requires_php": "7.4"
+    },
+    "versionCorrect": true,
+    "updateDetectable": false,
+    "zipDownloadable": true,
+    "remoteZipSize": "2.73 MB",
+    "status": "VALIDATED"
+  },
+  "finalState": {
+    "message": "El plugin es instalable y funcional, pero hay advertencias menores.",
+    "deploymentReady": true,
+    "summary": {
+      "zipIntegrity": "VALID",
+      "installSimulation": "SIMULATED",
+      "updateValidation": "VALIDATED",
+      "criticalErrors": 0,
+      "warnings": 2
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "No se encontró verificación de ABSPATH",
+    "Versiones iguales - update testing limitado"
+  ]
+}

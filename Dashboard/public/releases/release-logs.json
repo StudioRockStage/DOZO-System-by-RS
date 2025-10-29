@@ -1,0 +1,18 @@
+{
+  "logs": [
+    {
+      "event": "FASE 15 - Dashboard Initialized",
+      "timestamp": "2025-10-28T17:06:02.623Z",
+      "details": "Dashboard creado con 1 release(s)",
+      "type": "info"
+    },
+    {
+      "event": "Release Detected",
+      "timestamp": "2025-10-27T17:43:10.843Z",
+      "details": "DOZO-Control-Center-RockStage-v2.3.0.dmg - ⚠️ Unsigned Build",
+      "type": "warning",
+      "version": "2.3.0"
+    }
+  ],
+  "lastUpdated": "2025-10-28T17:06:02.623Z"
+}
