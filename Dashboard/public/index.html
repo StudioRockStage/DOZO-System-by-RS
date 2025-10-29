@@ -3,587 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOZO Log Viewer v1.3.0 | RockStage Solutions</title>
-    <meta name="description" content="Sistema de visualización de logs DOZO - RockStage Solutions">
-    <meta name="author" content="RockStage Solutions - DOZO System v7.9">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>DOZO System - Live Dashboard</title>
     <style>
-        /* ========================================
-           DOZO LOG VIEWER v1.3.0 - OFFICIAL
-           RockStage Design System
-           Diseño: Propuesta B - Compacto
-           Estado: PRODUCTION READY ✅
-           ======================================== */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --rs-primary: #78413F;
-            --rs-secondary: #080B0E;
-            --rs-neutral-dark: #393E40;
-            --rs-neutral-light: #A68281;
-            --rs-accent: #733A38;
-            --rs-bg: #0a0b0e;
-            --rs-text: #FFFFFF;
-        }
-        
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--rs-bg);
-            color: var(--rs-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            display: grid;
-            grid-template-areas: "header header" "sidebar main";
-            grid-template-columns: 320px 1fr;
-            grid-template-rows: auto 1fr;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
             min-height: 100vh;
         }
         
-        .header {
-            grid-area: header;
-            background: var(--rs-secondary);
-            padding: 20px 32px;
-            border-bottom: 2px solid var(--rs-primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
-            letter-spacing: 2px;
-        }
-        
-        .logo span {
-            font-size: 12px;
-            color: var(--rs-neutral-light);
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-        
-        .search-bar {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 32px;
-        }
-        
-        .search-bar input {
-            width: 100%;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 14px;
-            font-family: inherit;
-        }
-        
-        .search-bar input:focus {
-            outline: none;
-            border-color: var(--rs-primary);
-        }
-        
-        .search-bar input::placeholder {
-            color: var(--rs-neutral-light);
-        }
-        
-        .header-actions button {
-            padding: 10px 20px;
-            background: var(--rs-primary);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        
-        .header-actions button:hover {
-            background: var(--rs-accent);
-            transform: translateY(-2px);
-        }
-        
-        .sidebar {
-            grid-area: sidebar;
-            background: var(--rs-secondary);
-            padding: 24px;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            overflow-y: auto;
-        }
-        
-        .sidebar-section {
-            margin-bottom: 32px;
-        }
-        
-        .sidebar-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 18px;
-            letter-spacing: 1.5px;
-            color: var(--rs-primary);
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid rgba(120, 65, 63, 0.3);
-        }
-        
-        .filter-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .filter-item {
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-item:hover,
-        .filter-item.active {
-            background: rgba(120, 65, 63, 0.15);
-            border-color: var(--rs-primary);
-        }
-        
-        .filter-count {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        
-        .stat-box {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 16px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .stat-value {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 32px;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: var(--rs-neutral-light);
-            text-transform: uppercase;
-        }
-        
-        .main {
-            grid-area: main;
-            padding: 32px;
-            overflow-y: auto;
-        }
-        
-        .main-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        
-        .main-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
-            letter-spacing: 2px;
-        }
-        
-        .view-toggle {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .view-btn {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        
-        .view-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .view-btn.active {
-            background: var(--rs-primary);
-            border-color: var(--rs-primary);
-        }
-        
-        .table-container {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        thead {
-            background: rgba(120, 65, 63, 0.2);
-        }
-        
-        th {
-            padding: 16px 20px;
-            text-align: left;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--rs-primary);
-            font-weight: 700;
-        }
-        
-        tbody tr {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.2s ease;
-        }
-        
-        tbody tr:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-        
-        td {
-            padding: 18px 20px;
-            font-size: 14px;
-        }
-        
-        .log-name {
-            font-weight: 600;
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
+            padding: 30px;
+            text-align: center;
         }
         
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-block;
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .status-card h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 1.3em;
+        }
+        
+        .status-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
         }
         
         .status-success {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22C55E;
-        }
-        
-        .status-warning {
-            background: rgba(245, 158, 11, 0.2);
-            color: #F59E0B;
+            color: #27ae60;
+            font-weight: 600;
         }
         
         .status-error {
-            background: rgba(239, 68, 68, 0.2);
-            color: #EF4444;
+            color: #e74c3c;
+            font-weight: 600;
         }
         
-        .type-badge {
-            padding: 4px 12px;
-            background: rgba(120, 65, 63, 0.2);
-            border: 1px solid var(--rs-primary);
-            border-radius: 6px;
-            font-size: 11px;
-            color: var(--rs-primary);
-            text-transform: uppercase;
+        .status-warning {
+            color: #f39c12;
+            font-weight: 600;
         }
         
-        .action-icons {
-            display: flex;
-            gap: 8px;
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
         }
         
-        .icon-btn {
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .status-success {
+            background: #27ae60;
         }
         
-        .icon-btn:hover {
-            background: rgba(120, 65, 63, 0.2);
-            border-color: var(--rs-primary);
+        .status-error {
+            background: #e74c3c;
         }
         
-        @media (max-width: 1024px) {
-            body {
-                grid-template-areas: "header" "main";
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                display: none;
-            }
-            
-            .search-bar {
-                margin: 16px 0 0 0;
-            }
-            
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        .status-warning {
+            background: #f39c12;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
+    <div class="connection-status status-warning" id="connection-status">
+        Conectando...
+    </div>
     
-    <header class="header">
-        <div class="logo">
-            <h1>DOZO LOG VIEWER</h1>
-            <span>RockStage Solutions • v1.3.0</span>
+    <div class="container">
+        <div class="header">
+            <h1>🧩 DOZO System</h1>
+            <p>Live Dashboard - WebSocket Event Bridge v2.6.3</p>
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="🔍 Buscar logs...">
-        </div>
-        <div class="header-actions">
-            <button>🔄 Actualizar</button>
-        </div>
-    </header>
-    
-    <aside class="sidebar">
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">Filtros por Tipo</h3>
-            <div class="filter-list">
-                <div class="filter-item active">
-                    <span>Todos</span>
-                    <span class="filter-count">6</span>
+        
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>📡 Estado de Conexión</h3>
+                <div class="status-item">
+                    <strong>WebSocket:</strong> <span id="connection-status">Conectando...</span>
                 </div>
-                <div class="filter-item">
-                    <span>Consolidation</span>
-                    <span class="filter-count">2</span>
+                <div class="status-item">
+                    <strong>Servidor:</strong> ws://localhost:9091
                 </div>
-                <div class="filter-item">
-                    <span>Compliance</span>
-                    <span class="filter-count">2</span>
+                <div class="status-item">
+                    <strong>Última actualización:</strong> <span id="last-update">-</span>
                 </div>
-                <div class="filter-item">
-                    <span>Deploy</span>
-                    <span class="filter-count">1</span>
+            </div>
+            
+            <div class="status-card">
+                <h3>📊 Telemetría del Sistema</h3>
+                <div class="status-item">
+                    <strong>Estado:</strong> <span id="telemetry-status">Esperando datos...</span>
                 </div>
-                <div class="filter-item">
-                    <span>Update</span>
-                    <span class="filter-count">1</span>
+                <div class="status-item">
+                    <strong>Usuario:</strong> <span id="user-info">-</span>
+                </div>
+                <div class="status-item">
+                    <strong>Repositorio:</strong> <span id="repo-info">-</span>
+                </div>
+                <div class="status-item">
+                    <strong>Rama:</strong> <span id="branch-info">-</span>
+                </div>
+                <div class="status-item">
+                    <strong>Versión:</strong> <span id="version-info">-</span>
+                </div>
+                <div class="status-item">
+                    <strong>Commit:</strong> <span id="commit-info">-</span>
+                </div>
+            </div>
+            
+            <div class="status-card">
+                <h3>📝 Actividad Reciente</h3>
+                <div class="status-item">
+                    <strong>Último commit:</strong> <span id="last-commit">Esperando datos...</span>
+                </div>
+                <div class="status-item">
+                    <strong>Eventos recibidos:</strong> <span id="event-count">0</span>
+                </div>
+                <div class="status-item">
+                    <strong>Estado del monitoreo:</strong> <span class="status-success">Activo</span>
+                </div>
+            </div>
+            
+            <div class="status-card">
+                <h3>🔧 Configuración</h3>
+                <div class="status-item">
+                    <strong>Intervalo de monitoreo:</strong> 10 segundos
+                </div>
+                <div class="status-item">
+                    <strong>Archivos monitoreados:</strong> 2
+                </div>
+                <div class="status-item">
+                    <strong>Puerto WebSocket:</strong> 9091
+                </div>
+                <div class="status-item">
+                    <strong>Versión del Bridge:</strong> 2.6.3
                 </div>
             </div>
         </div>
         
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">Estado</h3>
-            <div class="filter-list">
-                <div class="filter-item active">
-                    <span>✅ Success</span>
-                    <span class="filter-count">3</span>
-                </div>
-                <div class="filter-item active">
-                    <span>⚠️ Warning</span>
-                    <span class="filter-count">2</span>
-                </div>
-                <div class="filter-item active">
-                    <span>❌ Error</span>
-                    <span class="filter-count">1</span>
-                </div>
-            </div>
+        <div class="footer">
+            <p>DOZO System by RockStage Solutions | Live WebSocket Event Bridge v2.6.3</p>
+            <p>Monitoreando cambios en tiempo real desde AppSync Telemetry</p>
         </div>
-        
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">Estadísticas</h3>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-value">6</div>
-                    <div class="stat-label">Total</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" style="color: #22C55E;">3</div>
-                    <div class="stat-label">Success</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" style="color: #F59E0B;">2</div>
-                    <div class="stat-label">Warning</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" style="color: #EF4444;">1</div>
-                    <div class="stat-label">Error</div>
-                </div>
-            </div>
-        </div>
-    </aside>
+    </div>
     
-    <main class="main">
-        <div class="main-header">
-            <h2 class="main-title">Logs Recientes</h2>
-            <div class="view-toggle">
-                <button class="view-btn active">📊 Tabla</button>
-                <button class="view-btn">📋 Cards</button>
-                <button class="view-btn">📈 Timeline</button>
-            </div>
-        </div>
-        
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Estado</th>
-                        <th>Nombre del Log</th>
-                        <th>Tipo</th>
-                        <th>Fecha</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-success">✅ Success</span>
-                        </td>
-                        <td class="log-name">DOZO-Consolidation-Report.json</td>
-                        <td>
-                            <span class="type-badge">Consolidation</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light);">2025-10-22 15:30</td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Consolidación exitosa</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver">👁️</button>
-                                <button class="icon-btn" title="Descargar">⬇️</button>
-                                <button class="icon-btn" title="Compartir">📤</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-warning">⚠️ Warning</span>
-                        </td>
-                        <td class="log-name">DOZO-Compliance-Check.json</td>
-                        <td>
-                            <span class="type-badge">Compliance</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light);">2025-10-22 14:15</td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">3 validaciones pendientes</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver">👁️</button>
-                                <button class="icon-btn" title="Descargar">⬇️</button>
-                                <button class="icon-btn" title="Resolver">🔧</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-error">❌ Error</span>
-                        </td>
-                        <td class="log-name">DOZO-Deploy-Failed.json</td>
-                        <td>
-                            <span class="type-badge">Deploy</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light);">2025-10-22 12:00</td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Error en FTP connection</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver">👁️</button>
-                                <button class="icon-btn" title="Reintentar">🔄</button>
-                                <button class="icon-btn" title="Reportar">🚨</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-success">✅ Success</span>
-                        </td>
-                        <td class="log-name">DOZO-Update-Channel.json</td>
-                        <td>
-                            <span class="type-badge">Update</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light);">2025-10-21 16:45</td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Canal verificado</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver">👁️</button>
-                                <button class="icon-btn" title="Descargar">⬇️</button>
-                                <button class="icon-btn" title="Compartir">📤</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-success">✅ Success</span>
-                        </td>
-                        <td class="log-name">DOZO-Base-Validation.json</td>
-                        <td>
-                            <span class="type-badge">Consolidation</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light);">2025-10-21 14:20</td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">Validación completa</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver">👁️</button>
-                                <button class="icon-btn" title="Descargar">⬇️</button>
-                                <button class="icon-btn" title="Compartir">📤</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-warning">⚠️ Warning</span>
-                        </td>
-                        <td class="log-name">DOZO-Security-Audit.json</td>
-                        <td>
-                            <span class="type-badge">Compliance</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light);">2025-10-21 10:30</td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2 permisos incorrectos</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver">👁️</button>
-                                <button class="icon-btn" title="Descargar">⬇️</button>
-                                <button class="icon-btn" title="Resolver">🔧</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-    
+    <script src="js/appsync-client.js"></script>
     <script>
-        console.log('✅ DOZO Log Viewer v1.3.0 - Official - Initialized');
-        console.log('📊 Diseño: Propuesta B - Compacto');
-        console.log('🎨 RockStage Design System');
+        let eventCount = 0;
+        
+        // Interceptar mensajes para contar eventos
+        const originalOnMessage = WebSocket.prototype.onmessage;
+        WebSocket.prototype.onmessage = function(event) {
+            eventCount++;
+            document.getElementById('event-count').textContent = eventCount;
+            document.getElementById('last-update').textContent = new Date().toLocaleString('es-ES');
+            if (originalOnMessage) {
+                originalOnMessage.call(this, event);
+            }
+        };
+        
+        // Actualizar timestamp cada minuto
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('last-update').textContent = now.toLocaleString('es-ES');
+        }, 60000);
     </script>
-    
 </body>
 </html>
