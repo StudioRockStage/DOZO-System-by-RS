@@ -1,0 +1,46 @@
+/* live-metrics.css */
+.metrics-container {
+  background-color: #101116;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.metric-box {
+  background: #1c1e22;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.metric-title {
+  font-size: 14px;
+  color: #a5a1a2;
+  margin-bottom: 5px;
+}
+
+.metric-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e6c185;
+}
+
+#system-status.active {
+  color: #2ecc71;
+}
+
+#telemetry-chart {
+  grid-column: 1 / span 2;
+  width: 100%;
+  height: 280px;
+  margin-top: 20px;
+  background: #1a1c1f;
+  border-radius: 8px;
+  padding: 10px;
+}

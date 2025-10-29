@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOZO System - Live Dashboard</title>
+    <link rel="stylesheet" href="./css/live-metrics.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -217,7 +219,24 @@
         </div>
     </div>
     
+    <section class="metrics-container">
+      <div class="metric-box">
+        <div class="metric-title">Estado del Sistema</div>
+        <div id="system-status" class="metric-value">Cargando...</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-title">Último Commit</div>
+        <div id="last-commit" class="metric-value">---</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-title">Última Telemetría</div>
+        <div id="telemetry-time" class="metric-value">---</div>
+      </div>
+      <canvas id="telemetry-chart"></canvas>
+    </section>
+
     <script src="js/appsync-client.js"></script>
+    <script src="./js/live-metrics.js"></script>
     <script>
         let eventCount = 0;
         
