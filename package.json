@@ -75,6 +75,10 @@
     "phase-16.1": "node dozo-phase-16.1.js",
     "phase-16.2": "node dozo-phase-16.2.js",
     "phase-16.3": "node dozo-phase-16.3.js",
+    "phase-16.5": "node ./Workflow\\ DB/healthsync/health-monitor.js",
+    "phase-16.5.1": "node ./Workflow\\ DB/healthsync/health-verify.js",
+    "healthsync": "node ./Workflow\\ DB/healthsync/health-monitor.js",
+    "healthsync-test": "node ./Workflow\\ DB/healthsync/health-verify.js",
     "github-setup": "node dozo-github-autosetup.js",
     "sync-github": "node dozo-phase-16.js"
   },
