@@ -80,13 +80,22 @@
     "healthsync": "node ./Workflow\\ DB/healthsync/health-monitor.js",
     "healthsync-test": "node ./Workflow\\ DB/healthsync/health-verify.js",
     "github-setup": "node dozo-github-autosetup.js",
-    "sync-github": "node dozo-phase-16.js"
+    "sync-github": "node dozo-phase-16.js",
+    "dozo:release": "node release/scripts/dozo-release.js",
+    "release:create": "node scripts/release.js create",
+    "release:rollback": "node scripts/release.js rollback",
+    "release:test": "node scripts/test-release.js",
+    "release:plugin": "php scripts/publish-plugin.php",
+    "ui:open": "node 'Claude AI/UI/open-viewer.js'"
   },
   "dependencies": {
     "archiver": "^7.0.1",
+    "axios": "^1.13.1",
     "chalk": "^5.6.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "fs-extra": "^11.3.2",
+    "mime-types": "^2.1.35",
     "node-fetch": "^3.3.2",
     "ora": "^9.0.0",
     "ws": "^8.18.3"
