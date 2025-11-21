@@ -23,10 +23,9 @@ import crypto from "crypto";
 // --- Configuración ----------------------------------------------------------
 const REPORT_PATH = path.resolve(
   process.env.HOME,
-  "Documents/DOZO System by RS/to chat gpt/Global/DOZO-UpdateChannelRecheck.json"
+  "Documents/DOZO System by RS/to chat gpt/Global/DOZO-UpdateChannelRecheck.json",
 );
-const REMOTE_JSON =
-  "https://updates.vapedot.mx/warranty-system-rs/update.json";
+const REMOTE_JSON = "https://updates.vapedot.mx/warranty-system-rs/update.json";
 const REMOTE_ZIP =
   "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs.zip";
 
@@ -51,7 +50,7 @@ function fetch(url) {
         res.on("end", () =>
           res.statusCode === 200
             ? resolve({ ok: true, status: res.statusCode, body: data })
-            : reject(new Error(`HTTP ${res.statusCode}`))
+            : reject(new Error(`HTTP ${res.statusCode}`)),
         );
       })
       .on("error", reject);
@@ -60,7 +59,7 @@ function fetch(url) {
 
 // --- Verificación del update.json ------------------------------------------
 async function validateUpdateJSON() {
-  console.log('\n▶ Validando update.json...');
+  console.log("\n▶ Validando update.json...");
   const res = await fetch(REMOTE_JSON);
   report.validation.http_status = res.ok ? 200 : res.status;
   const json = JSON.parse(res.body);
@@ -77,23 +76,25 @@ async function validateUpdateJSON() {
 
 // --- Descarga y validación del ZIP ------------------------------------------
 async function validateZip() {
-  console.log('\n▶ Descargando y validando ZIP...');
+  console.log("\n▶ Descargando y validando ZIP...");
   const tmpDir = path.resolve(
     process.env.HOME,
-    "Documents/DOZO System by RS/Temp"
+    "Documents/DOZO System by RS/Temp",
   );
   if (!fs.existsSync(tmpDir)) {
     fs.mkdirSync(tmpDir, { recursive: true });
   }
-  
+
   const tmpPath = path.join(tmpDir, "warranty-system-rs.zip");
-  
+
   await new Promise((resolve, reject) => {
     const file = fs.createWriteStream(tmpPath);
     https
       .get(REMOTE_ZIP, (res) => {
         if (res.statusCode !== 200)
-          return reject(new Error(`HTTP ${res.statusCode} - ZIP no encontrado`));
+          return reject(
+            new Error(`HTTP ${res.statusCode} - ZIP no encontrado`),
+          );
         res.pipe(file);
         file.on("finish", () => file.close(resolve));
       })
@@ -121,36 +122,38 @@ async function validateZip() {
   // Inspeccionar cabeceras
   const phpContent = zip.readAsText(mainFile);
   if (!phpContent.includes("Plugin Name") || !phpContent.includes("Author")) {
-    report.warnings.push("Cabeceras incompletas o ausentes en el archivo principal");
+    report.warnings.push(
+      "Cabeceras incompletas o ausentes en el archivo principal",
+    );
   }
   if (!phpContent.includes("ABSPATH")) {
     report.warnings.push("No se encontró verificación de ABSPATH");
   }
-  
+
   // Extraer información del plugin
   const versionMatch = phpContent.match(/Version:\s*([\d.]+)/i);
   const pluginNameMatch = phpContent.match(/Plugin Name:\s*(.+)/i);
   const updateUriMatch = phpContent.match(/Update URI:\s*(.+)/i);
-  
+
   report.validation.plugin_headers = {
     plugin_name: pluginNameMatch ? pluginNameMatch[1].trim() : null,
     version: versionMatch ? versionMatch[1].trim() : null,
-    update_uri: updateUriMatch ? updateUriMatch[1].trim() : null
+    update_uri: updateUriMatch ? updateUriMatch[1].trim() : null,
   };
-  
+
   console.log("✔ ZIP descargado y validado correctamente");
   console.log("  → Tamaño:", report.validation.zip_size_kb, "KB");
   console.log("  → Archivos:", report.validation.zip_entries);
   console.log("  → Plugin:", report.validation.plugin_headers.plugin_name);
   console.log("  → Versión:", report.validation.plugin_headers.version);
-  
+
   // Limpiar archivo temporal
   fs.unlinkSync(tmpPath);
 }
 
 // --- Simulación WordPress ---------------------------------------------------
 async function simulateWordPress() {
-  console.log('\n▶ Simulando detección de actualización WordPress...');
+  console.log("\n▶ Simulando detección de actualización WordPress...");
   report.simulation = {
     detected_plugin: "Warranty System RS",
     local_version: "1.0.0",
@@ -172,39 +175,40 @@ async function simulateWordPress() {
 
 // --- Ejecución principal ----------------------------------------------------
 (async () => {
-  console.log('═'.repeat(80));
-  console.log('🧩 DOZO Update Channel Validation v1.0.1 (Final Remote Recheck)');
-  console.log('═'.repeat(80));
-  
+  console.log("═".repeat(80));
+  console.log(
+    "🧩 DOZO Update Channel Validation v1.0.1 (Final Remote Recheck)",
+  );
+  console.log("═".repeat(80));
+
   try {
     await validateUpdateJSON();
     await validateZip();
     await simulateWordPress();
-    
+
     report.status = "UPDATE CHANNEL FULLY OPERATIONAL ✅";
     report.result = "El plugin puede actualizarse correctamente sin errores.";
-    
-    console.log('\n' + '═'.repeat(80));
-    console.log('✅ VALIDACIÓN COMPLETADA EXITOSAMENTE');
-    console.log('═'.repeat(80));
+
+    console.log("\n" + "═".repeat(80));
+    console.log("✅ VALIDACIÓN COMPLETADA EXITOSAMENTE");
+    console.log("═".repeat(80));
   } catch (err) {
     report.status = "UPDATE CHANNEL HAS ISSUES ⚠️";
     report.errors.push(err.message);
-    
-    console.log('\n' + '═'.repeat(80));
-    console.log('⚠️ VALIDACIÓN CON PROBLEMAS');
-    console.log('═'.repeat(80));
-    console.error('Error:', err.message);
+
+    console.log("\n" + "═".repeat(80));
+    console.log("⚠️ VALIDACIÓN CON PROBLEMAS");
+    console.log("═".repeat(80));
+    console.error("Error:", err.message);
   } finally {
     report.finished_at = new Date().toISOString();
     fs.mkdirSync(path.dirname(REPORT_PATH), { recursive: true });
     fs.writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2));
-    
+
     console.log("\n🧾 Reporte guardado en:", REPORT_PATH);
     console.log("📊 Estado final:", report.status);
     console.log("⚠️  Warnings:", report.warnings.length);
     console.log("❌ Errors:", report.errors.length);
-    console.log('═'.repeat(80));
+    console.log("═".repeat(80));
   }
 })();
-

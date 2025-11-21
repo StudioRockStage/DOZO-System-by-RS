@@ -26,6 +26,7 @@ npm run deploy:verify
 ```
 
 Cuando veas:
+
 ```
 Versión correcta: ✅
 🎊 ¡DEPLOYMENT 100% COMPLETO Y VERIFICADO!

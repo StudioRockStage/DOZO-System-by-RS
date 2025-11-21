@@ -7,14 +7,14 @@ console.log('⚙️  Iniciando Runtime Build v2.0.0');
 try {
   console.log('📦 Instalando dependencias...');
   execSync('npm install', { stdio: 'inherit' });
-  
+
   console.log('🔨 Construyendo aplicación Electron...');
   execSync('npm run build', { stdio: 'inherit' });
 
   const distPath = path.resolve('./DistributionBuild');
   if (fs.existsSync(distPath)) {
     console.log('✅ Build generado correctamente en DistributionBuild/');
-    
+
     // List generated files
     const files = fs.readdirSync(distPath);
     console.log('\n📁 Archivos generados:');
@@ -29,6 +29,3 @@ try {
 } catch (e) {
   console.error('❌ Error en el proceso de build:', e.message);
 }
-
-
-

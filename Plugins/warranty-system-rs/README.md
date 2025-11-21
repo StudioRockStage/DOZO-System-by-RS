@@ -102,6 +102,7 @@ Agrega el shortcode a cualquier página:
 ```
 
 **Parámetros opcionales**:
+
 ```
 [rockstage_warranty_form title="Solicitud de Garantía" subtitle="Completa el formulario" theme="rockstage"]
 ```
@@ -116,6 +117,7 @@ Accede desde **Garantías** en el menú de WordPress:
 ### Vista Detallada
 
 Haz clic en cualquier garantía para:
+
 - Ver información completa del cliente
 - Cambiar estado (Pendiente → Procesando → Aprobada/Rechazada)
 - Agregar notas internas
@@ -199,10 +201,12 @@ wp_rs_warranty_rma     → RMA tracking data
 ### AJAX Endpoints (8)
 
 **Frontend** (público):
+
 - `rs_verify_warranty` - Verificar elegibilidad de pedido
 - `rs_submit_warranty` - Enviar solicitud + archivos
 
 **Admin** (protegido):
+
 - `rs_update_warranty_status` - Cambiar estado
 - `rs_add_warranty_note` - Agregar nota
 - `rs_send_warranty_response` - Email personalizado
@@ -221,8 +225,8 @@ wp_rs_warranty_rma     → RMA tracking data
 ```php
 // Declaración de compatibilidad
 \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
-    'custom_order_tables', 
-    __FILE__, 
+    'custom_order_tables',
+    __FILE__,
     true
 );
 
@@ -245,6 +249,7 @@ Agrega columna "Garantía" en la lista de pedidos de WooCommerce mostrando estad
 ✅ **Sin Conflictos**
 
 **Técnicas Implementadas**:
+
 1. **CSS Namespacing**: Todos los selectores con prefijo `.rs-`
 2. **Scoped Reset**: `*` limitado a `.rs-warranty-form-container *`
 3. **CSS Containment**: `isolation: isolate` en contenedores
@@ -252,6 +257,7 @@ Agrega columna "Garantía" en la lista de pedidos de WooCommerce mostrando estad
 5. **Low Specificity**: Evita override de estilos del tema
 
 **Testeado Con**:
+
 - Astra Pro (latest)
 - Spectra Pro (latest)
 - Tema Twenty Twenty-Three
@@ -261,13 +267,13 @@ Agrega columna "Garantía" en la lista de pedidos de WooCommerce mostrando estad
 
 ## 📊 Métricas de Rendimiento
 
-| Métrica | Valor | Status |
-|---------|-------|--------|
-| Initial Load (admin) | < 300ms | ✅ Óptimo |
-| AJAX Response Time | < 150ms | ✅ Rápido |
-| Database Queries | Optimizadas con indexes | ✅ Eficiente |
-| Assets Size (CSS+JS) | ~30KB (sin minificar) | ✅ Liviano |
-| Pagination | 20 records/página | ✅ Escalable |
+| Métrica              | Valor                   | Status       |
+| -------------------- | ----------------------- | ------------ |
+| Initial Load (admin) | < 300ms                 | ✅ Óptimo    |
+| AJAX Response Time   | < 150ms                 | ✅ Rápido    |
+| Database Queries     | Optimizadas con indexes | ✅ Eficiente |
+| Assets Size (CSS+JS) | ~30KB (sin minificar)   | ✅ Liviano   |
+| Pagination           | 20 records/página       | ✅ Escalable |
 
 ---
 
@@ -276,12 +282,14 @@ Agrega columna "Garantía" en la lista de pedidos de WooCommerce mostrando estad
 ### Manual Testing Checklist
 
 **Setup** (5 minutos):
+
 - [ ] Instalar en WordPress 5.8+ con WooCommerce
 - [ ] Activar plugin sin errores
 - [ ] Configurar email y categorías
 - [ ] Crear página con shortcode
 
 **Flujo Completo** (15 minutos):
+
 - [ ] Crear pedido de prueba
 - [ ] Enviar garantía desde formulario público
 - [ ] Verificar emails recibidos (cliente + admin)
@@ -291,12 +299,14 @@ Agrega columna "Garantía" en la lista de pedidos de WooCommerce mostrando estad
 - [ ] Eliminar garantía
 
 **Accessibility** (5 minutos):
+
 - [ ] Navegación solo con teclado
 - [ ] Screen reader (VoiceOver/NVDA)
 - [ ] Dark mode (activar en OS)
 - [ ] Reduced motion (activar en OS)
 
 **Compatibility** (5 minutos):
+
 - [ ] Con Astra Pro activo
 - [ ] Con Spectra Pro blocks
 - [ ] Con HPOS habilitado en WC

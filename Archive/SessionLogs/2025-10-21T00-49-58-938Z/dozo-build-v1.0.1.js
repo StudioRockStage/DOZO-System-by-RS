@@ -24,7 +24,8 @@ const VERSION = {
   version: "1.0.1",
   zipName: "Warranty_System_RS_v1.0.1.zip",
   folderName: "warranty-system-rs",
-  changelog: "Admin panel completo restaurado y verificado. Mejoras en estabilidad y compatibilidad."
+  changelog:
+    "Admin panel completo restaurado y verificado. Mejoras en estabilidad y compatibilidad.",
 };
 
 function sha256(filePath) {
@@ -35,7 +36,7 @@ function sha256(filePath) {
 }
 
 function ensureDirs() {
-  [GLOBAL, LATEST, UPDATES_DIR].forEach(d => {
+  [GLOBAL, LATEST, UPDATES_DIR].forEach((d) => {
     if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
   });
 }
@@ -43,9 +44,9 @@ function ensureDirs() {
 function findMainPHP() {
   const candidates = [
     "warranty-system-rs.php",
-    "rockstage-warranty-system.php"
+    "rockstage-warranty-system.php",
   ];
-  
+
   for (const candidate of candidates) {
     const fullPath = path.join(PLUGINS_DIR, candidate);
     if (fs.existsSync(fullPath)) {
@@ -58,18 +59,30 @@ function findMainPHP() {
 function updatePHPHeaders(phpPath) {
   console.log(`   📝 Actualizando headers en: ${path.basename(phpPath)}`);
   let content = fs.readFileSync(phpPath, "utf8");
-  
+
   const originalContent = content;
-  
+
   // Update headers
   content = content
-    .replace(/^\s*\*\s*Plugin Name:\s*.*$/mi, ` * Plugin Name: ${VERSION.pluginName}`)
-    .replace(/^\s*\*\s*Author:\s*.*$/mi, ` * Author: ${VERSION.author}`)
-    .replace(/^\s*\*\s*Version:\s*.*$/mi, ` * Version: ${VERSION.version}`)
-    .replace(/define\(\s*['"]RS_WARRANTY_VERSION['"]\s*,\s*['"][^'"]+['"]\s*\)/g, `define('RS_WARRANTY_VERSION', '${VERSION.version}')`)
-    .replace(/define\(\s*['"]RS_WARRANTY_PLUGIN_NAME['"]\s*,\s*['"][^'"]+['"]\s*\)/g, `define('RS_WARRANTY_PLUGIN_NAME', '${VERSION.pluginName}')`)
-    .replace(/define\(\s*['"]RS_WARRANTY_AUTHOR['"]\s*,\s*['"][^'"]+['"]\s*\)/g, `define('RS_WARRANTY_AUTHOR', '${VERSION.author}')`);
-  
+    .replace(
+      /^\s*\*\s*Plugin Name:\s*.*$/im,
+      ` * Plugin Name: ${VERSION.pluginName}`,
+    )
+    .replace(/^\s*\*\s*Author:\s*.*$/im, ` * Author: ${VERSION.author}`)
+    .replace(/^\s*\*\s*Version:\s*.*$/im, ` * Version: ${VERSION.version}`)
+    .replace(
+      /define\(\s*['"]RS_WARRANTY_VERSION['"]\s*,\s*['"][^'"]+['"]\s*\)/g,
+      `define('RS_WARRANTY_VERSION', '${VERSION.version}')`,
+    )
+    .replace(
+      /define\(\s*['"]RS_WARRANTY_PLUGIN_NAME['"]\s*,\s*['"][^'"]+['"]\s*\)/g,
+      `define('RS_WARRANTY_PLUGIN_NAME', '${VERSION.pluginName}')`,
+    )
+    .replace(
+      /define\(\s*['"]RS_WARRANTY_AUTHOR['"]\s*,\s*['"][^'"]+['"]\s*\)/g,
+      `define('RS_WARRANTY_AUTHOR', '${VERSION.author}')`,
+    );
+
   if (content !== originalContent) {
     fs.writeFileSync(phpPath, content, "utf8");
     console.log(`   ✅ Headers actualizados a v${VERSION.version}`);
@@ -82,16 +95,16 @@ function updatePHPHeaders(phpPath) {
 
 function verifyAdminFiles() {
   console.log("\n🔍 Verificando archivos del Admin Panel...");
-  
+
   const criticalFiles = [
     "includes/class-warranty-admin.php",
     "templates/admin/dashboard.php",
     "templates/admin/settings.php",
-    "Admin Panels/panel-design-settings"
+    "Admin Panels/panel-design-settings",
   ];
-  
+
   let allPresent = true;
-  criticalFiles.forEach(file => {
+  criticalFiles.forEach((file) => {
     const fullPath = path.join(PLUGINS_DIR, file);
     if (fs.existsSync(fullPath)) {
       console.log(`   ✅ ${file}`);
@@ -100,38 +113,38 @@ function verifyAdminFiles() {
       allPresent = false;
     }
   });
-  
+
   return allPresent;
 }
 
 function createZipFromSource() {
   const zip = new AdmZip();
   const zipPath = path.join(LATEST, VERSION.zipName);
-  
+
   console.log(`\n📦 Empaquetando desde: ${PLUGINS_DIR}`);
-  
+
   const excludePatterns = [
     /^\.DS_Store$/,
     /^\.dozo_lock$/,
     /^node_modules/,
     /^\.git/,
-    /\.log$/
+    /\.log$/,
   ];
-  
+
   function addDirectory(dirPath, zipPath = "") {
     const items = fs.readdirSync(dirPath);
-    
+
     for (const item of items) {
       const fullPath = path.join(dirPath, item);
       const relativePath = zipPath ? path.join(zipPath, item) : item;
       const targetPath = path.join(VERSION.folderName, relativePath);
-      
-      if (excludePatterns.some(pattern => pattern.test(item))) {
+
+      if (excludePatterns.some((pattern) => pattern.test(item))) {
         continue;
       }
-      
+
       const stats = fs.statSync(fullPath);
-      
+
       if (stats.isDirectory()) {
         addDirectory(fullPath, relativePath);
       } else {
@@ -139,80 +152,100 @@ function createZipFromSource() {
       }
     }
   }
-  
+
   addDirectory(PLUGINS_DIR);
-  
+
   zip.writeZip(zipPath);
   console.log(`   ✅ ZIP creado: ${VERSION.zipName}`);
-  
+
   return zipPath;
 }
 
 function updateDOZODatabases() {
   console.log("\n🧠 Actualizando Workflow DB...");
-  
+
   // Update ActivePlugin.json
   fs.writeFileSync(
     path.join(WORKFLOW_DB, "ActivePlugin.json"),
-    JSON.stringify({
-      plugin_name: VERSION.pluginName,
-      version: VERSION.version,
-      author: VERSION.author,
-      active: true
-    }, null, 2)
+    JSON.stringify(
+      {
+        plugin_name: VERSION.pluginName,
+        version: VERSION.version,
+        author: VERSION.author,
+        active: true,
+      },
+      null,
+      2,
+    ),
   );
   console.log("   ✅ ActivePlugin.json actualizado");
-  
+
   // Update Versions.json
   fs.writeFileSync(
     path.join(WORKFLOW_DB, "Versions.json"),
-    JSON.stringify({
-      active_plugin: VERSION.pluginName,
-      version: VERSION.version,
-      certified_base: true
-    }, null, 2)
+    JSON.stringify(
+      {
+        active_plugin: VERSION.pluginName,
+        version: VERSION.version,
+        certified_base: true,
+      },
+      null,
+      2,
+    ),
   );
   console.log("   ✅ Versions.json actualizado");
-  
+
   // Update update.json
   fs.writeFileSync(
     path.join(UPDATES_DIR, "update.json"),
-    JSON.stringify({
-      version: VERSION.version,
-      name: VERSION.pluginName,
-      author: VERSION.author,
-      download_url: `https://updates.vapedot.mx/warranty-system/${VERSION.zipName}`,
-      last_updated: new Date().toISOString().split("T")[0],
-      changelog: VERSION.changelog
-    }, null, 2)
+    JSON.stringify(
+      {
+        version: VERSION.version,
+        name: VERSION.pluginName,
+        author: VERSION.author,
+        download_url: `https://updates.vapedot.mx/warranty-system/${VERSION.zipName}`,
+        last_updated: new Date().toISOString().split("T")[0],
+        changelog: VERSION.changelog,
+      },
+      null,
+      2,
+    ),
   );
   console.log("   ✅ update.json actualizado");
 }
 
 (async () => {
   console.log("\n🛠️  DOZO Build v1.0.1 - Admin Panel Restore\n");
-  console.log("═══════════════════════════════════════════════════════════════════════════════════════\n");
+  console.log(
+    "═══════════════════════════════════════════════════════════════════════════════════════\n",
+  );
 
   ensureDirs();
 
   // 1. Verify admin panel files
   const adminPresent = verifyAdminFiles();
   if (!adminPresent) {
-    console.error("\n❌ ADVERTENCIA: Algunos archivos del admin panel están faltantes.");
-    console.error("   El build continuará, pero el admin panel puede no funcionar correctamente.\n");
+    console.error(
+      "\n❌ ADVERTENCIA: Algunos archivos del admin panel están faltantes.",
+    );
+    console.error(
+      "   El build continuará, pero el admin panel puede no funcionar correctamente.\n",
+    );
   } else {
-    console.log("\n✅ Todos los archivos críticos del admin panel están presentes.\n");
+    console.log(
+      "\n✅ Todos los archivos críticos del admin panel están presentes.\n",
+    );
   }
 
   // 2. Find and update main PHP file
   console.log("🔍 Localizando archivo PHP principal...");
   const mainPHP = findMainPHP();
-  
+
   if (!mainPHP) {
     console.error("❌ No se encontró el archivo PHP principal");
     process.exit(1);
   }
-  
+
   console.log(`✅ Encontrado: ${mainPHP.name}\n`);
 
   // 3. Update PHP headers
@@ -228,7 +261,9 @@ function updateDOZODatabases() {
 
   console.log(`\n📊 Información del Build:`);
   console.log(`   Archivo: ${VERSION.zipName}`);
-  console.log(`   Tamaño: ${(zipSize / 1024 / 1024).toFixed(2)} MB (${zipSize.toLocaleString()} bytes)`);
+  console.log(
+    `   Tamaño: ${(zipSize / 1024 / 1024).toFixed(2)} MB (${zipSize.toLocaleString()} bytes)`,
+  );
   console.log(`   SHA-256: ${zipSha.substring(0, 32)}...`);
   console.log(`   Ubicación: ${zipPath}`);
 
@@ -245,7 +280,7 @@ function updateDOZODatabases() {
     mainPHP: {
       file: mainPHP.name,
       path: mainPHP.path,
-      updated
+      updated,
     },
     adminPanel: {
       verified: adminPresent,
@@ -253,15 +288,15 @@ function updateDOZODatabases() {
         "includes/class-warranty-admin.php",
         "templates/admin/dashboard.php",
         "templates/admin/settings.php",
-        "Admin Panels/panel-design-settings"
-      ]
+        "Admin Panels/panel-design-settings",
+      ],
     },
     build: {
       zipName: VERSION.zipName,
       zipPath,
       zipSize,
       zipSizeMB: parseFloat((zipSize / 1024 / 1024).toFixed(2)),
-      sha256: zipSha
+      sha256: zipSha,
     },
     changelog: VERSION.changelog,
     sourceDirectory: PLUGINS_DIR,
@@ -272,15 +307,16 @@ function updateDOZODatabases() {
       "ZIP generado desde código fuente",
       "Workflow DB actualizado",
       "update.json configurado",
-      "Checksum SHA-256 calculado"
-    ]
+      "Checksum SHA-256 calculado",
+    ],
   };
 
   fs.writeFileSync(REPORT, JSON.stringify(report, null, 2), "utf8");
 
   console.log(`\n✅ Build v1.0.1 completado exitosamente`);
   console.log(`🧾 Reporte: ${REPORT}`);
-  console.log(`\n═══════════════════════════════════════════════════════════════════════════════════════`);
+  console.log(
+    `\n═══════════════════════════════════════════════════════════════════════════════════════`,
+  );
   console.log(`\n🎉 Warranty_System_RS_v1.0.1.zip listo para distribución\n`);
 })();
-

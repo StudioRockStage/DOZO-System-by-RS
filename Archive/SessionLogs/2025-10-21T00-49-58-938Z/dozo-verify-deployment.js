@@ -8,7 +8,8 @@ import fetch from "node-fetch";
 
 const urls = {
   updateJson: "https://updates.vapedot.mx/warranty-system/update.json",
-  zipFile: "https://updates.vapedot.mx/warranty-system/Warranty_System_v7.7.6.zip"
+  zipFile:
+    "https://updates.vapedot.mx/warranty-system/Warranty_System_v7.7.6.zip",
 };
 
 const expectedVersion = "7.7.6";
@@ -18,8 +19,8 @@ console.log("══════════════════════�
 
 async function checkURL(url, type) {
   try {
-    const res = await fetch(url, { method: 'HEAD' });
-    
+    const res = await fetch(url, { method: "HEAD" });
+
     if (res.ok) {
       console.log(`✅ ${type}: Accesible (HTTP ${res.status})`);
       return true;
@@ -37,15 +38,15 @@ async function checkVersion() {
   try {
     const res = await fetch(urls.updateJson);
     const data = await res.json();
-    
+
     const version = data.version;
     const isCorrect = version === expectedVersion;
-    
+
     console.log(`\n📄 update.json:`);
     console.log(`   Versión actual: ${version}`);
     console.log(`   Versión esperada: ${expectedVersion}`);
-    console.log(`   Estado: ${isCorrect ? '✅ CORRECTO' : '⏳ Aún en caché'}`);
-    
+    console.log(`   Estado: ${isCorrect ? "✅ CORRECTO" : "⏳ Aún en caché"}`);
+
     if (!isCorrect) {
       console.log(`\n⏳ El caché aún no se ha propagado`);
       console.log(`   Versión antigua: ${version}`);
@@ -53,9 +54,11 @@ async function checkVersion() {
     } else {
       console.log(`\n🎉 ¡DEPLOYMENT COMPLETO!`);
       console.log(`   El caché se ha propagado correctamente`);
-      console.log(`   La versión ${expectedVersion} está disponible públicamente`);
+      console.log(
+        `   La versión ${expectedVersion} está disponible públicamente`,
+      );
     }
-    
+
     return isCorrect;
   } catch (e) {
     console.log(`❌ Error al verificar versión: ${e.message}`);
@@ -65,19 +68,19 @@ async function checkVersion() {
 
 (async () => {
   console.log("📡 Verificando accesibilidad HTTP...\n");
-  
+
   const updateJsonOK = await checkURL(urls.updateJson, "update.json");
   const zipFileOK = await checkURL(urls.zipFile, "ZIP file   ");
-  
+
   const versionOK = await checkVersion();
-  
+
   console.log("\n═══════════════════════════════════════════════════════════");
   console.log("📊 RESUMEN");
   console.log("═══════════════════════════════════════════════════════════");
-  console.log(`update.json accesible:  ${updateJsonOK ? '✅' : '❌'}`);
-  console.log(`ZIP file accesible:     ${zipFileOK ? '✅' : '❌'}`);
-  console.log(`Versión correcta:       ${versionOK ? '✅' : '⏳'}`);
-  
+  console.log(`update.json accesible:  ${updateJsonOK ? "✅" : "❌"}`);
+  console.log(`ZIP file accesible:     ${zipFileOK ? "✅" : "❌"}`);
+  console.log(`Versión correcta:       ${versionOK ? "✅" : "⏳"}`);
+
   if (updateJsonOK && zipFileOK && versionOK) {
     console.log("\n🎊 ¡DEPLOYMENT 100% COMPLETO Y VERIFICADO!");
     console.log("\n🚀 Próximo paso:");
@@ -89,7 +92,6 @@ async function checkVersion() {
     console.log("\n⚠️  Hay problemas de accesibilidad");
     console.log("   Revisa los logs arriba para más detalles");
   }
-  
+
   console.log("═══════════════════════════════════════════════════════════\n");
 })();
-

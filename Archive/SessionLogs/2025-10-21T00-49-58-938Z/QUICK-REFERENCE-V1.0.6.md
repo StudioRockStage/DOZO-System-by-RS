@@ -19,6 +19,7 @@
 ## 🚀 Quick Commands
 
 ### Run Recovery Script
+
 ```bash
 npm run recover:v1.0.6
 # or
@@ -26,11 +27,13 @@ node dozo-fatal-recovery-v1.0.6.js
 ```
 
 ### Install via WP-CLI
+
 ```bash
 wp plugin install warranty-system-rs-v1.0.6.zip --activate
 ```
 
 ### Check Logs
+
 ```bash
 cat to\ chat\ gpt/Global/DOZO-Fatal-Recovery-Report-v1.0.6.json
 ```
@@ -69,24 +72,29 @@ cat to\ chat\ gpt/Global/DOZO-Fatal-Recovery-Report-v1.0.6.json
 ## 🔍 Verification
 
 ### Check Plugin Active
+
 ```
 WordPress Admin → Plugins
 → "Warranty System RS" should show v1.0.6
 ```
 
 ### Check Database Tables
+
 ```sql
 SHOW TABLES LIKE 'wp_rs_warranties%';
 ```
 
 Should show:
+
 - `wp_rs_warranties`
 - `wp_rs_warranty_notes`
 - `wp_rs_warranty_categories`
 - `wp_rs_warranty_rma`
 
 ### Test Frontend
+
 Add shortcode to any page:
+
 ```
 [warranty_form]
 ```
@@ -95,26 +103,26 @@ Add shortcode to any page:
 
 ## 🔧 Key Features
 
-| Feature | Status | Location |
-|---------|--------|----------|
-| Admin Panel | ✅ | WP Admin → Warranty System |
-| Frontend Form | ✅ | `[warranty_form]` shortcode |
-| Email Notifications | ✅ | Settings → Email |
-| RMA Tracking | ✅ | Warranty System → RMA Tracking |
-| Category Management | ✅ | Warranty System → Categories |
-| WooCommerce Integration | ✅ | Auto-detects |
-| DOZO Auto-Repair | ✅ | Automatic |
-| Integrity Checking | ✅ | On every init |
+| Feature                 | Status | Location                       |
+| ----------------------- | ------ | ------------------------------ |
+| Admin Panel             | ✅     | WP Admin → Warranty System     |
+| Frontend Form           | ✅     | `[warranty_form]` shortcode    |
+| Email Notifications     | ✅     | Settings → Email               |
+| RMA Tracking            | ✅     | Warranty System → RMA Tracking |
+| Category Management     | ✅     | Warranty System → Categories   |
+| WooCommerce Integration | ✅     | Auto-detects                   |
+| DOZO Auto-Repair        | ✅     | Automatic                      |
+| Integrity Checking      | ✅     | On every init                  |
 
 ---
 
 ## 📊 System Requirements
 
-| Requirement | Minimum |
-|-------------|---------|
-| WordPress | 6.0+ |
-| PHP | 7.4+ |
-| MySQL | 5.6+ |
+| Requirement | Minimum         |
+| ----------- | --------------- |
+| WordPress   | 6.0+            |
+| PHP         | 7.4+            |
+| MySQL       | 5.6+            |
 | WooCommerce | 6.0+ (optional) |
 
 ---
@@ -122,6 +130,7 @@ Add shortcode to any page:
 ## 🛠 Troubleshooting
 
 ### Plugin Won't Activate
+
 ```bash
 # Check PHP version
 php -v
@@ -134,12 +143,14 @@ tail -f wp-content/debug.log
 ```
 
 ### Admin Menu Missing
+
 1. Deactivate plugin
 2. Reactivate plugin
 3. Clear browser cache
 4. Check JavaScript console
 
 ### Database Error
+
 ```bash
 # Via WP-CLI
 wp plugin deactivate warranty-system-rs
@@ -150,13 +161,13 @@ wp plugin activate warranty-system-rs
 
 ## 📁 Key Files
 
-| File | Purpose |
-|------|---------|
-| `warranty-system-rs.php` | Main plugin file |
-| `includes/class-warranty-core.php` | Core functionality |
-| `includes/class-warranty-admin.php` | Admin interface |
+| File                                   | Purpose             |
+| -------------------------------------- | ------------------- |
+| `warranty-system-rs.php`               | Main plugin file    |
+| `includes/class-warranty-core.php`     | Core functionality  |
+| `includes/class-warranty-admin.php`    | Admin interface     |
 | `includes/class-warranty-database.php` | Database operations |
-| `includes/class-warranty-frontend.php` | Frontend forms |
+| `includes/class-warranty-frontend.php` | Frontend forms      |
 
 ---
 
@@ -174,11 +185,13 @@ wp plugin activate warranty-system-rs
 ## 📞 Support Resources
 
 ### Documentation
+
 - **Full Guide:** `WARRANTY-SYSTEM-V1.0.6-RELEASE.md`
 - **Recovery Report:** `to chat gpt/Global/DOZO-Fatal-Recovery-Report-v1.0.6.json`
 - **Plugin README:** Inside plugin → `README.md`
 
 ### NPM Scripts
+
 ```bash
 npm run recover:v1.0.6    # Rebuild plugin
 npm run validate          # Validate local files
@@ -187,6 +200,7 @@ npm run monitor           # Monitor system health
 ```
 
 ### Manual Locations
+
 ```
 Recovery Script:  dozo-fatal-recovery-v1.0.6.js
 Package Output:   Empaquetado/Ready/warranty-system-rs-v1.0.6.zip
@@ -239,6 +253,7 @@ ZIP Size:          193,861 bytes
 ## 💡 Quick Tips
 
 **First-time Setup:**
+
 ```
 1. Activate plugin
 2. Go to Warranty System → Settings
@@ -248,6 +263,7 @@ ZIP Size:          193,861 bytes
 ```
 
 **Daily Use:**
+
 ```
 1. Check Dashboard for new claims
 2. Process pending warranties
@@ -256,6 +272,7 @@ ZIP Size:          193,861 bytes
 ```
 
 **Maintenance:**
+
 ```
 1. Monitor DOZO diagnostics
 2. Check error logs weekly
@@ -267,5 +284,4 @@ ZIP Size:          193,861 bytes
 
 **Ready to Deploy! 🚀**
 
-*For detailed information, see:* `WARRANTY-SYSTEM-V1.0.6-RELEASE.md`
-
+_For detailed information, see:_ `WARRANTY-SYSTEM-V1.0.6-RELEASE.md`

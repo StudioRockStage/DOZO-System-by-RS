@@ -3,6 +3,7 @@
 ## 📋 Descripción
 
 Script de validación automática para el servidor de actualizaciones DOZO que verifica:
+
 - ✅ Conectividad FTP
 - ✅ Validez de archivos de actualización
 - ✅ Accesibilidad HTTP
@@ -150,12 +151,14 @@ cat Global/DOZO-RemoteSyncReport.json | grep -A 10 "wordpressSimulation"
 ## ✅ Validaciones Realizadas
 
 ### 🌐 1. Conexión FTP
+
 - Conecta al servidor FTP
 - Verifica acceso al directorio remoto
 - Lista archivos disponibles
 - Registra permisos y tamaños
 
 ### 🧾 2. Update.json
+
 - Descarga y analiza el archivo
 - Valida campos requeridos:
   - `version`
@@ -166,17 +169,20 @@ cat Global/DOZO-RemoteSyncReport.json | grep -A 10 "wordpressSimulation"
 - Verifica acceso HTTP
 
 ### 📦 3. Archivo ZIP
+
 - Localiza el archivo ZIP (detecta variantes con versión)
 - Descarga y calcula checksum SHA256
 - Verifica tamaño y integridad
 - Confirma accesibilidad HTTP
 
 ### 🔐 4. Permisos
+
 - Verifica permisos de archivos (644)
 - Identifica permisos incorrectos
 - Genera reporte de estado
 
 ### 🔍 5. Simulación WordPress
+
 - Simula petición de actualización
 - Compara versiones (remota vs instalada)
 - Verifica URL de descarga
@@ -187,12 +193,15 @@ cat Global/DOZO-RemoteSyncReport.json | grep -A 10 "wordpressSimulation"
 ## 🚨 Interpretación de Resultados
 
 ### ✅ REMOTE_SYNC_SUCCESSFUL
+
 Todos los componentes funcionan correctamente. El servidor está listo para servir actualizaciones.
 
 ### ⚠️ REMOTE_SYNC_PARTIAL
+
 Algunas validaciones tienen advertencias pero el sistema es funcional. Revisar el campo `errors` para detalles.
 
 ### ❌ REMOTE_SYNC_FAILED
+
 Errores críticos detectados. Revisar el reporte JSON para identificar problemas.
 
 ---
@@ -203,7 +212,7 @@ Errores críticos detectados. Revisar el reporte JSON para identificar problemas
 {
   "timestamp": "ISO 8601 timestamp",
   "status": "REMOTE_SYNC_SUCCESSFUL | REMOTE_SYNC_PARTIAL | REMOTE_SYNC_FAILED",
-  
+
   "connection": {
     "status": "SUCCESS | FAILED",
     "host": "servidor FTP",
@@ -211,13 +220,13 @@ Errores críticos detectados. Revisar el reporte JSON para identificar problemas
     "fileCount": "número de archivos",
     "files": [ /* lista de archivos */ ]
   },
-  
+
   "updateJson": {
     "status": "VALID | INCOMPLETE | FAILED",
     "content": { /* contenido del JSON */ },
     "httpAccess": { /* detalles de acceso HTTP */ }
   },
-  
+
   "zipFile": {
     "ftpStatus": "FOUND | NOT_FOUND",
     "fileName": "nombre del archivo",
@@ -225,13 +234,13 @@ Errores críticos detectados. Revisar el reporte JSON para identificar problemas
     "sha256": "hash SHA256",
     "httpAccess": { /* detalles de acceso HTTP */ }
   },
-  
+
   "permissions": {
     "checked": [ /* archivos revisados */ ],
     "corrected": [ /* permisos corregidos */ ],
     "status": "CHECKED | CORRECTED | FAILED"
   },
-  
+
   "wordpressSimulation": {
     "updateDetected": true/false,
     "remoteVersion": "versión disponible",
@@ -239,7 +248,7 @@ Errores críticos detectados. Revisar el reporte JSON para identificar problemas
     "status": "UPDATE_DETECTED | NO_UPDATE | FAILED",
     "zipDownloadable": true/false
   },
-  
+
   "errors": [ /* lista de errores si los hay */ ]
 }
 ```
@@ -277,22 +286,27 @@ fi
 ## 🛠️ Troubleshooting
 
 ### Error: "Connection failed"
+
 **Causa:** No se puede conectar al servidor FTP  
 **Solución:** Verificar credenciales y conectividad de red
 
 ### Error: "update.json not found"
+
 **Causa:** Archivo no existe en el servidor  
 **Solución:** Subir update.json al directorio remoto
 
 ### Error: "ZIP verification failed"
+
 **Causa:** Archivo ZIP no encontrado o corrupto  
 **Solución:** Verificar nombre y subir archivo ZIP válido
 
 ### Warning: "Tamaño HTTP difiere del FTP"
+
 **Causa:** Diferencia en tamaño entre FTP y HTTP  
 **Solución:** Normal si hay compresión. Verificar hash SHA256
 
 ### "No update detected"
+
 **Causa:** Versión remota <= versión instalada  
 **Solución:** Verificar números de versión en update.json
 
@@ -312,7 +326,7 @@ fi
 **Sistema:** DOZO System by RockStage  
 **Versión:** v7.9 DeepSync Framework  
 **Proyecto:** Warranty System RS  
-**Autor:** RockStage Solutions  
+**Autor:** RockStage Solutions
 
 ---
 
@@ -321,6 +335,7 @@ fi
 ⚠️ **IMPORTANTE:** Este script contiene credenciales FTP. Mantener en ubicación segura y no compartir públicamente.
 
 Considerar:
+
 - Usar variables de entorno para credenciales
 - Implementar .env para configuración sensible
 - Restringir permisos de archivo (chmod 600)
@@ -328,4 +343,3 @@ Considerar:
 ---
 
 **Última Actualización:** October 20, 2025
-

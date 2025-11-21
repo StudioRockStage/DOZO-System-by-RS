@@ -20,12 +20,19 @@ const version = "1.0.0";
 const pluginName = "Warranty System RS";
 const pluginAuthor = "RockStage Solutions";
 const zipName = `Warranty_System_RS_v${version}.zip`;
-const updateJSONPath = path.join(baseDir, "updates", "warranty-system", "update.json");
+const updateJSONPath = path.join(
+  baseDir,
+  "updates",
+  "warranty-system",
+  "update.json",
+);
 const zipOutput = path.join(packagedDir, zipName);
 const reportPath = path.join(globalDir, "DOZO-LegacyReset-Report.json");
 
 // 🧹 1️⃣ Eliminar versiones previas
-console.log("🧹 Eliminando versiones antiguas y nomenclaturas inconsistentes...");
+console.log(
+  "🧹 Eliminando versiones antiguas y nomenclaturas inconsistentes...",
+);
 [pluginsDir, packagedDir, backupDir].forEach((dir) => {
   if (fs.existsSync(dir)) {
     const files = fs.readdirSync(dir);
@@ -77,7 +84,11 @@ define('RS_WARRANTY_VERSION', '${version}');
 define('RS_WARRANTY_AUTHOR', '${pluginAuthor}');
 `;
 
-fs.writeFileSync(path.join(pluginsDir, "rockstage-warranty-system.php"), pluginPHP, "utf8");
+fs.writeFileSync(
+  path.join(pluginsDir, "rockstage-warranty-system.php"),
+  pluginPHP,
+  "utf8",
+);
 console.log(`  ✅ Plugin PHP creado en Plugins/Warranty System/`);
 
 fs.writeFileSync(zipOutput, "ZIP placeholder: Warranty System RS v1.0.0");
@@ -91,7 +102,8 @@ const updateData = {
   author: pluginAuthor,
   download_url: `https://updates.vapedot.mx/warranty-system/${zipName}`,
   last_updated: new Date().toISOString().split("T")[0],
-  changelog: "Versión base certificada – Reinicio estructural y nomenclatura unificada.",
+  changelog:
+    "Versión base certificada – Reinicio estructural y nomenclatura unificada.",
 };
 fs.mkdirSync(path.dirname(updateJSONPath), { recursive: true });
 fs.writeFileSync(updateJSONPath, JSON.stringify(updateData, null, 2), "utf8");
@@ -109,18 +121,25 @@ const namingRules = {
   auto_correct: true,
 };
 
-fs.writeFileSync(path.join(workflowDB, "Versions.json"), JSON.stringify(versions, null, 2));
+fs.writeFileSync(
+  path.join(workflowDB, "Versions.json"),
+  JSON.stringify(versions, null, 2),
+);
 console.log(`  ✅ Versions.json actualizado`);
 
 fs.writeFileSync(
   path.join(workflowDB, "ActivePlugin.json"),
-  JSON.stringify({ plugin_name: pluginName, version, author: pluginAuthor, active: true }, null, 2)
+  JSON.stringify(
+    { plugin_name: pluginName, version, author: pluginAuthor, active: true },
+    null,
+    2,
+  ),
 );
 console.log(`  ✅ ActivePlugin.json actualizado`);
 
 fs.writeFileSync(
   path.join(workflowDB, "DOZO-Core.json"),
-  JSON.stringify({ NamingIntegrityRules: namingRules }, null, 2)
+  JSON.stringify({ NamingIntegrityRules: namingRules }, null, 2),
 );
 console.log(`  ✅ DOZO-Core.json actualizado`);
 
@@ -133,7 +152,8 @@ console.log(`  🔒 Lock file creado`);
 // ✅ 7️⃣ Reporte global
 const report = {
   status: "success",
-  message: "Sistema reiniciado correctamente. Base v1.0.0 certificada y registrada.",
+  message:
+    "Sistema reiniciado correctamente. Base v1.0.0 certificada y registrada.",
   plugin: pluginName,
   author: pluginAuthor,
   version,
@@ -144,18 +164,19 @@ const report = {
     "Plugin base v1.0.0 creado",
     "update.json generado",
     "Bases DOZO actualizadas",
-    "Lock file activado"
+    "Lock file activado",
   ],
   next_steps: [
     "Desarrollar funcionalidades del plugin",
     "Empaquetar versión completa",
     "Subir a servidor de actualizaciones",
-    "Activar monitoreo automático"
-  ]
+    "Activar monitoreo automático",
+  ],
 };
 fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
 console.log(`  ✅ Reporte guardado en: ${reportPath}`);
 
 console.log("\n✅ Proceso completado. Reporte en:", reportPath);
-console.log("🚀 Nueva versión base lista para instalación y actualización automática.");
-
+console.log(
+  "🚀 Nueva versión base lista para instalación y actualización automática.",
+);

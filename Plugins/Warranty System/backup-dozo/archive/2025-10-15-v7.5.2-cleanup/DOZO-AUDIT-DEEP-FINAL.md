@@ -42,14 +42,14 @@ This comprehensive audit certifies that **Warranty System by RockStage** achieve
 
 ## 📂 FILES MODIFIED IN THIS AUDIT
 
-| File | Lines Before | Lines After | Added | Status |
-|------|--------------|-------------|-------|--------|
-| `templates/admin/settings.php` | 582 | 830 | +248 | ✅ Enhanced |
-| `assets/css/admin-style.css` | 602 | 1,051 | +449 | ✅ Enhanced |
-| `includes/class-warranty-core.php` | 827 | 1,071 | +244 | ✅ Enhanced |
-| `rockstage-warranty-system.php` | 282 | 285 | +3 | ✅ Enhanced |
-| `tools/diagnostics.php` | 0 | 310 | +310 | ✅ NEW |
-| **TOTAL** | **2,293** | **3,547** | **+1,254** | **✅** |
+| File                               | Lines Before | Lines After | Added      | Status      |
+| ---------------------------------- | ------------ | ----------- | ---------- | ----------- |
+| `templates/admin/settings.php`     | 582          | 830         | +248       | ✅ Enhanced |
+| `assets/css/admin-style.css`       | 602          | 1,051       | +449       | ✅ Enhanced |
+| `includes/class-warranty-core.php` | 827          | 1,071       | +244       | ✅ Enhanced |
+| `rockstage-warranty-system.php`    | 282          | 285         | +3         | ✅ Enhanced |
+| `tools/diagnostics.php`            | 0            | 310         | +310       | ✅ NEW      |
+| **TOTAL**                          | **2,293**    | **3,547**   | **+1,254** | **✅**      |
 
 ---
 
@@ -63,31 +63,31 @@ This comprehensive audit certifies that **Warranty System by RockStage** achieve
 
 ### Structural Elements Mapped
 
-| HTML Element | PHP Implementation | Line Range | Status |
-|--------------|-------------------|------------|--------|
-| **Card 1: Config Form** | `.settings-card` | 143-271 | ✅ 100% |
-| └ Header | `.card-header` + `.card-icon` | 144-161 | ✅ |
-| └ Sync button | `#syncCategoriesBtn` | 155-160 | ✅ |
-| └ Category select | `#categorySelect` | 164-181 | ✅ Dynamic WC |
-| └ Config grid | `.warranty-config-grid` | 184-239 | ✅ 2×2 grid |
-| └ Days input | `#warrantyDays` | 186-196 | ✅ |
-| └ Hours input | `#warrantyHours` | 199-209 | ✅ |
-| └ Text input | `#warrantyText` | 212-221 | ✅ |
-| └ Toggle switch | `#categoryActiveToggle` | 224-238 | ✅ Animated |
-| └ Preview panel | `.warranty-preview` | 242-253 | ✅ Live calc |
-| └ Action buttons | `.form-actions` | 256-270 | ✅ 2 buttons |
-| **Card 2: Table** | `.settings-card` | 274-416 | ✅ 100% |
-| └ Header + stats | `.card-header` + `.category-stats` | 275-302 | ✅ Dynamic |
-| └ Table wrapper | `.table-wrapper-categories` | 305-415 | ✅ |
-| └ Table element | `.categories-table` | 306-397 | ✅ 7 columns |
-| └ Dynamic rows | PHP foreach loop | 319-395 | ✅ From DB |
-| └ Edit buttons | `.action-btn-small.action-edit` | 377-381 | ✅ Per row |
-| └ Delete buttons | `.action-btn-small.action-delete` | 382-386 | ✅ Per row |
-| └ Footer info | `.table-footer-info` | 400-414 | ✅ 2 items |
-| **Action Bar** | `.action-bar` | 419-447 | ✅ 100% |
-| └ Info section | `.action-info` | 420-428 | ✅ Dynamic count |
-| └ Restore button | `.btn.btn-secondary` | 431-437 | ✅ AJAX |
-| └ Save all button | `.btn.btn-primary` | 438-445 | ✅ AJAX |
+| HTML Element            | PHP Implementation                 | Line Range | Status           |
+| ----------------------- | ---------------------------------- | ---------- | ---------------- |
+| **Card 1: Config Form** | `.settings-card`                   | 143-271    | ✅ 100%          |
+| └ Header                | `.card-header` + `.card-icon`      | 144-161    | ✅               |
+| └ Sync button           | `#syncCategoriesBtn`               | 155-160    | ✅               |
+| └ Category select       | `#categorySelect`                  | 164-181    | ✅ Dynamic WC    |
+| └ Config grid           | `.warranty-config-grid`            | 184-239    | ✅ 2×2 grid      |
+| └ Days input            | `#warrantyDays`                    | 186-196    | ✅               |
+| └ Hours input           | `#warrantyHours`                   | 199-209    | ✅               |
+| └ Text input            | `#warrantyText`                    | 212-221    | ✅               |
+| └ Toggle switch         | `#categoryActiveToggle`            | 224-238    | ✅ Animated      |
+| └ Preview panel         | `.warranty-preview`                | 242-253    | ✅ Live calc     |
+| └ Action buttons        | `.form-actions`                    | 256-270    | ✅ 2 buttons     |
+| **Card 2: Table**       | `.settings-card`                   | 274-416    | ✅ 100%          |
+| └ Header + stats        | `.card-header` + `.category-stats` | 275-302    | ✅ Dynamic       |
+| └ Table wrapper         | `.table-wrapper-categories`        | 305-415    | ✅               |
+| └ Table element         | `.categories-table`                | 306-397    | ✅ 7 columns     |
+| └ Dynamic rows          | PHP foreach loop                   | 319-395    | ✅ From DB       |
+| └ Edit buttons          | `.action-btn-small.action-edit`    | 377-381    | ✅ Per row       |
+| └ Delete buttons        | `.action-btn-small.action-delete`  | 382-386    | ✅ Per row       |
+| └ Footer info           | `.table-footer-info`               | 400-414    | ✅ 2 items       |
+| **Action Bar**          | `.action-bar`                      | 419-447    | ✅ 100%          |
+| └ Info section          | `.action-info`                     | 420-428    | ✅ Dynamic count |
+| └ Restore button        | `.btn.btn-secondary`               | 431-437    | ✅ AJAX          |
+| └ Save all button       | `.btn.btn-primary`                 | 438-445    | ✅ AJAX          |
 
 **Total Elements**: 26  
 **All Implemented**: ✅ **100%**
@@ -146,17 +146,17 @@ This comprehensive audit certifies that **Warranty System by RockStage** achieve
 
 ### Functions Implemented in `settings.php`
 
-| Function | Purpose | AJAX Endpoint | Lines | Status |
-|----------|---------|---------------|-------|--------|
-| `updateWarrantyPreview()` | Calculate "365 días (1 año)" format | N/A | 589-607 | ✅ |
-| `$('.toggle-switch').click()` | Toggle active class | N/A | 610-612 | ✅ |
-| `$('#syncCategoriesBtn').click()` | Sync WC categories | `rs_sync_categories` | 615-641 | ✅ |
-| `$('#addCategoryBtn').click()` | Save single category | `rs_save_category` | 644-688 | ✅ |
-| `rsClearCategoryFields()` | Reset form to defaults | N/A | 695-702 | ✅ |
-| `rsEditCategory(id)` | Load category into form + scroll | N/A | 705-733 | ✅ |
-| `rsDeleteCategory(id)` | Delete with confirm | `rs_delete_category` | 736-761 | ✅ |
-| `rsRestoreDefaults()` | Restore all to defaults | `rs_restore_default_categories` | 764-788 | ✅ |
-| `rsSaveAllCategories()` | Batch save all rows | `rs_save_all_categories` | 791-828 | ✅ |
+| Function                          | Purpose                             | AJAX Endpoint                   | Lines   | Status |
+| --------------------------------- | ----------------------------------- | ------------------------------- | ------- | ------ |
+| `updateWarrantyPreview()`         | Calculate "365 días (1 año)" format | N/A                             | 589-607 | ✅     |
+| `$('.toggle-switch').click()`     | Toggle active class                 | N/A                             | 610-612 | ✅     |
+| `$('#syncCategoriesBtn').click()` | Sync WC categories                  | `rs_sync_categories`            | 615-641 | ✅     |
+| `$('#addCategoryBtn').click()`    | Save single category                | `rs_save_category`              | 644-688 | ✅     |
+| `rsClearCategoryFields()`         | Reset form to defaults              | N/A                             | 695-702 | ✅     |
+| `rsEditCategory(id)`              | Load category into form + scroll    | N/A                             | 705-733 | ✅     |
+| `rsDeleteCategory(id)`            | Delete with confirm                 | `rs_delete_category`            | 736-761 | ✅     |
+| `rsRestoreDefaults()`             | Restore all to defaults             | `rs_restore_default_categories` | 764-788 | ✅     |
+| `rsSaveAllCategories()`           | Batch save all rows                 | `rs_save_all_categories`        | 791-828 | ✅     |
 
 **Total Functions**: 9  
 **All Functional**: ✅ **100%**
@@ -184,8 +184,9 @@ This comprehensive audit certifies that **Warranty System by RockStage** achieve
 **Purpose**: Sync WooCommerce product categories into warranty configuration
 
 **Flow**:
+
 ```
-check_ajax_referer() 
+check_ajax_referer()
   → current_user_can('manage_woocommerce')
   → get_terms('product_cat', hide_empty: false)
   → Loop through categories
@@ -196,6 +197,7 @@ check_ajax_referer()
 ```
 
 **Security**:
+
 - ✅ Nonce verification
 - ✅ Capability check
 - ✅ Term validation with `is_wp_error()`
@@ -208,6 +210,7 @@ check_ajax_referer()
 **Purpose**: Save or update single category configuration
 
 **Flow**:
+
 ```
 check_ajax_referer()
   → current_user_can('manage_woocommerce')
@@ -220,6 +223,7 @@ check_ajax_referer()
 ```
 
 **Security**:
+
 - ✅ Nonce verification
 - ✅ Capability check
 - ✅ Input validation: `absint()`, `sanitize_text_field()`
@@ -233,6 +237,7 @@ check_ajax_referer()
 **Purpose**: Remove category configuration
 
 **Flow**:
+
 ```
 check_ajax_referer()
   → current_user_can('manage_woocommerce')
@@ -245,6 +250,7 @@ check_ajax_referer()
 ```
 
 **Security**:
+
 - ✅ Nonce verification
 - ✅ Capability check
 - ✅ Integer sanitization
@@ -257,6 +263,7 @@ check_ajax_referer()
 **Purpose**: Reset all categories to default 365 days
 
 **Flow**:
+
 ```
 check_ajax_referer()
   → current_user_can('manage_woocommerce')
@@ -268,6 +275,7 @@ check_ajax_referer()
 ```
 
 **Security**:
+
 - ✅ Nonce verification
 - ✅ Capability check
 - ✅ Term validation
@@ -280,6 +288,7 @@ check_ajax_referer()
 **Purpose**: Batch save all category configurations
 
 **Flow**:
+
 ```
 check_ajax_referer()
   → current_user_can('manage_woocommerce')
@@ -295,6 +304,7 @@ check_ajax_referer()
 ```
 
 **Security**:
+
 - ✅ Nonce verification
 - ✅ Capability check
 - ✅ Array validation (`is_array()`)
@@ -315,7 +325,7 @@ check_ajax_referer()
 #### Test Categories Implemented
 
 1. **Arquitectura** (13 tests)
-   - Constants defined (RS_WARRANTY_*)
+   - Constants defined (RS*WARRANTY*\*)
    - Classes exist (7 core classes)
    - Tables exist (4 custom tables)
 
@@ -360,6 +370,7 @@ check_ajax_referer()
 Navigate to: **WordPress Admin > Garantías > ⚡ Diagnóstico**
 
 **Features**:
+
 - One-click "Ejecutar Diagnóstico Completo" button
 - Real-time AJAX execution
 - Color-coded results (green/red)
@@ -368,6 +379,7 @@ Navigate to: **WordPress Admin > Garantías > ⚡ Diagnóstico**
 - Visual feedback with icons
 
 **Expected Output**:
+
 ```
 ╔════════════════════════════════════════╗
 ║  Puntuación DOZO: 40/40 (100%)         ║
@@ -411,25 +423,25 @@ if (!current_user_can('manage_woocommerce')) {
 
 ### Input Sanitization Coverage
 
-| Input Type | Function | Endpoint Count | Coverage |
-|------------|----------|---------------|----------|
-| Integer ID | `absint()` | 5 | 100% |
-| Text | `sanitize_text_field()` | 3 | 100% |
-| Array | `is_array()` + loop | 1 | 100% |
-| Term | `get_term()` + `is_wp_error()` | 3 | 100% |
+| Input Type | Function                       | Endpoint Count | Coverage |
+| ---------- | ------------------------------ | -------------- | -------- |
+| Integer ID | `absint()`                     | 5              | 100%     |
+| Text       | `sanitize_text_field()`        | 3              | 100%     |
+| Array      | `is_array()` + loop            | 1              | 100%     |
+| Term       | `get_term()` + `is_wp_error()` | 3              | 100%     |
 
 **Total Sanitization**: ✅ **100%**
 
 ### Vulnerability Assessment
 
-| Vulnerability Type | Risk | Mitigation | Status |
-|-------------------|------|------------|--------|
-| CSRF | High | Nonces in all endpoints | ✅ Protected |
-| XSS | High | `esc_html()`, `esc_attr()`, `esc_js()` | ✅ Protected |
-| SQL Injection | High | Using WP Options API (no SQL) | ✅ N/A |
-| Unauthorized Access | High | `current_user_can()` checks | ✅ Protected |
-| Term Hijacking | Medium | `get_term()` validation | ✅ Protected |
-| Array Injection | Medium | `is_array()` + individual validation | ✅ Protected |
+| Vulnerability Type  | Risk   | Mitigation                             | Status       |
+| ------------------- | ------ | -------------------------------------- | ------------ |
+| CSRF                | High   | Nonces in all endpoints                | ✅ Protected |
+| XSS                 | High   | `esc_html()`, `esc_attr()`, `esc_js()` | ✅ Protected |
+| SQL Injection       | High   | Using WP Options API (no SQL)          | ✅ N/A       |
+| Unauthorized Access | High   | `current_user_can()` checks            | ✅ Protected |
+| Term Hijacking      | Medium | `get_term()` validation                | ✅ Protected |
+| Array Injection     | Medium | `is_array()` + individual validation   | ✅ Protected |
 
 **Security Score**: ✅ **100/100**
 
@@ -439,19 +451,19 @@ if (!current_user_can('manage_woocommerce')) {
 
 ### Total New Elements: 11
 
-| # | Element | Action | AJAX | Feedback | Status |
-|---|---------|--------|------|----------|--------|
-| 1 | Sync button | `$('#syncCategoriesBtn').click()` | `rs_sync_categories` | Notification + reload | ✅ |
-| 2 | Category select | Change event | N/A | Updates form | ✅ |
-| 3 | Days input | Input event | N/A | Updates preview | ✅ |
-| 4 | Hours input | Input event | N/A | Updates preview | ✅ |
-| 5 | Toggle switch | Click event | N/A | Toggles class | ✅ |
-| 6 | Clear button | `rsClearCategoryFields()` | N/A | Resets form | ✅ |
-| 7 | Save config button | `$('#addCategoryBtn').click()` | `rs_save_category` | Notification + reload | ✅ |
-| 8 | Edit buttons | `rsEditCategory(id)` | N/A | Populates form + scroll | ✅ |
-| 9 | Delete buttons | `rsDeleteCategory(id)` | `rs_delete_category` | Confirm + reload | ✅ |
-| 10 | Restore button | `rsRestoreDefaults()` | `rs_restore_default_categories` | Confirm + reload | ✅ |
-| 11 | Save all button | `rsSaveAllCategories()` | `rs_save_all_categories` | Notification (no reload) | ✅ |
+| #   | Element            | Action                            | AJAX                            | Feedback                 | Status |
+| --- | ------------------ | --------------------------------- | ------------------------------- | ------------------------ | ------ |
+| 1   | Sync button        | `$('#syncCategoriesBtn').click()` | `rs_sync_categories`            | Notification + reload    | ✅     |
+| 2   | Category select    | Change event                      | N/A                             | Updates form             | ✅     |
+| 3   | Days input         | Input event                       | N/A                             | Updates preview          | ✅     |
+| 4   | Hours input        | Input event                       | N/A                             | Updates preview          | ✅     |
+| 5   | Toggle switch      | Click event                       | N/A                             | Toggles class            | ✅     |
+| 6   | Clear button       | `rsClearCategoryFields()`         | N/A                             | Resets form              | ✅     |
+| 7   | Save config button | `$('#addCategoryBtn').click()`    | `rs_save_category`              | Notification + reload    | ✅     |
+| 8   | Edit buttons       | `rsEditCategory(id)`              | N/A                             | Populates form + scroll  | ✅     |
+| 9   | Delete buttons     | `rsDeleteCategory(id)`            | `rs_delete_category`            | Confirm + reload         | ✅     |
+| 10  | Restore button     | `rsRestoreDefaults()`             | `rs_restore_default_categories` | Confirm + reload         | ✅     |
+| 11  | Save all button    | `rsSaveAllCategories()`           | `rs_save_all_categories`        | Notification (no reload) | ✅     |
 
 **Functional Rate**: 11/11 = ✅ **100%**
 
@@ -475,22 +487,22 @@ if (!current_user_can('manage_woocommerce')) {
 
 ### Element Type Distribution
 
-| Type | Count | Percentage |
-|------|-------|------------|
-| Form Inputs | 4 | 36% |
-| Buttons | 5 | 45% |
-| Interactive (toggle, select) | 2 | 18% |
-| **TOTAL** | **11** | **100%** |
+| Type                         | Count  | Percentage |
+| ---------------------------- | ------ | ---------- |
+| Form Inputs                  | 4      | 36%        |
+| Buttons                      | 5      | 45%        |
+| Interactive (toggle, select) | 2      | 18%        |
+| **TOTAL**                    | **11** | **100%**   |
 
 ### AJAX Complexity
 
-| Endpoint | Request Size | Response Size | Complexity | Status |
-|----------|-------------|---------------|------------|--------|
-| `rs_sync_categories` | Small | Medium | Medium | ✅ |
-| `rs_save_category` | Medium | Small | Low | ✅ |
-| `rs_delete_category` | Small | Small | Low | ✅ |
-| `rs_restore_default_categories` | Small | Medium | Medium | ✅ |
-| `rs_save_all_categories` | Large | Small | High | ✅ |
+| Endpoint                        | Request Size | Response Size | Complexity | Status |
+| ------------------------------- | ------------ | ------------- | ---------- | ------ |
+| `rs_sync_categories`            | Small        | Medium        | Medium     | ✅     |
+| `rs_save_category`              | Medium       | Small         | Low        | ✅     |
+| `rs_delete_category`            | Small        | Small         | Low        | ✅     |
+| `rs_restore_default_categories` | Small        | Medium        | Medium     | ✅     |
+| `rs_save_all_categories`        | Large        | Small         | High       | ✅     |
 
 **All Endpoints**: ✅ **Functional & Secure**
 
@@ -557,7 +569,7 @@ if (!current_user_can('manage_woocommerce')) {
 
 ### Criteria 5: Code Quality
 
-- [x] Consistent naming (rs_ prefix)
+- [x] Consistent naming (rs\_ prefix)
 - [x] Clear function names
 - [x] Inline documentation
 - [x] Proper indentation
@@ -692,6 +704,7 @@ if (!current_user_can('manage_woocommerce')) {
 > The **Warranty System by RockStage** plugin has undergone a comprehensive deep audit and successfully integrates the complete HTML structure from `Configuración de Categorías y Períodos de Garantía.html` into the WordPress admin interface with **100% visual and functional parity**.
 
 **Key Achievements**:
+
 - ✅ **1,254 new lines** of DOZO-compliant code
 - ✅ **100% visual match** with HTML reference
 - ✅ **100% functional match** with expected behaviors
@@ -733,16 +746,16 @@ if (!current_user_can('manage_woocommerce')) {
 
 ## 📊 COMPARISON: BEFORE vs AFTER AUDIT
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| Total Files | 26 | 30 | +4 |
-| Lines of Code | 6,630 | 7,884 | +1,254 (19%) |
-| AJAX Endpoints | 10 | 15 | +5 (50%) |
-| Clickable Elements | 47 | 58 | +11 (23%) |
-| CSS Classes | 165 | 185 | +20 (12%) |
-| JavaScript Functions | 22 | 31 | +9 (41%) |
-| Documentation | 115 KB | 142 KB | +27 KB (23%) |
-| DOZO Score | 99/100 | 100/100 | +1% |
+| Metric               | Before | After   | Improvement  |
+| -------------------- | ------ | ------- | ------------ |
+| Total Files          | 26     | 30      | +4           |
+| Lines of Code        | 6,630  | 7,884   | +1,254 (19%) |
+| AJAX Endpoints       | 10     | 15      | +5 (50%)     |
+| Clickable Elements   | 47     | 58      | +11 (23%)    |
+| CSS Classes          | 165    | 185     | +20 (12%)    |
+| JavaScript Functions | 22     | 31      | +9 (41%)     |
+| Documentation        | 115 KB | 142 KB  | +27 KB (23%) |
+| DOZO Score           | 99/100 | 100/100 | +1%          |
 
 ---
 
@@ -751,6 +764,7 @@ if (!current_user_can('manage_woocommerce')) {
 The **DOZO Audit Deep** has successfully completed with the integration of the complete HTML reference for "Configuración de Categorías y Períodos de Garantía" into the RockStage Warranty System plugin.
 
 **All requirements met**:
+
 - ✅ Visual parity: 100%
 - ✅ Functional parity: 100%
 - ✅ Security: 100%
@@ -758,6 +772,7 @@ The **DOZO Audit Deep** has successfully completed with the integration of the c
 - ✅ Autodiagnostic system: Implemented
 
 **The plugin is certified**:
+
 - ✅ DOZO-COMPLIANT
 - ✅ PRODUCTION READY
 - ✅ FULLY TESTED
@@ -773,6 +788,3 @@ The **DOZO Audit Deep** has successfully completed with the integration of the c
 ---
 
 _This audit certifies that all visible elements from the HTML reference execute real actions in WordPress, with identical design and behavior._
-
-
-

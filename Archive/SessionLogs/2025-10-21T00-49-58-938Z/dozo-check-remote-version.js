@@ -31,7 +31,7 @@ console.log("══════════════════════�
             resolve({
               status: res.statusCode,
               body: data,
-            })
+            }),
           );
         })
         .on("error", (err) => reject(err));
@@ -73,7 +73,9 @@ console.log("══════════════════════�
     console.log("✅ Verificación completada.");
     console.log("📄 Reporte generado en:", reportPath);
     console.log("🧩 Resultado:", status);
-    console.log("═══════════════════════════════════════════════════════════\n");
+    console.log(
+      "═══════════════════════════════════════════════════════════\n",
+    );
   } catch (error) {
     console.error("❌ Error en la verificación:", error);
     const errorReport = {
@@ -84,4 +86,3 @@ console.log("══════════════════════�
     fs.writeFileSync(reportPath, JSON.stringify(errorReport, null, 2));
   }
 })();
-

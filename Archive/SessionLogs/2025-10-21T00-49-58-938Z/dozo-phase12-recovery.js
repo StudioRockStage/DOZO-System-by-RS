@@ -5,29 +5,31 @@ Plugin: Warranty System RS
 Objetivo: Detectar, reconstruir y ejecutar automáticamente el script dozo-phase12-sync.js faltante, restaurando el flujo de deploy completo.
 */
 
-import fs from 'fs';
-import path from 'path';
-import ftp from 'basic-ftp';
-import { execSync } from 'child_process';
+import fs from "fs";
+import path from "path";
+import ftp from "basic-ftp";
+import { execSync } from "child_process";
 
-const BASE = path.resolve(process.env.HOME, 'Documents/DOZO System by RS');
-const WORKFLOW = path.join(BASE, 'Workflow DB');
-const GLOBAL = path.join(BASE, 'to chat gpt/Global');
-const READY = path.join(BASE, 'Empaquetado/Ready');
-const LOGFILE = path.join(GLOBAL, 'DOZO-Phase12-Recovery.json');
+const BASE = path.resolve(process.env.HOME, "Documents/DOZO System by RS");
+const WORKFLOW = path.join(BASE, "Workflow DB");
+const GLOBAL = path.join(BASE, "to chat gpt/Global");
+const READY = path.join(BASE, "Empaquetado/Ready");
+const LOGFILE = path.join(GLOBAL, "DOZO-Phase12-Recovery.json");
 
 const CONFIG = {
-  host: '82.29.86.182',
-  user: 'u461169968',
-  password: ':oU33+oTQBRWFG:g',
+  host: "82.29.86.182",
+  user: "u461169968",
+  password: ":oU33+oTQBRWFG:g",
   port: 21,
-  remoteDir: '/public_html/updates/warranty-system/',
-  zipFile: 'Warranty_System_v7.7.7.zip',
-  jsonFile: 'update.json',
+  remoteDir: "/public_html/updates/warranty-system/",
+  zipFile: "Warranty_System_v7.7.7.zip",
+  jsonFile: "update.json",
 };
 
 function log(entry) {
-  const prev = fs.existsSync(LOGFILE) ? JSON.parse(fs.readFileSync(LOGFILE, 'utf8')) : [];
+  const prev = fs.existsSync(LOGFILE)
+    ? JSON.parse(fs.readFileSync(LOGFILE, "utf8"))
+    : [];
   prev.push({ ts: new Date().toISOString(), ...entry });
   fs.writeFileSync(LOGFILE, JSON.stringify(prev, null, 2));
 }
@@ -39,7 +41,7 @@ function ensureFileStructure() {
 }
 
 function recreatePhase12() {
-  const target = path.join(WORKFLOW, 'dozo-phase12-sync.js');
+  const target = path.join(WORKFLOW, "dozo-phase12-sync.js");
   const content = `
 import fs from 'fs';
 import path from 'path';
@@ -85,37 +87,40 @@ async function deploy() {
 deploy();
 `;
   fs.writeFileSync(target, content);
-  console.log('🧩 Archivo reconstruido:', target);
-  log({ step: 'recreate-phase12', ok: true, file: target });
+  console.log("🧩 Archivo reconstruido:", target);
+  log({ step: "recreate-phase12", ok: true, file: target });
 }
 
 function validateDependencies() {
   try {
-    execSync('npm install basic-ftp', { stdio: 'inherit' });
-    log({ step: 'validate-deps', ok: true });
+    execSync("npm install basic-ftp", { stdio: "inherit" });
+    log({ step: "validate-deps", ok: true });
   } catch (err) {
-    log({ step: 'validate-deps', ok: false, error: err.message });
+    log({ step: "validate-deps", ok: false, error: err.message });
   }
 }
 
 (async () => {
-  console.log('\n🔍 DOZO Phase 12 Auto-Recovery (v7.7.7)');
-  console.log('══════════════════════════════════════════════════════════════════════');
+  console.log("\n🔍 DOZO Phase 12 Auto-Recovery (v7.7.7)");
+  console.log(
+    "══════════════════════════════════════════════════════════════════════",
+  );
 
   ensureFileStructure();
   recreatePhase12();
   validateDependencies();
 
   try {
-    console.log('▶️ Ejecutando script de deploy restaurado...');
-    execSync('node dozo-phase12-sync.js', { cwd: WORKFLOW, stdio: 'inherit' });
-    log({ step: 'execute-phase12', ok: true });
+    console.log("▶️ Ejecutando script de deploy restaurado...");
+    execSync("node dozo-phase12-sync.js", { cwd: WORKFLOW, stdio: "inherit" });
+    log({ step: "execute-phase12", ok: true });
   } catch (err) {
-    console.error('❌ Error ejecutando dozo-phase12-sync.js:', err.message);
-    log({ step: 'execute-phase12', ok: false, error: err.message });
+    console.error("❌ Error ejecutando dozo-phase12-sync.js:", err.message);
+    log({ step: "execute-phase12", ok: false, error: err.message });
   }
 
-  console.log('\n✅ Recuperación de Fase 12 completada.');
-  console.log('══════════════════════════════════════════════════════════════════════');
+  console.log("\n✅ Recuperación de Fase 12 completada.");
+  console.log(
+    "══════════════════════════════════════════════════════════════════════",
+  );
 })();
-

@@ -22,8 +22,7 @@
 (function (tinymce) {
   var reported;
 
-  function noop() {
-  }
+  function noop() {}
 
   function log(apiCall) {
     if (!reported && window && window.console) {
@@ -42,7 +41,7 @@
     }
 
     this.add = function (callback, scope, prepend) {
-      log('<target>.on' + newEventName + ".add(..)");
+      log("<target>.on" + newEventName + ".add(..)");
 
       // Convert callback({arg1:x, arg2:x}) -> callback(arg1, arg2)
       function patchedEventCallback(e) {
@@ -71,7 +70,10 @@
 
         callbackArgs.unshift(defaultScope || target);
 
-        if (callback.apply(scope || defaultScope || target, callbackArgs) === false) {
+        if (
+          callback.apply(scope || defaultScope || target, callbackArgs) ===
+          false
+        ) {
           e.stopImmediatePropagation();
         }
       }
@@ -80,7 +82,7 @@
 
       var handlers = {
         original: callback,
-        patched: patchedEventCallback
+        patched: patchedEventCallback,
       };
 
       cbs.push(handlers);
@@ -114,17 +116,22 @@
   tinymce.onRemoveEditor = new Dispatcher(tinymce, "RemoveEditor", "editor");
 
   tinymce.util.Cookie = {
-    get: noop, getHash: noop, remove: noop, set: noop, setHash: noop
+    get: noop,
+    getHash: noop,
+    remove: noop,
+    set: noop,
+    setHash: noop,
   };
 
   function patchEditor(editor) {
-
     function translate(str) {
       var prefix = editor.settings.language || "en";
-      var prefixedStr = [prefix, str].join('.');
+      var prefixedStr = [prefix, str].join(".");
       var translatedStr = tinymce.i18n.translate(prefixedStr);
 
-      return prefixedStr !== translatedStr ? translatedStr : tinymce.i18n.translate(str);
+      return prefixedStr !== translatedStr
+        ? translatedStr
+        : tinymce.i18n.translate(str);
     }
 
     function patchEditorEvents(oldEventNames, argsMap) {
@@ -134,15 +141,15 @@
     }
 
     function convertUndoEventArgs(type, event, target) {
-      return [
-        event.level,
-        target
-      ];
+      return [event.level, target];
     }
 
     function filterSelectionEvents(needsSelection) {
       return function (type, e) {
-        if ((!e.selection && !needsSelection) || e.selection == needsSelection) {
+        if (
+          (!e.selection && !needsSelection) ||
+          e.selection == needsSelection
+        ) {
           return [e];
         }
       };
@@ -153,18 +160,20 @@
     }
 
     function cmNoop() {
-      var obj = {}, methods = 'add addMenu addSeparator collapse createMenu destroy displayColor expand focus ' +
-        'getLength hasMenus hideMenu isActive isCollapsed isDisabled isRendered isSelected mark ' +
-        'postRender remove removeAll renderHTML renderMenu renderNode renderTo select selectByIndex ' +
-        'setActive setAriaProperty setColor setDisabled setSelected setState showMenu update';
+      var obj = {},
+        methods =
+          "add addMenu addSeparator collapse createMenu destroy displayColor expand focus " +
+          "getLength hasMenus hideMenu isActive isCollapsed isDisabled isRendered isSelected mark " +
+          "postRender remove removeAll renderHTML renderMenu renderNode renderTo select selectByIndex " +
+          "setActive setAriaProperty setColor setDisabled setSelected setState showMenu update";
 
-      log('editor.controlManager.*');
+      log("editor.controlManager.*");
 
       function _noop() {
         return cmNoop();
       }
 
-      tinymce.each(methods.split(' '), function (method) {
+      tinymce.each(methods.split(" "), function (method) {
         obj[method] = _noop;
       });
 
@@ -208,14 +217,22 @@
       createToolbarGroup: cmNoop,
       destroy: noop,
       get: noop,
-      setControlType: cmNoop
+      setControlType: cmNoop,
     };
 
-    patchEditorEvents("PreInit BeforeRenderUI PostRender Load Init Remove Activate Deactivate", "editor");
-    patchEditorEvents("Click MouseUp MouseDown DblClick KeyDown KeyUp KeyPress ContextMenu Paste Submit Reset");
+    patchEditorEvents(
+      "PreInit BeforeRenderUI PostRender Load Init Remove Activate Deactivate",
+      "editor",
+    );
+    patchEditorEvents(
+      "Click MouseUp MouseDown DblClick KeyDown KeyUp KeyPress ContextMenu Paste Submit Reset",
+    );
     patchEditorEvents("BeforeExecCommand ExecCommand", "command ui value args"); // args.terminate not supported
     patchEditorEvents("PreProcess PostProcess LoadContent SaveContent Change");
-    patchEditorEvents("BeforeSetContent BeforeGetContent SetContent GetContent", filterSelectionEvents(false));
+    patchEditorEvents(
+      "BeforeSetContent BeforeGetContent SetContent GetContent",
+      filterSelectionEvents(false),
+    );
     patchEditorEvents("SetProgressState", "state time");
     patchEditorEvents("VisualAid", "element hasVisual");
     patchEditorEvents("Undo Redo", convertUndoEventArgs);
@@ -225,7 +242,7 @@
         editor.controlManager,
         e.element,
         editor.selection.isCollapsed(),
-        e
+        e,
       ];
     });
 
@@ -259,21 +276,59 @@
       return originalAddButton.call(this, name, settings);
     };
 
-    editor.on('init', function () {
-      var undoManager = editor.undoManager, selection = editor.selection;
+    editor.on("init", function () {
+      var undoManager = editor.undoManager,
+        selection = editor.selection;
 
-      undoManager.onUndo = new Dispatcher(editor, "Undo", convertUndoEventArgs, null, undoManager);
-      undoManager.onRedo = new Dispatcher(editor, "Redo", convertUndoEventArgs, null, undoManager);
-      undoManager.onBeforeAdd = new Dispatcher(editor, "BeforeAddUndo", null, undoManager);
+      undoManager.onUndo = new Dispatcher(
+        editor,
+        "Undo",
+        convertUndoEventArgs,
+        null,
+        undoManager,
+      );
+      undoManager.onRedo = new Dispatcher(
+        editor,
+        "Redo",
+        convertUndoEventArgs,
+        null,
+        undoManager,
+      );
+      undoManager.onBeforeAdd = new Dispatcher(
+        editor,
+        "BeforeAddUndo",
+        null,
+        undoManager,
+      );
       undoManager.onAdd = new Dispatcher(editor, "AddUndo", null, undoManager);
 
-      selection.onBeforeGetContent = new Dispatcher(editor, "BeforeGetContent", filterSelectionEvents(true), selection);
-      selection.onGetContent = new Dispatcher(editor, "GetContent", filterSelectionEvents(true), selection);
-      selection.onBeforeSetContent = new Dispatcher(editor, "BeforeSetContent", filterSelectionEvents(true), selection);
-      selection.onSetContent = new Dispatcher(editor, "SetContent", filterSelectionEvents(true), selection);
+      selection.onBeforeGetContent = new Dispatcher(
+        editor,
+        "BeforeGetContent",
+        filterSelectionEvents(true),
+        selection,
+      );
+      selection.onGetContent = new Dispatcher(
+        editor,
+        "GetContent",
+        filterSelectionEvents(true),
+        selection,
+      );
+      selection.onBeforeSetContent = new Dispatcher(
+        editor,
+        "BeforeSetContent",
+        filterSelectionEvents(true),
+        selection,
+      );
+      selection.onSetContent = new Dispatcher(
+        editor,
+        "SetContent",
+        filterSelectionEvents(true),
+        selection,
+      );
     });
 
-    editor.on('BeforeRenderUI', function () {
+    editor.on("BeforeRenderUI", function () {
       var windowManager = editor.windowManager;
 
       windowManager.onOpen = new Dispatcher();
@@ -287,35 +342,36 @@
     });
   }
 
-  tinymce.on('SetupEditor', function (e) {
+  tinymce.on("SetupEditor", function (e) {
     patchEditor(e.editor);
   });
 
   tinymce.PluginManager.add("compat3x", patchEditor);
 
   tinymce.addI18n = function (prefix, o) {
-    var I18n = tinymce.util.I18n, each = tinymce.each;
+    var I18n = tinymce.util.I18n,
+      each = tinymce.each;
 
-    if (typeof prefix == "string" && prefix.indexOf('.') === -1) {
+    if (typeof prefix == "string" && prefix.indexOf(".") === -1) {
       I18n.add(prefix, o);
       return;
     }
 
-    if (!tinymce.is(prefix, 'string')) {
+    if (!tinymce.is(prefix, "string")) {
       each(prefix, function (o, lc) {
         each(o, function (o, g) {
           each(o, function (o, k) {
-            if (g === 'common') {
-              I18n.data[lc + '.' + k] = o;
+            if (g === "common") {
+              I18n.data[lc + "." + k] = o;
             } else {
-              I18n.data[lc + '.' + g + '.' + k] = o;
+              I18n.data[lc + "." + g + "." + k] = o;
             }
           });
         });
       });
     } else {
       each(o, function (o, k) {
-        I18n.data[prefix + '.' + k] = o;
+        I18n.data[prefix + "." + k] = o;
       });
     }
   };

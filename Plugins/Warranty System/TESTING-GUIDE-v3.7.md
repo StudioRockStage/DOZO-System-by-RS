@@ -1,15 +1,17 @@
 # 🧪 Testing Guide - DOZO v3.7
+
 ## Warranty System by RockStage
 
 **Plugin:** Warranty System by RockStage  
 **Version:** 1.0.0  
-**DOZO Level:** v3.7 (Complete)  
+**DOZO Level:** v3.7 (Complete)
 
 ---
 
 ## 🚀 QUICK START (5 Minutes)
 
 ### Step 1: Upload & Activate
+
 ```bash
 1. Upload plugin folder to /wp-content/plugins/
 2. WP Admin → Plugins → Activate "Warranty System by RockStage"
@@ -17,6 +19,7 @@
 ```
 
 ### Step 2: Initial Sync
+
 ```bash
 1. WP Admin → Garantías → Configuración → Tab "Categorías"
 2. Click "Sincronizar con WooCommerce"
@@ -26,6 +29,7 @@
 ```
 
 ### Step 3: Run Auto-Test
+
 ```bash
 1. Open Console (F12)
 2. Execute: rsTestDynamicCounters()
@@ -98,8 +102,8 @@ console.log(rsWarrantyAdmin);
 console.log(typeof window.rsReloadCategoryStats);
 
 // Check elements
-console.log($('#activeCount').length);
-console.log($('#activeCount').text());
+console.log($("#activeCount").length);
+console.log($("#activeCount").text());
 ```
 
 ### PHP Commands (functions.php)
@@ -171,6 +175,7 @@ DOZO v3.6: Productos: 47 con garantía, 3 sin garantía (de 50 totales)
 ### Issue 1: Counters Still Show "0 y 0"
 
 **Solutions:**
+
 1. Clear browser cache (Ctrl + Shift + R)
 2. Verify `admin-categories.js` loads (Network tab)
 3. Run `rsTestDynamicCounters()` in console
@@ -179,6 +184,7 @@ DOZO v3.6: Productos: 47 con garantía, 3 sin garantía (de 50 totales)
 ### Issue 2: Verifier Says "No Products with Warranty"
 
 **Solutions:**
+
 1. WP Admin → Garantías → Configuración → Categorías
 2. Click "Restaurar Predeterminadas" (forces re-link)
 3. Check debug.log for "DOZO v3.6: Vinculados X productos..."
@@ -187,6 +193,7 @@ DOZO v3.6: Productos: 47 con garantía, 3 sin garantía (de 50 totales)
 ### Issue 3: Auto-Test Fails
 
 **Solutions:**
+
 1. Verify `rsWarrantyAdmin` is defined: `console.log(rsWarrantyAdmin)`
 2. Verify jQuery loaded: `console.log(jQuery.fn.jquery)`
 3. Verify file loads: Network tab → admin-categories.js
@@ -253,8 +260,8 @@ tail -f wp-content/debug.log | grep "DOZO"
 
 **Last Updated:** 2025-10-13  
 **DOZO Level:** v3.7  
-**Status:** All Systems Functional ✅  
+**Status:** All Systems Functional ✅
 
 ---
 
-*Quick reference guide for testing the Warranty System by RockStage after DOZO v3.7 implementation.*
+_Quick reference guide for testing the Warranty System by RockStage after DOZO v3.7 implementation._

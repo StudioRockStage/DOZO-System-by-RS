@@ -10,16 +10,16 @@
 
 // Support for indented bullet-lists.
 .policy-text ul {
-	list-style: disc;
+  list-style: disc;
 }
 
 .policy-text ol {
-	list-style: decimal;
+  list-style: decimal;
 }
 
 .policy-text ul li,
 .policy-text ol li {
-	margin-left: 2em;
+  margin-left: 2em;
 }
 
 // Pre-5.4 support for italics.
@@ -27,30 +27,50 @@
 .branch-5-2 .policy-text ol,
 .branch-5-3 .policy-text ul,
 .branch-5-3 .policy-text ol {
-	font-style: italic;
+  font-style: italic;
 }
 
 // 5.4 support for white background and padding.
 .branch-5-4 .policy-text ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
 .branch-5-4 .policy-text ol:not(.privacy-policy-tutorial):not(.wp-policy-help) {
-	background-color: #fff;
-	margin: 0;
-	padding: 1em;
+  background-color: #fff;
+  margin: 0;
+  padding: 1em;
 }
 
-.branch-5-4 .hide-privacy-policy-tutorial ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.branch-5-4 .hide-privacy-policy-tutorial ol:not(.privacy-policy-tutorial):not(.wp-policy-help) {
-	margin: 1em 0;
-	padding: 0;
+.branch-5-4
+  .hide-privacy-policy-tutorial
+  ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.branch-5-4
+  .hide-privacy-policy-tutorial
+  ol:not(.privacy-policy-tutorial):not(.wp-policy-help) {
+  margin: 1em 0;
+  padding: 0;
 }
 
-.policy-text p:not(.privacy-policy-tutorial):not(.wp-policy-help) + ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.policy-text p:not(.privacy-policy-tutorial):not(.wp-policy-help) + ol:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.policy-text ul:not(.privacy-policy-tutorial):not(.wp-policy-help) + p:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.policy-text ul:not(.privacy-policy-tutorial):not(.wp-policy-help) + ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.policy-text ul:not(.privacy-policy-tutorial):not(.wp-policy-help) + ol:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.policy-text ol:not(.privacy-policy-tutorial):not(.wp-policy-help) + p:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.policy-text ol:not(.privacy-policy-tutorial):not(.wp-policy-help) + ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
-.policy-text ol:not(.privacy-policy-tutorial):not(.wp-policy-help) + ol:not(.privacy-policy-tutorial):not(.wp-policy-help) {
-	padding-top: 0;
+.policy-text
+  p:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.policy-text
+  p:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + ol:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.policy-text
+  ul:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + p:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.policy-text
+  ul:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.policy-text
+  ul:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + ol:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.policy-text
+  ol:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + p:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.policy-text
+  ol:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + ul:not(.privacy-policy-tutorial):not(.wp-policy-help),
+.policy-text
+  ol:not(.privacy-policy-tutorial):not(.wp-policy-help)
+  + ol:not(.privacy-policy-tutorial):not(.wp-policy-help) {
+  padding-top: 0;
 }

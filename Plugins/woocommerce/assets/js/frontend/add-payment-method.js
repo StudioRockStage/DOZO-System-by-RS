@@ -1,44 +1,52 @@
-jQuery( function( $ ) {
+jQuery(function ($) {
+  // woocommerce_params is required to continue, ensure the object exists
+  if (typeof woocommerce_params === "undefined") {
+    return false;
+  }
 
-	// woocommerce_params is required to continue, ensure the object exists
-	if ( typeof woocommerce_params === 'undefined' ) {
-		return false;
-	}
+  $("#add_payment_method")
+    /* Payment option selection */
 
-	$( '#add_payment_method' )
+    .on(
+      "click init_add_payment_method",
+      ".payment_methods input.input-radio",
+      function () {
+        if ($(".payment_methods input.input-radio").length > 1) {
+          var target_payment_box = $("div.payment_box." + $(this).attr("ID"));
+          if ($(this).is(":checked") && !target_payment_box.is(":visible")) {
+            $("div.payment_box").filter(":visible").slideUp(250);
+            if ($(this).is(":checked")) {
+              $("div.payment_box." + $(this).attr("ID")).slideDown(250);
+            }
+          }
+        } else {
+          $("div.payment_box").show();
+        }
+      },
+    )
 
-	/* Payment option selection */
+    // Trigger initial click
+    .find("input[name=payment_method]:checked")
+    .trigger("click");
 
-	.on( 'click init_add_payment_method', '.payment_methods input.input-radio', function() {
-		if ( $( '.payment_methods input.input-radio' ).length > 1 ) {
-			var target_payment_box = $( 'div.payment_box.' + $( this ).attr( 'ID' ) );
-			if ( $( this ).is( ':checked' ) && ! target_payment_box.is( ':visible' ) ) {
-				$( 'div.payment_box' ).filter( ':visible' ).slideUp( 250 );
-				if ( $( this ).is( ':checked' ) ) {
-					$( 'div.payment_box.' + $( this ).attr( 'ID' ) ).slideDown( 250 );
-				}
-			}
-		} else {
-			$( 'div.payment_box' ).show();
-		}
-	})
+  $("#add_payment_method").on("submit", function () {
+    $("#add_payment_method").block({
+      message: null,
+      overlayCSS: { background: "#fff", opacity: 0.6 },
+    });
+  });
 
-	// Trigger initial click
-	.find( 'input[name=payment_method]:checked' ).trigger( 'click' );
+  $(document.body).trigger("init_add_payment_method");
 
-	$( '#add_payment_method' ).on( 'submit', function() {
-		$( '#add_payment_method' ).block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
-	});
+  // Prevent firing multiple requests upon double clicking the buttons in payment methods table
+  $(" .woocommerce .payment-method-actions .button.delete").on(
+    "click",
+    function (event) {
+      if ($(this).hasClass("disabled")) {
+        event.preventDefault();
+      }
 
-	$( document.body ).trigger( 'init_add_payment_method' );
-
-	// Prevent firing multiple requests upon double clicking the buttons in payment methods table
-	$(' .woocommerce .payment-method-actions .button.delete' ).on( 'click' , function( event ) {
-		if ( $( this ).hasClass( 'disabled' ) ) {
-			event.preventDefault();
-		}
-
-		$( this ).addClass( 'disabled' );
-	});
-
+      $(this).addClass("disabled");
+    },
+  );
 });

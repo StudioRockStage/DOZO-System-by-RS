@@ -1,0 +1,212 @@
+# CLEANUP INSTRUCTIONS FOR CHATGPT
+
+## INPUT FILES
+1. DOZO-DIRECTORY-INVENTORY-REPORT.md - Detailed analysis
+2. DOZO-CLEANUP-DATA.csv - Machine-readable data
+
+## SCRIPT REQUIREMENTS
+
+Create a Python or Bash script that:
+
+### 1. SAFETY FIRST
+- NEVER delete directories marked "CRITICAL" or "KEEP"
+- Create full backup before any operation
+- Implement dry-run mode (show what would be deleted)
+- Require confirmation before destructive operations
+- Log all operations to CLEANUP-LOG.txt
+
+### 2. HIGH PRIORITY OPERATIONS (21.5 GB savings)
+
+#### Step 1: Archive Backup/ Directory (5.0 GB)
+```bash
+# Commands to include:
+tar -czf ../DOZO-Backup-Archive-$(date +%Y%m%d).tar.gz Backup/
+# Verify archive integrity
+# Ask user confirmation
+# Delete Backup/ after verification
+```
+
+#### Step 2: Clean DistributionBuild/ (17.0 GB)
+```bash
+# Keep only the 2 most recent DMG files
+# Archive or delete older builds
+# Keep builds from last 7 days minimum
+```
+
+### 3. MEDIUM PRIORITY OPERATIONS (400 MB savings)
+
+#### Step 3: Clean Old Logs (109 MB)
+```bash
+find Logs/ -name "*.log" -mtime +30 -delete
+find Diagnostics/ -name "*.log" -mtime +30 -delete
+```
+
+#### Step 4: Consolidate Duplicates (200 MB)
+```bash
+# Merge DozoCoreResport/ into DozoCoreReport/
+# Remove duplicate Integration/ or Integrations/
+# Keep warranty-system-rs-clean, archive warranty-system
+```
+
+#### Step 5: Archive AI Logs (400 KB)
+```bash
+tar -czf AI-Conversations-Archive-$(date +%Y%m%d).tar.gz \
+  "ChatGPT AI/" "Claude AI/" "Cursor AI/" "to chat gpt/" "AI-Link/"
+```
+
+#### Step 6: Clean Temp Files (10 MB)
+```bash
+find . -name ".DS_Store" -delete
+find . -name "*.pyc" -delete
+find . -name "__pycache__" -type d -exec rm -rf {} +
+find . -type d -empty -delete
+```
+
+### 4. SCRIPT FEATURES
+
+Include these features:
+- Interactive mode with yes/no prompts
+- Dry-run mode: --dry-run flag
+- Verbose output: --verbose flag
+- Safety mode (default): requires confirmation for each step
+- Aggressive mode: --aggressive (batch operations)
+- Report generation: creates summary of space saved
+
+### 5. CRITICAL - NEVER DELETE LIST
+
+Hardcode these patterns as protected:
+```
+app-updater/
+wp-updater/
+AppBuild/
+Core/
+Dashboard/
+infra/
+scripts/release.js
+scripts/publish-plugin.php
+scripts/test-release.js
+release/
+server/
+wordpress/wp-content/plugins/dozo-system/
+node_modules/
+package.json
+package-lock.json
+release-manifest.json
+github-config.json
+docker-compose.yml
+dozo-phase-*.js
+*.py (all Python scripts)
+Workflow DB/
+DashboardTelemetry/
+DOZO Core/
+```
+
+### 6. OUTPUT FORMAT
+
+Script should output:
+```
+==== DOZO CLEANUP SCRIPT ====
+Mode: [DRY-RUN / LIVE]
+Date: YYYY-MM-DD HH:MM:SS
+
+Step 1/6: Archiving Backup/ directory...
+  ✓ Created archive: DOZO-Backup-Archive-20251105.tar.gz (5.0 GB)
+  ✓ Verified archive integrity
+  ? Delete source directory? [y/N]: 
+  ✓ Deleted Backup/ directory
+  Saved: 5.0 GB
+
+Step 2/6: Cleaning old builds...
+  Found 15 DMG files in DistributionBuild/
+  Keeping: 
+    - DOZO-Control-Center-RockStage-2.6.0.dmg (2025-11-04)
+    - DOZO-Control-Center-RockStage-2.5.0.dmg (2025-10-28)
+  Deleting 13 old builds...
+  ✓ Deleted 13 build artifacts
+  Saved: 15.2 GB
+
+... (continue for all steps)
+
+==== CLEANUP SUMMARY ====
+Total space saved: 20.7 GB
+Files deleted: 220,450
+Directories removed: 1,234
+Archives created: 3
+Logs: cleanup-log-20251105.txt
+```
+
+### 7. ROLLBACK CAPABILITY
+
+Include rollback function:
+```python
+def rollback():
+    """Restore from backup if something goes wrong"""
+    # Read cleanup log
+    # Reverse all operations
+    # Restore archives
+```
+
+### 8. VERIFICATION
+
+After cleanup, verify:
+- Critical directories still exist
+- package.json still valid
+- Main scripts still executable
+- Total space saved matches estimate
+
+### 9. RECOMMENDED SCRIPT NAME
+
+`dozo-intelligent-cleanup.py` or `dozo-smart-cleanup.sh`
+
+### 10. EXECUTION FLOW
+
+```
+1. Load CSV data
+2. Check for critical files
+3. Create safety backup list
+4. Run in dry-run mode first
+5. Show estimated savings
+6. Ask for confirmation
+7. Execute cleanup steps sequentially
+8. Log everything
+9. Generate summary report
+10. Offer rollback if needed
+```
+
+## USAGE EXAMPLE
+
+```bash
+# Dry run (safe)
+python dozo-intelligent-cleanup.py --dry-run
+
+# Interactive mode (default)
+python dozo-intelligent-cleanup.py
+
+# Aggressive mode (auto-yes)
+python dozo-intelligent-cleanup.py --aggressive --yes
+
+# Custom priorities
+python dozo-intelligent-cleanup.py --only-high-priority
+```
+
+## SUCCESS CRITERIA
+
+Script should:
+✅ Never delete critical files
+✅ Save ~20 GB of space
+✅ Create backups before deletion
+✅ Provide detailed logging
+✅ Allow rollback
+✅ Run in dry-run mode first
+✅ Be idempotent (safe to run multiple times)
+✅ Provide clear progress indicators
+✅ Generate summary report
+
+## FINAL NOTE
+
+This cleanup will reduce the codebase from 22.4 GB to ~1.7 GB, making it manageable and organized while preserving all critical functionality.
+
+Current: 261,521 files, 22.4 GB
+After: ~41,000 files, 1.7 GB (84% file reduction, 92% space reduction)
+
+

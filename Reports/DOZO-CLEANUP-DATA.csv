@@ -1,0 +1,46 @@
+Directory,Size,Files,Category,Priority,Action,Savings,Risk
+DistributionBuild,18.0GB,8773,build artifact,HIGH,Keep latest 2-3 builds only,17.0GB,LOW
+Backup,5.0GB,219792,backup,HIGH,Archive to external storage,4.5GB,LOW
+node_modules,448MB,23708,dependency,KEEP,Keep - can regenerate,0,CRITICAL
+Diagnostics,129MB,500,logs,MEDIUM,Delete logs > 30 days,109MB,LOW
+PublicRelease,90MB,200,build artifact,MEDIUM,Keep latest release only,50MB,LOW
+wordpress,87MB,120922,wordpress,KEEP,Keep - core functionality,0,CRITICAL
+Plugins,76MB,3000,wordpress,KEEP,Keep - active development,0,CRITICAL
+infra,46MB,150,core project file,KEEP,Keep - infrastructure,0,CRITICAL
+Archive,1.8MB,50,backup,MEDIUM,Move to external storage,1.8MB,LOW
+AppBuild,1.6MB,100,core project file,KEEP,Keep - Electron source,0,CRITICAL
+Dashboard,868KB,50,core project file,KEEP,Keep - web dashboard,0,CRITICAL
+Latest Builds,424KB,10,build artifact,REVIEW,Check for duplicates,200KB,MEDIUM
+to chat gpt,324KB,30,temp/dev/test,MEDIUM,Archive after processing,324KB,LOW
+Workflow DB,264KB,20,core project file,KEEP,Keep - health monitoring,0,CRITICAL
+Empaquetado,256KB,15,other,REVIEW,Review if still used,200KB,MEDIUM
+DOZO Core,208KB,30,core project file,KEEP,Keep - core modules,0,CRITICAL
+Claude AI,192KB,50,temp/dev/test,MEDIUM,Archive conversations > 60 days,150KB,LOW
+DozoCoreReport,168KB,100,other,REVIEW,Keep recent reports,50KB,LOW
+DozoCoreResport,148KB,50,other,REVIEW,Merge with DozoCoreReport,148KB,LOW
+Scripts,80KB,50,core project file,KEEP,Keep - build scripts,0,CRITICAL
+Global,64KB,20,other,REVIEW,Review for overlap,30KB,MEDIUM
+AI-Link,60KB,15,temp/dev/test,MEDIUM,Archive old conversations,40KB,LOW
+AutoSync,52KB,10,core project file,KEEP,Keep if active,0,MEDIUM
+Cursor AI,48KB,20,temp/dev/test,MEDIUM,Archive old conversations,30KB,LOW
+DashboardTelemetry,36KB,15,core project file,KEEP,Keep - monitoring,0,CRITICAL
+release,32KB,25,core project file,KEEP,Keep - release system,0,CRITICAL
+app-updater,15KB,3,core project file,KEEP,Keep - Phase 16.7,0,CRITICAL
+wp-updater,10KB,2,core project file,KEEP,Keep - Phase 16.7,0,CRITICAL
+server,200KB,30,core project file,KEEP,Keep - backend server,0,CRITICAL
+warranty-system,500KB,200,other,REVIEW,Archive - old version,500KB,MEDIUM
+warranty-system-rs-clean,300KB,150,other,KEEP,Keep - cleaned version,0,LOW
+Integration,100KB,30,other,REVIEW,Check for duplicates,50KB,MEDIUM
+Integrations,100KB,30,other,REVIEW,Merge with Integration,100KB,MEDIUM
+Modules,150KB,40,other,REVIEW,Review overlap with Core,50KB,MEDIUM
+Reports,120KB,80,other,REVIEW,Consolidate with DozoCoreReport,50KB,LOW
+Shared,90KB,25,other,REVIEW,Review overlap with Core,30KB,MEDIUM
+updates,80KB,20,other,REVIEW,Consolidate with release,40KB,LOW
+GitSync,70KB,15,other,REVIEW,Review overlap with AutoSync,30KB,MEDIUM
+Logs,50KB,20,logs,MEDIUM,Delete logs > 30 days,30KB,LOW
+ChatGPT AI,100KB,40,temp/dev/test,MEDIUM,Archive old conversations,70KB,LOW
+Backups,200KB,100,backup,MEDIUM,Archive to external,200KB,LOW
+Latest Updates,150KB,30,other,REVIEW,Consolidate with release,100KB,LOW
+Core,800KB,100,core project file,KEEP,Keep - essential modules,0,CRITICAL
+
+

@@ -28,17 +28,17 @@ DOZO Deep Audit v5.1 introduces **Dual AI Integration**, expanding the plugin's 
 \`\`\`
 RockStage Warranty System v5.1
 ├── DOZO Core (v4.9)
-│   ├── Reaper Layer
-│   ├── Self-Healing Layer
-│   └── Autodiagnostic Engine
+│ ├── Reaper Layer
+│ ├── Self-Healing Layer
+│ └── Autodiagnostic Engine
 ├── Claude AI Integration (v5.0)
-│   ├── Chat Interface
-│   ├── Code Generation
-│   └── Context-Aware Prompts
+│ ├── Chat Interface
+│ ├── Code Generation
+│ └── Context-Aware Prompts
 └── Cursor AI Integration (v5.1) 🆕
-    ├── Console-Based Interface
-    ├── Local/Remote Endpoint Support
-    └── Fix Application System
+├── Console-Based Interface
+├── Local/Remote Endpoint Support
+└── Fix Application System
 \`\`\`
 
 ### Menu Structure
@@ -47,10 +47,10 @@ RockStage Warranty System v5.1
 WordPress Admin → RockStage Warranty
 ├── Dashboard
 ├── Configuración
-│   ├── General
-│   ├── Categorías
-│   ├── Templates
-│   └── Avanzado (with DOZO v4.9 panel)
+│ ├── General
+│ ├── Categorías
+│ ├── Templates
+│ └── Avanzado (with DOZO v4.9 panel)
 ├── 🤖 Claude AI Developer (v5.0)
 └── 💻 Cursor AI Developer (v5.1) 🆕
 \`\`\`
@@ -62,6 +62,7 @@ WordPress Admin → RockStage Warranty
 ### PHP Backend
 
 **\`includes/class-cursor-developer-panel.php\`** (25,387 bytes)
+
 - Singleton class for Cursor AI integration
 - AJAX endpoints:
   - \`rs_cursor_query\` - Execute queries
@@ -74,6 +75,7 @@ WordPress Admin → RockStage Warranty
 ### CSS Styling
 
 **\`assets/css/cursor-developer.css\`** (23,124 bytes)
+
 - RockStage color scheme (#FF8C00 primary)
 - 2-column responsive layout (sidebar + console)
 - Console tabs: Prompt, Preview, Response, Logs
@@ -84,6 +86,7 @@ WordPress Admin → RockStage Warranty
 ### JavaScript Frontend
 
 **\`assets/js/cursor-developer.js\`** (19,826 bytes)
+
 - \`CursorDeveloper\` global object
 - Event handlers for all UI interactions
 - AJAX communication with backend
@@ -100,6 +103,7 @@ WordPress Admin → RockStage Warranty
 ### 1. \`rockstage-warranty-system.php\`
 
 **Changes:**
+
 - Version updated: \`5.0.0\` → \`5.1.0\`
 - Added constants:
   \`\`\`php
@@ -114,6 +118,7 @@ WordPress Admin → RockStage Warranty
 ### 2. \`includes/class-warranty-admin.php\`
 
 **Changes:**
+
 - Added comment documenting dual AI integration
 - Cursor submenu registered in \`class-cursor-developer-panel.php\`
 
@@ -147,6 +152,7 @@ WordPress Admin → RockStage Warranty
 #### Main Console Area
 
 **Tab System:**
+
 1. **Prompt Tab**
    - Large textarea for queries
    - "Ejecutar Query" button
@@ -180,66 +186,72 @@ WordPress Admin → RockStage Warranty
 ### AJAX Endpoints
 
 #### \`rs_cursor_query\`
+
 **Purpose:** Send query to Cursor AI  
 **Request:**
 \`\`\`json
 {
-  "query": "User's query text",
-  "context": {
-    "plugin": {...},
-    "environment": {...},
-    "structure": {...}
-  }
+"query": "User's query text",
+"context": {
+"plugin": {...},
+"environment": {...},
+"structure": {...}
+}
 }
 \`\`\`
 **Response:**
 \`\`\`json
 {
-  "success": true,
-  "data": {
-    "response": {
-      "code": "Generated code",
-      "explanation": "Markdown text",
-      "suggestions": ["..."]
-    }
-  }
+"success": true,
+"data": {
+"response": {
+"code": "Generated code",
+"explanation": "Markdown text",
+"suggestions": ["..."]
+}
+}
 }
 \`\`\`
 
 #### \`rs_cursor_test_connection\`
+
 **Purpose:** Ping endpoint to verify connectivity  
 **Response:**
 \`\`\`json
 {
-  "success": true,
-  "data": {
-    "message": "Conexión exitosa con Cursor AI",
-    "endpoint": "http://..."
-  }
+"success": true,
+"data": {
+"message": "Conexión exitosa con Cursor AI",
+"endpoint": "http://..."
+}
 }
 \`\`\`
 
 #### \`rs_cursor_apply_fix\`
+
 **Purpose:** Apply generated code to plugin files  
 **Security:**
+
 - Path validation (must be within plugin directory)
 - Automatic backup creation
 - Saved as draft first (\`.draft.{timestamp}\`)
-**Response:**
-\`\`\`json
-{
+  **Response:**
+  \`\`\`json
+  {
   "success": true,
   "data": {
-    "message": "Fix guardado como draft",
-    "draft_path": "/path/to/draft",
-    "backup_path": "/path/to/backup"
+  "message": "Fix guardado como draft",
+  "draft_path": "/path/to/draft",
+  "backup_path": "/path/to/backup"
   }
-}
-\`\`\`
+  }
+  \`\`\`
 
 #### \`rs_cursor_save_endpoint\`
+
 **Purpose:** Save endpoint configuration  
 **Storage:** \`wp_options\`
+
 - \`rs_cursor_endpoint_url\`
 - \`rs_cursor_access_token\`
 
@@ -247,18 +259,18 @@ WordPress Admin → RockStage Warranty
 
 ## 🔄 Dual AI Workflow Comparison
 
-| Feature | Claude AI (v5.0) | Cursor AI (v5.1) |
-|---------|------------------|------------------|
-| **Interface** | Chat-based | Console-based |
-| **Authentication** | Anthropic API Key | Custom Endpoint + Token |
-| **Connection** | Remote (Anthropic) | Local or Remote |
-| **Input Style** | Conversational | Command-like |
-| **Output Style** | Message stream | Structured response |
-| **Code Actions** | Copiar, Preview, Aplicar | Copiar, Preview, Aplicar |
-| **Quick Actions** | 6 templates | 6 templates |
-| **History** | localStorage | localStorage |
-| **Logs** | Chat-style | Console-style |
-| **Best For** | General AI assistance | Code-focused tasks |
+| Feature            | Claude AI (v5.0)         | Cursor AI (v5.1)         |
+| ------------------ | ------------------------ | ------------------------ |
+| **Interface**      | Chat-based               | Console-based            |
+| **Authentication** | Anthropic API Key        | Custom Endpoint + Token  |
+| **Connection**     | Remote (Anthropic)       | Local or Remote          |
+| **Input Style**    | Conversational           | Command-like             |
+| **Output Style**   | Message stream           | Structured response      |
+| **Code Actions**   | Copiar, Preview, Aplicar | Copiar, Preview, Aplicar |
+| **Quick Actions**  | 6 templates              | 6 templates              |
+| **History**        | localStorage             | localStorage             |
+| **Logs**           | Chat-style               | Console-style            |
+| **Best For**       | General AI assistance    | Code-focused tasks       |
 
 ---
 
@@ -266,16 +278,16 @@ WordPress Admin → RockStage Warranty
 
 ### v5.1 Compatibility Verification
 
-| Component | v4.9 | v5.0 | v5.1 | Status |
-|-----------|------|------|------|--------|
-| **Reaper Layer** | ✅ | ✅ | ✅ | Preserved |
-| **Self-Healing** | ✅ | ✅ | ✅ | Preserved |
-| **Autodiagnostic** | ✅ | ✅ | ✅ | Preserved |
-| **Claude AI Panel** | ❌ | ✅ | ✅ | Preserved |
-| **Cursor AI Panel** | ❌ | ❌ | ✅ | New |
-| **Nonce Validation** | ✅ | ✅ | ✅ | Preserved |
-| **Race Condition Fix** | ✅ | ✅ | ✅ | Preserved |
-| **Counter Fix** | ✅ | ✅ | ✅ | Preserved |
+| Component              | v4.9 | v5.0 | v5.1 | Status    |
+| ---------------------- | ---- | ---- | ---- | --------- |
+| **Reaper Layer**       | ✅   | ✅   | ✅   | Preserved |
+| **Self-Healing**       | ✅   | ✅   | ✅   | Preserved |
+| **Autodiagnostic**     | ✅   | ✅   | ✅   | Preserved |
+| **Claude AI Panel**    | ❌   | ✅   | ✅   | Preserved |
+| **Cursor AI Panel**    | ❌   | ❌   | ✅   | New       |
+| **Nonce Validation**   | ✅   | ✅   | ✅   | Preserved |
+| **Race Condition Fix** | ✅   | ✅   | ✅   | Preserved |
+| **Counter Fix**        | ✅   | ✅   | ✅   | Preserved |
 
 **Result:** ✅ **100% Backward Compatibility**
 
@@ -286,6 +298,7 @@ WordPress Admin → RockStage Warranty
 ### Integration Tests
 
 #### Test 1: Plugin Version ✅
+
 \`\`\`bash
 $ grep "RS_WARRANTY_VERSION" rockstage-warranty-system.php
 define('RS_WARRANTY_VERSION', '5.1.0');
@@ -294,6 +307,7 @@ define('RS_DOZO_VERSION', '5.1.0');
 **Result:** PASS
 
 #### Test 2: File Existence ✅
+
 \`\`\`bash
 $ ls includes/ | grep -E "(claude|cursor)"
 class-claude-developer-panel.php
@@ -302,6 +316,7 @@ class-cursor-developer-panel.php
 **Result:** PASS
 
 #### Test 3: v4.9 Features Preserved ✅
+
 \`\`\`bash
 $ grep -c "selfHealingCheck\|checkBackendPHP" assets/js/dozo-diagnostic.js
 8
@@ -309,18 +324,21 @@ $ grep -c "selfHealingCheck\|checkBackendPHP" assets/js/dozo-diagnostic.js
 **Result:** PASS
 
 #### Test 4: Menu Registration ✅
+
 - Claude AI: WP Admin → RockStage → 🤖 Claude AI
 - Cursor AI: WP Admin → RockStage → 💻 Cursor AI
-**Result:** PASS (requires WordPress upload)
+  **Result:** PASS (requires WordPress upload)
 
 #### Test 5: CSS Loading ✅
+
 \`\`\`bash
 $ wc -l assets/css/cursor-developer.css
-    571 assets/css/cursor-developer.css
+571 assets/css/cursor-developer.css
 \`\`\`
 **Result:** PASS
 
 #### Test 6: JavaScript Loading ✅
+
 \`\`\`bash
 $ grep "CursorDeveloper.init" assets/js/cursor-developer.js
 CursorDeveloper.init();
@@ -333,16 +351,16 @@ CursorDeveloper.init();
 
 ### Code Metrics
 
-| Metric | v5.0 | v5.1 | Change |
-|--------|------|------|--------|
-| **Plugin Version** | 5.0.0 | 5.1.0 | +0.1.0 |
-| **Total Lines** | ~7,863 | ~9,101 | +1,238 (+15.7%) |
-| **PHP Files** | 11 | 12 | +1 |
-| **CSS Files** | 5 | 6 | +1 |
-| **JS Files** | 6 | 7 | +1 |
-| **AI Integrations** | 1 (Claude) | 2 (Claude+Cursor) | +1 |
-| **AJAX Endpoints** | 18 | 22 | +4 |
-| **Quick Actions** | 6 (Claude) | 12 (6+6) | +6 |
+| Metric              | v5.0       | v5.1              | Change          |
+| ------------------- | ---------- | ----------------- | --------------- |
+| **Plugin Version**  | 5.0.0      | 5.1.0             | +0.1.0          |
+| **Total Lines**     | ~7,863     | ~9,101            | +1,238 (+15.7%) |
+| **PHP Files**       | 11         | 12                | +1              |
+| **CSS Files**       | 5          | 6                 | +1              |
+| **JS Files**        | 6          | 7                 | +1              |
+| **AI Integrations** | 1 (Claude) | 2 (Claude+Cursor) | +1              |
+| **AJAX Endpoints**  | 18         | 22                | +4              |
+| **Quick Actions**   | 6 (Claude) | 12 (6+6)          | +6              |
 
 ### Feature Expansion
 
@@ -365,28 +383,36 @@ CursorDeveloper.init();
 ### Upgrade Steps
 
 #### Step 1: Backup
+
 \`\`\`bash
 cd /wp-content/plugins/rockstage-warranty-system/
 mkdir -p backup-dozo/v5.0-before-upgrade/
-cp -r * backup-dozo/v5.0-before-upgrade/
+cp -r \* backup-dozo/v5.0-before-upgrade/
 \`\`\`
 
 #### Step 2: Upload Files
+
 Upload the following new files:
+
 - \`includes/class-cursor-developer-panel.php\`
 - \`assets/css/cursor-developer.css\`
 - \`assets/js/cursor-developer.js\`
 
 Replace the following files:
+
 - \`rockstage-warranty-system.php\` (v5.1.0)
 - \`includes/class-warranty-admin.php\` (with v5.1 comments)
 
 #### Step 3: Clear Cache
+
 \`\`\`bash
+
 # Browser
+
 Ctrl + Shift + R (hard refresh)
 
 # WordPress (if using cache plugin)
+
 wp cache flush
 \`\`\`
 
@@ -458,9 +484,9 @@ wp cache flush
 
 ### Claude AI (Anthropic)
 
-| Model | Input Cost | Output Cost | Typical Query Cost |
-|-------|-----------|-------------|-------------------|
-| **Sonnet 4** | $3/1M tokens | $15/1M tokens | ~$0.015 |
+| Model        | Input Cost   | Output Cost   | Typical Query Cost |
+| ------------ | ------------ | ------------- | ------------------ |
+| **Sonnet 4** | $3/1M tokens | $15/1M tokens | ~$0.015            |
 
 ### Cursor AI (Custom)
 
@@ -479,12 +505,14 @@ wp cache flush
 **Query:**
 \`\`\`
 Audita el archivo assets/js/admin-categories.js y encuentra:
+
 - Memory leaks
 - Race conditions
 - Código redundante
-\`\`\`
+  \`\`\`
 
 **Expected Output:**
+
 - Code review report
 - List of issues found
 - Suggested fixes
@@ -495,12 +523,14 @@ Audita el archivo assets/js/admin-categories.js y encuentra:
 \`\`\`
 Genera PHPUnit tests para la clase RS_Warranty_Database
 incluyendo test cases para:
+
 - create_warranty()
 - get_warranty()
 - update_warranty()
-\`\`\`
+  \`\`\`
 
 **Expected Output:**
+
 - Complete test class
 - Mock objects
 - Assertions
@@ -510,12 +540,14 @@ incluyendo test cases para:
 **Query:**
 \`\`\`
 Optimiza la función reloadCategoryTable() en admin-categories.js:
+
 - Reduce DOM queries
 - Implementa virtual scrolling si hay +100 categorías
 - Cache jQuery selectors
-\`\`\`
+  \`\`\`
 
 **Expected Output:**
+
 - Refactored function
 - Performance improvements
 - Before/after comparison
@@ -553,18 +585,18 @@ Optimiza la función reloadCategoryTable() en admin-categories.js:
 
 ## 📊 Version History Summary
 
-| Version | Date | Key Feature | Lines Added |
-|---------|------|-------------|-------------|
-| v1.0 | 2024 | Core warranty system | ~3,000 |
-| v3.6 | 2024 | Product linking | +500 |
-| v3.9 | 2024 | Nonce validation | +200 |
-| v4.0 | 2024 | Race condition fix | +300 |
-| v4.1 | 2024 | Backend nonce sync | +100 |
-| v4.4 | 2024 | Claude design import | +1,200 |
-| v4.8 | 2024 | Adaptive diagnostic | +800 |
-| v4.9 | 2024 | Reaper & self-healing | +600 |
-| v5.0 | 2025 | Claude AI integration | +1,994 |
-| **v5.1** | **2025** | **Cursor AI integration** | **+1,238** |
+| Version  | Date     | Key Feature               | Lines Added |
+| -------- | -------- | ------------------------- | ----------- |
+| v1.0     | 2024     | Core warranty system      | ~3,000      |
+| v3.6     | 2024     | Product linking           | +500        |
+| v3.9     | 2024     | Nonce validation          | +200        |
+| v4.0     | 2024     | Race condition fix        | +300        |
+| v4.1     | 2024     | Backend nonce sync        | +100        |
+| v4.4     | 2024     | Claude design import      | +1,200      |
+| v4.8     | 2024     | Adaptive diagnostic       | +800        |
+| v4.9     | 2024     | Reaper & self-healing     | +600        |
+| v5.0     | 2025     | Claude AI integration     | +1,994      |
+| **v5.1** | **2025** | **Cursor AI integration** | **+1,238**  |
 
 **Total Evolution:** ~10,000 lines of production-grade code
 
@@ -607,13 +639,13 @@ Optimiza la función reloadCategoryTable() en admin-categories.js:
 
 ### Quality Metrics
 
-| Metric | Target | Actual | Status |
-|--------|--------|--------|--------|
-| **Backward Compat** | 100% | 100% | ✅ |
-| **Code Coverage** | >80% | >85% | ✅ |
-| **Security Audit** | Pass | Pass | ✅ |
-| **Performance** | <100ms | <50ms | ✅ |
-| **Documentation** | Complete | 100% | ✅ |
+| Metric              | Target   | Actual | Status |
+| ------------------- | -------- | ------ | ------ |
+| **Backward Compat** | 100%     | 100%   | ✅     |
+| **Code Coverage**   | >80%     | >85%   | ✅     |
+| **Security Audit**  | Pass     | Pass   | ✅     |
+| **Performance**     | <100ms   | <50ms  | ✅     |
+| **Documentation**   | Complete | 100%   | ✅     |
 
 ---
 

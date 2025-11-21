@@ -1,4 +1,5 @@
 # 📦 Deployment Checklist - DOZO v3.7
+
 ## Warranty System by RockStage
 
 ---
@@ -154,6 +155,7 @@
 ### Issue: Counters Still "0 y 0"
 
 **Check:**
+
 1. Clear browser cache (Ctrl + Shift + R)
 2. Verify `admin-categories.js` loads (Network tab)
 3. Run `rsTestDynamicCounters()` → should pass all tests
@@ -161,6 +163,7 @@
 5. Click "Sincronizar con WooCommerce"
 
 **Fix:**
+
 - If test fails on step 1 → Check HTML has `#activeCount`
 - If test fails on step 2 → Verify JS file uploaded
 - If test fails on step 3 → Check `rsWarrantyAdmin` is localized
@@ -168,23 +171,27 @@
 ### Issue: Verifier Says "No Products"
 
 **Check:**
+
 1. WP Admin → Productos → Edit product
 2. Custom Fields → Look for `_rs_warranty_days`
 3. If missing → Click "Restaurar Predeterminadas" in Categories tab
 4. Check debug.log for "DOZO v3.6: Vinculados..."
 
 **Fix:**
+
 - If meta missing → Re-sync categories
 - If meta exists but verifier fails → Check key 'active' in categories
 
 ### Issue: JavaScript Error
 
 **Check:**
+
 1. Console (F12) → Look for red errors
 2. Verify jQuery loaded: `console.log(jQuery.fn.jquery)`
 3. Verify `rsWarrantyAdmin` defined: `console.log(rsWarrantyAdmin)`
 
 **Fix:**
+
 - Clear cache and hard refresh
 - Check file uploaded correctly
 - Verify no syntax errors in JS file
@@ -236,9 +243,10 @@ Si algo falla:
 **Developer:** RockStage Development Team  
 **Plugin:** Warranty System by RockStage  
 **Version:** 1.0.0  
-**DOZO Level:** v3.7  
+**DOZO Level:** v3.7
 
 **Documentation:**
+
 - `/DOZO-V3.7-FINAL-REPORT.md`
 - `/TESTING-GUIDE-v3.7.md`
 - `/DOZO-COMPLETE-SUMMARY.md`
@@ -264,6 +272,6 @@ Si algo falla:
 
 ---
 
-*Last Updated: 2025-10-13*  
-*DOZO Level: v3.7*  
-*Status: Ready for Production*
+_Last Updated: 2025-10-13_  
+_DOZO Level: v3.7_  
+_Status: Ready for Production_

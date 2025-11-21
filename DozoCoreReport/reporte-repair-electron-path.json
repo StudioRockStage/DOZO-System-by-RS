@@ -26,10 +26,7 @@
       "Configuración de extraResources para Dashboard/public"
     ]
   },
-  "verified_in": [
-    "dev",
-    "prod"
-  ],
+  "verified_in": ["dev", "prod"],
   "features_added": {
     "autoPathDetection": true,
     "multiplePathFallbacks": true,
@@ -84,10 +81,5 @@
     "Verificar que no hay pantalla blanca",
     "Si hay problemas, revisar logs en consola"
   ],
-  "documentation": [
-    "ELECTRON-REPAIR-GUIDE.md",
-    "README-ELECTRON-FIXES.md"
-  ]
+  "documentation": ["ELECTRON-REPAIR-GUIDE.md", "README-ELECTRON-FIXES.md"]
 }
-
-

@@ -9,9 +9,7 @@
     "Estado del repositorio verificado",
     "Estado final verificado"
   ],
-  "errors": [
-    "GitHub CLI no instalado"
-  ],
+  "errors": ["GitHub CLI no instalado"],
   "warnings": [
     "GitHub CLI no disponible para autenticación",
     "Token personal no creado automáticamente",

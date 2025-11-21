@@ -25,9 +25,11 @@ function verifyStructure() {
     "Backup",
     "Workflow DB",
     "Shared",
-    "to chat gpt"
+    "to chat gpt",
   ];
-  const missing = requiredDirs.filter(d => !fs.existsSync(path.join(base, d)));
+  const missing = requiredDirs.filter(
+    (d) => !fs.existsSync(path.join(base, d)),
+  );
   return missing.length ? { ok: false, missing } : { ok: true };
 }
 
@@ -44,9 +46,10 @@ function buildSeal() {
       database_integrity: "✅ Passed",
       plugin_mapping: "✅ Passed",
       ai_collaboration: "✅ Passed",
-      live_sync: "✅ Passed"
+      live_sync: "✅ Passed",
     },
-    summary: "El ecosistema DOZO v7.9 ha sido validado exitosamente y se considera estable para despliegues y versiones empresariales.",
+    summary:
+      "El ecosistema DOZO v7.9 ha sido validado exitosamente y se considera estable para despliegues y versiones empresariales.",
   };
   fs.writeFileSync(sealPath, JSON.stringify(seal, null, 2));
   return seal;
@@ -65,7 +68,7 @@ function generateReport(seal) {
     changelog_registered: fs.existsSync(changelogPath),
     seal_file: sealPath,
     changelog_file: changelogPath,
-    result: "✅ DOZO System v7.9 certificado y sellado correctamente."
+    result: "✅ DOZO System v7.9 certificado y sellado correctamente.",
   };
 
   const reportPath = path.join(reports, "DOZO-FinalAudit-Report.json");
@@ -73,7 +76,10 @@ function generateReport(seal) {
 
   const backupDir = path.join(backup, "Certification");
   if (!fs.existsSync(backupDir)) fs.mkdirSync(backupDir, { recursive: true });
-  fs.copyFileSync(reportPath, path.join(backupDir, "DOZO-FinalAudit-Report.json"));
+  fs.copyFileSync(
+    reportPath,
+    path.join(backupDir, "DOZO-FinalAudit-Report.json"),
+  );
   fs.copyFileSync(sealPath, path.join(backupDir, "DOZO-Final-Seal.json"));
   console.log(`🧾 Reporte final generado en: ${reportPath}`);
   console.log(`📦 Copia de respaldo creada en: ${backupDir}`);
@@ -85,7 +91,10 @@ console.log("══════════════════════�
 
 const structure = verifyStructure();
 if (!structure.ok) {
-  console.error("❌ Estructura incompleta. Carpetas faltantes:", structure.missing);
+  console.error(
+    "❌ Estructura incompleta. Carpetas faltantes:",
+    structure.missing,
+  );
   process.exit(1);
 }
 
@@ -96,4 +105,3 @@ const finalReport = generateReport(seal);
 console.log("\n✅ Fase 15 completada exitosamente.");
 console.log("🧩 Sello de estabilidad emitido para DOZO v7.9");
 console.log("═════════════════════════════════════════════════════\n");
-

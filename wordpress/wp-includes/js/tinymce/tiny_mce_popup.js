@@ -25,7 +25,10 @@ var tinyMCEPopup = {
    * @method init
    */
   init: function () {
-    var self = this, parentWin, settings, uiWindow;
+    var self = this,
+      parentWin,
+      settings,
+      uiWindow;
 
     // Find window & API
     parentWin = self.getWin();
@@ -33,7 +36,10 @@ var tinyMCEPopup = {
     self.editor = tinymce.EditorManager.activeEditor;
     self.params = self.editor.windowManager.getParams();
 
-    uiWindow = self.editor.windowManager.windows[self.editor.windowManager.windows.length - 1];
+    uiWindow =
+      self.editor.windowManager.windows[
+        self.editor.windowManager.windows.length - 1
+      ];
     self.features = uiWindow.features;
     self.uiWindow = uiWindow;
 
@@ -42,27 +48,38 @@ var tinyMCEPopup = {
     // Setup popup CSS path(s)
     if (settings.popup_css !== false) {
       if (settings.popup_css) {
-        settings.popup_css = self.editor.documentBaseURI.toAbsolute(settings.popup_css);
+        settings.popup_css = self.editor.documentBaseURI.toAbsolute(
+          settings.popup_css,
+        );
       } else {
-        settings.popup_css = self.editor.baseURI.toAbsolute("plugins/compat3x/css/dialog.css");
+        settings.popup_css = self.editor.baseURI.toAbsolute(
+          "plugins/compat3x/css/dialog.css",
+        );
       }
     }
 
     if (settings.popup_css_add) {
-      settings.popup_css += ',' + self.editor.documentBaseURI.toAbsolute(settings.popup_css_add);
+      settings.popup_css +=
+        "," + self.editor.documentBaseURI.toAbsolute(settings.popup_css_add);
     }
 
     // Setup local DOM
-    self.dom = self.editor.windowManager.createInstance('tinymce.dom.DOMUtils', document, {
-      ownEvents: true,
-      proxy: tinyMCEPopup._eventProxy
-    });
+    self.dom = self.editor.windowManager.createInstance(
+      "tinymce.dom.DOMUtils",
+      document,
+      {
+        ownEvents: true,
+        proxy: tinyMCEPopup._eventProxy,
+      },
+    );
 
-    self.dom.bind(window, 'ready', self._onDOMLoaded, self);
+    self.dom.bind(window, "ready", self._onDOMLoaded, self);
 
     // Enables you to skip loading the default css
     if (self.features.popup_css !== false) {
-      self.dom.loadCSS(self.features.popup_css || self.editor.settings.popup_css);
+      self.dom.loadCSS(
+        self.features.popup_css || self.editor.settings.popup_css,
+      );
     }
 
     // Setup on init listeners
@@ -85,11 +102,11 @@ var tinyMCEPopup = {
     self.onInit = {
       add: function (func, scope) {
         self.listeners.push({ func: func, scope: scope });
-      }
+      },
     };
 
-    self.isWindow = !self.getWindowArg('mce_inline');
-    self.id = self.getWindowArg('mce_window_id');
+    self.isWindow = !self.getWindowArg("mce_inline");
+    self.id = self.getWindowArg("mce_window_id");
   },
 
   /**
@@ -100,7 +117,12 @@ var tinyMCEPopup = {
    */
   getWin: function () {
     // Added frameElement check to fix bug: #2817583
-    return (!window.frameElement && window.dialogArguments) || opener || parent || top;
+    return (
+      (!window.frameElement && window.dialogArguments) ||
+      opener ||
+      parent ||
+      top
+    );
   },
 
   /**
@@ -200,7 +222,8 @@ var tinyMCEPopup = {
    * @method storeSelection
    */
   storeSelection: function () {
-    this.editor.windowManager.bookmark = tinyMCEPopup.editor.selection.getBookmark(1);
+    this.editor.windowManager.bookmark =
+      tinyMCEPopup.editor.selection.getBookmark(1);
   },
 
   /**
@@ -224,17 +247,27 @@ var tinyMCEPopup = {
    * @method requireLangPack
    */
   requireLangPack: function () {
-    var self = this, url = self.getWindowArg('plugin_url') || self.getWindowArg('theme_url'), settings = self.editor.settings, lang;
+    var self = this,
+      url = self.getWindowArg("plugin_url") || self.getWindowArg("theme_url"),
+      settings = self.editor.settings,
+      lang;
 
     if (settings.language !== false) {
       lang = settings.language || "en";
     }
 
-    if (url && lang && self.features.translate_i18n !== false && settings.language_load !== false) {
-      url += '/langs/' + lang + '_dlg.js';
+    if (
+      url &&
+      lang &&
+      self.features.translate_i18n !== false &&
+      settings.language_load !== false
+    ) {
+      url += "/langs/" + lang + "_dlg.js";
 
       if (!tinymce.ScriptLoader.isDone(url)) {
-        document.write('<script type="text/javascript" src="' + url + '"></script>');
+        document.write(
+          '<script type="text/javascript" src="' + url + '"></script>',
+        );
         tinymce.ScriptLoader.markDone(url);
       }
     }
@@ -249,7 +282,8 @@ var tinyMCEPopup = {
    * @param {string} element_id Element id to be filled with the color value from the picker.
    */
   pickColor: function (e, element_id) {
-    var el = document.getElementById(element_id), colorPickerCallback = this.editor.settings.color_picker_callback;
+    var el = document.getElementById(element_id),
+      colorPickerCallback = this.editor.settings.color_picker_callback;
     if (colorPickerCallback) {
       colorPickerCallback.call(
         this.editor,
@@ -261,7 +295,7 @@ var tinyMCEPopup = {
             // Try fire event, ignore errors
           }
         },
-        el.value
+        el.value,
       );
     }
   },
@@ -277,7 +311,13 @@ var tinyMCEPopup = {
    */
   openBrowser: function (element_id, type) {
     tinyMCEPopup.restoreSelection();
-    this.editor.execCallback('file_browser_callback', element_id, document.getElementById(element_id).value, type, window);
+    this.editor.execCallback(
+      "file_browser_callback",
+      element_id,
+      document.getElementById(element_id).value,
+      type,
+      window,
+    );
   },
 
   /**
@@ -332,7 +372,7 @@ var tinyMCEPopup = {
   _restoreSelection: function () {
     var e = window.event.srcElement;
 
-    if (e.nodeName == 'INPUT' && (e.type == 'submit' || e.type == 'button')) {
+    if (e.nodeName == "INPUT" && (e.type == "submit" || e.type == "button")) {
       tinyMCEPopup.restoreSelection();
     }
   },
@@ -346,22 +386,29 @@ var tinyMCEPopup = {
     },*/
 
   _onDOMLoaded: function () {
-    var t = tinyMCEPopup, ti = document.title, h, nv;
+    var t = tinyMCEPopup,
+      ti = document.title,
+      h,
+      nv;
 
     // Translate page
     if (t.features.translate_i18n !== false) {
       var map = {
-        "update": "Ok",
-        "insert": "Ok",
-        "cancel": "Cancel",
-        "not_set": "--",
-        "class_name": "Class name",
-        "browse": "Browse"
+        update: "Ok",
+        insert: "Ok",
+        cancel: "Cancel",
+        not_set: "--",
+        class_name: "Class name",
+        browse: "Browse",
       };
 
-      var langCode = (tinymce.settings ? tinymce.settings : t.editor.settings).language || 'en';
+      var langCode =
+        (tinymce.settings ? tinymce.settings : t.editor.settings).language ||
+        "en";
       for (var key in map) {
-        tinymce.i18n.data[langCode + "." + key] = tinymce.i18n.translate(map[key]);
+        tinymce.i18n.data[langCode + "." + key] = tinymce.i18n.translate(
+          map[key],
+        );
       }
 
       h = document.body.innerHTML;
@@ -371,7 +418,7 @@ var tinyMCEPopup = {
         h = h.replace(/ (value|title|alt)=([^"][^\s>]+)/gi, ' $1="$2"');
       }
 
-      document.dir = t.editor.getParam('directionality', '');
+      document.dir = t.editor.getParam("directionality", "");
 
       if ((nv = t.editor.translate(h)) && nv != h) {
         document.body.innerHTML = nv;
@@ -382,21 +429,25 @@ var tinyMCEPopup = {
       }
     }
 
-    if (!t.editor.getParam('browser_preferred_colors', false) || !t.isWindow) {
-      t.dom.addClass(document.body, 'forceColors');
+    if (!t.editor.getParam("browser_preferred_colors", false) || !t.isWindow) {
+      t.dom.addClass(document.body, "forceColors");
     }
 
-    document.body.style.display = '';
+    document.body.style.display = "";
 
     // Restore selection in IE when focus is placed on a non textarea or input element of the type text
     if (tinymce.Env.ie) {
       if (tinymce.Env.ie < 11) {
-        document.attachEvent('onmouseup', tinyMCEPopup._restoreSelection);
+        document.attachEvent("onmouseup", tinyMCEPopup._restoreSelection);
 
         // Add base target element for it since it would fail with modal dialogs
-        t.dom.add(t.dom.select('head')[0], 'base', { target: '_self' });
+        t.dom.add(t.dom.select("head")[0], "base", { target: "_self" });
       } else {
-        document.addEventListener('mouseup', tinyMCEPopup._restoreSelection, false);
+        document.addEventListener(
+          "mouseup",
+          tinyMCEPopup._restoreSelection,
+          false,
+        );
       }
     }
 
@@ -411,13 +462,13 @@ var tinyMCEPopup = {
     }
 
     if (!tinymce.isIE && !t.isWindow) {
-      t.dom.bind(document, 'focus', function () {
+      t.dom.bind(document, "focus", function () {
         t.editor.windowManager.focus(t.id);
       });
     }
 
     // Patch for accessibility
-    tinymce.each(t.dom.select('select'), function (e) {
+    tinymce.each(t.dom.select("select"), function (e) {
       e.onkeydown = tinyMCEPopup._accessHandler;
     });
 
@@ -428,13 +479,13 @@ var tinyMCEPopup = {
     });
 
     // Move focus to window
-    if (t.getWindowArg('mce_auto_focus', true)) {
+    if (t.getWindowArg("mce_auto_focus", true)) {
       window.focus();
 
       // Focus element with mceFocus class
       tinymce.each(document.forms, function (f) {
         tinymce.each(f.elements, function (e) {
-          if (t.dom.hasClass(e, 'mceFocus') && !e.disabled) {
+          if (t.dom.hasClass(e, "mceFocus") && !e.disabled) {
             e.focus();
             return false; // Break loop
           }
@@ -444,10 +495,10 @@ var tinyMCEPopup = {
 
     document.onkeyup = tinyMCEPopup._closeWinKeyHandler;
 
-    if ('textContent' in document) {
-      t.uiWindow.getEl('head').firstChild.textContent = document.title;
+    if ("textContent" in document) {
+      t.uiWindow.getEl("head").firstChild.textContent = document.title;
     } else {
-      t.uiWindow.getEl('head').firstChild.innerText = document.title;
+      t.uiWindow.getEl("head").firstChild.innerText = document.title;
     }
   },
 
@@ -477,7 +528,7 @@ var tinyMCEPopup = {
     return function (evt) {
       tinyMCEPopup.dom.events.callNativeHandler(id, evt);
     };
-  }
+  },
 };
 
 tinyMCEPopup.init();
@@ -493,7 +544,8 @@ tinymce.util.Dispatcher = function (scope) {
   };
 
   this.addToTop = function (callback, scope) {
-    var self = this, listener = { cb: callback, scope: scope || self.scope };
+    var self = this,
+      listener = { cb: callback, scope: scope || self.scope };
 
     // Create new listeners if addToTop is executed in a dispatch loop
     if (self.inDispatch) {
@@ -506,7 +558,8 @@ tinymce.util.Dispatcher = function (scope) {
   };
 
   this.remove = function (callback) {
-    var listeners = this.listeners, output = null;
+    var listeners = this.listeners,
+      output = null;
 
     tinymce.each(listeners, function (listener, i) {
       if (callback == listener.cb) {
@@ -520,7 +573,12 @@ tinymce.util.Dispatcher = function (scope) {
   };
 
   this.dispatch = function () {
-    var self = this, returnValue, args = arguments, i, listeners = self.listeners, listener;
+    var self = this,
+      returnValue,
+      args = arguments,
+      i,
+      listeners = self.listeners,
+      listener;
 
     self.inDispatch = true;
 
@@ -528,7 +586,10 @@ tinymce.util.Dispatcher = function (scope) {
     // And this is also more efficient
     for (i = 0; i < listeners.length; i++) {
       listener = listeners[i];
-      returnValue = listener.cb.apply(listener.scope, args.length > 0 ? args : [listener.scope]);
+      returnValue = listener.cb.apply(
+        listener.scope,
+        args.length > 0 ? args : [listener.scope],
+      );
 
       if (returnValue === false) {
         break;

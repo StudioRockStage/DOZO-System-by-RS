@@ -10,14 +10,16 @@ import path from "path";
 
 const pluginDir = path.resolve(
   process.env.HOME,
-  "Documents/DOZO System by RS/Plugins/Warranty System"
+  "Documents/DOZO System by RS/Plugins/Warranty System",
 );
 const mainFile = path.join(pluginDir, "rockstage-warranty-system.php");
 const triggerFile = path.join(pluginDir, "force-update-check.php");
 const logFile = path.join(pluginDir, "DOZO-Patch-Log.json");
 
 (async () => {
-  console.log("\n🚀 Iniciando actualización del plugin Warranty System RS → v7.7.7");
+  console.log(
+    "\n🚀 Iniciando actualización del plugin Warranty System RS → v7.7.7",
+  );
 
   // Verificar existencia del archivo principal
   if (!fs.existsSync(mainFile)) {
@@ -68,12 +70,11 @@ echo "<br><br>🧩 DOZO Trigger completado correctamente.";
 
   // Actualizar versión en el archivo principal
   let pluginContent = fs.readFileSync(mainFile, "utf8");
-  pluginContent = pluginContent.replace(
-    /Version:\s*[0-9.]+/,
-    "Version: 7.7.7"
-  );
+  pluginContent = pluginContent.replace(/Version:\s*[0-9.]+/, "Version: 7.7.7");
   fs.writeFileSync(mainFile, pluginContent);
-  console.log("🔢 Versión actualizada a 7.7.7 en rockstage-warranty-system.php");
+  console.log(
+    "🔢 Versión actualizada a 7.7.7 en rockstage-warranty-system.php",
+  );
 
   // Registrar el cambio en el changelog
   const changelogEntry = {
@@ -83,13 +84,14 @@ echo "<br><br>🧩 DOZO Trigger completado correctamente.";
       "➕ Añadido trigger force-update-check.php",
       "🔗 Integración directa con DOZO Update Channel",
       "🧩 Validación de ruta y actualización inmediata",
-      "✅ Compatible con https://updates.vapedot.mx/warranty-system/update.json"
-    ]
+      "✅ Compatible con https://updates.vapedot.mx/warranty-system/update.json",
+    ],
   };
 
   fs.writeFileSync(logFile, JSON.stringify(changelogEntry, null, 2));
   console.log("🧾 Log generado:", logFile);
 
-  console.log("\n🎉 Actualización completada. Plugin preparado para deploy v7.7.7\n");
+  console.log(
+    "\n🎉 Actualización completada. Plugin preparado para deploy v7.7.7\n",
+  );
 })();
-

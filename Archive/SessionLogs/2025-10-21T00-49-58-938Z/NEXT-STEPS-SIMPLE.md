@@ -1,6 +1,7 @@
 # 🎯 Próximos Pasos - Deployment en 4 Pasos
 
 ## Estado Actual
+
 ✅ **Sistema 95% completo** - Solo falta configurar credenciales FTP correctas
 
 ---
@@ -8,6 +9,7 @@
 ## Paso 1: Obtener Credenciales FTP Correctas
 
 ### Opción A: Desde tu Panel de Hosting
+
 1. Entra a tu **cPanel / Plesk / DirectAdmin**
 2. Busca la sección **"FTP Accounts"** o **"Cuentas FTP"**
 3. Anota o resetea las credenciales:
@@ -15,6 +17,7 @@
    - **Password FTP:** (tu contraseña)
 
 ### Opción B: Probar con FileZilla Primero
+
 1. Descarga [FileZilla](https://filezilla-project.org/)
 2. Prueba conectar con:
    - **Host:** `ftp.vapedot.mx`
@@ -53,6 +56,7 @@ npm run ftp:test
 ```
 
 ✅ **Si todo está bien**, verás:
+
 ```
 ✅ Conectado exitosamente
 ✅ Acceso al directorio confirmado
@@ -73,6 +77,7 @@ npm run deploy
 ```
 
 Esto subirá:
+
 - ✅ `Warranty_System_v7.7.6.zip` (2.75 MB)
 - ✅ `update.json`
 
@@ -117,4 +122,3 @@ npm run deploy
 
 **Tiempo estimado:** 15 minutos  
 **Dificultad:** ⭐⭐☆☆☆ (Fácil, solo necesitas credenciales FTP)
-

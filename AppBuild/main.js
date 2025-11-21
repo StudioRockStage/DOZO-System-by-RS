@@ -2,7 +2,7 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-console.log('🚀 DOZO Control Center v2.3.0 - Electron AutoPath Repair');
+console.log('🚀 DOZO Control Center v2.6.0 - Phase 16.9 Build Factory');
 console.log('═══════════════════════════════════════════════════════');
 
 function resolveDashboardPath() {
@@ -10,7 +10,7 @@ function resolveDashboardPath() {
   console.log('process.resourcesPath:', process.resourcesPath);
   console.log('__dirname:', __dirname);
   console.log('app.isPackaged:', app.isPackaged);
-  
+
   // Rutas posibles para el index.html
   const paths = [
     // Opción 1: Dashboard principal (desarrollo)
@@ -22,52 +22,56 @@ function resolveDashboardPath() {
     // Opción 4: AppBuild public (fallback producción)
     path.join(process.resourcesPath, 'app/AppBuild/public/index.html'),
     // Opción 5: Dentro del asar (producción)
-    path.join(__dirname, '../Dashboard/public/index.html').replace('app.asar', 'app.asar.unpacked')
+    path
+      .join(__dirname, '../Dashboard/public/index.html')
+      .replace('app.asar', 'app.asar.unpacked'),
   ];
-  
+
   console.log('\n🔎 Buscando index.html en las siguientes rutas:');
-  
+
   for (let i = 0; i < paths.length; i++) {
     const testPath = paths[i];
     console.log(`  [${i + 1}] ${testPath}`);
-    
+
     if (fs.existsSync(testPath)) {
       console.log(`  ✅ ¡Encontrado!`);
-      
+
       if (i === 0 || i === 2) {
         console.log('\n🧠 Entorno detectado: DESARROLLO');
       } else {
         console.log('\n🚀 Entorno detectado: PRODUCCIÓN');
       }
-      
+
       return testPath;
     } else {
       console.log(`  ❌ No existe`);
     }
   }
-  
-  console.error('\n❌ ERROR CRÍTICO: No se encontró index.html en ninguna ruta');
+
+  console.error(
+    '\n❌ ERROR CRÍTICO: No se encontró index.html en ninguna ruta'
+  );
   console.log('\n📋 Información de diagnóstico:');
   console.log('  - CWD:', process.cwd());
   console.log('  - Electron version:', process.versions.electron);
   console.log('  - Node version:', process.versions.node);
-  
+
   return null;
 }
 
 function createWindow() {
   console.log('\n🪟 Creando ventana principal...');
-  
+
   const win = new BrowserWindow({
     width: 1280,
     height: 800,
     backgroundColor: '#101116',
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
     },
     icon: path.join(__dirname, 'assets/rockstage-icon.icns'),
-    show: false // No mostrar hasta que esté listo
+    show: false, // No mostrar hasta que esté listo
   });
 
   // Mostrar ventana cuando esté lista
@@ -95,10 +99,10 @@ function createWindow() {
   }
 
   const htmlPath = resolveDashboardPath();
-  
+
   if (htmlPath) {
     console.log(`\n📄 Cargando: ${htmlPath}`);
-    
+
     win.loadFile(htmlPath).catch(err => {
       console.error('❌ Error al cargar index.html:', err);
       // Mostrar página de error
@@ -187,7 +191,7 @@ function createWindow() {
           <pre>${[
             path.join(__dirname, '../Dashboard/public/index.html'),
             path.join(process.resourcesPath, 'Dashboard/public/index.html'),
-            path.join(__dirname, 'public/index.html')
+            path.join(__dirname, 'public/index.html'),
           ].join('\n')}</pre>
           <h3>Información del sistema:</h3>
           <pre>
@@ -226,7 +230,7 @@ app.on('activate', () => {
 });
 
 // Manejo de errores no capturados
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', error => {
   console.error('❌ Uncaught Exception:', error);
 });
 

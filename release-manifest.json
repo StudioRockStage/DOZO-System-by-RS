@@ -1,0 +1,40 @@
+{
+  "version": "2.6.0",
+  "build": "16.9",
+  "releaseDate": "2025-11-06T23:16:18.102Z",
+  "type": "dmg-internal",
+  "platform": "macOS",
+  "desktop": {
+    "file": "DOZO-Control-Center-RockStage-2.6.0.dmg",
+    "sha256": "ca0ab93b9142f29ea96e6036b21a3b2f5bf3399962b3633fc77a663e56ab4a46",
+    "sha512": "vw6c3WgPQMETBNrcbvNr/hc4mY3FXfPR/VHUZLox7x6K+bhabYVhoIMJo3bWCP+3iGgO+YUCBzceX7xynIGcpA==",
+    "url": "https://updates.rockstage.mx/dozo-desktop-2.6.0.dmg",
+    "size": 95041550
+  },
+  "wordpress": {
+    "file": "dozo-wp-2.6.0.zip",
+    "sha256": "",
+    "url": "https://updates.rockstage.mx/dozo-wp-2.6.0.zip",
+    "size": 0
+  },
+  "changelog": [
+    "Phase 16.9 - Build Factory & DMG Generator implemented",
+    "Complete electron-builder configuration",
+    "macOS entitlements and code signing setup",
+    "Universal binary support (x64 + ARM64)",
+    "Auto-updater system ready for testing"
+  ],
+  "minVersion": {
+    "desktop": "2.0.0",
+    "wordpress": "1.0.0"
+  },
+  "rollback": {
+    "enabled": true,
+    "previousVersion": "2.5.0"
+  },
+  "metadata": {
+    "productName": "DOZO Control Center – RockStage",
+    "author": "RockStage Solutions",
+    "description": "Sistema avanzado de monitoreo y desarrollo de plugins WordPress."
+  }
+}

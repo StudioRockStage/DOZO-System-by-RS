@@ -8,9 +8,14 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   background: linear-gradient(135deg, #0f0f14 0%, #1a1a24 100%);
-  color: #E6C185;
+  color: #e6c185;
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -19,20 +24,20 @@ header {
   text-align: center;
   background: linear-gradient(135deg, #1a1b1f 0%, #252631 100%);
   padding: 30px 20px;
-  border-bottom: 3px solid #E6C185;
+  border-bottom: 3px solid #e6c185;
   box-shadow: 0 4px 20px rgba(230, 193, 133, 0.1);
 }
 
 header h1 {
   margin: 0 0 10px 0;
-  color: #E6C185;
+  color: #e6c185;
   font-size: 2.5rem;
   font-weight: 700;
   text-shadow: 0 2px 10px rgba(230, 193, 133, 0.3);
 }
 
 header p {
-  color: #A5A1A2;
+  color: #a5a1a2;
   font-size: 1.1rem;
   margin-bottom: 15px;
 }
@@ -70,7 +75,7 @@ main {
 
 .card {
   background: linear-gradient(135deg, #1b1c20 0%, #22232a 100%);
-  border: 2px solid #E6C185;
+  border: 2px solid #e6c185;
   border-radius: 15px;
   padding: 30px;
   text-align: center;
@@ -81,13 +86,17 @@ main {
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(230, 193, 133, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(230, 193, 133, 0.1) 0%,
+    transparent 70%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -104,7 +113,7 @@ main {
 .card h2 {
   margin-bottom: 15px;
   font-size: 1.3rem;
-  color: #E6C185;
+  color: #e6c185;
 }
 
 .metric-value {
@@ -116,7 +125,7 @@ main {
 
 .metric-subtitle {
   font-size: 0.9rem;
-  color: #A5A1A2;
+  color: #a5a1a2;
   margin-top: 10px;
 }
 
@@ -132,14 +141,14 @@ main {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #E6C185 0%, #f5d9a0 100%);
+  background: linear-gradient(90deg, #e6c185 0%, #f5d9a0 100%);
   transition: width 0.5s ease;
   box-shadow: 0 0 10px rgba(230, 193, 133, 0.5);
 }
 
 .telemetry {
   background: linear-gradient(135deg, #1b1c20 0%, #22232a 100%);
-  border: 2px solid #E6C185;
+  border: 2px solid #e6c185;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -153,12 +162,12 @@ main {
 }
 
 .telemetry h2 {
-  color: #E6C185;
+  color: #e6c185;
   font-size: 1.5rem;
 }
 
 #refresh-btn {
-  background: linear-gradient(135deg, #E6C185 0%, #f5d9a0 100%);
+  background: linear-gradient(135deg, #e6c185 0%, #f5d9a0 100%);
   color: #1a1b1f;
   border: none;
   padding: 10px 20px;
@@ -180,7 +189,7 @@ main {
 }
 
 .integrity-section h3 {
-  color: #E6C185;
+  color: #e6c185;
   margin-bottom: 10px;
   font-size: 1.1rem;
 }
@@ -192,21 +201,21 @@ main {
   padding: 15px;
   overflow: auto;
   max-height: 300px;
-  color: #A5A1A2;
+  color: #a5a1a2;
   font-size: 0.85rem;
-  font-family: 'Monaco', 'Courier New', monospace;
+  font-family: "Monaco", "Courier New", monospace;
 }
 
 .ai-status {
   background: linear-gradient(135deg, #1b1c20 0%, #22232a 100%);
-  border: 2px solid #E6C185;
+  border: 2px solid #e6c185;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .ai-status h2 {
-  color: #E6C185;
+  color: #e6c185;
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
@@ -227,7 +236,7 @@ main {
 }
 
 .ai-card:hover {
-  border-color: #E6C185;
+  border-color: #e6c185;
   transform: translateY(-3px);
 }
 
@@ -244,20 +253,20 @@ main {
 
 .ai-capabilities {
   font-size: 0.85rem;
-  color: #A5A1A2;
+  color: #a5a1a2;
   margin-top: 10px;
 }
 
 .health-analysis {
   background: linear-gradient(135deg, #1b1c20 0%, #22232a 100%);
-  border: 2px solid #E6C185;
+  border: 2px solid #e6c185;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .health-analysis h2 {
-  color: #E6C185;
+  color: #e6c185;
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
@@ -276,7 +285,7 @@ main {
 }
 
 .health-card h3 {
-  color: #E6C185;
+  color: #e6c185;
   margin-bottom: 15px;
   font-size: 1.1rem;
 }
@@ -301,37 +310,39 @@ main {
   border: 2px solid #ffc107;
 }
 
-#warnings-list, #recommendations-list {
+#warnings-list,
+#recommendations-list {
   list-style: none;
   padding: 0;
 }
 
-#warnings-list li, #recommendations-list li {
+#warnings-list li,
+#recommendations-list li {
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: #A5A1A2;
+  color: #a5a1a2;
 }
 
 #warnings-list li::before {
-  content: '⚠️ ';
+  content: "⚠️ ";
   margin-right: 8px;
 }
 
 #recommendations-list li::before {
-  content: '💡 ';
+  content: "💡 ";
   margin-right: 8px;
 }
 
 .phase-audit {
   background: linear-gradient(135deg, #1b1c20 0%, #22232a 100%);
-  border: 2px solid #E6C185;
+  border: 2px solid #e6c185;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .phase-audit h2 {
-  color: #E6C185;
+  color: #e6c185;
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
@@ -352,7 +363,7 @@ main {
 }
 
 .phase-card:hover {
-  border-color: #E6C185;
+  border-color: #e6c185;
   transform: scale(1.05);
 }
 
@@ -368,32 +379,37 @@ main {
 .phase-number {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #E6C185;
+  color: #e6c185;
   margin-bottom: 5px;
 }
 
 .phase-status {
   font-size: 0.9rem;
-  color: #A5A1A2;
+  color: #a5a1a2;
 }
 
 footer {
   text-align: center;
   background: #1a1b1f;
   padding: 20px;
-  border-top: 3px solid #E6C185;
+  border-top: 3px solid #e6c185;
   margin-top: 40px;
 }
 
 footer p {
-  color: #A5A1A2;
+  color: #a5a1a2;
   margin: 5px 0;
 }
 
 /* Animaciones */
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .loading {
@@ -405,23 +421,23 @@ footer p {
   header h1 {
     font-size: 1.8rem;
   }
-  
+
   .status-bar {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   main {
     padding: 20px 10px;
   }
-  
-  .metrics, .ai-grid, #health-container {
+
+  .metrics,
+  .ai-grid,
+  #health-container {
     grid-template-columns: 1fr;
   }
-  
+
   #integrity-container {
     grid-template-columns: 1fr;
   }
 }
-
-

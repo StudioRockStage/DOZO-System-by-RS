@@ -10,26 +10,29 @@ actualizando a v1.0.6, inyectando los hooks esenciales, restableciendo el panel 
 y asegurando la compatibilidad total con el flujo de actualización DOZO.
 */
 
-import fs from 'fs';
-import path from 'path';
-import AdmZip from 'adm-zip';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import AdmZip from "adm-zip";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Definir rutas base
-const baseDir = path.resolve(process.env.HOME, 'Documents/Dozo System by RS');
-const latestBuilds = path.join(baseDir, 'Latest Builds');
-const packagedDir = path.join(baseDir, 'Empaquetado', 'Ready');
-const globalDir = path.join(baseDir, 'to chat gpt', 'Global');
-const pluginSourceDir = path.join(latestBuilds, 'warranty-system-rs');
-const tempDir = path.join(baseDir, '.temp-recovery-v1.0.6');
-const reportPath = path.join(globalDir, 'DOZO-Fatal-Recovery-Report-v1.0.6.json');
+const baseDir = path.resolve(process.env.HOME, "Documents/Dozo System by RS");
+const latestBuilds = path.join(baseDir, "Latest Builds");
+const packagedDir = path.join(baseDir, "Empaquetado", "Ready");
+const globalDir = path.join(baseDir, "to chat gpt", "Global");
+const pluginSourceDir = path.join(latestBuilds, "warranty-system-rs");
+const tempDir = path.join(baseDir, ".temp-recovery-v1.0.6");
+const reportPath = path.join(
+  globalDir,
+  "DOZO-Fatal-Recovery-Report-v1.0.6.json",
+);
 
 // Configuración de la nueva versión
-const NEW_VERSION = '1.0.6';
-const PLUGIN_NAME = 'warranty-system-rs';
+const NEW_VERSION = "1.0.6";
+const PLUGIN_NAME = "warranty-system-rs";
 
 /**
  * Copia recursiva de directorios
@@ -47,13 +50,20 @@ function copyDirRecursive(src, dest) {
 
     if (entry.isDirectory()) {
       // Ignorar directorios de backup y temporales
-      if (entry.name === 'backup-dozo' || entry.name === 'logs' || entry.name.startsWith('.')) {
+      if (
+        entry.name === "backup-dozo" ||
+        entry.name === "logs" ||
+        entry.name.startsWith(".")
+      ) {
         continue;
       }
       copyDirRecursive(srcPath, destPath);
     } else {
       // Ignorar archivos de documentación innecesarios
-      if (entry.name.match(/\.(md|txt)$/i) && !entry.name.match(/^(README|CHANGELOG)\.md$/i)) {
+      if (
+        entry.name.match(/\.(md|txt)$/i) &&
+        !entry.name.match(/^(README|CHANGELOG)\.md$/i)
+      ) {
         continue;
       }
       fs.copyFileSync(srcPath, destPath);
@@ -66,9 +76,9 @@ function copyDirRecursive(src, dest) {
  */
 function updateVersionInFiles(pluginDir, version) {
   const filesToUpdate = [
-    path.join(pluginDir, 'warranty-system-rs.php'),
-    path.join(pluginDir, 'includes', 'class-warranty-core.php'),
-    path.join(pluginDir, 'includes', 'class-warranty-admin.php')
+    path.join(pluginDir, "warranty-system-rs.php"),
+    path.join(pluginDir, "includes", "class-warranty-core.php"),
+    path.join(pluginDir, "includes", "class-warranty-admin.php"),
   ];
 
   const updates = [];
@@ -76,30 +86,35 @@ function updateVersionInFiles(pluginDir, version) {
   for (const filePath of filesToUpdate) {
     if (!fs.existsSync(filePath)) continue;
 
-    let content = fs.readFileSync(filePath, 'utf8');
+    let content = fs.readFileSync(filePath, "utf8");
     let modified = false;
 
     // Actualizar Version en headers
-    if (content.includes('* Version:')) {
-      content = content.replace(/\* Version:\s*[\d.]+/g, `* Version: ${version}`);
+    if (content.includes("* Version:")) {
+      content = content.replace(
+        /\* Version:\s*[\d.]+/g,
+        `* Version: ${version}`,
+      );
       modified = true;
     }
 
     // Actualizar constantes de versión
-    if (content.includes('RS_WARRANTY_VERSION')) {
-      content = content.replace(/define\('RS_WARRANTY_VERSION',\s*'[\d.]+'\)/g, 
-        `define('RS_WARRANTY_VERSION', '${version}')`);
+    if (content.includes("RS_WARRANTY_VERSION")) {
+      content = content.replace(
+        /define\('RS_WARRANTY_VERSION',\s*'[\d.]+'\)/g,
+        `define('RS_WARRANTY_VERSION', '${version}')`,
+      );
       modified = true;
     }
 
     // Actualizar @version en docblocks
-    if (content.includes('@version')) {
+    if (content.includes("@version")) {
       content = content.replace(/@version\s+[\d.]+/g, `@version ${version}`);
       modified = true;
     }
 
     if (modified) {
-      fs.writeFileSync(filePath, content, 'utf8');
+      fs.writeFileSync(filePath, content, "utf8");
       updates.push(path.relative(pluginDir, filePath));
     }
   }
@@ -111,8 +126,8 @@ function updateVersionInFiles(pluginDir, version) {
  * Crea el archivo principal del plugin con headers actualizados
  */
 function createMainPluginFile(pluginDir, version) {
-  const mainFile = path.join(pluginDir, 'warranty-system-rs.php');
-  
+  const mainFile = path.join(pluginDir, "warranty-system-rs.php");
+
   const content = `<?php
 /**
  * Plugin Name: Warranty System RS
@@ -337,7 +352,7 @@ function rs_warranty_woocommerce_notice() {
 // ═══════════════════════════════════════════════════════════════
 `;
 
-  fs.writeFileSync(mainFile, content, 'utf8');
+  fs.writeFileSync(mainFile, content, "utf8");
   return true;
 }
 
@@ -345,14 +360,14 @@ function rs_warranty_woocommerce_notice() {
  * Valida que todos los hooks esenciales estén presentes
  */
 function validateHooks(pluginDir) {
-  const mainFile = path.join(pluginDir, 'warranty-system-rs.php');
-  const content = fs.readFileSync(mainFile, 'utf8');
+  const mainFile = path.join(pluginDir, "warranty-system-rs.php");
+  const content = fs.readFileSync(mainFile, "utf8");
 
   const requiredHooks = [
-    'plugins_loaded',
-    'register_activation_hook',
-    'register_deactivation_hook',
-    'init'
+    "plugins_loaded",
+    "register_activation_hook",
+    "register_deactivation_hook",
+    "init",
   ];
 
   const foundHooks = [];
@@ -371,7 +386,7 @@ function validateHooks(pluginDir) {
     found: foundHooks.length,
     hooks: foundHooks,
     missing: missingHooks,
-    valid: missingHooks.length === 0
+    valid: missingHooks.length === 0,
   };
 }
 
@@ -387,15 +402,19 @@ function countFiles(dir, stats = { php: 0, js: 0, css: 0, total: 0 }) {
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      if (!entry.name.startsWith('.') && entry.name !== 'backup-dozo' && entry.name !== 'logs') {
+      if (
+        !entry.name.startsWith(".") &&
+        entry.name !== "backup-dozo" &&
+        entry.name !== "logs"
+      ) {
         countFiles(fullPath, stats);
       }
     } else {
       stats.total++;
       const ext = path.extname(entry.name).toLowerCase();
-      if (ext === '.php') stats.php++;
-      else if (ext === '.js') stats.js++;
-      else if (ext === '.css') stats.css++;
+      if (ext === ".php") stats.php++;
+      else if (ext === ".js") stats.js++;
+      else if (ext === ".css") stats.css++;
     }
   }
 
@@ -407,12 +426,15 @@ function countFiles(dir, stats = { php: 0, js: 0, css: 0, total: 0 }) {
  */
 function cleanupOldVersions() {
   const cleaned = [];
-  
+
   // Limpiar en Empaquetado/Ready
   if (fs.existsSync(packagedDir)) {
     const files = fs.readdirSync(packagedDir);
     for (const file of files) {
-      if (file.includes('warranty-system') && !file.includes(`v${NEW_VERSION}`)) {
+      if (
+        file.includes("warranty-system") &&
+        !file.includes(`v${NEW_VERSION}`)
+      ) {
         const filePath = path.join(packagedDir, file);
         fs.rmSync(filePath, { recursive: true, force: true });
         cleaned.push(file);
@@ -433,7 +455,7 @@ function createZipPackage(sourceDir, outputPath) {
     zip.writeZip(outputPath);
     return true;
   } catch (error) {
-    console.error('Error al crear ZIP:', error.message);
+    console.error("Error al crear ZIP:", error.message);
     return false;
   }
 }
@@ -442,45 +464,57 @@ function createZipPackage(sourceDir, outputPath) {
  * Función principal de ejecución
  */
 async function main() {
-  console.log('\n╔═══════════════════════════════════════════════════════════════╗');
-  console.log('║  🧠 DOZO Fatal Recovery & Hook Reinsertion v1.0.6            ║');
-  console.log('║  Sistema de Reconstrucción Completa - Warranty System RS     ║');
-  console.log('╚═══════════════════════════════════════════════════════════════╝\n');
+  console.log(
+    "\n╔═══════════════════════════════════════════════════════════════╗",
+  );
+  console.log(
+    "║  🧠 DOZO Fatal Recovery & Hook Reinsertion v1.0.6            ║",
+  );
+  console.log(
+    "║  Sistema de Reconstrucción Completa - Warranty System RS     ║",
+  );
+  console.log(
+    "╚═══════════════════════════════════════════════════════════════╝\n",
+  );
 
   const startTime = Date.now();
   const report = {
-    status: 'in_progress',
-    plugin: 'Warranty System RS',
+    status: "in_progress",
+    plugin: "Warranty System RS",
     version: NEW_VERSION,
-    author: 'RockStage Solutions',
+    author: "RockStage Solutions",
     timestamp_start: new Date().toISOString(),
-    steps: []
+    steps: [],
   };
 
   try {
     // ═══════════════════════════════════════════════════════════════
     // PASO 1: Verificación de requisitos
     // ═══════════════════════════════════════════════════════════════
-    console.log('📋 [1/8] Verificando requisitos previos...');
-    
+    console.log("📋 [1/8] Verificando requisitos previos...");
+
     if (!fs.existsSync(pluginSourceDir)) {
-      throw new Error(`No se encontró el directorio fuente del plugin: ${pluginSourceDir}`);
+      throw new Error(
+        `No se encontró el directorio fuente del plugin: ${pluginSourceDir}`,
+      );
     }
 
     const sourceStats = countFiles(pluginSourceDir);
-    console.log(`   ✓ Plugin fuente encontrado: ${sourceStats.total} archivos (${sourceStats.php} PHP, ${sourceStats.js} JS, ${sourceStats.css} CSS)`);
+    console.log(
+      `   ✓ Plugin fuente encontrado: ${sourceStats.total} archivos (${sourceStats.php} PHP, ${sourceStats.js} JS, ${sourceStats.css} CSS)`,
+    );
 
     report.steps.push({
       step: 1,
-      name: 'Verificación de requisitos',
-      status: 'completed',
-      details: { source_files: sourceStats }
+      name: "Verificación de requisitos",
+      status: "completed",
+      details: { source_files: sourceStats },
     });
 
     // ═══════════════════════════════════════════════════════════════
     // PASO 2: Crear directorios de trabajo
     // ═══════════════════════════════════════════════════════════════
-    console.log('\n📁 [2/8] Preparando directorios de trabajo...');
+    console.log("\n📁 [2/8] Preparando directorios de trabajo...");
 
     // Limpiar temporal si existe
     if (fs.existsSync(tempDir)) {
@@ -492,18 +526,18 @@ async function main() {
     const workPluginDir = path.join(tempDir, PLUGIN_NAME);
     fs.mkdirSync(workPluginDir, { recursive: true });
 
-    console.log('   ✓ Directorios de trabajo creados');
+    console.log("   ✓ Directorios de trabajo creados");
 
     report.steps.push({
       step: 2,
-      name: 'Preparación de directorios',
-      status: 'completed'
+      name: "Preparación de directorios",
+      status: "completed",
     });
 
     // ═══════════════════════════════════════════════════════════════
     // PASO 3: Copiar estructura del plugin
     // ═══════════════════════════════════════════════════════════════
-    console.log('\n📦 [3/8] Copiando estructura del plugin...');
+    console.log("\n📦 [3/8] Copiando estructura del plugin...");
 
     copyDirRecursive(pluginSourceDir, workPluginDir);
 
@@ -512,23 +546,25 @@ async function main() {
 
     report.steps.push({
       step: 3,
-      name: 'Copia de estructura',
-      status: 'completed',
-      details: { files_copied: copiedStats.total }
+      name: "Copia de estructura",
+      status: "completed",
+      details: { files_copied: copiedStats.total },
     });
 
     // ═══════════════════════════════════════════════════════════════
     // PASO 4: Crear archivo principal con hooks actualizados
     // ═══════════════════════════════════════════════════════════════
-    console.log('\n🔧 [4/8] Creando archivo principal con hooks actualizados...');
+    console.log(
+      "\n🔧 [4/8] Creando archivo principal con hooks actualizados...",
+    );
 
     createMainPluginFile(workPluginDir, NEW_VERSION);
-    console.log('   ✓ Archivo principal creado con estructura DOZO completa');
+    console.log("   ✓ Archivo principal creado con estructura DOZO completa");
 
     report.steps.push({
       step: 4,
-      name: 'Creación de archivo principal',
-      status: 'completed'
+      name: "Creación de archivo principal",
+      status: "completed",
     });
 
     // ═══════════════════════════════════════════════════════════════
@@ -537,40 +573,46 @@ async function main() {
     console.log(`\n🔄 [5/8] Actualizando versión a ${NEW_VERSION}...`);
 
     const updatedFiles = updateVersionInFiles(workPluginDir, NEW_VERSION);
-    console.log(`   ✓ ${updatedFiles.length} archivos actualizados con nueva versión`);
+    console.log(
+      `   ✓ ${updatedFiles.length} archivos actualizados con nueva versión`,
+    );
 
     report.steps.push({
       step: 5,
-      name: 'Actualización de versiones',
-      status: 'completed',
-      details: { files_updated: updatedFiles }
+      name: "Actualización de versiones",
+      status: "completed",
+      details: { files_updated: updatedFiles },
     });
 
     // ═══════════════════════════════════════════════════════════════
     // PASO 6: Validar hooks esenciales
     // ═══════════════════════════════════════════════════════════════
-    console.log('\n✅ [6/8] Validando hooks de WordPress...');
+    console.log("\n✅ [6/8] Validando hooks de WordPress...");
 
     const hooksValidation = validateHooks(workPluginDir);
-    
+
     if (hooksValidation.valid) {
-      console.log(`   ✓ Todos los hooks esenciales están presentes (${hooksValidation.found}/${hooksValidation.total})`);
-      console.log(`   → ${hooksValidation.hooks.join(', ')}`);
+      console.log(
+        `   ✓ Todos los hooks esenciales están presentes (${hooksValidation.found}/${hooksValidation.total})`,
+      );
+      console.log(`   → ${hooksValidation.hooks.join(", ")}`);
     } else {
-      console.warn(`   ⚠ Faltan ${hooksValidation.missing.length} hooks: ${hooksValidation.missing.join(', ')}`);
+      console.warn(
+        `   ⚠ Faltan ${hooksValidation.missing.length} hooks: ${hooksValidation.missing.join(", ")}`,
+      );
     }
 
     report.steps.push({
       step: 6,
-      name: 'Validación de hooks',
-      status: hooksValidation.valid ? 'completed' : 'warning',
-      details: hooksValidation
+      name: "Validación de hooks",
+      status: hooksValidation.valid ? "completed" : "warning",
+      details: hooksValidation,
     });
 
     // ═══════════════════════════════════════════════════════════════
     // PASO 7: Crear paquete ZIP
     // ═══════════════════════════════════════════════════════════════
-    console.log('\n📦 [7/8] Creando paquete ZIP...');
+    console.log("\n📦 [7/8] Creando paquete ZIP...");
 
     // Asegurar que el directorio de salida existe
     if (!fs.existsSync(packagedDir)) {
@@ -581,42 +623,49 @@ async function main() {
     const zipPath = path.join(packagedDir, zipFileName);
 
     const zipCreated = createZipPackage(workPluginDir, zipPath);
-    
+
     if (zipCreated && fs.existsSync(zipPath)) {
       const zipSize = fs.statSync(zipPath).size;
-      console.log(`   ✓ ZIP creado: ${zipFileName} (${(zipSize / 1024 / 1024).toFixed(2)} MB)`);
-      
+      console.log(
+        `   ✓ ZIP creado: ${zipFileName} (${(zipSize / 1024 / 1024).toFixed(2)} MB)`,
+      );
+
       report.output_zip = zipPath;
       report.zip_size = zipSize;
     } else {
-      throw new Error('No se pudo crear el archivo ZIP');
+      throw new Error("No se pudo crear el archivo ZIP");
     }
 
     report.steps.push({
       step: 7,
-      name: 'Creación de paquete ZIP',
-      status: 'completed',
-      details: { output: zipPath, size_mb: (report.zip_size / 1024 / 1024).toFixed(2) }
+      name: "Creación de paquete ZIP",
+      status: "completed",
+      details: {
+        output: zipPath,
+        size_mb: (report.zip_size / 1024 / 1024).toFixed(2),
+      },
     });
 
     // ═══════════════════════════════════════════════════════════════
     // PASO 8: Limpieza de versiones antiguas
     // ═══════════════════════════════════════════════════════════════
-    console.log('\n🧹 [8/8] Limpiando versiones antiguas...');
+    console.log("\n🧹 [8/8] Limpiando versiones antiguas...");
 
     const cleaned = cleanupOldVersions();
     if (cleaned.length > 0) {
-      console.log(`   ✓ ${cleaned.length} versión(es) antigua(s) eliminada(s):`);
-      cleaned.forEach(file => console.log(`     - ${file}`));
+      console.log(
+        `   ✓ ${cleaned.length} versión(es) antigua(s) eliminada(s):`,
+      );
+      cleaned.forEach((file) => console.log(`     - ${file}`));
     } else {
-      console.log('   ℹ No se encontraron versiones antiguas para limpiar');
+      console.log("   ℹ No se encontraron versiones antiguas para limpiar");
     }
 
     report.steps.push({
       step: 8,
-      name: 'Limpieza de versiones antiguas',
-      status: 'completed',
-      details: { cleaned_files: cleaned }
+      name: "Limpieza de versiones antiguas",
+      status: "completed",
+      details: { cleaned_files: cleaned },
     });
 
     // ═══════════════════════════════════════════════════════════════
@@ -625,7 +674,7 @@ async function main() {
     const endTime = Date.now();
     const duration = ((endTime - startTime) / 1000).toFixed(2);
 
-    report.status = 'success';
+    report.status = "success";
     report.timestamp_end = new Date().toISOString();
     report.duration_seconds = parseFloat(duration);
     report.validated_hooks = hooksValidation.hooks;
@@ -635,7 +684,7 @@ async function main() {
     if (!fs.existsSync(globalDir)) {
       fs.mkdirSync(globalDir, { recursive: true });
     }
-    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), 'utf8');
+    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), "utf8");
 
     // Limpiar directorio temporal
     if (fs.existsSync(tempDir)) {
@@ -645,12 +694,20 @@ async function main() {
     // ═══════════════════════════════════════════════════════════════
     // Resumen final
     // ═══════════════════════════════════════════════════════════════
-    console.log('\n╔═══════════════════════════════════════════════════════════════╗');
-    console.log('║                  ✅ RECONSTRUCCIÓN COMPLETADA                 ║');
-    console.log('╚═══════════════════════════════════════════════════════════════╝');
-    console.log('');
-    console.log('📊 RESUMEN DE LA OPERACIÓN:');
-    console.log('─────────────────────────────────────────────────────────────────');
+    console.log(
+      "\n╔═══════════════════════════════════════════════════════════════╗",
+    );
+    console.log(
+      "║                  ✅ RECONSTRUCCIÓN COMPLETADA                 ║",
+    );
+    console.log(
+      "╚═══════════════════════════════════════════════════════════════╝",
+    );
+    console.log("");
+    console.log("📊 RESUMEN DE LA OPERACIÓN:");
+    console.log(
+      "─────────────────────────────────────────────────────────────────",
+    );
     console.log(`   Plugin:              ${report.plugin}`);
     console.log(`   Versión:             ${report.version}`);
     console.log(`   Autor:               ${report.author}`);
@@ -658,38 +715,51 @@ async function main() {
     console.log(`   • PHP:               ${copiedStats.php}`);
     console.log(`   • JavaScript:        ${copiedStats.js}`);
     console.log(`   • CSS:               ${copiedStats.css}`);
-    console.log(`   Hooks validados:     ${hooksValidation.found}/${hooksValidation.total}`);
+    console.log(
+      `   Hooks validados:     ${hooksValidation.found}/${hooksValidation.total}`,
+    );
     console.log(`   Tiempo de ejecución: ${duration}s`);
-    console.log('');
-    console.log('📁 ARCHIVOS GENERADOS:');
-    console.log('─────────────────────────────────────────────────────────────────');
+    console.log("");
+    console.log("📁 ARCHIVOS GENERADOS:");
+    console.log(
+      "─────────────────────────────────────────────────────────────────",
+    );
     console.log(`   📦 ZIP:     ${zipPath}`);
     console.log(`   📄 Reporte: ${reportPath}`);
-    console.log('');
-    console.log('🔍 PRÓXIMOS PASOS:');
-    console.log('─────────────────────────────────────────────────────────────────');
-    console.log('   1. Descargar el plugin desde WordPress');
+    console.log("");
+    console.log("🔍 PRÓXIMOS PASOS:");
+    console.log(
+      "─────────────────────────────────────────────────────────────────",
+    );
+    console.log("   1. Descargar el plugin desde WordPress");
     console.log(`   2. Subir el archivo: ${zipFileName}`);
-    console.log('   3. Activar el plugin');
-    console.log('   4. Verificar panel de administración en WP Admin');
-    console.log('   5. Probar funcionalidad de garantías');
-    console.log('');
-    console.log('═══════════════════════════════════════════════════════════════');
-    console.log('🎉 Plugin Warranty System RS v1.0.6 listo para implementación');
-    console.log('═══════════════════════════════════════════════════════════════\n');
-
+    console.log("   3. Activar el plugin");
+    console.log("   4. Verificar panel de administración en WP Admin");
+    console.log("   5. Probar funcionalidad de garantías");
+    console.log("");
+    console.log(
+      "═══════════════════════════════════════════════════════════════",
+    );
+    console.log(
+      "🎉 Plugin Warranty System RS v1.0.6 listo para implementación",
+    );
+    console.log(
+      "═══════════════════════════════════════════════════════════════\n",
+    );
   } catch (error) {
-    report.status = 'failed';
+    report.status = "failed";
     report.error = error.message;
     report.timestamp_end = new Date().toISOString();
 
-    console.error('\n❌ ERROR EN LA RECONSTRUCCIÓN:');
-    console.error('═══════════════════════════════════════════════════════════════');
+    console.error("\n❌ ERROR EN LA RECONSTRUCCIÓN:");
+    console.error(
+      "═══════════════════════════════════════════════════════════════",
+    );
     console.error(`   ${error.message}`);
-    console.error('');
+    console.error("");
 
     if (error.stack) {
-      console.error('Stack trace:');
+      console.error("Stack trace:");
       console.error(error.stack);
     }
 
@@ -697,7 +767,7 @@ async function main() {
     if (!fs.existsSync(globalDir)) {
       fs.mkdirSync(globalDir, { recursive: true });
     }
-    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), 'utf8');
+    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), "utf8");
 
     // Limpiar directorio temporal en caso de error
     if (fs.existsSync(tempDir)) {
@@ -710,4 +780,3 @@ async function main() {
 
 // Ejecutar
 main();
-

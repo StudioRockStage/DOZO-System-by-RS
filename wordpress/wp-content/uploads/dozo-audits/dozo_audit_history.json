@@ -1,181 +1,176 @@
 [
-    {
-        "timestamp": "2025-10-22T23:02:35.139Z",
-        "version": "4.8.0",
-        "environment": "admin-other",
-        "layers": {
-            "core": {
-                "layer": "core",
-                "timestamp": "2025-10-22T23:02:34.866Z",
-                "checks": {
-                    "nonces": {
-                        "passed": false,
-                        "message": "No se detectaron nonces",
-                        "count": 0
-                    },
-                    "ajax": {
-                        "passed": true,
-                        "message": "AJAX responde (200) en 271ms",
-                        "status": 200,
-                        "responseTime": 271
-                    },
-                    "raceCondition": {
-                        "passed": true,
-                        "message": "4\/4 mecanismos presentes: Flag rsIsSaving, Debounce timer, AJAX monitor, Debounced reload",
-                        "mechanisms": {
-                            "hasFlag": true,
-                            "hasTimer": true,
-                            "hasMonitor": true,
-                            "hasDebounced": true
-                        },
-                        "features": [
-                            "Flag rsIsSaving",
-                            "Debounce timer",
-                            "AJAX monitor",
-                            "Debounced reload"
-                        ]
-                    }
-                },
-                "score": 2,
-                "maxScore": 3,
-                "status": "warning"
+  {
+    "timestamp": "2025-10-22T23:02:35.139Z",
+    "version": "4.8.0",
+    "environment": "admin-other",
+    "layers": {
+      "core": {
+        "layer": "core",
+        "timestamp": "2025-10-22T23:02:34.866Z",
+        "checks": {
+          "nonces": {
+            "passed": false,
+            "message": "No se detectaron nonces",
+            "count": 0
+          },
+          "ajax": {
+            "passed": true,
+            "message": "AJAX responde (200) en 271ms",
+            "status": 200,
+            "responseTime": 271
+          },
+          "raceCondition": {
+            "passed": true,
+            "message": "4\/4 mecanismos presentes: Flag rsIsSaving, Debounce timer, AJAX monitor, Debounced reload",
+            "mechanisms": {
+              "hasFlag": true,
+              "hasTimer": true,
+              "hasMonitor": true,
+              "hasDebounced": true
             },
-            "ui": {
-                "layer": "ui",
-                "timestamp": "2025-10-22T23:02:34.868Z",
-                "checks": {
-                    "shortcode": {
-                        "passed": null,
-                        "message": "No se detect\u00f3 contenido del plugin",
-                        "type": "none"
-                    },
-                    "css": {
-                        "passed": true,
-                        "message": "4 estilos del plugin cargados (4 external, 0 inline)",
-                        "external": 4,
-                        "inline": 0
-                    },
-                    "javascript": {
-                        "passed": true,
-                        "message": "4 scripts cargados, 2 objetos globales",
-                        "scripts": 4,
-                        "globalObjects": [
-                            "rsWarrantyAdmin",
-                            "jQuery"
-                        ]
-                    },
-                    "visual": {
-                        "passed": true,
-                        "message": "1\/5 elementos cr\u00edticos encontrados",
-                        "found": [
-                            ".rs-btn-primary"
-                        ],
-                        "missing": [
-                            ".rs-form-card",
-                            ".rs-progress-steps",
-                            ".rs-card",
-                            "#categoriesTableBody"
-                        ]
-                    }
-                },
-                "score": 3,
-                "maxScore": 4,
-                "status": "good"
-            },
-            "selfHealing": {
-                "layer": "selfHealing",
-                "timestamp": "2025-10-22T23:02:34.869Z",
-                "checks": {
-                    "backend": {
-                        "passed": true,
-                        "message": "Backend PHP operativo (167ms)",
-                        "responseTime": 167,
-                        "data": {
-                            "status": "ok",
-                            "timestamp": 1761174155,
-                            "version": "1.0.0",
-                            "php_version": "8.2.29",
-                            "wp_version": "6.8.3",
-                            "woocommerce_active": true
-                        }
-                    },
-                    "counterFix": {
-                        "passed": false,
-                        "message": "Fix de contadores faltante o incompleto",
-                        "hasReloadFunction": true,
-                        "hasCounterElements": false,
-                        "hasScript": true
-                    },
-                    "raceFix": {
-                        "passed": true,
-                        "message": "Prevenci\u00f3n de race condition completa (4\/4)",
-                        "mechanisms": {
-                            "flag": true,
-                            "timer": true,
-                            "monitor": true,
-                            "debounced": true
-                        },
-                        "activeCount": 4
-                    }
-                },
-                "healed": [],
-                "score": 2,
-                "maxScore": 3,
-                "status": "warning"
-            },
-            "persistence": {
-                "layer": "persistence",
-                "timestamp": "2025-10-22T23:02:34.874Z",
-                "checks": {
-                    "version": {
-                        "passed": true,
-                        "message": "Primera ejecuci\u00f3n de DOZO, version registrada",
-                        "version": "v4.8",
-                        "isNew": true
-                    },
-                    "historical": {
-                        "passed": false,
-                        "message": "Solo 2\/4 fixes activos",
-                        "fixes": [
-                            {
-                                "id": "v3.9",
-                                "name": "Nonce IDs \u00fanicos",
-                                "active": false
-                            },
-                            {
-                                "id": "v4.0",
-                                "name": "Race condition prevention",
-                                "active": true
-                            },
-                            {
-                                "id": "v4.1",
-                                "name": "Nonce backend sync",
-                                "active": true
-                            },
-                            {
-                                "id": "v4.4",
-                                "name": "Claude design import",
-                                "active": false
-                            }
-                        ],
-                        "activeCount": 2,
-                        "totalCount": 4
-                    },
-                    "degradation": {
-                        "passed": true,
-                        "message": "Historial insuficiente para detectar degradaci\u00f3n",
-                        "samples": 0
-                    }
-                },
-                "score": 2,
-                "maxScore": 3,
-                "status": "warning"
-            }
+            "features": [
+              "Flag rsIsSaving",
+              "Debounce timer",
+              "AJAX monitor",
+              "Debounced reload"
+            ]
+          }
         },
-        "score": 9,
-        "maxScore": 13,
-        "percentage": 69.23076923076923,
-        "status": "critical",
-        "executionTime": 273
-    }
+        "score": 2,
+        "maxScore": 3,
+        "status": "warning"
+      },
+      "ui": {
+        "layer": "ui",
+        "timestamp": "2025-10-22T23:02:34.868Z",
+        "checks": {
+          "shortcode": {
+            "passed": null,
+            "message": "No se detect\u00f3 contenido del plugin",
+            "type": "none"
+          },
+          "css": {
+            "passed": true,
+            "message": "4 estilos del plugin cargados (4 external, 0 inline)",
+            "external": 4,
+            "inline": 0
+          },
+          "javascript": {
+            "passed": true,
+            "message": "4 scripts cargados, 2 objetos globales",
+            "scripts": 4,
+            "globalObjects": ["rsWarrantyAdmin", "jQuery"]
+          },
+          "visual": {
+            "passed": true,
+            "message": "1\/5 elementos cr\u00edticos encontrados",
+            "found": [".rs-btn-primary"],
+            "missing": [
+              ".rs-form-card",
+              ".rs-progress-steps",
+              ".rs-card",
+              "#categoriesTableBody"
+            ]
+          }
+        },
+        "score": 3,
+        "maxScore": 4,
+        "status": "good"
+      },
+      "selfHealing": {
+        "layer": "selfHealing",
+        "timestamp": "2025-10-22T23:02:34.869Z",
+        "checks": {
+          "backend": {
+            "passed": true,
+            "message": "Backend PHP operativo (167ms)",
+            "responseTime": 167,
+            "data": {
+              "status": "ok",
+              "timestamp": 1761174155,
+              "version": "1.0.0",
+              "php_version": "8.2.29",
+              "wp_version": "6.8.3",
+              "woocommerce_active": true
+            }
+          },
+          "counterFix": {
+            "passed": false,
+            "message": "Fix de contadores faltante o incompleto",
+            "hasReloadFunction": true,
+            "hasCounterElements": false,
+            "hasScript": true
+          },
+          "raceFix": {
+            "passed": true,
+            "message": "Prevenci\u00f3n de race condition completa (4\/4)",
+            "mechanisms": {
+              "flag": true,
+              "timer": true,
+              "monitor": true,
+              "debounced": true
+            },
+            "activeCount": 4
+          }
+        },
+        "healed": [],
+        "score": 2,
+        "maxScore": 3,
+        "status": "warning"
+      },
+      "persistence": {
+        "layer": "persistence",
+        "timestamp": "2025-10-22T23:02:34.874Z",
+        "checks": {
+          "version": {
+            "passed": true,
+            "message": "Primera ejecuci\u00f3n de DOZO, version registrada",
+            "version": "v4.8",
+            "isNew": true
+          },
+          "historical": {
+            "passed": false,
+            "message": "Solo 2\/4 fixes activos",
+            "fixes": [
+              {
+                "id": "v3.9",
+                "name": "Nonce IDs \u00fanicos",
+                "active": false
+              },
+              {
+                "id": "v4.0",
+                "name": "Race condition prevention",
+                "active": true
+              },
+              {
+                "id": "v4.1",
+                "name": "Nonce backend sync",
+                "active": true
+              },
+              {
+                "id": "v4.4",
+                "name": "Claude design import",
+                "active": false
+              }
+            ],
+            "activeCount": 2,
+            "totalCount": 4
+          },
+          "degradation": {
+            "passed": true,
+            "message": "Historial insuficiente para detectar degradaci\u00f3n",
+            "samples": 0
+          }
+        },
+        "score": 2,
+        "maxScore": 3,
+        "status": "warning"
+      }
+    },
+    "score": 9,
+    "maxScore": 13,
+    "percentage": 69.23076923076923,
+    "status": "critical",
+    "executionTime": 273
+  }
 ]

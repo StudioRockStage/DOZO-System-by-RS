@@ -36,7 +36,7 @@ const criticalFiles = [
   'public/index.html',
   'assets/rockstage-icon.icns',
   'main.js',
-  'electron-main.js'
+  'electron-main.js',
 ];
 
 criticalFiles.forEach(file => {
@@ -61,7 +61,5 @@ module.exports = {
   nodeVersion: process.version,
   cwd: process.cwd(),
   dirname: __dirname,
-  resourcesPath: process.resourcesPath
+  resourcesPath: process.resourcesPath,
 };
-
-

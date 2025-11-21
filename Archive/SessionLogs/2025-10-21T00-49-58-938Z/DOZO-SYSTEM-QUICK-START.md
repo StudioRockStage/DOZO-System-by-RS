@@ -14,6 +14,7 @@ npm run sync:deploy
 ```
 
 Esto automáticamente:
+
 - ✅ Detecta la versión más reciente
 - ✅ Sincroniza Latest Builds
 - ✅ Crea update.json
@@ -27,6 +28,7 @@ Esto automáticamente:
 ## 📋 Comandos Principales
 
 ### Workflow Completo
+
 ```bash
 # 1. Validar archivos locales
 npm run validate
@@ -41,12 +43,14 @@ npm run deploy:verify
 ### Comandos Individuales
 
 **Validación:**
+
 ```bash
 npm run validate        # Validar archivos locales
 npm run ftp:test       # Probar conexión FTP
 ```
 
 **Deployment:**
+
 ```bash
 npm run deploy         # Deploy remoto completo
 npm run deploy:dryrun  # Simulación sin FTP
@@ -54,12 +58,14 @@ npm run deploy:verify  # Verificar caché CDN
 ```
 
 **Sincronización:**
+
 ```bash
 npm run sync           # Sincronizar Latest Builds
 npm run sync:deploy    # Sincronizar y deployar
 ```
 
 **Setup:**
+
 ```bash
 npm run ftp:setup      # Configurar FTP
 npm run network-unlock # Configurar red
@@ -70,6 +76,7 @@ npm run network-unlock # Configurar red
 ## 📦 Versión Actual
 
 **Warranty System v7.7.7**
+
 - Tamaño: 267 KB (optimizado)
 - Archivos: 87
 - Nueva funcionalidad: `force-update-check.php`
@@ -80,16 +87,19 @@ npm run network-unlock # Configurar red
 ## 🌐 URLs
 
 **Update Channel:**
+
 ```
 https://updates.vapedot.mx/warranty-system/update.json
 ```
 
 **Package (v7.7.7):**
+
 ```
 https://updates.vapedot.mx/warranty-system/Warranty_System_v7.7.7.zip
 ```
 
 **Force Trigger:**
+
 ```
 https://yoursite.com/wp-content/plugins/warranty-system/force-update-check.php
 ```
@@ -136,18 +146,21 @@ DOZO System by RS/
 1. **Edita tu plugin** en `Plugins/Warranty System/`
 
 2. **Actualiza la versión:**
+
    ```javascript
    // En rockstage-warranty-system.php
    Version: 7.7.8
    ```
 
 3. **Crea el paquete:**
+
    ```bash
    # Ejecutar script de empaquetado (crear uno nuevo o usar existente)
    node dozo-package-v7.7.8.js
    ```
 
 4. **Deploy automático:**
+
    ```bash
    npm run sync:deploy
    ```
@@ -164,16 +177,19 @@ DOZO System by RS/
 ## 📖 Documentación
 
 ### Empieza Aquí
+
 - `README-DEPLOYMENT.md` - Instrucciones finales
 - `QUICK-DEPLOY-REFERENCE.md` - Referencia rápida
 - Este archivo
 
 ### Guías Completas
+
 - `DOZO-PHASE11-DEPLOYMENT-GUIDE.md` - Guía exhaustiva
 - `DOZO-PHASE11-FINAL-STATUS.md` - Estado del sistema
 - `DEPLOYMENT-SUCCESS-SUMMARY.md` - Resumen de deployment
 
 ### Troubleshooting
+
 - `DOZO-FTP-TROUBLESHOOTING.md` - Problemas FTP
 - `NEXT-STEPS-SIMPLE.md` - Guía simple de 4 pasos
 
@@ -182,21 +198,25 @@ DOZO System by RS/
 ## 🔍 Verificación y Diagnóstico
 
 ### Ver archivos en servidor
+
 ```bash
 node dozo-ftp-list-files.js
 ```
 
 ### Verificar deployment
+
 ```bash
 npm run deploy:verify
 ```
 
 ### Probar conexión FTP
+
 ```bash
 npm run ftp:test
 ```
 
 ### Ver reportes
+
 ```bash
 # Todos los reportes están en:
 ls "to chat gpt/Global/"
@@ -207,21 +227,25 @@ ls "to chat gpt/Global/"
 ## ✨ Características Principales
 
 ### ✅ Automatización Completa
+
 - Deployment con un solo comando
 - Sincronización automática
 - Generación de reportes
 
 ### ✅ Seguridad
+
 - Credenciales cifradas
 - Permisos 600 en archivos sensibles
 - Sin credenciales en logs
 
 ### ✅ Validación
+
 - Validación pre-deployment
 - Verificación FTP
 - Confirmación HTTP
 
 ### ✅ Multi-versión
+
 - Soporte para múltiples versiones
 - Backups automáticos
 - Rollback disponible
@@ -231,6 +255,7 @@ ls "to chat gpt/Global/"
 ## 🆘 Ayuda Rápida
 
 ### Error: "Credenciales FTP incorrectas"
+
 ```bash
 # Actualiza Scripts/ftp-config.json
 # Prueba de nuevo:
@@ -238,12 +263,14 @@ npm run ftp:test
 ```
 
 ### Error: "No se encuentra ZIP"
+
 ```bash
 # Verifica que el ZIP esté en Empaquetado/Ready/
 ls "Empaquetado/Ready/"
 ```
 
 ### Caché CDN no se limpia
+
 ```bash
 # Espera 5-10 minutos y verifica:
 npm run deploy:verify
@@ -263,6 +290,7 @@ npm run deploy:verify
 - ✅ **100% automatización** en deployment
 
 **Próximo deployment:**
+
 ```bash
 npm run sync:deploy
 ```
@@ -270,5 +298,4 @@ npm run sync:deploy
 ---
 
 **DOZO System by RockStage Solutions**  
-*Enterprise-grade WordPress Plugin Deployment System*
-
+_Enterprise-grade WordPress Plugin Deployment System_

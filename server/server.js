@@ -26,29 +26,33 @@ const releasesPath = path.join(__dirname, "../Dashboard/public/releases");
 app.get("/api/releases", (req, res) => {
   try {
     const versions = JSON.parse(
-      fs.readFileSync(path.join(releasesPath, "versions.json"), "utf8")
+      fs.readFileSync(path.join(releasesPath, "versions.json"), "utf8"),
     );
     res.json(versions);
   } catch (err) {
-    res.status(500).json({ error: "Error loading releases", message: err.message });
+    res
+      .status(500)
+      .json({ error: "Error loading releases", message: err.message });
   }
 });
 
 app.get("/api/hashes", (req, res) => {
   try {
     const hashes = JSON.parse(
-      fs.readFileSync(path.join(releasesPath, "hashes.json"), "utf8")
+      fs.readFileSync(path.join(releasesPath, "hashes.json"), "utf8"),
     );
     res.json(hashes);
   } catch (err) {
-    res.status(500).json({ error: "Error loading hashes", message: err.message });
+    res
+      .status(500)
+      .json({ error: "Error loading hashes", message: err.message });
   }
 });
 
 app.get("/api/logs", (req, res) => {
   try {
     const logs = JSON.parse(
-      fs.readFileSync(path.join(releasesPath, "release-logs.json"), "utf8")
+      fs.readFileSync(path.join(releasesPath, "release-logs.json"), "utf8"),
     );
     res.json(logs);
   } catch (err) {
@@ -59,11 +63,13 @@ app.get("/api/logs", (req, res) => {
 app.get("/api/phases", (req, res) => {
   try {
     const phases = JSON.parse(
-      fs.readFileSync(path.join(releasesPath, "phases.json"), "utf8")
+      fs.readFileSync(path.join(releasesPath, "phases.json"), "utf8"),
     );
     res.json(phases);
   } catch (err) {
-    res.status(500).json({ error: "Error loading phases", message: err.message });
+    res
+      .status(500)
+      .json({ error: "Error loading phases", message: err.message });
   }
 });
 
@@ -77,8 +83,8 @@ app.get("/api/status", (req, res) => {
       "/api/hashes",
       "/api/logs",
       "/api/phases",
-      "/api/status"
-    ]
+      "/api/status",
+    ],
   });
 });
 

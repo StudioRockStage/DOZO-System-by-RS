@@ -31,12 +31,14 @@ Todos los archivos necesarios para el deploy están listos en:
 ### Paso 1: Conectar al servidor FTP
 
 **Opciones de cliente FTP:**
+
 - FileZilla (recomendado)
 - Cyberduck
 - Transmit (macOS)
 - Terminal: `ftp ftp.vapedot.mx`
 
 **Credenciales sugeridas:**
+
 ```
 Host: ftp.vapedot.mx
 Port: 21
@@ -45,6 +47,7 @@ Password: RS@2025secure
 ```
 
 **⚠️ IMPORTANTE:** Si las credenciales anteriores no funcionan:
+
 1. Verifica con tu proveedor de hosting
 2. Revisa el panel de control (cPanel/Plesk)
 3. Genera nuevas credenciales FTP si es necesario
@@ -60,6 +63,7 @@ Password: RS@2025secure
 ### Paso 3: Subir archivos
 
 Arrastra o sube los siguientes archivos:
+
 1. `warranty-system-rs-v1.0.1.zip`
 2. `update.json`
 
@@ -68,6 +72,7 @@ Arrastra o sube los siguientes archivos:
 ### Paso 4: Verificar permisos
 
 Asegúrate de que los archivos tengan permisos:
+
 - `warranty-system-rs-v1.0.1.zip` → 644 (rw-r--r--)
 - `update.json` → 644 (rw-r--r--)
 
@@ -78,6 +83,7 @@ Asegúrate de que los archivos tengan permisos:
 Una vez subidos los archivos, verifica que sean accesibles:
 
 ### ZIP del Plugin
+
 ```
 https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip
 ```
@@ -85,11 +91,13 @@ https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip
 Debe descargar el archivo (2.66 MB)
 
 ### update.json
+
 ```
 https://updates.vapedot.mx/warranty-system-rs/update.json
 ```
 
 Debe mostrar:
+
 ```json
 {
   "version": "1.0.1",
@@ -134,6 +142,7 @@ ftp ftp.vapedot.mx
 ### D. Contactar con hosting
 
 Si nada funciona:
+
 - Soporte de hosting: support@tu-proveedor.com
 - Solicita: "Verificar acceso FTP al subdominio updates.vapedot.mx"
 - Pide credenciales válidas o ayuda para crear cuenta FTP
@@ -184,4 +193,4 @@ Después del deploy exitoso:
 
 ---
 
-*Generado automáticamente por DOZO Local Prepare System*
+_Generado automáticamente por DOZO Local Prepare System_

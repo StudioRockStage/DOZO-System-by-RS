@@ -33,6 +33,7 @@ npm run recover
 ```
 
 O directamente:
+
 ```bash
 node dozo-phase12-recovery.js
 ```
@@ -42,6 +43,7 @@ node dozo-phase12-recovery.js
 ## 📋 Proceso de Recuperación
 
 ### Paso 1: Estructura de Directorios
+
 ```
 ✅ Workflow DB/              → Scripts de workflow
 ✅ to chat gpt/Global/       → Reportes y logs
@@ -49,27 +51,32 @@ node dozo-phase12-recovery.js
 ```
 
 ### Paso 2: Script Reconstruido
+
 ```javascript
 Workflow DB/dozo-phase12-sync.js
 ```
 
 Funcionalidades incluidas:
+
 - Conexión FTP automática
 - Upload de ZIP y update.json
 - Manejo de errores
 - Logs de progreso
 
 ### Paso 3: Validación de Dependencias
+
 ```bash
 npm install basic-ftp
 ```
 
 ### Paso 4: Ejecución Automática
+
 ```bash
 node Workflow DB/dozo-phase12-sync.js
 ```
 
 Resultado:
+
 - ⬆️ ZIP subido al servidor
 - 🧾 update.json actualizado
 - ✅ Deployment completado
@@ -79,9 +86,11 @@ Resultado:
 ## 📊 Logs y Reportes
 
 ### Log de Recuperación
+
 **Archivo:** `to chat gpt/Global/DOZO-Phase12-Recovery.json`
 
 Contiene:
+
 ```json
 [
   {
@@ -116,6 +125,7 @@ npm run recover
 ```
 
 Resultado:
+
 - ✅ Script reconstruido
 - ✅ Dependencies instaladas
 - ✅ Deployment ejecutado
@@ -130,6 +140,7 @@ npm run recover
 ```
 
 El sistema automáticamente:
+
 - Sube el último ZIP de `Empaquetado/Ready/`
 - Actualiza `update.json`
 - Completa el deployment
@@ -158,7 +169,7 @@ const CONFIG = {
   user: 'u461169968',
   password: '[REDACTED]',
   port: 21,
-  remoteDir: '/public_html/updates/warranty-system/'
+  remoteDir: '/public_html/updates/warranty-system/',
 };
 ```
 
@@ -185,11 +196,13 @@ const CONFIG = {
 Después de la recuperación, verifica:
 
 **Update Channel:**
+
 ```
 https://updates.vapedot.mx/warranty-system/update.json
 ```
 
 **Package (v7.7.7):**
+
 ```
 https://updates.vapedot.mx/warranty-system/Warranty_System_v7.7.7.zip
 ```
@@ -199,21 +212,25 @@ https://updates.vapedot.mx/warranty-system/Warranty_System_v7.7.7.zip
 ## ✅ Verificación Post-Recuperación
 
 ### 1. Ver archivos en servidor
+
 ```bash
 node dozo-ftp-list-files.js
 ```
 
 Esperado:
+
 - ✅ Warranty_System_v7.7.7.zip (267 KB)
 - ✅ update.json
 - ✅ Warranty_System_v7.7.6.zip (backup)
 
 ### 2. Verificar propagación
+
 ```bash
 npm run deploy:verify
 ```
 
 ### 3. Revisar logs
+
 ```bash
 cat "to chat gpt/Global/DOZO-Phase12-Recovery.json"
 ```
@@ -241,11 +258,13 @@ npm run deploy:verify    # Verificar caché
 ### Error: "basic-ftp no disponible"
 
 El script automáticamente ejecuta:
+
 ```bash
 npm install basic-ftp
 ```
 
 Si falla, ejecuta manualmente:
+
 ```bash
 npm install
 ```
@@ -253,11 +272,13 @@ npm install
 ### Error: "ZIP no encontrado"
 
 Verifica que exista en:
+
 ```
 Empaquetado/Ready/Warranty_System_v7.7.7.zip
 ```
 
 Si no existe, ejecuta primero:
+
 ```bash
 node dozo-package-v7.7.7.js
 ```
@@ -265,12 +286,13 @@ node dozo-package-v7.7.7.js
 ### Error: "Credenciales FTP incorrectas"
 
 Las credenciales están hard-coded en el script de recovery. Si cambian, actualiza:
+
 ```javascript
 // En dozo-phase12-recovery.js
 const CONFIG = {
   host: 'nuevo_host',
   user: 'nuevo_user',
-  password: 'nuevo_password'
+  password: 'nuevo_password',
 };
 ```
 
@@ -279,17 +301,20 @@ const CONFIG = {
 ## 📈 Ventajas del Sistema
 
 ### ✅ Auto-Recuperación
+
 - Detecta componentes faltantes
 - Reconstruye automáticamente
 - Ejecuta deployment
 - Sin intervención manual
 
 ### ✅ Resiliente
+
 - Maneja errores gracefully
 - Logs detallados de cada paso
 - Validación automática
 
 ### ✅ Documentado
+
 - Cada paso registrado
 - Timestamps precisos
 - Trazabilidad completa
@@ -307,6 +332,7 @@ El **sistema de auto-recuperación** de DOZO:
 5. ✅ Registra todo el proceso
 
 **Un solo comando para recuperar todo el sistema:**
+
 ```bash
 npm run recover
 ```
@@ -323,5 +349,4 @@ npm run recover
 ---
 
 **DOZO System by RockStage Solutions**  
-*Self-Healing Enterprise Deployment System*
-
+_Self-Healing Enterprise Deployment System_

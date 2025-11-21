@@ -1,24 +1,88 @@
 {
   "name": "dozo-control-center",
   "productName": "DOZO Control Center – RockStage",
-  "version": "1.0.0",
+  "version": "2.6.0",
   "author": "RockStage Solutions",
   "description": "Sistema avanzado de monitoreo y desarrollo de plugins WordPress.",
   "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:dmg": "electron-builder --mac --x64 --publish never",
+    "build:dmg-arm": "electron-builder --mac --arm64 --publish never",
+    "build:dmg-universal": "electron-builder --mac --universal --publish never",
+    "dozo:release": "node release-manifest.js && npm run build:dmg-universal",
+    "test": "electron . --test"
+  },
   "build": {
     "appId": "com.rockstage.dozo",
+    "productName": "DOZO Control Center",
+    "directories": {
+      "output": "../DistributionBuild",
+      "buildResources": "assets"
+    },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": "dmg",
-      "icon": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Dashboard/public/assets/rockstage-icon.icns"
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/rockstage-icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "dmg": {
-      "background": null,
-      "icon": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/Dashboard/public/assets/rockstage-icon.icns",
-      "artifactName": "DOZO-Control-Center-RockStage-${version}.dmg"
+      "artifactName": "DOZO-Control-Center-RockStage-${version}.dmg",
+      "icon": "assets/rockstage-icon.icns",
+      "title": "DOZO Control Center ${version}",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
     },
-    "directories": {
-      "output": "/Users/davidalejandroperezrea/Documents/DOZO System by RS/DistributionBuild"
-    }
+    "files": [
+      "main.js",
+      "public/**/*",
+      "modules/**/*",
+      "assets/**/*",
+      "!node_modules/.cache/**",
+      "!dist/**",
+      "!*.log",
+      "!temp/**",
+      "!test.js",
+      "!dozo-fase5-init.js",
+      "!fix-main.js"
+    ],
+    "extraResources": [
+      {
+        "from": "../Dashboard/public",
+        "to": "Dashboard/public",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
   }
 }

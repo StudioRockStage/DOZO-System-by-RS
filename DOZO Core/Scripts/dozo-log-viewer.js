@@ -149,11 +149,11 @@ const htmlTemplate = (logs) => `
     </div>
     <div class="stat">
       <strong>JSON:</strong>
-      <span>${logs.filter(l => l.type === 'JSON').length}</span>
+      <span>${logs.filter((l) => l.type === "JSON").length}</span>
     </div>
     <div class="stat">
       <strong>Markdown:</strong>
-      <span>${logs.filter(l => l.type === 'Markdown').length}</span>
+      <span>${logs.filter((l) => l.type === "Markdown").length}</span>
     </div>
     <div class="stat">
       <strong>Proyecto:</strong>
@@ -181,8 +181,9 @@ const htmlTemplate = (logs) => `
   </section>
   
   <div class="grid" id="logGrid">
-    ${logs.map(
-      (log) => `
+    ${logs
+      .map(
+        (log) => `
       <div class="card" data-type="${log.type}" data-name="${log.title.toLowerCase()}" data-date="${log.dateRaw}">
         <h3>${log.title}</h3>
         <p><strong>📅 Fecha:</strong> ${log.date}</p>
@@ -192,10 +193,11 @@ const htmlTemplate = (logs) => `
             📄 Ver contenido
           </a>
         </p>
-        <span class="badge ${log.type === 'JSON' ? 'json-badge' : 'md-badge'}">${log.type}</span>
+        <span class="badge ${log.type === "JSON" ? "json-badge" : "md-badge"}">${log.type}</span>
         <span class="badge ${log.status.toLowerCase()}">${log.status}</span>
-      </div>`
-    ).join("")}
+      </div>`,
+      )
+      .join("")}
   </div>
   
   <footer>
@@ -256,12 +258,12 @@ function readLogs() {
         const location = path.relative(baseDir, dir);
         logs.push({
           title: file,
-          date: stats.mtime.toLocaleString('es-ES'),
+          date: stats.mtime.toLocaleString("es-ES"),
           dateRaw: stats.mtime.toISOString(),
           path: fullPath,
           type,
           status: "OK",
-          location
+          location,
         });
       } catch (e) {
         console.error(`Error leyendo ${file}:`, e.message);
@@ -287,11 +289,11 @@ app.get("/view", (req, res) => {
   if (!file || !fs.existsSync(file)) {
     return res.status(404).send("Archivo no encontrado");
   }
-  
+
   try {
     const ext = path.extname(file);
     const content = fs.readFileSync(file, "utf8");
-    
+
     if (ext === ".md") {
       const html = `
 <!DOCTYPE html>
@@ -399,18 +401,17 @@ app.get("/api/logs", (req, res) => {
 
 // -------- START SERVER --------
 app.listen(PORT, () => {
-  console.log('\n' + '═'.repeat(80));
-  console.log('🧩 DOZO Log Viewer v1.1.0 – RockStage Base Build');
-  console.log('═'.repeat(80));
+  console.log("\n" + "═".repeat(80));
+  console.log("🧩 DOZO Log Viewer v1.1.0 – RockStage Base Build");
+  console.log("═".repeat(80));
   console.log(`🚀 Servidor corriendo en: http://localhost:${PORT}/logs`);
   console.log(`📊 API disponible en: http://localhost:${PORT}/api/logs`);
-  console.log('\n📁 Directorios monitoreados:');
-  logsDirs.forEach(dir => {
+  console.log("\n📁 Directorios monitoreados:");
+  logsDirs.forEach((dir) => {
     const exists = fs.existsSync(dir);
-    console.log(`   ${exists ? '✓' : '✗'} ${path.relative(baseDir, dir)}`);
+    console.log(`   ${exists ? "✓" : "✗"} ${path.relative(baseDir, dir)}`);
   });
-  console.log('\n✅ Base técnica lista para diseño RockStage (fase 2).');
-  console.log('💡 Presiona Ctrl+C para detener el servidor');
-  console.log('═'.repeat(80) + '\n');
+  console.log("\n✅ Base técnica lista para diseño RockStage (fase 2).");
+  console.log("💡 Presiona Ctrl+C para detener el servidor");
+  console.log("═".repeat(80) + "\n");
 });
-

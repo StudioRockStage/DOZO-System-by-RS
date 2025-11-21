@@ -4,4 +4,3 @@
   "publicKeyPath": "./id_ed25519.pub",
   "instructions": "Run: ssh-keygen -t ed25519 -C 'dozo@rockstage.system' and add public key to GitHub"
 }
-

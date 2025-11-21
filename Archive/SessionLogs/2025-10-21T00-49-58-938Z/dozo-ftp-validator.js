@@ -19,7 +19,7 @@ const newConfig = {
   password: ":oU33+oTQBRWFG:g",
   port: 21,
   secure: false,
-  remotePath: "/public_html/updates/warranty-system/"
+  remotePath: "/public_html/updates/warranty-system/",
 };
 
 async function validateFTP() {
@@ -51,14 +51,17 @@ async function validateFTP() {
 
     const testFile = "dozo-test.txt";
     const testFilePath = `./${testFile}`;
-    fs.writeFileSync(testFilePath, "DOZO FTP TEST FILE - " + new Date().toISOString());
-    
+    fs.writeFileSync(
+      testFilePath,
+      "DOZO FTP TEST FILE - " + new Date().toISOString(),
+    );
+
     await client.uploadFrom(testFilePath, testFile);
     log.details.push("✅ Archivo de prueba subido correctamente.");
 
     await client.remove(testFile);
     log.details.push("✅ Archivo de prueba eliminado correctamente.");
-    
+
     fs.unlinkSync(testFilePath);
     log.details.push("✅ Archivo temporal local eliminado.");
 
@@ -78,4 +81,3 @@ async function validateFTP() {
 }
 
 validateFTP();
-

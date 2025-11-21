@@ -1,11 +1,6 @@
 {
   "network": {
     "allowOutbound": true,
-    "enabledProtocols": [
-      "http",
-      "https",
-      "ftp",
-      "sftp"
-    ]
+    "enabledProtocols": ["http", "https", "ftp", "sftp"]
   }
 }

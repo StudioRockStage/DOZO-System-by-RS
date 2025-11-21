@@ -8,18 +8,21 @@ Objetivo: Preparar todos los archivos localmente y generar instrucciones
           para deploy manual o verificación de credenciales FTP
 */
 
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
-import crypto from 'crypto';
+import fs from "fs";
+import path from "path";
+import os from "os";
+import crypto from "crypto";
 
-const ROOT = path.resolve(os.homedir(), 'Documents/DOZO System by RS');
-const LATEST_UPDATES = path.join(ROOT, 'Latest Updates');
-const EMPAQUETADO_READY = path.join(ROOT, 'Empaquetado', 'Ready');
-const GLOBAL = path.join(ROOT, 'to chat gpt', 'Global');
+const ROOT = path.resolve(os.homedir(), "Documents/DOZO System by RS");
+const LATEST_UPDATES = path.join(ROOT, "Latest Updates");
+const EMPAQUETADO_READY = path.join(ROOT, "Empaquetado", "Ready");
+const GLOBAL = path.join(ROOT, "to chat gpt", "Global");
 
-const DEPLOY_INSTRUCTIONS = path.join(ROOT, 'DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md');
-const DEPLOY_REPORT = path.join(GLOBAL, 'DOZO-v1.0.1-LocalPrepare-Report.json');
+const DEPLOY_INSTRUCTIONS = path.join(
+  ROOT,
+  "DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md",
+);
+const DEPLOY_REPORT = path.join(GLOBAL, "DOZO-v1.0.1-LocalPrepare-Report.json");
 
 // Utilidades
 function log(emoji, message) {
@@ -28,9 +31,9 @@ function log(emoji, message) {
 
 function calculateSHA256(filePath) {
   const fileBuffer = fs.readFileSync(filePath);
-  const hashSum = crypto.createHash('sha256');
+  const hashSum = crypto.createHash("sha256");
   hashSum.update(fileBuffer);
-  return hashSum.digest('hex');
+  return hashSum.digest("hex");
 }
 
 function getFileSize(filePath) {
@@ -39,17 +42,17 @@ function getFileSize(filePath) {
 }
 
 function formatBytes(bytes) {
-  if (bytes === 0) return '0 Bytes';
+  if (bytes === 0) return "0 Bytes";
   const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const sizes = ["Bytes", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
 }
 
 // Preparar archivos localmente
 function prepareLocalFiles() {
-  log('📦', 'Preparando archivos localmente...');
-  
+  log("📦", "Preparando archivos localmente...");
+
   // Crear directorios
   if (!fs.existsSync(EMPAQUETADO_READY)) {
     fs.mkdirSync(EMPAQUETADO_READY, { recursive: true });
@@ -57,59 +60,60 @@ function prepareLocalFiles() {
   if (!fs.existsSync(GLOBAL)) {
     fs.mkdirSync(GLOBAL, { recursive: true });
   }
-  
+
   // Buscar el archivo correcto
-  const correctName = 'warranty-system-rs-v1.0.1.zip';
+  const correctName = "warranty-system-rs-v1.0.1.zip";
   let correctPath = path.join(LATEST_UPDATES, correctName);
-  
+
   if (!fs.existsSync(correctPath)) {
     // Buscar alternativo
-    const altName = 'warranty-system-rs-v1.0.1-with-smart-panel.zip';
+    const altName = "warranty-system-rs-v1.0.1-with-smart-panel.zip";
     const altPath = path.join(LATEST_UPDATES, altName);
-    
+
     if (fs.existsSync(altPath)) {
-      log('🔄', `Renombrando: ${altName} → ${correctName}`);
+      log("🔄", `Renombrando: ${altName} → ${correctName}`);
       fs.copyFileSync(altPath, correctPath);
-      log('✅', 'Archivo renombrado');
+      log("✅", "Archivo renombrado");
     } else {
-      throw new Error('No se encontró ningún paquete v1.0.1');
+      throw new Error("No se encontró ningún paquete v1.0.1");
     }
   }
-  
+
   // Copiar a Empaquetado/Ready
   const readyPath = path.join(EMPAQUETADO_READY, correctName);
   fs.copyFileSync(correctPath, readyPath);
-  log('✅', `Copiado a: Empaquetado/Ready/${correctName}`);
-  
+  log("✅", `Copiado a: Empaquetado/Ready/${correctName}`);
+
   return {
     correctPath,
-    readyPath
+    readyPath,
   };
 }
 
 // Generar update.json local
 function generateUpdateJSON() {
-  log('📄', 'Generando update.json...');
-  
+  log("📄", "Generando update.json...");
+
   const updateData = {
     version: "1.0.1",
-    download_url: "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip",
+    download_url:
+      "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip",
     tested: "6.7.1",
     requires: "6.0",
-    requires_php: "7.4"
+    requires_php: "7.4",
   };
-  
-  const updateJSONPath = path.join(EMPAQUETADO_READY, 'update.json');
+
+  const updateJSONPath = path.join(EMPAQUETADO_READY, "update.json");
   fs.writeFileSync(updateJSONPath, JSON.stringify(updateData, null, 2));
-  log('✅', 'update.json creado en: Empaquetado/Ready/update.json');
-  
+  log("✅", "update.json creado en: Empaquetado/Ready/update.json");
+
   return { updateData, updateJSONPath };
 }
 
 // Generar instrucciones de deploy
 function generateDeployInstructions(sha256, size) {
-  log('📝', 'Generando instrucciones de deploy...');
-  
+  log("📝", "Generando instrucciones de deploy...");
+
   const instructions = `# 🚀 Instrucciones de Deploy - Warranty System RS v1.0.1
 
 **Generado:** ${new Date().toISOString()}  
@@ -292,7 +296,7 @@ Después del deploy exitoso:
 
 **Desarrollado por:** RockStage Solutions  
 **Sistema DOZO:** v7.9  
-**Fecha:** ${new Date().toISOString().split('T')[0]}
+**Fecha:** ${new Date().toISOString().split("T")[0]}
 
 ---
 
@@ -300,119 +304,136 @@ Después del deploy exitoso:
 `;
 
   fs.writeFileSync(DEPLOY_INSTRUCTIONS, instructions);
-  log('✅', `Instrucciones creadas: DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md`);
-  
+  log("✅", `Instrucciones creadas: DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md`);
+
   return instructions;
 }
 
 // Generar reporte
 function generateReport(paths, sha256, size) {
-  log('📋', 'Generando reporte...');
-  
+  log("📋", "Generando reporte...");
+
   const report = {
-    action: 'Local Prepare for Deploy v1.0.1',
-    status: 'ready_for_manual_deploy',
+    action: "Local Prepare for Deploy v1.0.1",
+    status: "ready_for_manual_deploy",
     timestamp: new Date().toISOString(),
     files_prepared: {
       zip: {
-        name: 'warranty-system-rs-v1.0.1.zip',
+        name: "warranty-system-rs-v1.0.1.zip",
         path: paths.readyPath,
         sha256: sha256,
         size: size,
-        size_formatted: formatBytes(size)
+        size_formatted: formatBytes(size),
       },
       update_json: {
-        name: 'update.json',
-        path: paths.updateJSONPath
-      }
+        name: "update.json",
+        path: paths.updateJSONPath,
+      },
     },
     deploy_target: {
-      method: 'manual_ftp_required',
-      server: 'ftp.vapedot.mx',
-      remote_path: '/public_html/updates/warranty-system-rs/',
+      method: "manual_ftp_required",
+      server: "ftp.vapedot.mx",
+      remote_path: "/public_html/updates/warranty-system-rs/",
       urls: {
-        zip: 'https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip',
-        json: 'https://updates.vapedot.mx/warranty-system-rs/update.json'
-      }
+        zip: "https://updates.vapedot.mx/warranty-system-rs/warranty-system-rs-v1.0.1.zip",
+        json: "https://updates.vapedot.mx/warranty-system-rs/update.json",
+      },
     },
     next_steps: [
-      'Leer DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md',
-      'Verificar credenciales FTP',
-      'Subir archivos manualmente',
-      'Validar URLs públicas',
-      'Probar actualización en WordPress'
+      "Leer DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md",
+      "Verificar credenciales FTP",
+      "Subir archivos manualmente",
+      "Validar URLs públicas",
+      "Probar actualización en WordPress",
     ],
     ftp_troubleshooting: {
-      reason: 'Login incorrect (530)',
+      reason: "Login incorrect (530)",
       suggested_credentials: {
-        host: 'ftp.vapedot.mx',
+        host: "ftp.vapedot.mx",
         port: 21,
-        user: 'u461169968.vapedotmx',
-        note: 'Verificar password en cPanel'
-      }
-    }
+        user: "u461169968.vapedotmx",
+        note: "Verificar password en cPanel",
+      },
+    },
   };
-  
+
   fs.writeFileSync(DEPLOY_REPORT, JSON.stringify(report, null, 2));
-  log('✅', `Reporte guardado: ${DEPLOY_REPORT}`);
-  
+  log("✅", `Reporte guardado: ${DEPLOY_REPORT}`);
+
   return report;
 }
 
 // Main execution
 (async () => {
-  console.log('\n╔══════════════════════════════════════════════════════════════════════════════╗');
-  console.log('║                                                                              ║');
-  console.log('║           📦 DOZO Local Prepare - Deploy v1.0.1 📦                           ║');
-  console.log('║                                                                              ║');
-  console.log('╚══════════════════════════════════════════════════════════════════════════════╝\n');
-  
+  console.log(
+    "\n╔══════════════════════════════════════════════════════════════════════════════╗",
+  );
+  console.log(
+    "║                                                                              ║",
+  );
+  console.log(
+    "║           📦 DOZO Local Prepare - Deploy v1.0.1 📦                           ║",
+  );
+  console.log(
+    "║                                                                              ║",
+  );
+  console.log(
+    "╚══════════════════════════════════════════════════════════════════════════════╝\n",
+  );
+
   try {
     // Preparar archivos
     const paths = prepareLocalFiles();
-    
+
     // Generar update.json
     const { updateData, updateJSONPath } = generateUpdateJSON();
     paths.updateJSONPath = updateJSONPath;
-    
+
     // Calcular hash y tamaño
     const sha256 = calculateSHA256(paths.readyPath);
     const size = getFileSize(paths.readyPath);
-    
-    log('🔐', `SHA256: ${sha256.substring(0, 32)}...`);
-    log('📊', `Tamaño: ${formatBytes(size)}`);
-    
+
+    log("🔐", `SHA256: ${sha256.substring(0, 32)}...`);
+    log("📊", `Tamaño: ${formatBytes(size)}`);
+
     // Generar instrucciones
     generateDeployInstructions(sha256, size);
-    
+
     // Generar reporte
     const report = generateReport(paths, sha256, size);
-    
+
     // Resultado
-    console.log('\n╔══════════════════════════════════════════════════════════════════════════════╗');
-    console.log('║                                                                              ║');
-    console.log('║               ✅ ARCHIVOS PREPARADOS PARA DEPLOY MANUAL ✅                    ║');
-    console.log('║                                                                              ║');
-    console.log('╚══════════════════════════════════════════════════════════════════════════════╝\n');
-    
-    log('📦', 'Archivos listos en: Empaquetado/Ready/');
-    log('📝', 'Instrucciones: DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md');
-    log('📋', `Reporte: ${path.basename(DEPLOY_REPORT)}`);
-    log('🔐', `SHA256: ${sha256.substring(0, 32)}...`);
-    log('📊', `Tamaño: ${formatBytes(size)}`);
-    
-    console.log('\n📖 PRÓXIMOS PASOS:\n');
-    console.log('1. Lee: DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md');
-    console.log('2. Verifica credenciales FTP en cPanel');
-    console.log('3. Sube archivos a: /public_html/updates/warranty-system-rs/');
-    console.log('4. Valida URLs públicas');
-    console.log('5. Prueba actualización en WordPress\n');
-    
+    console.log(
+      "\n╔══════════════════════════════════════════════════════════════════════════════╗",
+    );
+    console.log(
+      "║                                                                              ║",
+    );
+    console.log(
+      "║               ✅ ARCHIVOS PREPARADOS PARA DEPLOY MANUAL ✅                    ║",
+    );
+    console.log(
+      "║                                                                              ║",
+    );
+    console.log(
+      "╚══════════════════════════════════════════════════════════════════════════════╝\n",
+    );
+
+    log("📦", "Archivos listos en: Empaquetado/Ready/");
+    log("📝", "Instrucciones: DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md");
+    log("📋", `Reporte: ${path.basename(DEPLOY_REPORT)}`);
+    log("🔐", `SHA256: ${sha256.substring(0, 32)}...`);
+    log("📊", `Tamaño: ${formatBytes(size)}`);
+
+    console.log("\n📖 PRÓXIMOS PASOS:\n");
+    console.log("1. Lee: DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md");
+    console.log("2. Verifica credenciales FTP en cPanel");
+    console.log("3. Sube archivos a: /public_html/updates/warranty-system-rs/");
+    console.log("4. Valida URLs públicas");
+    console.log("5. Prueba actualización en WordPress\n");
   } catch (error) {
-    console.error('\n❌ Error:', error.message);
+    console.error("\n❌ Error:", error.message);
     console.error(error.stack);
     process.exit(1);
   }
 })();
-
-

@@ -71,5 +71,3 @@ Ambos deben retornar **200 OK**
 ```bash
 ./dozo-deploy-ftp-manual.sh
 ```
-
-

@@ -12,7 +12,12 @@ import net from "net";
 const basePath = path.resolve(process.env.HOME, "Documents/DOZO System by RS");
 const cursorDir = path.join(basePath, ".cursor");
 const configFile = path.join(cursorDir, "config.json");
-const logFile = path.join(basePath, "to chat gpt", "Global", "DOZO-Network-Report.json");
+const logFile = path.join(
+  basePath,
+  "to chat gpt",
+  "Global",
+  "DOZO-Network-Report.json",
+);
 
 // Crear carpeta .cursor si no existe
 if (!fs.existsSync(cursorDir)) fs.mkdirSync(cursorDir, { recursive: true });
@@ -41,12 +46,18 @@ function checkFTPConnection() {
     });
 
     socket.on("timeout", () => {
-      resolve({ success: false, message: "⚠️ Timeout al intentar conectar con FTP" });
+      resolve({
+        success: false,
+        message: "⚠️ Timeout al intentar conectar con FTP",
+      });
       socket.destroy();
     });
 
     socket.on("error", (err) => {
-      resolve({ success: false, message: `❌ Error de conexión: ${err.message}` });
+      resolve({
+        success: false,
+        message: `❌ Error de conexión: ${err.message}`,
+      });
     });
 
     socket.connect(port, host);
@@ -71,4 +82,3 @@ function checkFTPConnection() {
   console.log("🧾 Reporte guardado en:", logFile);
   console.log("\n🎉 Configuración de red completada.");
 })();
-

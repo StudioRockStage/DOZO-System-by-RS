@@ -7,6 +7,7 @@
 ## 🎯 ACCESO INMEDIATO
 
 ### WordPress Local
+
 ```
 🌐 http://localhost:8080/wp-admin/
 📦 Plugin: Warranty System RS v1.0.0 (active ✅)
@@ -14,6 +15,7 @@
 ```
 
 ### Build
+
 ```
 📦 Latest Builds/Warranty System RS/warranty-system-rs.zip
 💾 205 KB
@@ -21,6 +23,7 @@
 ```
 
 ### Servidor
+
 ```
 🌐 https://updates.vapedot.mx/warranty-system-rs/
 ✅ JSON: HTTP 200
@@ -50,12 +53,12 @@ node dozo-local-rollback-reinstall.js
 
 ## 📖 DOCUMENTACIÓN
 
-| Tipo | Archivo |
-|------|---------|
-| **Inicio** | `INDEX.txt` |
-| **Resumen** | `EXECUTIVE-SUMMARY.md` |
-| **Índice** | `COMPLETE-SESSION-INDEX.md` |
-| **Guía** | `START-HERE-BASE-v1.0.0.md` |
+| Tipo        | Archivo                     |
+| ----------- | --------------------------- |
+| **Inicio**  | `INDEX.txt`                 |
+| **Resumen** | `EXECUTIVE-SUMMARY.md`      |
+| **Índice**  | `COMPLETE-SESSION-INDEX.md` |
+| **Guía**    | `START-HERE-BASE-v1.0.0.md` |
 
 ---
 
@@ -85,4 +88,3 @@ Git:          ✅ Configured
 
 **DOZO v7.9.1 — Session: 2025-10-21/22**  
 **Developer: StudioRockStage**
-

@@ -1,0 +1,52 @@
+{
+  "enabled": true,
+  "version": "16.9.4",
+  "policy": {
+    "auto_organize": true,
+    "health_check": true,
+    "run_after_prompts": true,
+    "run_on_phase_complete": true
+  },
+  "schedule": {
+    "after_prompt": "immediate",
+    "daily_check": "00:00",
+    "weekly_cleanup": "sunday_00:00"
+  },
+  "protection": {
+    "exclude_dirs": [
+      "node_modules",
+      "Backup",
+      "Archive",
+      ".git",
+      "DistributionBuild",
+      "Plugins",
+      "wordpress"
+    ],
+    "critical_files": ["package.json", "package-lock.json", ".gitignore"]
+  },
+  "organization_rules": {
+    ".md": "Docs",
+    ".json": "Data",
+    ".txt": "Logs",
+    ".log": "Logs",
+    ".yml": "Config",
+    ".yaml": "Config"
+  },
+  "health_checks": {
+    "critical_directories": [
+      "AppBuild",
+      "Core",
+      "Dashboard",
+      "DistributionBuild",
+      "Scripts",
+      "Reports",
+      "Claude AI/UI"
+    ],
+    "critical_files": [
+      "package.json",
+      "release-manifest.json",
+      "AppBuild/main.js",
+      "AppBuild/package.json"
+    ]
+  }
+}

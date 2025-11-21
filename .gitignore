@@ -28,3 +28,5 @@ vendor/
 /*.pkg
 /*.app
 *.DS_Store
+
+.early.coverage

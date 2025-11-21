@@ -13,14 +13,14 @@
 
 ## ✅ Validaciones
 
-| Check | Estado |
-|-------|--------|
-| GitHub CLI instalado | ❌ |
-| Autenticación GitHub | ❌ |
-| Git configurado | ✅ |
-| Remoto configurado | ✅ |
-| Token almacenado | ❌ |
-| Push exitoso | ⚠️ |
+| Check                | Estado |
+| -------------------- | ------ |
+| GitHub CLI instalado | ❌     |
+| Autenticación GitHub | ❌     |
+| Git configurado      | ✅     |
+| Remoto configurado   | ✅     |
+| Token almacenado     | ❌     |
+| Push exitoso         | ⚠️     |
 
 **Completadas:** 2/6
 
@@ -45,20 +45,16 @@
 
 **Listo para GitHub Sync:** ⚠️ NO
 
-
 ### Pasos Pendientes:
+
 - Instalar GitHub CLI: `brew install gh`
 - Autenticar con GitHub: `gh auth login`
 
-
-
 ## 🚀 Próximos Pasos
-
 
 1. Completar configuración pendiente
 2. Re-ejecutar: `npm run github-setup`
 3. Ejecutar: `npm run phase-16`
-
 
 ---
 

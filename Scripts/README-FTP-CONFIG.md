@@ -22,7 +22,7 @@ Replace the placeholder values with your actual FTP credentials:
 
 ### Security Note
 
-⚠️ **IMPORTANT**: This file contains sensitive credentials. 
+⚠️ **IMPORTANT**: This file contains sensitive credentials.
 
 - Do NOT commit this file to version control
 - Keep it secure and private
@@ -57,5 +57,4 @@ node dozo-phase11-remote-deploy.js
 
 ---
 
-*DOZO System by RockStage Solutions*
-
+_DOZO System by RockStage Solutions_

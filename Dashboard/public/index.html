@@ -1,224 +1,238 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOZO System - Live Dashboard</title>
-    <link rel="stylesheet" href="./css/live-metrics.css">
+    <link rel="stylesheet" href="./css/live-metrics.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        font-weight: 300;
+      }
+
+      .header p {
+        margin: 10px 0 0 0;
+        opacity: 0.8;
+        font-size: 1.1em;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 30px;
+      }
+
+      .status-card {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 25px;
+        border-left: 5px solid #3498db;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .status-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .status-card h3 {
+        margin: 0 0 15px 0;
+        color: #2c3e50;
+        font-size: 1.3em;
+      }
+
+      .status-item {
+        margin: 10px 0;
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+        border: 1px solid #e9ecef;
+      }
+
+      .status-success {
+        color: #27ae60;
+        font-weight: 600;
+      }
+
+      .status-error {
+        color: #e74c3c;
+        font-weight: 600;
+      }
+
+      .status-warning {
+        color: #f39c12;
+        font-weight: 600;
+      }
+
+      .connection-status {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        border-radius: 25px;
+        color: white;
+        font-weight: 600;
+        z-index: 1000;
+      }
+
+      .status-success {
+        background: #27ae60;
+      }
+
+      .status-error {
+        background: #e74c3c;
+      }
+
+      .status-warning {
+        background: #f39c12;
+      }
+
+      .footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9em;
+        opacity: 0.8;
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
+        50% {
+          opacity: 0.5;
         }
-        
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
+        100% {
+          opacity: 1;
         }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            font-weight: 300;
-        }
-        
-        .header p {
-            margin: 10px 0 0 0;
-            opacity: 0.8;
-            font-size: 1.1em;
-        }
-        
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 30px;
-        }
-        
-        .status-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            border-left: 5px solid #3498db;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .status-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .status-card h3 {
-            margin: 0 0 15px 0;
-            color: #2c3e50;
-            font-size: 1.3em;
-        }
-        
-        .status-item {
-            margin: 10px 0;
-            padding: 10px;
-            background: white;
-            border-radius: 5px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .status-success {
-            color: #27ae60;
-            font-weight: 600;
-        }
-        
-        .status-error {
-            color: #e74c3c;
-            font-weight: 600;
-        }
-        
-        .status-warning {
-            color: #f39c12;
-            font-weight: 600;
-        }
-        
-        .connection-status {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            border-radius: 25px;
-            color: white;
-            font-weight: 600;
-            z-index: 1000;
-        }
-        
-        .status-success {
-            background: #27ae60;
-        }
-        
-        .status-error {
-            background: #e74c3c;
-        }
-        
-        .status-warning {
-            background: #f39c12;
-        }
-        
-        .footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="connection-status status-warning" id="connection-status">
-        Conectando...
+      Conectando...
     </div>
-    
+
     <div class="container">
-        <div class="header">
-            <h1>🧩 DOZO System</h1>
-            <p>Live Dashboard - WebSocket Event Bridge v2.6.3</p>
+      <div class="header">
+        <h1>🧩 DOZO System</h1>
+        <p>Live Dashboard - WebSocket Event Bridge v2.6.3</p>
+      </div>
+
+      <div class="status-grid">
+        <div class="status-card">
+          <h3>📡 Estado de Conexión</h3>
+          <div class="status-item">
+            <strong>WebSocket:</strong>
+            <span id="connection-status">Conectando...</span>
+          </div>
+          <div class="status-item">
+            <strong>Servidor:</strong> ws://localhost:9091
+          </div>
+          <div class="status-item">
+            <strong>Última actualización:</strong>
+            <span id="last-update">-</span>
+          </div>
         </div>
-        
-        <div class="status-grid">
-            <div class="status-card">
-                <h3>📡 Estado de Conexión</h3>
-                <div class="status-item">
-                    <strong>WebSocket:</strong> <span id="connection-status">Conectando...</span>
-                </div>
-                <div class="status-item">
-                    <strong>Servidor:</strong> ws://localhost:9091
-                </div>
-                <div class="status-item">
-                    <strong>Última actualización:</strong> <span id="last-update">-</span>
-                </div>
-            </div>
-            
-            <div class="status-card">
-                <h3>📊 Telemetría del Sistema</h3>
-                <div class="status-item">
-                    <strong>Estado:</strong> <span id="telemetry-status">Esperando datos...</span>
-                </div>
-                <div class="status-item">
-                    <strong>Usuario:</strong> <span id="user-info">-</span>
-                </div>
-                <div class="status-item">
-                    <strong>Repositorio:</strong> <span id="repo-info">-</span>
-                </div>
-                <div class="status-item">
-                    <strong>Rama:</strong> <span id="branch-info">-</span>
-                </div>
-                <div class="status-item">
-                    <strong>Versión:</strong> <span id="version-info">-</span>
-                </div>
-                <div class="status-item">
-                    <strong>Commit:</strong> <span id="commit-info">-</span>
-                </div>
-            </div>
-            
-            <div class="status-card">
-                <h3>📝 Actividad Reciente</h3>
-                <div class="status-item">
-                    <strong>Último commit:</strong> <span id="last-commit">Esperando datos...</span>
-                </div>
-                <div class="status-item">
-                    <strong>Eventos recibidos:</strong> <span id="event-count">0</span>
-                </div>
-                <div class="status-item">
-                    <strong>Estado del monitoreo:</strong> <span class="status-success">Activo</span>
-                </div>
-            </div>
-            
-            <div class="status-card">
-                <h3>🔧 Configuración</h3>
-                <div class="status-item">
-                    <strong>Intervalo de monitoreo:</strong> 10 segundos
-                </div>
-                <div class="status-item">
-                    <strong>Archivos monitoreados:</strong> 2
-                </div>
-                <div class="status-item">
-                    <strong>Puerto WebSocket:</strong> 9091
-                </div>
-                <div class="status-item">
-                    <strong>Versión del Bridge:</strong> 2.6.3
-                </div>
-            </div>
+
+        <div class="status-card">
+          <h3>📊 Telemetría del Sistema</h3>
+          <div class="status-item">
+            <strong>Estado:</strong>
+            <span id="telemetry-status">Esperando datos...</span>
+          </div>
+          <div class="status-item">
+            <strong>Usuario:</strong> <span id="user-info">-</span>
+          </div>
+          <div class="status-item">
+            <strong>Repositorio:</strong> <span id="repo-info">-</span>
+          </div>
+          <div class="status-item">
+            <strong>Rama:</strong> <span id="branch-info">-</span>
+          </div>
+          <div class="status-item">
+            <strong>Versión:</strong> <span id="version-info">-</span>
+          </div>
+          <div class="status-item">
+            <strong>Commit:</strong> <span id="commit-info">-</span>
+          </div>
         </div>
-        
-        <div class="footer">
-            <p>DOZO System by RockStage Solutions | Live WebSocket Event Bridge v2.6.3</p>
-            <p>Monitoreando cambios en tiempo real desde AppSync Telemetry</p>
+
+        <div class="status-card">
+          <h3>📝 Actividad Reciente</h3>
+          <div class="status-item">
+            <strong>Último commit:</strong>
+            <span id="last-commit">Esperando datos...</span>
+          </div>
+          <div class="status-item">
+            <strong>Eventos recibidos:</strong> <span id="event-count">0</span>
+          </div>
+          <div class="status-item">
+            <strong>Estado del monitoreo:</strong>
+            <span class="status-success">Activo</span>
+          </div>
         </div>
+
+        <div class="status-card">
+          <h3>🔧 Configuración</h3>
+          <div class="status-item">
+            <strong>Intervalo de monitoreo:</strong> 10 segundos
+          </div>
+          <div class="status-item">
+            <strong>Archivos monitoreados:</strong> 2
+          </div>
+          <div class="status-item"><strong>Puerto WebSocket:</strong> 9091</div>
+          <div class="status-item">
+            <strong>Versión del Bridge:</strong> 2.6.3
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>
+          DOZO System by RockStage Solutions | Live WebSocket Event Bridge
+          v2.6.3
+        </p>
+        <p>Monitoreando cambios en tiempo real desde AppSync Telemetry</p>
+      </div>
     </div>
-    
+
     <section class="metrics-container">
       <div class="metric-box">
         <div class="metric-title">Estado del Sistema</div>
@@ -238,24 +252,26 @@
     <script src="js/appsync-client.js"></script>
     <script src="./js/live-metrics.js"></script>
     <script>
-        let eventCount = 0;
-        
-        // Interceptar mensajes para contar eventos
-        const originalOnMessage = WebSocket.prototype.onmessage;
-        WebSocket.prototype.onmessage = function(event) {
-            eventCount++;
-            document.getElementById('event-count').textContent = eventCount;
-            document.getElementById('last-update').textContent = new Date().toLocaleString('es-ES');
-            if (originalOnMessage) {
-                originalOnMessage.call(this, event);
-            }
-        };
-        
-        // Actualizar timestamp cada minuto
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('last-update').textContent = now.toLocaleString('es-ES');
-        }, 60000);
+      let eventCount = 0;
+
+      // Interceptar mensajes para contar eventos
+      const originalOnMessage = WebSocket.prototype.onmessage;
+      WebSocket.prototype.onmessage = function (event) {
+        eventCount++;
+        document.getElementById("event-count").textContent = eventCount;
+        document.getElementById("last-update").textContent =
+          new Date().toLocaleString("es-ES");
+        if (originalOnMessage) {
+          originalOnMessage.call(this, event);
+        }
+      };
+
+      // Actualizar timestamp cada minuto
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("last-update").textContent =
+          now.toLocaleString("es-ES");
+      }, 60000);
     </script>
-</body>
+  </body>
 </html>

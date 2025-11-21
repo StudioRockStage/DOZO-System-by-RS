@@ -3,6 +3,7 @@
 ## 📦 Archivos Listos para Deploy
 
 ### Para Subir via FTP
+
 ```
 ~/Documents/DOZO System by RS/Empaquetado/Ready/
 ├── warranty-system-rs-v1.0.1.zip  (2.7 MB) ⬆️ SUBIR
@@ -15,13 +16,13 @@
 
 ## 📚 Documentación Principal
 
-| Documento | Ubicación |
-|-----------|-----------|
-| **Instrucciones de Deploy** | `DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md` |
-| **Resumen Completo** | `DOZO-v1.0.1-COMPLETE-SUMMARY.md` |
-| **Success v1.0.0** | `WARRANTY-SYSTEM-RS-v1.0.0-SUCCESS.txt` |
-| **Success v1.0.1** | `WARRANTY-SYSTEM-RS-v1.0.1-SMART-PANEL-SUCCESS.md` |
-| **Quick Access** | `QUICK-ACCESS-v1.0.1.md` (este archivo) |
+| Documento                   | Ubicación                                          |
+| --------------------------- | -------------------------------------------------- |
+| **Instrucciones de Deploy** | `DOZO-v1.0.1-DEPLOY-INSTRUCTIONS.md`               |
+| **Resumen Completo**        | `DOZO-v1.0.1-COMPLETE-SUMMARY.md`                  |
+| **Success v1.0.0**          | `WARRANTY-SYSTEM-RS-v1.0.0-SUCCESS.txt`            |
+| **Success v1.0.1**          | `WARRANTY-SYSTEM-RS-v1.0.1-SMART-PANEL-SUCCESS.md` |
+| **Quick Access**            | `QUICK-ACCESS-v1.0.1.md` (este archivo)            |
 
 ---
 
@@ -94,6 +95,4 @@ https://updates.vapedot.mx/warranty-system-rs/update.json
 
 ---
 
-*Actualizado: 2025-10-19 08:20 UTC*
-
-
+_Actualizado: 2025-10-19 08:20 UTC_

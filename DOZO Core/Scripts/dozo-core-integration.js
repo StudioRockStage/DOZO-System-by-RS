@@ -30,7 +30,9 @@ console.log("\n📁 Verificando estructura base...");
 for (const [dir, subs] of Object.entries(structure)) {
   const fullPath = path.join(baseDir, dir);
   fs.mkdirSync(fullPath, { recursive: true });
-  subs.forEach((s) => fs.mkdirSync(path.join(fullPath, s), { recursive: true }));
+  subs.forEach((s) =>
+    fs.mkdirSync(path.join(fullPath, s), { recursive: true }),
+  );
 }
 console.log("✅ Estructura verificada");
 
@@ -39,25 +41,32 @@ const snapshotDir = path.join(
   baseDir,
   "Backup",
   "Pre-ControlCenter",
-  new Date().toISOString().replace(/[:.]/g, "-")
+  new Date().toISOString().replace(/[:.]/g, "-"),
 );
 fs.mkdirSync(snapshotDir, { recursive: true });
 console.log("💾 Creando copia de respaldo...");
-execSync(`rsync -av --exclude 'Backup' "${baseDir}/" "${snapshotDir}/"`, { stdio: "inherit" });
+execSync(`rsync -av --exclude 'Backup' "${baseDir}/" "${snapshotDir}/"`, {
+  stdio: "inherit",
+});
 console.log("✅ Snapshot creado en:", snapshotDir);
 
 // --- 3️⃣ Clasificación de archivos sueltos ---
 const fileMap = {};
-const files = fs.readdirSync(baseDir).filter((f) => !fs.lstatSync(path.join(baseDir, f)).isDirectory());
+const files = fs
+  .readdirSync(baseDir)
+  .filter((f) => !fs.lstatSync(path.join(baseDir, f)).isDirectory());
 
 files.forEach((file) => {
   const ext = path.extname(file);
   let targetDir = null;
-  if (ext === ".js" || ext === ".sh") targetDir = path.join(baseDir, "DOZO Core", "Scripts");
+  if (ext === ".js" || ext === ".sh")
+    targetDir = path.join(baseDir, "DOZO Core", "Scripts");
   else if (ext === ".json") targetDir = path.join(baseDir, "Workflow DB");
-  else if (ext === ".md") targetDir = path.join(baseDir, "Archive", "QuickNotes");
+  else if (ext === ".md")
+    targetDir = path.join(baseDir, "Archive", "QuickNotes");
   else if (ext === ".zip") targetDir = path.join(baseDir, "Latest Builds");
-  else if ([".php", ".css", ".html"].includes(ext)) targetDir = path.join(baseDir, "Plugins");
+  else if ([".php", ".css", ".html"].includes(ext))
+    targetDir = path.join(baseDir, "Plugins");
   if (targetDir) {
     fs.renameSync(path.join(baseDir, file), path.join(targetDir, file));
     fileMap[file] = targetDir;
@@ -70,7 +79,11 @@ fs.writeFileSync(fileMapPath, JSON.stringify(fileMap, null, 2));
 console.log("🧭 Archivo DOZO-FileMap.json generado");
 
 // --- 5️⃣ Registro inicial en Workflow DB ---
-const workflowPath = path.join(baseDir, "Workflow DB", "DOZO-CoreRegistry.json");
+const workflowPath = path.join(
+  baseDir,
+  "Workflow DB",
+  "DOZO-CoreRegistry.json",
+);
 const coreRegistry = {
   initialized_at: new Date().toISOString(),
   version: "1.0.0",

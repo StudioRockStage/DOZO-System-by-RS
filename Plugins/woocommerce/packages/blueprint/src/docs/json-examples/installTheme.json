@@ -1,10 +1,10 @@
 {
   "step": "installTheme",
   "themeZipFile": {
-	"resource": "wordpress.org/themes",
-	"slug": "twentytwenty"
+    "resource": "wordpress.org/themes",
+    "slug": "twentytwenty"
   },
   "options": {
-	"activate": true
+    "activate": true
   }
 }

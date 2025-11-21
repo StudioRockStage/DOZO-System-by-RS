@@ -10,63 +10,72 @@ Dashboard de telemetría visual con monitoreo en tiempo real para el sistema DOZ
 ## 🚀 Inicio Rápido
 
 ### 1. Iniciar el servidor
+
 ```bash
 cd ~/Documents/DOZO\ System\ by\ RS/DashboardTelemetry
 node telemetry-server.js
 ```
 
 ### 2. Acceder al dashboard
+
 Abre tu navegador en: **http://localhost:9095**
 
 ---
 
 ## 📦 Archivos del Proyecto
 
-| Archivo | Descripción |
-|---------|-------------|
-| `telemetry-server.js` | Servidor Express con API REST |
-| `index.html` | Interfaz web del dashboard |
-| `dashboard.css` | Estilos visuales modernos |
-| `dashboard.js` | Lógica del frontend con actualización automática |
-| `README.md` | Este archivo |
+| Archivo               | Descripción                                      |
+| --------------------- | ------------------------------------------------ |
+| `telemetry-server.js` | Servidor Express con API REST                    |
+| `index.html`          | Interfaz web del dashboard                       |
+| `dashboard.css`       | Estilos visuales modernos                        |
+| `dashboard.js`        | Lógica del frontend con actualización automática |
+| `README.md`           | Este archivo                                     |
 
 ---
 
 ## 🎯 Características
 
 ### 📊 Monitoreo en Tiempo Real
+
 - **CPU:** Núcleos, modelo, arquitectura
 - **Memoria:** Total, usada, libre, porcentaje de uso
 - **Uptime:** Tiempo de actividad del sistema
 - **Plataforma:** Sistema operativo, hostname
 
 ### 🔍 Integridad del Sistema
+
 - Validación SHA-256 de archivos críticos
 - Estado de directorios principales
 - Conteo de archivos y tamaños
 - Detección de archivos faltantes
 
 ### 🧠 Sincronización Multi-IA
+
 - **Cursor AI** - Code generation, validation, telemetry
 - **Claude AI** - Deep analysis, optimization, documentation
 - **ChatGPT** - Conversational AI, troubleshooting, training
 
 Estados visuales:
+
 - 🟢 ACTIVE - Operando activamente
 - 🟡 STANDBY - En espera
 - 🔴 OFFLINE - No disponible
 
 ### 🏥 Análisis de Salud
+
 - **Estado General:** HEALTHY / NEEDS_ATTENTION
 - **Advertencias:** Lista de problemas detectados
 - **Recomendaciones:** Sugerencias de mejora automáticas
 
 ### 📋 Auditoría de Fases
+
 - Visualización de todas las fases (1-12+)
 - Estado de cada fase: ✅ Verificada / ❌ Faltante
 - Conteo de reportes generados por fase
 
 ### 🔄 Actualización Automática
+
 El dashboard se actualiza automáticamente cada **5 segundos**.
 
 Botón manual de actualización disponible en la sección de integridad.
@@ -76,9 +85,11 @@ Botón manual de actualización disponible en la sección de integridad.
 ## 🔌 API Endpoints
 
 ### GET /api/metrics
+
 Retorna métricas actuales del sistema.
 
 **Respuesta:**
+
 ```json
 {
   "telemetry": {
@@ -100,9 +111,11 @@ Retorna métricas actuales del sistema.
 ```
 
 ### GET /api/reports
+
 Lista todos los reportes disponibles.
 
 **Respuesta:**
+
 ```json
 {
   "reports": [
@@ -117,9 +130,11 @@ Lista todos los reportes disponibles.
 ```
 
 ### GET /api/health
+
 Estado de salud del servidor.
 
 **Respuesta:**
+
 ```json
 {
   "status": "OPERATIONAL",
@@ -143,16 +158,19 @@ Estado de salud del servidor.
 ## 🎨 Diseño Visual
 
 ### Paleta de Colores
+
 - **Primario:** #E6C185 (Dorado DOZO)
 - **Fondo:** #0f0f14 → #1a1a24 (Gradiente oscuro)
 - **Tarjetas:** #1b1c20 → #22232a
 - **Texto:** #E6C185 (encabezados), #A5A1A2 (secundario), #fff (métricas)
 
 ### Tipografía
+
 - **Principal:** Inter, -apple-system, BlinkMacSystemFont, Segoe UI
 - **Código:** Monaco, Courier New, monospace
 
 ### Efectos Visuales
+
 - Gradientes suaves en tarjetas y fondos
 - Sombras con glow dorado
 - Transiciones fluidas (0.3s ease)
@@ -161,6 +179,7 @@ Estado de salud del servidor.
 - Badges de estado con colores semánticos
 
 ### Responsive Design
+
 - **Desktop:** Grid de 3 columnas para métricas
 - **Tablet:** Grid de 2 columnas
 - **Móvil:** Grid de 1 columna
@@ -171,17 +190,21 @@ Estado de salud del servidor.
 ## ⚙️ Configuración
 
 ### Puerto del Servidor
+
 Por defecto: **9095**
 
 Para cambiar el puerto, edita `telemetry-server.js`:
+
 ```javascript
 const PORT = 9095; // Cambiar a tu puerto preferido
 ```
 
 ### Intervalo de Actualización
+
 Por defecto: **5000ms (5 segundos)**
 
 Para cambiar el intervalo, edita `dashboard.js`:
+
 ```javascript
 updateInterval = setInterval(updateDashboard, 5000); // Cambiar valor
 ```
@@ -200,21 +223,27 @@ updateInterval = setInterval(updateDashboard, 5000); // Cambiar valor
 ## 🔧 Solución de Problemas
 
 ### El dashboard muestra "Sin reportes de telemetría"
+
 **Solución:** Ejecuta primero `node dozo-phase-11.js` para generar reportes.
 
 ### Error de conexión al servidor
-**Solución:** 
+
+**Solución:**
+
 1. Verifica que `telemetry-server.js` esté ejecutándose
 2. Comprueba que el puerto 9095 no esté ocupado
 3. Revisa los logs de consola del servidor
 
 ### Las métricas no se actualizan
+
 **Solución:**
+
 1. Verifica la conexión de red (localhost)
 2. Abre la consola del navegador para ver errores
 3. Presiona el botón "🔄 Actualizar" manualmente
 
 ### Puerto 9095 ocupado
+
 **Solución:** Cambia el puerto en `telemetry-server.js` y actualiza el README.
 
 ---
@@ -255,5 +284,3 @@ DOZO System v2.2.0
 ---
 
 **Última actualización:** 27 de octubre de 2025
-
-

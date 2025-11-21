@@ -3,6 +3,7 @@
 ## 📋 Descripción
 
 Script de alineación y validación completa que verifica:
+
 - ✅ Plugin local (versión, estructura, configuración)
 - ✅ URL de actualización configurada
 - ✅ Estructura del ZIP
@@ -119,11 +120,11 @@ El script busca el plugin en las siguientes ubicaciones (en orden):
 
 ```javascript
 localPluginPaths: [
-  '/Applications/MAMP/htdocs/vapedot/wp-content/plugins/warranty-system-rs',
-  '/Users/davidalejandroperezrea/Documents/Dozo System by RS/warranty-system',
-  '/Users/davidalejandroperezrea/Documents/Dozo System by RS/Latest Builds/warranty-system-rs',
-  '/Users/davidalejandroperezrea/Documents/Dozo System by RS/Latest Builds/Warranty System RS/warranty-system-rs'
-]
+  "/Applications/MAMP/htdocs/vapedot/wp-content/plugins/warranty-system-rs",
+  "/Users/davidalejandroperezrea/Documents/Dozo System by RS/warranty-system",
+  "/Users/davidalejandroperezrea/Documents/Dozo System by RS/Latest Builds/warranty-system-rs",
+  "/Users/davidalejandroperezrea/Documents/Dozo System by RS/Latest Builds/Warranty System RS/warranty-system-rs",
+];
 ```
 
 ### Personalizar Rutas:
@@ -182,6 +183,7 @@ cat Global/DOZO-UpdateAlignmentReport.json | grep -A 10 "wordPressCheck"
 ## ✅ Validaciones Realizadas
 
 ### 🧭 1. Verificación del Entorno Base
+
 - Busca plugin en múltiples ubicaciones
 - Extrae información del plugin header:
   - Plugin Name
@@ -198,16 +200,19 @@ cat Global/DOZO-UpdateAlignmentReport.json | grep -A 10 "wordPressCheck"
   - tools/
 
 ### 🔗 2. Validación de URL de Actualización
+
 - Verifica Update URI en el plugin
 - Comprueba accesibilidad de update.json
 - Valida formato JSON
 
 ### 📦 3. Validación de Estructura ZIP
+
 - Verifica nombre de carpeta del plugin
 - Detecta estructura de doble carpeta
 - Confirma archivos principales presentes
 
 ### 🧾 4. Validación Remota
+
 - Descarga update.json
 - Valida campos requeridos:
   - version
@@ -219,11 +224,13 @@ cat Global/DOZO-UpdateAlignmentReport.json | grep -A 10 "wordPressCheck"
 - Obtiene tamaño del archivo
 
 ### 🔁 5. Comparación de Versiones
+
 - Compara versión local vs remota
 - Determina si hay actualización disponible
 - Usa comparación semántica (major.minor.patch)
 
 ### ⚙️ 6. WordPress Check
+
 - Verifica disponibilidad de WP-CLI
 - Busca instalación WordPress
 - Ejecuta comandos:
@@ -236,9 +243,11 @@ cat Global/DOZO-UpdateAlignmentReport.json | grep -A 10 "wordPressCheck"
 ## 🚨 Interpretación de Resultados
 
 ### ✅ UPDATE_ALIGNMENT_SUCCESSFUL
+
 Todo configurado correctamente. El sistema de actualizaciones está operativo.
 
 **Características:**
+
 - Plugin encontrado y válido
 - Update URI configurado
 - Servidor remoto accesible
@@ -250,9 +259,11 @@ Todo configurado correctamente. El sistema de actualizaciones está operativo.
 ---
 
 ### ⚠️ UPDATE_ALIGNMENT_WITH_WARNINGS
+
 Sistema funcional pero con advertencias que deberían revisarse.
 
 **Características:**
+
 - Plugin encontrado
 - Algunas configuraciones faltantes o no estándar
 - Servidor remoto operativo
@@ -261,6 +272,7 @@ Sistema funcional pero con advertencias que deberían revisarse.
 **Acción:** Revisar advertencias y aplicar mejoras opcionales.
 
 **Advertencias comunes:**
+
 - Update URI no configurado
 - Directorios no estándar
 - WP-CLI no disponible
@@ -269,9 +281,11 @@ Sistema funcional pero con advertencias que deberían revisarse.
 ---
 
 ### ❌ UPDATE_ALIGNMENT_FAILED
+
 Errores críticos detectados que impiden el funcionamiento.
 
 **Características:**
+
 - Plugin no encontrado, o
 - Servidor remoto inaccesible, o
 - Errores de configuración críticos
@@ -287,6 +301,7 @@ Errores críticos detectados que impiden el funcionamiento.
 **Causa:** El plugin no existe en ninguna ruta configurada
 
 **Solución:**
+
 1. Verifica que el plugin esté extraído
 2. Agrega la ruta correcta al array `localPluginPaths`
 3. Asegúrate de que el archivo `warranty-system-rs.php` exista
@@ -351,6 +366,7 @@ wp --info
 **Causa:** Servidor remoto no responde o URL incorrecta
 
 **Solución:**
+
 1. Verifica conectividad de red
 2. Confirma que la URL sea correcta
 3. Verifica permisos del servidor
@@ -369,7 +385,7 @@ curl -I https://updates.vapedot.mx/warranty-system-rs/update.json
   // Metadata
   "timestamp": "ISO 8601 timestamp",
   "status": "UPDATE_ALIGNMENT_SUCCESSFUL | _WITH_WARNINGS | _FAILED",
-  
+
   // Plugin local
   "localPlugin": {
     "status": "FOUND | NOT_FOUND | ERROR",
@@ -383,7 +399,7 @@ curl -I https://updates.vapedot.mx/warranty-system-rs/update.json
     },
     "directories": ["lista", "de", "directorios"]
   },
-  
+
   // URL de actualización
   "updateUrl": {
     "status": "CORRECT | MISMATCH | NOT_CONFIGURED",
@@ -391,13 +407,13 @@ curl -I https://updates.vapedot.mx/warranty-system-rs/update.json
     "expected": "URL esperada",
     "accessible": true/false
   },
-  
+
   // Estructura ZIP
   "zipStructure": {
     "status": "CORRECT | NON_STANDARD | ERROR",
     "folderName": "nombre de la carpeta"
   },
-  
+
   // Validación remota
   "remoteValidation": {
     "status": "VALID | ERROR",
@@ -411,7 +427,7 @@ curl -I https://updates.vapedot.mx/warranty-system-rs/update.json
     "zipSize": "tamaño del ZIP",
     "zipAccessible": true/false
   },
-  
+
   // Comparación de versiones
   "versionComparison": {
     "localVersion": "versión local",
@@ -419,7 +435,7 @@ curl -I https://updates.vapedot.mx/warranty-system-rs/update.json
     "status": "UPDATE_AVAILABLE | UP_TO_DATE | LOCAL_NEWER",
     "updateAvailable": true/false
   },
-  
+
   // WordPress check
   "wordPressCheck": {
     "wpCliAvailable": true/false,
@@ -429,7 +445,7 @@ curl -I https://updates.vapedot.mx/warranty-system-rs/update.json
     "pluginInfo": { /* info del plugin en WP */ },
     "updateDetected": true/false
   },
-  
+
   // Errores y advertencias
   "errors": ["lista", "de", "errores"],
   "warnings": ["lista", "de", "advertencias"]
@@ -441,6 +457,7 @@ curl -I https://updates.vapedot.mx/warranty-system-rs/update.json
 ## 🔄 Flujo de Trabajo Recomendado
 
 ### 1. Desarrollo Local
+
 ```bash
 # Modificar plugin
 # Incrementar versión en warranty-system-rs.php
@@ -449,6 +466,7 @@ node dozo-update-alignment-v1.0.0.js
 ```
 
 ### 2. Empaquetado
+
 ```bash
 # Crear ZIP
 # Validar estructura
@@ -456,6 +474,7 @@ node dozo-update-alignment-v1.0.0.js
 ```
 
 ### 3. Despliegue
+
 ```bash
 # Subir ZIP al servidor
 # Actualizar update.json
@@ -464,6 +483,7 @@ node dozo-remote-sync-validation-v1.0.0.js
 ```
 
 ### 4. Validación Completa
+
 ```bash
 # Ejecutar alineación completa
 node dozo-update-alignment-v1.0.0.js
@@ -473,6 +493,7 @@ cat Global/DOZO-UpdateAlignmentReport.json | grep "status"
 ```
 
 ### 5. Testing en WordPress
+
 ```bash
 # Si WP-CLI disponible
 cd /ruta/wordpress
@@ -499,9 +520,8 @@ wp plugin list
 **Sistema:** DOZO System by RockStage  
 **Versión:** v7.9 DeepSync Framework  
 **Proyecto:** Warranty System RS  
-**Autor:** RockStage Solutions  
+**Autor:** RockStage Solutions
 
 ---
 
 **Última Actualización:** October 20, 2025
-

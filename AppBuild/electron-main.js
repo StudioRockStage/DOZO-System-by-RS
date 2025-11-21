@@ -12,15 +12,12 @@ function createWindow() {
     backgroundColor: '#101116',
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
     },
-    icon: path.join(__dirname, 'assets/rockstage-icon.icns')
+    icon: path.join(__dirname, 'assets/rockstage-icon.icns'),
   });
 
   win.loadFile(path.join(__dirname, 'public/index.html'));
 }
 
 app.whenReady().then(createWindow);
-
-
-

@@ -1,4 +1,5 @@
 # 🎯 DOZO v3.2 - FINAL AUDIT REPORT
+
 ## Warranty Verification Logic Layer
 
 **Plugin:** RockStage Warranty System  
@@ -15,13 +16,13 @@ El **Warranty System by RockStage** ha completado exitosamente la integración d
 
 ### ✅ **Cumplimiento DOZO Global: 100/100**
 
-| Layer | Descripción | Score | Status |
-|-------|-------------|-------|--------|
-| **v1.0** | Visual Replication | 100/100 | ✅ |
-| **v2.0** | Functional Integration | 100/100 | ✅ |
-| **v3.0** | Semantic Translation | 100/100 | ✅ |
-| **v3.1** | Shortcode Execution | 100/100 | ✅ |
-| **v3.2** | **Warranty Verifier** | **100/100** | ✅ |
+| Layer    | Descripción            | Score       | Status |
+| -------- | ---------------------- | ----------- | ------ |
+| **v1.0** | Visual Replication     | 100/100     | ✅     |
+| **v2.0** | Functional Integration | 100/100     | ✅     |
+| **v3.0** | Semantic Translation   | 100/100     | ✅     |
+| **v3.1** | Shortcode Execution    | 100/100     | ✅     |
+| **v3.2** | **Warranty Verifier**  | **100/100** | ✅     |
 
 ---
 
@@ -49,12 +50,14 @@ Redefinir el shortcode `[rs_warranty_form]` como un **verificador inteligente de
 **Características:**
 
 ✅ **4 Pasos del Flujo:**
+
 - **Step 1:** Verificación de pedido (input order number)
 - **Step 2:** Estado de garantía (productos + progress bars)
 - **Step 3:** Formulario de reclamo (si garantía vigente)
 - **Step 4:** Mensaje de éxito
 
 ✅ **Componentes Semánticos DOZO:**
+
 ```html
 <!-- Producto Card -->
 <div class="rs-product-card">
@@ -71,7 +74,7 @@ Redefinir el shortcode `[rs_warranty_form]` como un **verificador inteligente de
 
 <!-- Upload Zone -->
 <div class="rs-upload-zone" id="rs-upload-zone">
-  <input type="file" multiple>
+  <input type="file" multiple />
   <div class="rs-upload-content">
     <i class="rs-icon" data-icon="upload-cloud"></i>
   </div>
@@ -84,6 +87,7 @@ Redefinir el shortcode `[rs_warranty_form]` como un **verificador inteligente de
 ```
 
 ✅ **CSS Inline:**
+
 - `.rs-warranty-verifier` (container principal)
 - `.rs-product-list` / `.rs-product-card`
 - `.rs-progress` / `.rs-progress-bar` (con variantes: `--valid`, `--warning`, `--expired`)
@@ -91,6 +95,7 @@ Redefinir el shortcode `[rs_warranty_form]` como un **verificador inteligente de
 - `.rs-success-icon` / `.rs-success-details`
 
 ✅ **Accessibility (WCAG 2.1 AA):**
+
 - `role="main"`, `role="alert"`, `role="progressbar"`
 - `aria-label`, `aria-required`, `aria-valuenow`
 - Labels visibles en todos los inputs
@@ -104,39 +109,42 @@ Redefinir el shortcode `[rs_warranty_form]` como un **verificador inteligente de
 **Líneas:** 425+  
 **Funciones Principales:**
 
-| Función | Descripción |
-|---------|-------------|
-| `initVerifyForm()` | Inicializa form de verificación + AJAX `rs_verify_warranty` |
-| `showWarrantyStatus(data)` | Renderiza productos con estado de garantía |
-| `createProductCard(product)` | Crea card de producto con progress bar dinámico |
-| `showClaimForm(product)` | Pre-llena formulario de reclamo con datos del cliente |
-| `initClaimForm()` | Maneja envío de reclamo + AJAX `rs_submit_warranty` |
-| `initFileUpload()` | Drag & drop de fotos/videos con preview |
-| `handleFiles(files)` | Valida y prepara archivos para upload |
-| `goToStep(step)` | Navegación entre pasos con animación fadeIn |
+| Función                      | Descripción                                                 |
+| ---------------------------- | ----------------------------------------------------------- |
+| `initVerifyForm()`           | Inicializa form de verificación + AJAX `rs_verify_warranty` |
+| `showWarrantyStatus(data)`   | Renderiza productos con estado de garantía                  |
+| `createProductCard(product)` | Crea card de producto con progress bar dinámico             |
+| `showClaimForm(product)`     | Pre-llena formulario de reclamo con datos del cliente       |
+| `initClaimForm()`            | Maneja envío de reclamo + AJAX `rs_submit_warranty`         |
+| `initFileUpload()`           | Drag & drop de fotos/videos con preview                     |
+| `handleFiles(files)`         | Valida y prepara archivos para upload                       |
+| `goToStep(step)`             | Navegación entre pasos con animación fadeIn                 |
 
 ✅ **AJAX Calls:**
+
 - `rs_verify_warranty` → Verifica pedido WooCommerce
 - `rs_submit_warranty` → Envía reclamo de garantía
 
 ✅ **Validaciones:**
+
 - Número de pedido requerido
 - Email válido (regex)
 - Campos obligatorios completos
 - Tamaño máximo de archivos (configurable)
 
 ✅ **Progress Bar Logic:**
+
 ```javascript
 if (!product.is_expired) {
-    if (product.warranty_percentage > 50) {
-        progressClass = 'rs-progress--valid';     // Verde
-    } else if (product.warranty_percentage > 20) {
-        progressClass = 'rs-progress--warning';   // Amarillo
-    } else {
-        progressClass = 'rs-progress--warning';   // Amarillo (próximo a vencer)
-    }
+  if (product.warranty_percentage > 50) {
+    progressClass = "rs-progress--valid"; // Verde
+  } else if (product.warranty_percentage > 20) {
+    progressClass = "rs-progress--warning"; // Amarillo
+  } else {
+    progressClass = "rs-progress--warning"; // Amarillo (próximo a vencer)
+  }
 } else {
-    progressClass = 'rs-progress--expired';       // Rojo
+  progressClass = "rs-progress--expired"; // Rojo
 }
 ```
 
@@ -149,6 +157,7 @@ if (!product.is_expired) {
 **Cambios:**
 
 ✅ **Soporte para modo `verifier`:**
+
 ```php
 public function render_warranty_form($atts) {
     $atts = shortcode_atts(array(
@@ -157,7 +166,7 @@ public function render_warranty_form($atts) {
         'theme' => 'rockstage',
         'mode' => 'verifier' // verifier (nuevo) o classic (antiguo)
     ), $atts, 'rockstage_warranty_form');
-    
+
     if ($atts['mode'] === 'classic') {
         include RS_WARRANTY_TEMPLATES_DIR . 'public/warranty-form.php';
     } else {
@@ -167,6 +176,7 @@ public function render_warranty_form($atts) {
 ```
 
 ✅ **Enqueue de `warranty-verifier.js`:**
+
 ```php
 wp_enqueue_script(
     'rs-warranty-verifier-js',
@@ -188,17 +198,20 @@ wp_enqueue_script(
 Los métodos ya implementados en v3.1 ahora soportan el nuevo flujo:
 
 ✅ **`ajax_verify_warranty()`**:
+
 - Verifica pedido WooCommerce (`wc_get_order`)
 - Llama a `get_order_products_with_warranty()`
 - Retorna datos de productos con garantía
 
 ✅ **`get_order_products_with_warranty()`**:
+
 - Obtiene productos del pedido
 - Calcula días de garantía por categoría
 - Calcula `expiration_date`, `days_remaining`, `warranty_percentage`, `is_expired`
 - Retorna array con toda la información necesaria
 
 ✅ **`ajax_submit_warranty()`**:
+
 - Recibe datos del formulario de reclamo
 - Valida nonce y campos requeridos
 - Procesa archivos (`wp_handle_upload`)
@@ -207,6 +220,7 @@ Los métodos ya implementados en v3.1 ahora soportan el nuevo flujo:
 - Retorna `warranty_number`
 
 **Lógica de Cálculo de Garantía:**
+
 ```php
 // Calcular fecha de expiración
 $purchase_date = $order->get_date_created();
@@ -223,8 +237,8 @@ if ($is_expired) {
 }
 
 // Calcular porcentaje de garantía restante
-$warranty_percentage = $warranty_days > 0 
-    ? round(($days_remaining / $warranty_days) * 100) 
+$warranty_percentage = $warranty_days > 0
+    ? round(($days_remaining / $warranty_days) * 100)
     : 0;
 ```
 
@@ -235,16 +249,19 @@ $warranty_percentage = $warranty_days > 0
 **Nuevos Tests (33 totales para v3.2):**
 
 ✅ **Arquitectura:**
+
 - Template `warranty-verifier.php` existe
 - JavaScript `warranty-verifier.js` existe
 
 ✅ **HTML Elements:**
+
 - `#rs-verify-form` (formulario de verificación)
 - `#rs-step-status` (paso de estado)
 - `#rs-step-claim` (paso de reclamo)
 - `#rs-step-success` (paso de éxito)
 
 ✅ **Componentes Semánticos:**
+
 - `.rs-product-card`
 - `.rs-progress`
 - `.rs-progress-bar`
@@ -253,11 +270,13 @@ $warranty_percentage = $warranty_days > 0
 - `#rs-upload-preview`
 
 ✅ **CSS:**
+
 - `.rs-warranty-verifier` styles
 - `.rs-progress-bar` styles
 - `.rs-upload-zone` styles
 
 ✅ **JavaScript Functions:**
+
 - `initVerifyForm()`
 - `showWarrantyStatus()`
 - `createProductCard()`
@@ -267,15 +286,18 @@ $warranty_percentage = $warranty_days > 0
 - `goToStep()`
 
 ✅ **AJAX Integration:**
+
 - `action: 'rs_verify_warranty'`
 - `action: 'rs_submit_warranty'`
 
 ✅ **Frontend Integration:**
+
 - `warranty-verifier.js` enqueued
 - `mode` parameter soportado
 - `warranty-verifier.php` incluido
 
 ✅ **Core Integration:**
+
 - `get_order_products_with_warranty()`
 - Cálculo `warranty_percentage`
 - Cálculo `is_expired`
@@ -289,41 +311,46 @@ $warranty_percentage = $warranty_days > 0
 ### 1. Product Card con Progress Bar
 
 **Estructura:**
+
 ```html
 <div class="rs-product-card">
-    <div class="rs-product-image">
-        <img src="product.jpg" alt="Product Name">
+  <div class="rs-product-image">
+    <img src="product.jpg" alt="Product Name" />
+  </div>
+  <div class="rs-product-info">
+    <h4 class="rs-product-name">Apple iPhone 14 Pro</h4>
+    <p class="rs-product-warranty-text">1 año de garantía</p>
+
+    <div class="rs-warranty-progress">
+      <div class="rs-progress-header">
+        <span class="rs-progress-label">Garantía Vigente</span>
+        <span class="rs-progress-value">287 días</span>
+      </div>
+      <div class="rs-progress">
+        <div
+          class="rs-progress-bar rs-progress--valid"
+          style="width: 78%"
+        ></div>
+      </div>
+      <p class="rs-progress-expiry">Válida hasta el 25 de julio de 2026</p>
     </div>
-    <div class="rs-product-info">
-        <h4 class="rs-product-name">Apple iPhone 14 Pro</h4>
-        <p class="rs-product-warranty-text">1 año de garantía</p>
-        
-        <div class="rs-warranty-progress">
-            <div class="rs-progress-header">
-                <span class="rs-progress-label">Garantía Vigente</span>
-                <span class="rs-progress-value">287 días</span>
-            </div>
-            <div class="rs-progress">
-                <div class="rs-progress-bar rs-progress--valid" 
-                     style="width: 78%"></div>
-            </div>
-            <p class="rs-progress-expiry">Válida hasta el 25 de julio de 2026</p>
-        </div>
-        
-        <button class="rs-btn rs-btn--primary rs-btn--sm">
-            <i class="rs-icon" data-icon="file-text"></i>
-            <span>Solicitar Garantía</span>
-        </button>
-    </div>
+
+    <button class="rs-btn rs-btn--primary rs-btn--sm">
+      <i class="rs-icon" data-icon="file-text"></i>
+      <span>Solicitar Garantía</span>
+    </button>
+  </div>
 </div>
 ```
 
 **Estados de la Barra:**
+
 - **Verde (rs-progress--valid):** warranty_percentage > 50%
 - **Amarillo (rs-progress--warning):** 20% < warranty_percentage ≤ 50%
 - **Rojo (rs-progress--expired):** warranty_percentage = 0% (expirada)
 
 **Colores:**
+
 - Verde: `linear-gradient(90deg, #10B981, #059669)`
 - Amarillo: `linear-gradient(90deg, #F59E0B, #D97706)`
 - Rojo: `linear-gradient(90deg, #EF4444, #DC2626)`
@@ -333,6 +360,7 @@ $warranty_percentage = $warranty_days > 0
 ### 2. Upload Zone con Drag & Drop
 
 **Características:**
+
 - Drag & drop visual con feedback
 - Preview de imágenes y videos
 - Botón de eliminar por archivo
@@ -340,6 +368,7 @@ $warranty_percentage = $warranty_days > 0
 - Límite configurable desde admin
 
 **UI States:**
+
 - Normal: Border dashed gris
 - Hover: Border naranja + fondo ligero
 - Dragover: Background rgba(255, 140, 0, 0.05)
@@ -349,21 +378,23 @@ $warranty_percentage = $warranty_days > 0
 ### 3. Success Message
 
 **Estructura:**
+
 ```html
 <div class="rs-card rs-card--success">
-    <div class="rs-success-icon">
-        <i class="rs-icon rs-icon--xxl" data-icon="check-circle"></i>
-    </div>
-    <h2 class="rs-success-title">¡Solicitud Enviada!</h2>
-    <p class="rs-success-message">Hemos recibido tu solicitud...</p>
-    <div class="rs-success-details">
-        <p><strong>Número de Ticket:</strong> WRT-2024-00123</p>
-        <p><strong>Email de Confirmación:</strong> cliente@email.com</p>
-    </div>
+  <div class="rs-success-icon">
+    <i class="rs-icon rs-icon--xxl" data-icon="check-circle"></i>
+  </div>
+  <h2 class="rs-success-title">¡Solicitud Enviada!</h2>
+  <p class="rs-success-message">Hemos recibido tu solicitud...</p>
+  <div class="rs-success-details">
+    <p><strong>Número de Ticket:</strong> WRT-2024-00123</p>
+    <p><strong>Email de Confirmación:</strong> cliente@email.com</p>
+  </div>
 </div>
 ```
 
 **Estilos:**
+
 - Icono verde (#10B981) con animación fadeIn
 - Padding generoso (60px 40px)
 - Success details con fondo gris claro
@@ -375,6 +406,7 @@ $warranty_percentage = $warranty_days > 0
 ### Shortcode Modes
 
 **Modo Verifier (nuevo, default):**
+
 ```
 [rs_warranty_form]
 [rs_warranty_form mode="verifier"]
@@ -382,11 +414,13 @@ $warranty_percentage = $warranty_days > 0
 ```
 
 **Modo Classic (antiguo):**
+
 ```
 [rs_warranty_form mode="classic"]
 ```
 
 **Con Título Personalizado:**
+
 ```
 [rs_warranty_form title="Verifica tu Garantía" subtitle="Ingresa el número de tu pedido"]
 ```
@@ -439,6 +473,7 @@ $warranty_percentage = $warranty_days > 0
 ### Caso: Garantía Expirada
 
 Si el producto tiene garantía expirada:
+
 - Se muestra barra roja al 0%
 - No aparece botón "Solicitar Garantía"
 - Se muestra alerta: "Garantía Expirada"
@@ -450,11 +485,13 @@ Si el producto tiene garantía expirada:
 ### Nonces
 
 ✅ **Verificación en templates:**
+
 ```php
 <?php wp_nonce_field('rs_warranty_nonce', 'rs_warranty_nonce'); ?>
 ```
 
 ✅ **Verificación en AJAX:**
+
 ```php
 check_ajax_referer('rs_warranty_nonce', 'nonce');
 ```
@@ -462,6 +499,7 @@ check_ajax_referer('rs_warranty_nonce', 'nonce');
 ### Sanitización
 
 ✅ **Inputs:**
+
 ```php
 $order_number = rs_sanitize_order_number($_POST['order_number']);
 $customer_name = sanitize_text_field($_POST['customer_name']);
@@ -470,6 +508,7 @@ $description = sanitize_textarea_field($_POST['description']);
 ```
 
 ✅ **Outputs (en template):**
+
 ```php
 <?php echo esc_html($product['product_name']); ?>
 <?php echo esc_attr($product['product_id']); ?>
@@ -478,7 +517,8 @@ $description = sanitize_textarea_field($_POST['description']);
 ### File Upload
 
 ✅ **Validación:**
-- Tipo MIME (image/*, video/*)
+
+- Tipo MIME (image/_, video/_)
 - Tamaño máximo (configurable desde admin)
 - Cantidad máxima de archivos
 - Nombres de archivo sanitizados
@@ -489,27 +529,30 @@ $description = sanitize_textarea_field($_POST['description']);
 
 ### Métricas
 
-| Métrica | Valor | Status |
-|---------|-------|--------|
-| **Template Size** | 470 líneas | ✅ |
-| **JavaScript Size** | 425 líneas | ✅ |
-| **CSS Inline** | ~300 líneas | ✅ |
-| **Load Time (Initial)** | < 200ms | ✅ |
-| **AJAX Response (Verify)** | < 500ms | ✅ |
-| **AJAX Response (Submit)** | < 1000ms | ✅ |
+| Métrica                    | Valor       | Status |
+| -------------------------- | ----------- | ------ |
+| **Template Size**          | 470 líneas  | ✅     |
+| **JavaScript Size**        | 425 líneas  | ✅     |
+| **CSS Inline**             | ~300 líneas | ✅     |
+| **Load Time (Initial)**    | < 200ms     | ✅     |
+| **AJAX Response (Verify)** | < 500ms     | ✅     |
+| **AJAX Response (Submit)** | < 1000ms    | ✅     |
 
 ### Optimizaciones
 
 ✅ **Lazy Loading:**
+
 - Imágenes de productos: `loading="lazy"`
 - JavaScript: Enqueue en footer
 
 ✅ **Asset Enqueue Condicional:**
+
 - Solo carga si hay shortcode en la página
 - Verificación de bloques Gutenberg
 - Debug mode: `?warranty_debug=1`
 
 ✅ **Database:**
+
 - Uso de WooCommerce CRUD (caché interno)
 - Consultas optimizadas con índices
 - No queries N+1
@@ -521,21 +564,25 @@ $description = sanitize_textarea_field($_POST['description']);
 ### Cumplimiento: 100%
 
 ✅ **Keyboard Navigation:**
+
 - Todos los inputs accesibles con Tab
 - Focus visible en todos los elementos interactivos
 
 ✅ **Screen Readers:**
+
 - `role="main"`, `role="alert"`, `role="progressbar"`
 - `aria-label` en botones con iconos
 - `aria-required` en campos obligatorios
 - `aria-valuenow/min/max` en progress bars
 
 ✅ **Contraste:**
+
 - Texto principal: 8:1 (#212529 sobre #FFFFFF)
 - Texto secundario: 5:1 (#6B7280 sobre #FFFFFF)
 - Botones: 4.5:1 mínimo
 
 ✅ **Responsive:**
+
 - Mobile-first design
 - Breakpoint: 640px
 - Touch targets: mínimo 44x44px
@@ -572,37 +619,37 @@ WP Admin → Garantías → ⚡ Diagnóstico → "Ejecutar Diagnóstico Completo
 
 ### Tests Específicos v3.2
 
-| Test | Expected | Status |
-|------|----------|--------|
-| Template warranty-verifier.php existe | ✅ | PASS |
-| warranty-verifier.js existe | ✅ | PASS |
-| Formulario verificación (#rs-verify-form) | ✅ | PASS |
-| Step: Order Status | ✅ | PASS |
-| Step: Claim Form | ✅ | PASS |
-| Step: Success | ✅ | PASS |
-| Componente .rs-product-card | ✅ | PASS |
-| Componente .rs-progress | ✅ | PASS |
-| Componente .rs-progress-bar | ✅ | PASS |
-| Template de producto | ✅ | PASS |
-| Upload zone | ✅ | PASS |
-| Upload preview | ✅ | PASS |
-| ARIA labels (3+) | ✅ | PASS |
-| CSS inline presente | ✅ | PASS |
-| Función initVerifyForm() | ✅ | PASS |
-| Función showWarrantyStatus() | ✅ | PASS |
-| Función createProductCard() | ✅ | PASS |
-| Función showClaimForm() | ✅ | PASS |
-| Función initFileUpload() | ✅ | PASS |
-| Función handleFiles() | ✅ | PASS |
-| Función goToStep() | ✅ | PASS |
-| AJAX: rs_verify_warranty | ✅ | PASS |
-| AJAX: rs_submit_warranty | ✅ | PASS |
-| Frontend: JS enqueued | ✅ | PASS |
-| Frontend: mode parameter | ✅ | PASS |
-| Frontend: template incluido | ✅ | PASS |
-| Core: get_order_products_with_warranty() | ✅ | PASS |
-| Core: warranty_percentage | ✅ | PASS |
-| Core: is_expired | ✅ | PASS |
+| Test                                      | Expected | Status |
+| ----------------------------------------- | -------- | ------ |
+| Template warranty-verifier.php existe     | ✅       | PASS   |
+| warranty-verifier.js existe               | ✅       | PASS   |
+| Formulario verificación (#rs-verify-form) | ✅       | PASS   |
+| Step: Order Status                        | ✅       | PASS   |
+| Step: Claim Form                          | ✅       | PASS   |
+| Step: Success                             | ✅       | PASS   |
+| Componente .rs-product-card               | ✅       | PASS   |
+| Componente .rs-progress                   | ✅       | PASS   |
+| Componente .rs-progress-bar               | ✅       | PASS   |
+| Template de producto                      | ✅       | PASS   |
+| Upload zone                               | ✅       | PASS   |
+| Upload preview                            | ✅       | PASS   |
+| ARIA labels (3+)                          | ✅       | PASS   |
+| CSS inline presente                       | ✅       | PASS   |
+| Función initVerifyForm()                  | ✅       | PASS   |
+| Función showWarrantyStatus()              | ✅       | PASS   |
+| Función createProductCard()               | ✅       | PASS   |
+| Función showClaimForm()                   | ✅       | PASS   |
+| Función initFileUpload()                  | ✅       | PASS   |
+| Función handleFiles()                     | ✅       | PASS   |
+| Función goToStep()                        | ✅       | PASS   |
+| AJAX: rs_verify_warranty                  | ✅       | PASS   |
+| AJAX: rs_submit_warranty                  | ✅       | PASS   |
+| Frontend: JS enqueued                     | ✅       | PASS   |
+| Frontend: mode parameter                  | ✅       | PASS   |
+| Frontend: template incluido               | ✅       | PASS   |
+| Core: get_order_products_with_warranty()  | ✅       | PASS   |
+| Core: warranty_percentage                 | ✅       | PASS   |
+| Core: is_expired                          | ✅       | PASS   |
 
 ---
 
@@ -611,6 +658,7 @@ WP Admin → Garantías → ⚡ Diagnóstico → "Ejecutar Diagnóstico Completo
 ### Estructura de Datos
 
 **Response de `rs_verify_warranty`:**
+
 ```json
 {
   "success": true,
@@ -640,6 +688,7 @@ WP Admin → Garantías → ⚡ Diagnóstico → "Ejecutar Diagnóstico Completo
 ```
 
 **Request de `rs_submit_warranty`:**
+
 ```javascript
 {
   action: 'rs_submit_warranty',
@@ -655,6 +704,7 @@ WP Admin → Garantías → ⚡ Diagnóstico → "Ejecutar Diagnóstico Completo
 ```
 
 **Response de `rs_submit_warranty`:**
+
 ```json
 {
   "success": true,
@@ -697,6 +747,7 @@ El **Warranty System by RockStage** ha integrado exitosamente el **Warranty Veri
 ### 🚀 Ready for Production
 
 El plugin está **100% listo para producción** y cumple con todos los estándares de:
+
 - ✅ WordPress Coding Standards
 - ✅ WooCommerce HPOS Compatibility
 - ✅ WCAG 2.1 AA Accessibility
@@ -730,20 +781,23 @@ El plugin está **100% listo para producción** y cumple con todos los estándar
 ### Debugging
 
 **Activar modo debug:**
+
 ```
 ?warranty_debug=1
 ```
 
 **Logs:**
+
 ```php
 /wp-content/debug.log
 ```
 
 **Console JavaScript:**
+
 ```javascript
-rsWarranty // Ver configuración cargada
-currentOrderData // Ver datos del pedido actual
-selectedProduct // Ver producto seleccionado
+rsWarranty; // Ver configuración cargada
+currentOrderData; // Ver datos del pedido actual
+selectedProduct; // Ver producto seleccionado
 ```
 
 ### Contacto
@@ -761,7 +815,4 @@ selectedProduct // Ver producto seleccionado
 
 ---
 
-*Este reporte certifica que el Warranty System by RockStage cumple al 100% con la **Condición DOZO v3.2**, incluyendo el flujo completo de verificación inteligente de garantías integrado con WooCommerce.*
-
-
-
+_Este reporte certifica que el Warranty System by RockStage cumple al 100% con la **Condición DOZO v3.2**, incluyendo el flujo completo de verificación inteligente de garantías integrado con WooCommerce._

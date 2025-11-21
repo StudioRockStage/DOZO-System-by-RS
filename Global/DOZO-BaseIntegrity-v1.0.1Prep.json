@@ -22,9 +22,7 @@
     "size": 277032,
     "sizeReadable": "0.26 MB",
     "sha256": "d62acc4d9040d403d66a9fc9c3fe28e2f98c4f5a93da607a97f9a53b57a45270",
-    "rootFolders": [
-      "warranty-system-rs"
-    ],
+    "rootFolders": ["warranty-system-rs"],
     "rootFolderCorrect": true,
     "directories": {
       "includes": true,
@@ -84,9 +82,7 @@
     "status": "SUCCESS"
   },
   "errors": [],
-  "warnings": [
-    "ZIP contiene versión sin ABSPATH"
-  ],
+  "warnings": ["ZIP contiene versión sin ABSPATH"],
   "readyForNextRelease": true,
   "message": "La versión base está lista, pero hay advertencias menores que revisar."
 }

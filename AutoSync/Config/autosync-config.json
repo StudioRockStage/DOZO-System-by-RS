@@ -1,13 +1,6 @@
 {
   "autoSyncInterval": "24h",
-  "pluginDirectories": [
-    "Warranty System",
-    "PriceCraft",
-    "Lucky Stage"
-  ],
+  "pluginDirectories": ["Warranty System", "PriceCraft", "Lucky Stage"],
   "autoBackupBeforeSync": true,
   "notifyOnUpdate": true
 }
-
-
-

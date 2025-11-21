@@ -7,11 +7,13 @@
 ## 📦 UBICACIÓN DEL PLUGIN
 
 ### ZIP Final (Listo para instalar)
+
 ```
 Latest Builds/Warranty System RS/warranty-system-rs.zip
 ```
 
 ### Código Fuente
+
 ```
 /Users/davidalejandroperezrea/Documents/warranty-system-rs/
 ```
@@ -21,6 +23,7 @@ Latest Builds/Warranty System RS/warranty-system-rs.zip
 ## ⚡ INSTALACIÓN RÁPIDA
 
 ### WordPress Local
+
 ```bash
 # Opción 1: Upload desde Admin
 WordPress Admin → Plugins → Add New → Upload Plugin
@@ -32,6 +35,7 @@ wp plugin activate warranty-system-rs
 ```
 
 ### WordPress Remoto (FTP)
+
 ```bash
 # Subir al servidor
 ftp your-server.com
@@ -44,14 +48,14 @@ unzip warranty-system-rs.zip
 
 ## 📊 INFORMACIÓN DEL BUILD
 
-| Propiedad | Valor |
-|-----------|-------|
-| **Versión** | 1.0.0 |
-| **Tamaño** | 199 KB |
-| **SHA-256** | a58a74ea5c764faacc1fc3ddce1d3d4c099074a8204d96e352da220f1a365300 |
-| **Archivos PHP** | 36 |
-| **Directorios** | 19 |
-| **Estructura** | ✓ Validada |
+| Propiedad        | Valor                                                            |
+| ---------------- | ---------------------------------------------------------------- |
+| **Versión**      | 1.0.0                                                            |
+| **Tamaño**       | 199 KB                                                           |
+| **SHA-256**      | a58a74ea5c764faacc1fc3ddce1d3d4c099074a8204d96e352da220f1a365300 |
+| **Archivos PHP** | 36                                                               |
+| **Directorios**  | 19                                                               |
+| **Estructura**   | ✓ Validada                                                       |
 
 ---
 
@@ -98,16 +102,19 @@ warranty-system-rs/
 ## 🔧 ACCESO RÁPIDO A REPORTES
 
 ### Reporte Técnico Completo
+
 ```
 to chat gpt/Global/DOZO-Base-Consolidation-Report.json
 ```
 
 ### Documento de Éxito
+
 ```
 to chat gpt/Global/DOZO-BASE-CONSOLIDATION-SUCCESS.md
 ```
 
 ### Script de Consolidación
+
 ```
 dozo-base-consolidation-final-v1.0.0.js
 ```
@@ -117,11 +124,13 @@ dozo-base-consolidation-final-v1.0.0.js
 ## 🗂️ BACKUPS Y ARCHIVOS
 
 ### Archivos del Plugin Removidos (No eliminados)
+
 ```
 Backup/Workspace_Trash/[timestamp]/
 ```
 
 Contiene:
+
 - Documentación de desarrollo
 - Admin Panels antiguos
 - Changelogs
@@ -129,6 +138,7 @@ Contiene:
 - Logs y backups
 
 ### Reportes Archivados
+
 ```
 Archive/SessionLogs/[timestamp]/
 ```
@@ -140,6 +150,7 @@ Contiene 160+ archivos de sesiones anteriores.
 ## 🎯 CONFIGURACIÓN DEL PLUGIN
 
 ### Cabecera Principal
+
 ```php
 Plugin Name: Warranty System RS
 Version: 1.0.0
@@ -149,6 +160,7 @@ Update URI: https://updates.vapedot.mx/warranty-system-rs/update.json
 ```
 
 ### Requisitos
+
 - WordPress: 6.0+
 - PHP: 7.4+
 - Tested up to: 6.7.1
@@ -158,6 +170,7 @@ Update URI: https://updates.vapedot.mx/warranty-system-rs/update.json
 ## 🚨 VERIFICACIÓN RÁPIDA
 
 ### Validar Integridad del ZIP
+
 ```bash
 cd "Latest Builds/Warranty System RS"
 shasum -a 256 warranty-system-rs.zip
@@ -167,6 +180,7 @@ shasum -a 256 warranty-system-rs.zip
 ```
 
 ### Verificar Estructura del ZIP
+
 ```bash
 unzip -l warranty-system-rs.zip | head -20
 
@@ -175,6 +189,7 @@ unzip -l warranty-system-rs.zip | head -20
 ```
 
 ### Probar Código Fuente
+
 ```bash
 cd /Users/davidalejandroperezrea/Documents/warranty-system-rs
 php -l warranty-system-rs.php
@@ -187,11 +202,13 @@ php -l warranty-system-rs.php
 ## 📞 UPDATE SERVER
 
 ### Configuración Actual
+
 - **URL:** https://updates.vapedot.mx/warranty-system-rs/
 - **Update JSON:** update.json
 - **ZIP:** warranty-system-rs.zip
 
 ### Para Deployment
+
 1. Subir `warranty-system-rs.zip` al servidor
 2. Actualizar `update.json` con nueva versión
 3. Verificar URL de acceso público
@@ -225,15 +242,18 @@ zip -r "DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zi
 ## 🛠️ TROUBLESHOOTING
 
 ### El plugin no activa
+
 - Verificar permisos de archivos (644 para .php)
 - Verificar carpeta de nombre: debe ser `warranty-system-rs`
 - Revisar error_log de WordPress
 
 ### Errores de sintaxis
+
 - Verificar compatibilidad PHP (7.4+)
 - Verificar que no falte ABSPATH guard
 
 ### Actualizaciones no funcionan
+
 - Verificar Update URI en cabecera
 - Verificar acceso a updates.vapedot.mx
 - Revisar formato de update.json
@@ -243,6 +263,7 @@ zip -r "DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zi
 ## 📝 NOTAS
 
 ### Cambios Realizados en Consolidación
+
 1. Cabeceras normalizadas
 2. ABSPATH guard insertado
 3. Rutas Claude configuradas como relativas
@@ -250,6 +271,7 @@ zip -r "DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zi
 5. ROOT del plugin limpiado
 
 ### Archivos NO Modificados
+
 - ✓ Código funcional intacto
 - ✓ Clases e includes sin cambios
 - ✓ Assets originales
@@ -263,5 +285,4 @@ zip -r "DOZO System by RS/Latest Builds/Warranty System RS/warranty-system-rs.zi
 
 ---
 
-*Para más detalles, consulta: `DOZO-BASE-CONSOLIDATION-SUCCESS.md`*
-
+_Para más detalles, consulta: `DOZO-BASE-CONSOLIDATION-SUCCESS.md`_

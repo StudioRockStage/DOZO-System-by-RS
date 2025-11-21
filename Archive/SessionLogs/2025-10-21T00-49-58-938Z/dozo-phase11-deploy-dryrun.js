@@ -10,7 +10,12 @@ import path from "path";
 
 const BASE = path.resolve(process.env.HOME, "Documents/DOZO System by RS");
 const READY = path.join(BASE, "Empaquetado", "Ready");
-const REPORT = path.join(BASE, "to chat gpt", "Global", "DOZO-DryRun-Report.json");
+const REPORT = path.join(
+  BASE,
+  "to chat gpt",
+  "Global",
+  "DOZO-DryRun-Report.json",
+);
 const CONFIG_PATH = path.join(BASE, "Scripts", "ftp-config.json");
 
 console.log("\n🧪 DOZO Remote Deploy – DRY RUN Mode (Simulation)");
@@ -21,7 +26,7 @@ console.log("══════════════════════�
 const report = {
   mode: "DRY_RUN",
   timestamp: new Date().toISOString(),
-  steps: []
+  steps: [],
 };
 
 // Step 1: Verificar configuración FTP
@@ -31,7 +36,7 @@ if (!fs.existsSync(CONFIG_PATH)) {
     step: 1,
     action: "Check FTP config",
     status: "ERROR",
-    message: "ftp-config.json no encontrado"
+    message: "ftp-config.json no encontrado",
   });
   console.log("   ❌ No se encontró ftp-config.json");
 } else {
@@ -44,8 +49,8 @@ if (!fs.existsSync(CONFIG_PATH)) {
       host: cfg.host,
       user: cfg.user,
       port: cfg.port,
-      remotePath: cfg.remotePath
-    }
+      remotePath: cfg.remotePath,
+    },
   });
   console.log(`   ✅ Configuración encontrada`);
   console.log(`      Host: ${cfg.host}`);
@@ -55,23 +60,27 @@ if (!fs.existsSync(CONFIG_PATH)) {
 
 // Step 2: Buscar archivos para deployar
 console.log("\n📌 Paso 2: Buscar archivos en Ready/");
-const files = fs.existsSync(READY) ? fs.readdirSync(READY).filter(f => f.endsWith(".zip")) : [];
+const files = fs.existsSync(READY)
+  ? fs.readdirSync(READY).filter((f) => f.endsWith(".zip"))
+  : [];
 if (!files.length) {
   report.steps.push({
     step: 2,
     action: "Find ZIP files",
     status: "ERROR",
-    message: "No se encontró ningún ZIP"
+    message: "No se encontró ningún ZIP",
   });
   console.log("   ❌ No se encontró ningún ZIP");
 } else {
-  const latestZip = files.sort((a, b) => 
-    fs.statSync(path.join(READY, b)).mtimeMs - fs.statSync(path.join(READY, a)).mtimeMs
+  const latestZip = files.sort(
+    (a, b) =>
+      fs.statSync(path.join(READY, b)).mtimeMs -
+      fs.statSync(path.join(READY, a)).mtimeMs,
   )[0];
-  
+
   const zipPath = path.join(READY, latestZip);
   const stats = fs.statSync(zipPath);
-  
+
   report.steps.push({
     step: 2,
     action: "Find ZIP files",
@@ -80,10 +89,10 @@ if (!files.length) {
       name: latestZip,
       size: stats.size,
       sizeReadable: `${(stats.size / 1024 / 1024).toFixed(2)} MB`,
-      modified: stats.mtime.toISOString()
-    }
+      modified: stats.mtime.toISOString(),
+    },
   });
-  
+
   console.log(`   ✅ ZIP encontrado: ${latestZip}`);
   console.log(`      Tamaño: ${(stats.size / 1024 / 1024).toFixed(2)} MB`);
   console.log(`      Modificado: ${stats.mtime.toISOString()}`);
@@ -97,7 +106,7 @@ if (!fs.existsSync(updateJsonPath)) {
     step: 3,
     action: "Check update.json",
     status: "ERROR",
-    message: "update.json no encontrado"
+    message: "update.json no encontrado",
   });
   console.log("   ❌ update.json no encontrado");
 } else {
@@ -111,8 +120,8 @@ if (!fs.existsSync(updateJsonPath)) {
         version: updateJson.version,
         name: updateJson.name,
         download_url: updateJson.download_url,
-        last_updated: updateJson.last_updated
-      }
+        last_updated: updateJson.last_updated,
+      },
     });
     console.log(`   ✅ update.json válido`);
     console.log(`      Versión: ${updateJson.version}`);
@@ -123,7 +132,7 @@ if (!fs.existsSync(updateJsonPath)) {
       step: 3,
       action: "Check update.json",
       status: "ERROR",
-      message: `Error al parsear: ${e.message}`
+      message: `Error al parsear: ${e.message}`,
     });
     console.log(`   ❌ Error al parsear update.json: ${e.message}`);
   }
@@ -135,7 +144,7 @@ report.steps.push({
   step: 4,
   action: "FTP connection (simulated)",
   status: "SIMULATED",
-  message: "En modo real se conectaría a ftp.vapedot.mx"
+  message: "En modo real se conectaría a ftp.vapedot.mx",
 });
 console.log("   🧪 [SIMULADO] Conectando a FTP...");
 console.log("   🧪 [SIMULADO] Autenticando usuario...");
@@ -150,7 +159,7 @@ if (files.length > 0 && fs.existsSync(updateJsonPath)) {
     action: "Upload files (simulated)",
     status: "SIMULATED",
     files: [latestZip, "update.json"],
-    message: "En modo real se subirían los archivos al servidor"
+    message: "En modo real se subirían los archivos al servidor",
   });
   console.log(`   🧪 [SIMULADO] Subiendo ${latestZip}...`);
   console.log(`   🧪 [SIMULADO] Subiendo update.json...`);
@@ -160,14 +169,16 @@ if (files.length > 0 && fs.existsSync(updateJsonPath)) {
     step: 5,
     action: "Upload files (simulated)",
     status: "SKIPPED",
-    message: "No hay archivos para subir"
+    message: "No hay archivos para subir",
   });
   console.log("   ⏭️  [SIMULADO] No hay archivos para subir");
 }
 
 // Step 6: Simular validación HTTP
 console.log("\n📌 Paso 6: Simular validación HTTP");
-const cfg = fs.existsSync(CONFIG_PATH) ? JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8")) : {};
+const cfg = fs.existsSync(CONFIG_PATH)
+  ? JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"))
+  : {};
 const publicBase = "https://updates.vapedot.mx/warranty-system";
 
 report.steps.push({
@@ -176,9 +187,9 @@ report.steps.push({
   status: "SIMULATED",
   urls: {
     updateJson: `${publicBase}/update.json`,
-    zipFile: files.length > 0 ? `${publicBase}/${files[0]}` : "N/A"
+    zipFile: files.length > 0 ? `${publicBase}/${files[0]}` : "N/A",
   },
-  message: "En modo real se verificaría la accesibilidad HTTP"
+  message: "En modo real se verificaría la accesibilidad HTTP",
 });
 
 console.log("   🧪 [SIMULADO] Verificando URLs públicas...");
@@ -192,14 +203,18 @@ console.log("\n" + "═".repeat(63));
 console.log("📊 RESUMEN DE SIMULACIÓN");
 console.log("═".repeat(63));
 
-const allOk = report.steps.every(s => s.status === "OK" || s.status === "SIMULATED");
-const hasErrors = report.steps.some(s => s.status === "ERROR");
+const allOk = report.steps.every(
+  (s) => s.status === "OK" || s.status === "SIMULATED",
+);
+const hasErrors = report.steps.some((s) => s.status === "ERROR");
 
 report.summary = {
   total_steps: report.steps.length,
-  successful: report.steps.filter(s => s.status === "OK" || s.status === "SIMULATED").length,
-  errors: report.steps.filter(s => s.status === "ERROR").length,
-  ready_for_real_deploy: allOk && !hasErrors
+  successful: report.steps.filter(
+    (s) => s.status === "OK" || s.status === "SIMULATED",
+  ).length,
+  errors: report.steps.filter((s) => s.status === "ERROR").length,
+  ready_for_real_deploy: allOk && !hasErrors,
 };
 
 if (allOk && !hasErrors) {
@@ -207,7 +222,9 @@ if (allOk && !hasErrors) {
   console.log("\n🎯 Tu sistema está configurado correctamente");
   console.log("\n📋 Para ejecutar el deployment REAL:");
   console.log("   1. Verifica las credenciales FTP en Scripts/ftp-config.json");
-  console.log("   2. Prueba la conexión: node dozo-phase11.1-update-credentials.js");
+  console.log(
+    "   2. Prueba la conexión: node dozo-phase11.1-update-credentials.js",
+  );
   console.log("   3. Si la prueba es exitosa, ejecuta: npm run deploy");
 } else {
   console.log("⚠️  Se encontraron problemas en la simulación");
@@ -220,4 +237,3 @@ report.overall_status = allOk && !hasErrors ? "READY" : "ERRORS_FOUND";
 fs.writeFileSync(REPORT, JSON.stringify(report, null, 2));
 console.log(`\n📄 Reporte guardado: ${REPORT}`);
 console.log("═".repeat(63) + "\n");
-

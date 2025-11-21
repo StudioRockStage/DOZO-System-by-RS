@@ -70,10 +70,9 @@ console.log("✅ Archivo .gitignore creado correctamente.");
 console.log("\n📦 Registrando versión inicial en Git...");
 try {
   execSync("git add .", { stdio: "inherit" });
-  execSync(
-    'git commit -m "[DOZO] Initial Commit — Consolidated Base v7.9.1"',
-    { stdio: "inherit" }
-  );
+  execSync('git commit -m "[DOZO] Initial Commit — Consolidated Base v7.9.1"', {
+    stdio: "inherit",
+  });
   console.log("✅ Commit inicial creado correctamente.");
 } catch {
   console.log("⚠️ Commit ya existente o sin cambios pendientes.");
@@ -93,10 +92,14 @@ try {
 // 5️⃣ (Opcional) Configurar conexión remota a GitHub
 // ---------------------------------------------------------
 console.log("\n🌐 Configuración remota (opcional)");
-console.log("   Si ya tienes una cuenta GitHub, crea un repositorio vacío con el mismo nombre:");
+console.log(
+  "   Si ya tienes una cuenta GitHub, crea un repositorio vacío con el mismo nombre:",
+);
 console.log("   👉  https://github.com/rockstagecapital/dozo-system-by-rs\n");
 console.log("   Luego ejecuta este comando dentro del terminal:");
-console.log(`   git remote add origin https://github.com/rockstagecapital/dozo-system-by-rs.git`);
+console.log(
+  `   git remote add origin https://github.com/rockstagecapital/dozo-system-by-rs.git`,
+);
 console.log("   git push -u origin main\n");
 
 // ---------------------------------------------------------
@@ -116,7 +119,7 @@ const status = {
 
 fs.writeFileSync(
   path.join(logDir, "DOZO-Git-Integration.json"),
-  JSON.stringify(status, null, 2)
+  JSON.stringify(status, null, 2),
 );
 
 console.log("🧾 Registro generado en Workflow DB/DOZO-Git-Integration.json");

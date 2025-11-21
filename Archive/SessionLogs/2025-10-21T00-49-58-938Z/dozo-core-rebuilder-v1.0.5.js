@@ -5,67 +5,78 @@ Autor: RockStage Solutions
 Objetivo: Reconstruir el flujo de carga y bootstrap principal del plugin para restaurar la funcionalidad completa y visibilidad del panel de administración en WordPress.
 */
 
-import fs from 'fs';
-import path from 'path';
-import { execSync } from 'child_process';
-import crypto from 'crypto';
-import AdmZip from 'adm-zip';
+import fs from "fs";
+import path from "path";
+import { execSync } from "child_process";
+import crypto from "crypto";
+import AdmZip from "adm-zip";
 
-const baseDir = path.resolve(process.env.HOME, 'Documents/DOZO System by RS');
-const latestBuilds = path.join(baseDir, 'Latest Builds');
-const extractedDir = path.join(latestBuilds, 'Warranty_System_RS_v1.0.5_build');
-const sourceZip = path.join(latestBuilds, 'Warranty_System_RS_v1.0.4.zip');
-const fixedZip = path.join(latestBuilds, 'Warranty_System_RS_v1.0.5.zip');
-const reportPath = path.join(baseDir, 'to chat gpt', 'Global', 'DOZO-CoreRebuild-Report.json');
-const workflowDB = path.join(baseDir, 'Workflow DB');
-const updatesDir = path.join(baseDir, 'updates', 'warranty-system');
+const baseDir = path.resolve(process.env.HOME, "Documents/DOZO System by RS");
+const latestBuilds = path.join(baseDir, "Latest Builds");
+const extractedDir = path.join(latestBuilds, "Warranty_System_RS_v1.0.5_build");
+const sourceZip = path.join(latestBuilds, "Warranty_System_RS_v1.0.4.zip");
+const fixedZip = path.join(latestBuilds, "Warranty_System_RS_v1.0.5.zip");
+const reportPath = path.join(
+  baseDir,
+  "to chat gpt",
+  "Global",
+  "DOZO-CoreRebuild-Report.json",
+);
+const workflowDB = path.join(baseDir, "Workflow DB");
+const updatesDir = path.join(baseDir, "updates", "warranty-system");
 
 const VERSION = {
-  old: '1.0.4',
-  new: '1.0.5',
-  pluginName: 'Warranty System RS',
-  author: 'RockStage Solutions'
+  old: "1.0.4",
+  new: "1.0.5",
+  pluginName: "Warranty System RS",
+  author: "RockStage Solutions",
 };
 
 function sha256(filePath) {
-  const hash = crypto.createHash('sha256');
+  const hash = crypto.createHash("sha256");
   const data = fs.readFileSync(filePath);
   hash.update(data);
-  return hash.digest('hex');
+  return hash.digest("hex");
 }
 
 (async () => {
-  console.log('\n🧠 DOZO Core Rebuilder & Bootstrap Fix - v1.0.5');
-  console.log('═══════════════════════════════════════════════════════════════════════════════════════\n');
+  console.log("\n🧠 DOZO Core Rebuilder & Bootstrap Fix - v1.0.5");
+  console.log(
+    "═══════════════════════════════════════════════════════════════════════════════════════\n",
+  );
 
   if (!fs.existsSync(sourceZip)) {
-    console.error('❌ No se encontró el ZIP v1.0.4');
+    console.error("❌ No se encontró el ZIP v1.0.4");
     process.exit(1);
   }
 
-  console.log('📦 Base ZIP encontrado:', path.basename(sourceZip));
-  console.log('📊 Tamaño:', (fs.statSync(sourceZip).size / 1024 / 1024).toFixed(2), 'MB\n');
+  console.log("📦 Base ZIP encontrado:", path.basename(sourceZip));
+  console.log(
+    "📊 Tamaño:",
+    (fs.statSync(sourceZip).size / 1024 / 1024).toFixed(2),
+    "MB\n",
+  );
 
   // 1️⃣ Preparar entorno limpio
-  console.log('📂 Extrayendo v1.0.4...');
+  console.log("📂 Extrayendo v1.0.4...");
   if (fs.existsSync(extractedDir)) {
     fs.rmSync(extractedDir, { recursive: true });
   }
-  
+
   try {
-    execSync(`unzip -q "${sourceZip}" -d "${extractedDir}"`, { stdio: 'pipe' });
-    console.log('   ✅ Extracción completada\n');
+    execSync(`unzip -q "${sourceZip}" -d "${extractedDir}"`, { stdio: "pipe" });
+    console.log("   ✅ Extracción completada\n");
   } catch (err) {
-    console.error('   ❌ Error al extraer ZIP:', err.message);
+    console.error("   ❌ Error al extraer ZIP:", err.message);
     process.exit(1);
   }
 
-  const pluginDir = path.join(extractedDir, 'warranty-system-rs');
-  const mainFile = path.join(pluginDir, 'warranty-system-rs.php');
-  const includesDir = path.join(pluginDir, 'includes');
+  const pluginDir = path.join(extractedDir, "warranty-system-rs");
+  const mainFile = path.join(pluginDir, "warranty-system-rs.php");
+  const includesDir = path.join(pluginDir, "includes");
 
   if (!fs.existsSync(mainFile)) {
-    console.error('   ❌ No se encontró warranty-system-rs.php');
+    console.error("   ❌ No se encontró warranty-system-rs.php");
     process.exit(1);
   }
 
@@ -74,14 +85,14 @@ function sha256(filePath) {
   }
 
   // 2️⃣ Validar archivos críticos
-  console.log('🔍 Validando archivos críticos...\n');
-  
+  console.log("🔍 Validando archivos críticos...\n");
+
   const requiredFiles = {
-    'class-warranty-core.php': 'RS_Warranty_Core',
-    'class-warranty-admin.php': 'RS_Warranty_Admin',
-    'class-warranty-frontend.php': 'RS_Warranty_Frontend',
-    'class-warranty-settings.php': 'RS_Warranty_Settings',
-    'class-warranty-database.php': 'RS_Warranty_Database'
+    "class-warranty-core.php": "RS_Warranty_Core",
+    "class-warranty-admin.php": "RS_Warranty_Admin",
+    "class-warranty-frontend.php": "RS_Warranty_Frontend",
+    "class-warranty-settings.php": "RS_Warranty_Settings",
+    "class-warranty-database.php": "RS_Warranty_Database",
   };
 
   const missing = [];
@@ -89,11 +100,11 @@ function sha256(filePath) {
 
   for (const [file, className] of Object.entries(requiredFiles)) {
     const filePath = path.join(includesDir, file);
-    
+
     if (!fs.existsSync(filePath)) {
       console.warn(`   ⚠️  FALTA: ${file} - Creando stub...`);
       missing.push(file);
-      
+
       // Crear stub básico
       const stub = `<?php
 /**
@@ -130,8 +141,8 @@ if (!class_exists('${className}')) {
     }
 }
 `;
-      
-      fs.writeFileSync(filePath, stub, 'utf8');
+
+      fs.writeFileSync(filePath, stub, "utf8");
       console.log(`   ✅ Stub creado: ${file}`);
     } else {
       existing.push(file);
@@ -140,8 +151,8 @@ if (!class_exists('${className}')) {
   }
 
   // 3️⃣ Restaurar bootstrap principal
-  console.log('\n🔨 Reconstruyendo bootstrap principal...');
-  
+  console.log("\n🔨 Reconstruyendo bootstrap principal...");
+
   const bootstrap = `<?php
 /**
  * Plugin Name: Warranty System RS
@@ -386,68 +397,81 @@ function rs_warranty_plugin_action_links($links) {
 add_filter('plugin_action_links_' . RS_WARRANTY_BASENAME, 'rs_warranty_plugin_action_links');
 `;
 
-  fs.writeFileSync(mainFile, bootstrap, 'utf8');
-  console.log('   ✅ Bootstrap reconstruido con admin menu visible\n');
+  fs.writeFileSync(mainFile, bootstrap, "utf8");
+  console.log("   ✅ Bootstrap reconstruido con admin menu visible\n");
 
   // 4️⃣ Reempaquetar plugin corregido
-  console.log('📦 Empaquetando v1.0.5...');
-  
+  console.log("📦 Empaquetando v1.0.5...");
+
   if (fs.existsSync(fixedZip)) {
     fs.rmSync(fixedZip);
   }
 
   const zip = new AdmZip();
-  zip.addLocalFolder(pluginDir, 'warranty-system-rs');
+  zip.addLocalFolder(pluginDir, "warranty-system-rs");
   zip.writeZip(fixedZip);
-  
+
   const zipSize = fs.statSync(fixedZip).size;
   const zipSha = sha256(fixedZip);
-  
-  console.log('   ✅ ZIP creado:', path.basename(fixedZip));
-  console.log('   📊 Tamaño:', (zipSize / 1024 / 1024).toFixed(2), 'MB');
-  console.log('   🔐 SHA-256:', zipSha.substring(0, 32) + '...\n');
+
+  console.log("   ✅ ZIP creado:", path.basename(fixedZip));
+  console.log("   📊 Tamaño:", (zipSize / 1024 / 1024).toFixed(2), "MB");
+  console.log("   🔐 SHA-256:", zipSha.substring(0, 32) + "...\n");
 
   // 5️⃣ Actualizar Workflow DB
-  console.log('🧠 Actualizando Workflow DB...');
-  
-  fs.writeFileSync(
-    path.join(workflowDB, 'ActivePlugin.json'),
-    JSON.stringify({
-      plugin_name: VERSION.pluginName,
-      version: VERSION.new,
-      author: VERSION.author,
-      active: true
-    }, null, 2)
-  );
-  console.log('   ✅ ActivePlugin.json actualizado');
+  console.log("🧠 Actualizando Workflow DB...");
 
   fs.writeFileSync(
-    path.join(workflowDB, 'Versions.json'),
-    JSON.stringify({
-      active_plugin: VERSION.pluginName,
-      version: VERSION.new,
-      certified_base: true
-    }, null, 2)
+    path.join(workflowDB, "ActivePlugin.json"),
+    JSON.stringify(
+      {
+        plugin_name: VERSION.pluginName,
+        version: VERSION.new,
+        author: VERSION.author,
+        active: true,
+      },
+      null,
+      2,
+    ),
   );
-  console.log('   ✅ Versions.json actualizado');
+  console.log("   ✅ ActivePlugin.json actualizado");
 
   fs.writeFileSync(
-    path.join(updatesDir, 'update.json'),
-    JSON.stringify({
-      version: VERSION.new,
-      name: VERSION.pluginName,
-      author: VERSION.author,
-      download_url: `https://updates.vapedot.mx/warranty-system/Warranty_System_RS_v${VERSION.new}.zip`,
-      last_updated: new Date().toISOString().split('T')[0],
-      changelog: 'Core rebuilder executed. Bootstrap fixed with visible admin menu. Complete admin panel functionality restored.'
-    }, null, 2)
+    path.join(workflowDB, "Versions.json"),
+    JSON.stringify(
+      {
+        active_plugin: VERSION.pluginName,
+        version: VERSION.new,
+        certified_base: true,
+      },
+      null,
+      2,
+    ),
   );
-  console.log('   ✅ update.json actualizado\n');
+  console.log("   ✅ Versions.json actualizado");
+
+  fs.writeFileSync(
+    path.join(updatesDir, "update.json"),
+    JSON.stringify(
+      {
+        version: VERSION.new,
+        name: VERSION.pluginName,
+        author: VERSION.author,
+        download_url: `https://updates.vapedot.mx/warranty-system/Warranty_System_RS_v${VERSION.new}.zip`,
+        last_updated: new Date().toISOString().split("T")[0],
+        changelog:
+          "Core rebuilder executed. Bootstrap fixed with visible admin menu. Complete admin panel functionality restored.",
+      },
+      null,
+      2,
+    ),
+  );
+  console.log("   ✅ update.json actualizado\n");
 
   // 6️⃣ Limpiar
-  console.log('🧹 Limpiando archivos temporales...');
+  console.log("🧹 Limpiando archivos temporales...");
   fs.rmSync(extractedDir, { recursive: true });
-  console.log('   ✅ Limpieza completada\n');
+  console.log("   ✅ Limpieza completada\n");
 
   // 7️⃣ Generar reporte
   const report = {
@@ -460,36 +484,38 @@ add_filter('plugin_action_links_' . RS_WARRANTY_BASENAME, 'rs_warranty_plugin_ac
     admin_menu_visible: true,
     files_status: {
       existing: existing,
-      missing_stubs_created: missing
+      missing_stubs_created: missing,
     },
     improvements: [
-      'Core bootstrap completely rebuilt',
-      'Admin menu now visible in WordPress',
-      'Direct menu creation with add_menu_page',
-      'Submenu items added (Panel, Settings)',
-      'Admin page render functions implemented',
-      'Plugin action links enhanced',
-      'Proper textdomain loading',
-      'Version updated to 1.0.5',
-      `${missing.length} missing stubs created`
+      "Core bootstrap completely rebuilt",
+      "Admin menu now visible in WordPress",
+      "Direct menu creation with add_menu_page",
+      "Submenu items added (Panel, Settings)",
+      "Admin page render functions implemented",
+      "Plugin action links enhanced",
+      "Proper textdomain loading",
+      "Version updated to 1.0.5",
+      `${missing.length} missing stubs created`,
     ],
     build: {
       zipName: path.basename(fixedZip),
       zipPath: fixedZip,
       zipSize: zipSize,
       zipSizeMB: parseFloat((zipSize / 1024 / 1024).toFixed(2)),
-      sha256: zipSha
+      sha256: zipSha,
     },
-    status: 'core_rebuilt',
+    status: "core_rebuilt",
     workflow_updated: true,
     timestamp: new Date().toISOString(),
-    result: 'success'
+    result: "success",
   };
 
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
 
-  console.log('═══════════════════════════════════════════════════════════════════════════════════════');
-  console.log('📊 RESUMEN DE CORE REBUILD\n');
+  console.log(
+    "═══════════════════════════════════════════════════════════════════════════════════════",
+  );
+  console.log("📊 RESUMEN DE CORE REBUILD\n");
   console.log(`   Versión anterior: ${VERSION.old}`);
   console.log(`   Versión nueva: ${VERSION.new}`);
   console.log(`   Archivos existentes: ${existing.length}`);
@@ -498,11 +524,14 @@ add_filter('plugin_action_links_' . RS_WARRANTY_BASENAME, 'rs_warranty_plugin_ac
   console.log(`   Bootstrap: ✅ RECONSTRUIDO`);
   console.log(`   Estado: ✅ SUCCESS\n`);
 
-  console.log('✅ Core Rebuilder completado correctamente.');
+  console.log("✅ Core Rebuilder completado correctamente.");
   console.log(`📦 Nuevo ZIP: ${fixedZip}`);
   console.log(`📄 Reporte: ${reportPath}`);
-  console.log('\n═══════════════════════════════════════════════════════════════════════════════════════\n');
-  
-  console.log('🎉 Warranty System RS v1.0.5 - Admin menu ahora visible en WordPress!\n');
-})();
+  console.log(
+    "\n═══════════════════════════════════════════════════════════════════════════════════════\n",
+  );
 
+  console.log(
+    "🎉 Warranty System RS v1.0.5 - Admin menu ahora visible en WordPress!\n",
+  );
+})();

@@ -19,23 +19,24 @@ async function listFiles() {
       user: config.user,
       password: config.password,
       port: config.port,
-      secure: config.secure
+      secure: config.secure,
     });
 
     console.log(`\n📁 Navegando a: ${config.remotePath}`);
     await client.cd(config.remotePath);
-    
+
     console.log("\n📋 Archivos en el directorio remoto:\n");
     const list = await client.list();
-    
-    list.forEach(file => {
+
+    list.forEach((file) => {
       const size = (file.size / 1024 / 1024).toFixed(2);
       const type = file.type === 1 ? "📄" : "📁";
-      console.log(`${type} ${file.name.padEnd(40)} ${size.padStart(8)} MB  ${file.modifiedAt || ''}`);
+      console.log(
+        `${type} ${file.name.padEnd(40)} ${size.padStart(8)} MB  ${file.modifiedAt || ""}`,
+      );
     });
-    
-    console.log(`\n✅ Total de archivos: ${list.length}`);
 
+    console.log(`\n✅ Total de archivos: ${list.length}`);
   } catch (error) {
     console.error("❌ Error:", error.message);
   } finally {
@@ -44,4 +45,3 @@ async function listFiles() {
 }
 
 listFiles();
-

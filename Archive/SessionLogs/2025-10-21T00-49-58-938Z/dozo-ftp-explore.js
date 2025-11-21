@@ -10,22 +10,27 @@ const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 
 async function explore(client, dir, depth = 0, maxDepth = 3) {
   if (depth > maxDepth) return;
-  
+
   const indent = "  ".repeat(depth);
-  
+
   try {
     await client.cd(dir);
     const list = await client.list();
-    
+
     for (const item of list) {
-      if (item.name === '.' || item.name === '..') continue;
-      
-      if (item.type === 2) { // Directory
+      if (item.name === "." || item.name === "..") continue;
+
+      if (item.type === 2) {
+        // Directory
         console.log(`${indent}📁 ${item.name}/`);
-        
+
         // Buscar directorios relevantes
-        if (item.name.includes('update') || item.name.includes('warranty') || 
-            item.name.includes('vapedot') || item.name === 'public_html') {
+        if (
+          item.name.includes("update") ||
+          item.name.includes("warranty") ||
+          item.name.includes("vapedot") ||
+          item.name === "public_html"
+        ) {
           try {
             await explore(client, `${dir}/${item.name}`, depth + 1, maxDepth);
             await client.cd(dir);
@@ -35,7 +40,11 @@ async function explore(client, dir, depth = 0, maxDepth = 3) {
         }
       } else {
         // Buscar archivos update.json
-        if (item.name === 'update.json' || item.name.includes('warranty') || item.name.includes('.zip')) {
+        if (
+          item.name === "update.json" ||
+          item.name.includes("warranty") ||
+          item.name.includes(".zip")
+        ) {
           const size = (item.size / 1024).toFixed(1);
           console.log(`${indent}📄 ${item.name} (${size} KB)`);
         }
@@ -57,16 +66,15 @@ async function findUpdateJson() {
       user: config.user,
       password: config.password,
       port: config.port,
-      secure: config.secure
+      secure: config.secure,
     });
 
     const pwd = await client.pwd();
     console.log(`📍 Directorio inicial: ${pwd}\n`);
-    
-    await explore(client, pwd, 0, 2);
-    
-    console.log("\n✅ Exploración completada");
 
+    await explore(client, pwd, 0, 2);
+
+    console.log("\n✅ Exploración completada");
   } catch (error) {
     console.error("❌ Error:", error.message);
   } finally {
@@ -75,4 +83,3 @@ async function findUpdateJson() {
 }
 
 findUpdateJson();
-

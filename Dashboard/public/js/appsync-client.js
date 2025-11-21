@@ -35,7 +35,7 @@ ws.onmessage = (msg) => {
 ws.onclose = () => {
   console.log("📡 Desconectado del Event Bridge");
   updateConnectionStatus("Desconectado", "error");
-  
+
   // Intentar reconectar después de 5 segundos
   setTimeout(() => {
     console.log("🔄 Intentando reconectar...");
@@ -63,7 +63,7 @@ function updateTelemetryStatus(data) {
     "repo-info": `Repositorio: ${data.repo}`,
     "branch-info": `Rama: ${data.branch}`,
     "version-info": `Versión: ${data.version}`,
-    "commit-info": `Último commit: ${data.lastCommit}`
+    "commit-info": `Último commit: ${data.lastCommit}`,
   };
 
   Object.entries(elements).forEach(([id, text]) => {
@@ -90,7 +90,7 @@ function formatTimestamp(timestamp) {
       day: "2-digit",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit"
+      second: "2-digit",
     });
   } catch (err) {
     return timestamp;
@@ -111,5 +111,5 @@ window.AppSyncClient = {
   sendCommand,
   updateTelemetryStatus,
   updateLastCommit,
-  isConnected: () => ws.readyState === WebSocket.OPEN
+  isConnected: () => ws.readyState === WebSocket.OPEN,
 };

@@ -17,6 +17,7 @@ DOZO Deep Audit v7.5.1 introduces **Force Mode** for SmartSync Layout Validation
 **Purpose:** Automatically organize loose files scattered across temporary folders.
 
 **Capabilities:**
+
 - Scans `/Objetos/` folder for loose files
 - Classifies files by name patterns and extensions
 - Moves files to correct destinations
@@ -33,9 +34,11 @@ DOZO Deep Audit v7.5.1 introduces **Force Mode** for SmartSync Layout Validation
 **Enhanced Function:** `dozo_smartsync_validate_layout($force_mode = false)`
 
 **New Parameter:**
+
 - `$force_mode` (boolean): Enables automatic file organization from `/Objetos/`
 
 **Usage:**
+
 ```php
 // Standard validation
 $report = dozo_smartsync_validate_layout();
@@ -45,6 +48,7 @@ $report = dozo_smartsync_validate_layout(true);
 ```
 
 **AJAX Usage:**
+
 ```javascript
 jQuery.post(ajaxurl, {
     action: 'dozo_smartsync_validate',
@@ -62,24 +66,25 @@ jQuery.post(ajaxurl, {
 
 **Classification Rules:**
 
-| Pattern | Destination | Example |
-|---------|------------|---------|
-| `panel-*` | `Admin Panels/panel-name/` | `panel-dozo-dashboard.html` |
-| `warranty-*.html` | `Shortcodes/` | `warranty-verifier-preview.html` |
-| `rockstage-*.css` | `Themes/` | `rockstage-dark.css` |
-| `theme*.css` | `Themes/` | `theme-light.css` |
-| `dashboard.js`, `form.js` | `Scripts/` | `warranty-form.js` |
-| `*card*.{html,css,js}` | `UI Components/cards/` | `warranty-card.html` |
-| `*modal*.{html,css,js}` | `UI Components/modal/` | `modal-confirm.js` |
-| `*form*.{html,css,js}` | `UI Components/forms/` | `form-builder.css` |
-| `*icon*.{png,svg,jpg}` | `Assets/icons/` | `icon-warranty.svg` |
-| `*logo*.{png,svg,jpg}` | `Assets/logos/` | `logo-rockstage.png` |
-| `*.{png,jpg,svg}` | `Assets/images/` | `banner-home.jpg` |
-| `*.md` | `Documentation/` | `README-API.md` |
+| Pattern                   | Destination                | Example                          |
+| ------------------------- | -------------------------- | -------------------------------- |
+| `panel-*`                 | `Admin Panels/panel-name/` | `panel-dozo-dashboard.html`      |
+| `warranty-*.html`         | `Shortcodes/`              | `warranty-verifier-preview.html` |
+| `rockstage-*.css`         | `Themes/`                  | `rockstage-dark.css`             |
+| `theme*.css`              | `Themes/`                  | `theme-light.css`                |
+| `dashboard.js`, `form.js` | `Scripts/`                 | `warranty-form.js`               |
+| `*card*.{html,css,js}`    | `UI Components/cards/`     | `warranty-card.html`             |
+| `*modal*.{html,css,js}`   | `UI Components/modal/`     | `modal-confirm.js`               |
+| `*form*.{html,css,js}`    | `UI Components/forms/`     | `form-builder.css`               |
+| `*icon*.{png,svg,jpg}`    | `Assets/icons/`            | `icon-warranty.svg`              |
+| `*logo*.{png,svg,jpg}`    | `Assets/logos/`            | `logo-rockstage.png`             |
+| `*.{png,jpg,svg}`         | `Assets/images/`           | `banner-home.jpg`                |
+| `*.md`                    | `Documentation/`           | `README-API.md`                  |
 
 **Example Classification:**
 
 **Input Files in `/Objetos/`:**
+
 ```
 /Objetos/
 ├── panel-preset-manager.html
@@ -93,6 +98,7 @@ jQuery.post(ajaxurl, {
 ```
 
 **After Force Mode:**
+
 ```
 /Admin Panels/panel-preset-manager/
 ├── panel-preset-manager.html
@@ -144,6 +150,7 @@ jQuery.post(ajaxurl, {
 ```
 
 **Return Value:**
+
 ```json
 {
   "scanned": 25,
@@ -164,14 +171,14 @@ jQuery.post(ajaxurl, {
 **Automatic Tag Addition:**
 
 **HTML Files:**
+
 ```html
 <!-- @dozo:sync auto -->
-<div class="warranty-panel">
-    ...
-</div>
+<div class="warranty-panel">...</div>
 ```
 
 **CSS Files:**
+
 ```css
 /* @dozo:sync auto */
 .warranty-card {
@@ -180,6 +187,7 @@ jQuery.post(ajaxurl, {
 ```
 
 **JavaScript Files:**
+
 ```javascript
 // @dozo:sync auto
 // @dozo:validate-integrity
@@ -189,6 +197,7 @@ jQuery.post(ajaxurl, {
 ```
 
 **Features:**
+
 - Only injects if tag doesn't already exist
 - Adds appropriate comment syntax for file type
 - Adds integrity validation tag for JS files
@@ -201,6 +210,7 @@ jQuery.post(ajaxurl, {
 **Purpose:** Creates a comprehensive index of the entire Claude AI design structure.
 
 **Generated JSON Structure:**
+
 ```json
 {
   "version": "7.5.1",
@@ -244,6 +254,7 @@ jQuery.post(ajaxurl, {
 **File Location:** `/Claude AI/DISEÑOS Warranty System by RockStage/DOZO-INDEX.json`
 
 **Usage Benefits:**
+
 - Quick overview of entire design structure
 - Verify folder completeness
 - Track all files and subdirectories
@@ -276,6 +287,7 @@ jQuery.post(ajaxurl, {
 ```
 
 **Key Metrics:**
+
 - `force_mode`: Indicates if Force Mode was active
 - `files_moved`: Total files moved from `/Objetos/`
 - `files_classified`: Total files successfully classified
@@ -364,17 +376,17 @@ jQuery.post(ajaxurl, {
 
 ## 🎯 Success Criteria
 
-| Goal | Status |
-|------|--------|
-| Force Mode parameter added | ✅ Complete |
-| File classification system | ✅ Complete |
+| Goal                        | Status      |
+| --------------------------- | ----------- |
+| Force Mode parameter added  | ✅ Complete |
+| File classification system  | ✅ Complete |
 | Automatic file organization | ✅ Complete |
-| /Objetos/ folder scanning | ✅ Complete |
-| Tag injection during move | ✅ Complete |
-| DOZO-INDEX.json generation | ✅ Complete |
-| Enhanced AJAX endpoint | ✅ Complete |
-| Comprehensive logging | ✅ Complete |
-| Backward compatibility | ✅ 100% |
+| /Objetos/ folder scanning   | ✅ Complete |
+| Tag injection during move   | ✅ Complete |
+| DOZO-INDEX.json generation  | ✅ Complete |
+| Enhanced AJAX endpoint      | ✅ Complete |
+| Comprehensive logging       | ✅ Complete |
+| Backward compatibility      | ✅ 100%     |
 
 **Overall:** ✅ **9/9 Goals Achieved (100%)**
 
@@ -385,6 +397,7 @@ jQuery.post(ajaxurl, {
 ### Upload Files (3 total)
 
 **MODIFIED (3):**
+
 1. `rockstage-warranty-system.php` (v7.5.1)
 2. `tools/dozo-smartsync-layout.php` (Force Mode)
 3. `tools/dozo-syntax-shield.php` (updated log)
@@ -396,6 +409,7 @@ jQuery.post(ajaxurl, {
 2. **Verify version:** v7.5.1 in Plugins page
 
 3. **Check debug.log:**
+
    ```
    ✅ DOZO SmartSync Layout Validation v7.5.1 (Force Mode) loaded
    ✅ DOZO v7.5.1 initialized successfully - Full Self-Healing + SmartSync Force Mode
@@ -403,16 +417,21 @@ jQuery.post(ajaxurl, {
 
 4. **Test Force Mode (if files in /Objetos/):**
    Browser console:
+
    ```javascript
-   jQuery.post(ajaxurl, {
-       action: 'dozo_smartsync_validate',
-       force_mode: 'true',
-       nonce: jQuery('[name*="nonce"]').val()
-   }, function(response) {
-       console.log('✅ Force Mode Report:', response.data);
-       console.log('📦 Files moved:', response.data.files_moved);
-       console.log('🏷️ Files classified:', response.data.files_classified);
-   });
+   jQuery.post(
+     ajaxurl,
+     {
+       action: "dozo_smartsync_validate",
+       force_mode: "true",
+       nonce: jQuery('[name*="nonce"]').val(),
+     },
+     function (response) {
+       console.log("✅ Force Mode Report:", response.data);
+       console.log("📦 Files moved:", response.data.files_moved);
+       console.log("🏷️ Files classified:", response.data.files_classified);
+     },
+   );
    ```
 
 5. **Verify DOZO-INDEX.json:**
@@ -425,6 +444,7 @@ jQuery.post(ajaxurl, {
 ### Admin Panel Files
 
 **Input:**
+
 ```
 panel-preset-manager.html
 panel-preset-manager.css
@@ -432,6 +452,7 @@ panel-preset-manager.js
 ```
 
 **Output Location:**
+
 ```
 /Admin Panels/panel-preset-manager/
 ├── panel-preset-manager.html  ← <!-- @dozo:sync auto -->
@@ -443,11 +464,13 @@ panel-preset-manager.js
 ### Shortcode Files
 
 **Input:**
+
 ```
 warranty-verifier-premium.html
 ```
 
 **Output Location:**
+
 ```
 /Shortcodes/
 └── warranty-verifier-premium.html  ← <!-- @dozo:sync auto -->
@@ -456,12 +479,14 @@ warranty-verifier-premium.html
 ### Theme Files
 
 **Input:**
+
 ```
 rockstage-gradient.css
 theme-corporate.css
 ```
 
 **Output Location:**
+
 ```
 /Themes/
 ├── rockstage-gradient.css  ← /* @dozo:sync auto */
@@ -471,6 +496,7 @@ theme-corporate.css
 ### UI Component Files
 
 **Input:**
+
 ```
 card-warranty-status.html
 modal-confirmation.js
@@ -478,6 +504,7 @@ form-custom-fields.css
 ```
 
 **Output Location:**
+
 ```
 /UI Components/
 ├── cards/
@@ -492,6 +519,7 @@ form-custom-fields.css
 ### Asset Files
 
 **Input:**
+
 ```
 icon-warranty-check.svg
 logo-rockstage-2025.png
@@ -499,6 +527,7 @@ banner-home-warranty.jpg
 ```
 
 **Output Location:**
+
 ```
 /Assets/
 ├── icons/
@@ -557,4 +586,3 @@ Generated by: DOZO Deep Audit System v7.5.1
 Document Version: 1.0  
 Last Updated: October 15, 2025  
 Classification: Public - Major Enhancement
-

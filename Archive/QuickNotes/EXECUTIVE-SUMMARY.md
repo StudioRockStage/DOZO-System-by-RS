@@ -30,7 +30,7 @@ El plugin **Warranty System RS v1.0.0** está **100% certificado** y listo para 
 # WordPress Admin
 Plugins → Add New → Upload Plugin → warranty-system-rs.zip
 
-# WP-CLI  
+# WP-CLI
 wp plugin install warranty-system-rs.zip --activate
 ```
 
@@ -55,12 +55,12 @@ wp plugin install warranty-system-rs.zip --activate
 
 ## 📁 Recursos
 
-| Recurso | Ubicación |
-|---------|-----------|
-| **Inicio** | `START-HERE-BASE-v1.0.0.md` |
-| **Validar** | `./verify-zip-only.sh` |
-| **Índice** | `MASTER-INDEX-2025-10-21.md` |
-| **Sesión** | `to chat gpt/Global/DOZO-SESSION-COMPLETE-FINAL.md` |
+| Recurso     | Ubicación                                           |
+| ----------- | --------------------------------------------------- |
+| **Inicio**  | `START-HERE-BASE-v1.0.0.md`                         |
+| **Validar** | `./verify-zip-only.sh`                              |
+| **Índice**  | `MASTER-INDEX-2025-10-21.md`                        |
+| **Sesión**  | `to chat gpt/Global/DOZO-SESSION-COMPLETE-FINAL.md` |
 
 ---
 
@@ -68,7 +68,7 @@ wp plugin install warranty-system-rs.zip --activate
 
 ```
 Plugin:              READY ✅
-WordPress:           COMPLIANT ✅  
+WordPress:           COMPLIANT ✅
 Updates:             OPERATIONAL ✅
 Validation:          AUTOMATED ✅
 ```
@@ -78,5 +78,4 @@ Validation:          AUTOMATED ✅
 ---
 
 **DOZO System by RockStage v7.9**  
-*Sesión: 2025-10-21*
-
+_Sesión: 2025-10-21_

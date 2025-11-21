@@ -12,7 +12,6 @@
 - **Notarizado por Apple:** ❌ No
 - **Ticket aplicado:** ❌ No
 
-
 ### ⚠️ Instalación sin notarización
 
 Este instalador no está notarizado por Apple. Para instalarlo:
@@ -23,7 +22,6 @@ Este instalador no está notarizado por Apple. Para instalarlo:
    ```bash
    xattr -cr "DOZO-Control-Center-RockStage-v2.3.0.dmg"
    ```
-
 
 ## 🚀 Instalación
 

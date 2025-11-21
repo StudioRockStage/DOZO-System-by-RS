@@ -130,40 +130,24 @@
   ],
   "healthAnalysis": {
     "overallStatus": "HEALTHY",
-    "warnings": [
-      "Alto uso de memoria del sistema"
-    ],
-    "recommendations": [
-      "Considerar cerrar aplicaciones innecesarias"
-    ]
+    "warnings": ["Alto uso de memoria del sistema"],
+    "recommendations": ["Considerar cerrar aplicaciones innecesarias"]
   },
   "aiSyncContext": {
     "cursorAI": {
       "status": "ACTIVE",
       "lastSync": "2025-10-27T02:31:11.502Z",
-      "capabilities": [
-        "code_generation",
-        "validation",
-        "telemetry"
-      ]
+      "capabilities": ["code_generation", "validation", "telemetry"]
     },
     "claudeAI": {
       "status": "STANDBY",
       "integration": "API_READY",
-      "capabilities": [
-        "deep_analysis",
-        "optimization",
-        "documentation"
-      ]
+      "capabilities": ["deep_analysis", "optimization", "documentation"]
     },
     "chatGPT": {
       "status": "STANDBY",
       "integration": "API_READY",
-      "capabilities": [
-        "conversational_ai",
-        "troubleshooting",
-        "training"
-      ]
+      "capabilities": ["conversational_ai", "troubleshooting", "training"]
     }
   },
   "nextSteps": [

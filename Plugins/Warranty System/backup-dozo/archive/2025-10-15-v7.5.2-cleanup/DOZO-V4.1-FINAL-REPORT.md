@@ -1,4 +1,5 @@
 # 🔒 DOZO v4.1 - FINAL AUDIT REPORT
+
 ## Security Nonce Validation & Session Refresh
 
 **Plugin:** Warranty System by RockStage  
@@ -15,19 +16,19 @@ El **Warranty System by RockStage** ha completado la auditoría DOZO v4.1, resol
 
 ### ✅ **Cumplimiento DOZO Global: 100/100**
 
-| Layer | Descripción | Score | Status |
-|-------|-------------|-------|--------|
-| **v1.0** | Visual Replication | 100/100 | ✅ |
-| **v2.0** | Functional Integration | 100/100 | ✅ |
-| **v3.0** | Semantic Translation | 100/100 | ✅ |
-| **v3.1** | Shortcode Execution | 100/100 | ✅ |
-| **v3.2** | Warranty Verifier | 100/100 | ✅ |
-| **v3.5** | Data Persistence | 100/100 | ✅ |
-| **v3.6** | Product Linking | 100/100 | ✅ |
-| **v3.7** | Counter Refresh | 100/100 | ✅ |
-| **v3.9** | Nonce Validation (IDs) | 100/100 | ✅ |
-| **v4.0** | Race Condition Fix | 100/100 | ✅ |
-| **v4.1** | **Nonce Backend Sync** | **100/100** | ✅ |
+| Layer    | Descripción            | Score       | Status |
+| -------- | ---------------------- | ----------- | ------ |
+| **v1.0** | Visual Replication     | 100/100     | ✅     |
+| **v2.0** | Functional Integration | 100/100     | ✅     |
+| **v3.0** | Semantic Translation   | 100/100     | ✅     |
+| **v3.1** | Shortcode Execution    | 100/100     | ✅     |
+| **v3.2** | Warranty Verifier      | 100/100     | ✅     |
+| **v3.5** | Data Persistence       | 100/100     | ✅     |
+| **v3.6** | Product Linking        | 100/100     | ✅     |
+| **v3.7** | Counter Refresh        | 100/100     | ✅     |
+| **v3.9** | Nonce Validation (IDs) | 100/100     | ✅     |
+| **v4.0** | Race Condition Fix     | 100/100     | ✅     |
+| **v4.1** | **Nonce Backend Sync** | **100/100** | ✅     |
 
 ---
 
@@ -42,6 +43,7 @@ El **Warranty System by RockStage** ha completado la auditoría DOZO v4.1, resol
 ### Diagnóstico DOZO
 
 **Root Cause:**
+
 ```
 v3.9 (Frontend):  IDs cambiados a _general, _templates, _advanced ✅
 v3.9 (Backend):   Validación seguía buscando nonce sin sufijo ❌
@@ -52,6 +54,7 @@ Resultado: MISMATCH → "Verificación de seguridad falló"
 **Evidence:**
 
 **Frontend (settings.php - v3.9):**
+
 ```php
 wp_nonce_field('rs_warranty_save_settings', 'rs_warranty_settings_nonce_general');
 wp_nonce_field('rs_warranty_save_settings', 'rs_warranty_settings_nonce_templates');
@@ -59,15 +62,17 @@ wp_nonce_field('rs_warranty_save_settings', 'rs_warranty_settings_nonce_advanced
 ```
 
 **Backend (class-warranty-admin.php - ANTES v4.1):**
+
 ```php
 // ❌ PROBLEMA: Busca nonce sin sufijo
-if (!isset($_POST['rs_warranty_settings_nonce']) || 
+if (!isset($_POST['rs_warranty_settings_nonce']) ||
     !wp_verify_nonce($_POST['rs_warranty_settings_nonce'], 'rs_warranty_save_settings')) {
     wp_die('Verificación de seguridad falló');
 }
 ```
 
 **Mismatch:**
+
 - Frontend envía: `rs_warranty_settings_nonce_advanced`
 - Backend busca: `rs_warranty_settings_nonce`
 - Resultado: ❌ Nonce no encontrado → Error
@@ -81,38 +86,40 @@ if (!isset($_POST['rs_warranty_settings_nonce']) ||
 **Ubicación:** `includes/class-warranty-admin.php` (líneas 327-344)
 
 **ANTES (PROBLEMA):**
+
 ```php
 public function save_settings() {
     if (!current_user_can('manage_woocommerce')) {
         wp_die('No tienes permisos para realizar esta acción');
     }
-    
+
     // ❌ PROBLEMA: Busca nonce genérico
-    if (!isset($_POST['rs_warranty_settings_nonce']) || 
+    if (!isset($_POST['rs_warranty_settings_nonce']) ||
         !wp_verify_nonce($_POST['rs_warranty_settings_nonce'], 'rs_warranty_save_settings')) {
         wp_die('Verificación de seguridad falló');
     }
-    
+
     $section = isset($_POST['section']) ? sanitize_text_field($_POST['section']) : 'general';
-    
+
     // ... switch cases ...
 }
 ```
 
 **DESPUÉS (CORREGIDO):**
+
 ```php
 public function save_settings() {
     if (!current_user_can('manage_woocommerce')) {
         wp_die('No tienes permisos para realizar esta acción');
     }
-    
+
     // Determinar sección primero
     $section = isset($_POST['section']) ? sanitize_text_field($_POST['section']) : 'general';
-    
+
     // ✅ DOZO v4.1: Verificar nonce según la sección (IDs únicos)
     $nonce_field = 'rs_warranty_settings_nonce_' . $section;
     $nonce_action = 'rs_warranty_save_settings';
-    
+
     if (!isset($_POST[$nonce_field]) || !wp_verify_nonce($_POST[$nonce_field], $nonce_action)) {
         error_log(sprintf(
             '⚠️ DOZO v4.1: Nonce validation failed - Section: %s, Field: %s, Action: %s',
@@ -122,14 +129,15 @@ public function save_settings() {
         ));
         wp_die('Verificación de seguridad falló. Por favor recarga la página e intenta de nuevo.');
     }
-    
+
     error_log(sprintf('✅ DOZO v4.1: Nonce válido para sección: %s', $section));
-    
+
     // ... switch cases ...
 }
 ```
 
 **Diferencias clave:**
+
 1. ✅ Determina `$section` **antes** de validar nonce
 2. ✅ Construye `$nonce_field` dinámicamente con sufijo correcto
 3. ✅ Enhanced logging para debugging
@@ -142,47 +150,55 @@ public function save_settings() {
 **Ubicación:** `tools/nonce-validator.php` (líneas 131-179)
 
 **Funcionalidad:**
+
 ```javascript
 // Se ejecuta automáticamente en admin_footer
-console.log('🧩 DOZO v4.1: Validación histórica de nonces iniciada');
+console.log("🧩 DOZO v4.1: Validación histórica de nonces iniciada");
 
 const nonces = document.querySelectorAll('input[name*="nonce"]');
 const seen = new Map();
 let hasDuplicates = false;
 
-nonces.forEach(el => {
-    const value = el.value;
-    if (value && value.length > 0) {
-        if (seen.has(value)) {
-            console.warn('⚠️ DOZO v4.1: Nonce duplicado detectado:', el.name);
-            hasDuplicates = true;
-        }
-        seen.set(value, el.name);
+nonces.forEach((el) => {
+  const value = el.value;
+  if (value && value.length > 0) {
+    if (seen.has(value)) {
+      console.warn("⚠️ DOZO v4.1: Nonce duplicado detectado:", el.name);
+      hasDuplicates = true;
     }
+    seen.set(value, el.name);
+  }
 });
 
 if (!hasDuplicates) {
-    console.log('✅ DOZO v4.1: Validación completada - No se detectaron nonces duplicados (' + nonces.length + ' nonces únicos)');
+  console.log(
+    "✅ DOZO v4.1: Validación completada - No se detectaron nonces duplicados (" +
+      nonces.length +
+      " nonces únicos)",
+  );
 } else {
-    console.error('❌ DOZO v4.1: Se detectaron nonces duplicados. Recarga la página.');
+  console.error(
+    "❌ DOZO v4.1: Se detectaron nonces duplicados. Recarga la página.",
+  );
 }
 
 // Verificar IDs únicos
 const ids = {};
-nonces.forEach(el => {
-    if (el.id) {
-        if (ids[el.id]) {
-            console.error('❌ DOZO v4.1: ID duplicado detectado:', el.id);
-        } else {
-            ids[el.id] = true;
-        }
+nonces.forEach((el) => {
+  if (el.id) {
+    if (ids[el.id]) {
+      console.error("❌ DOZO v4.1: ID duplicado detectado:", el.id);
+    } else {
+      ids[el.id] = true;
     }
+  }
 });
 
-console.log('✅ DOZO v4.1: Verificación de IDs completada');
+console.log("✅ DOZO v4.1: Verificación de IDs completada");
 ```
 
 **Características:**
+
 - ✅ Se ejecuta **automáticamente** en todas las páginas del plugin
 - ✅ Detecta **nonces duplicados** (valores idénticos)
 - ✅ Detecta **IDs duplicados** (misma validación de v3.9)
@@ -246,6 +262,7 @@ console.log('✅ DOZO v4.1: Verificación de IDs completada');
 ```
 
 **Mejoras:**
+
 - ✅ Nonce correcto validado
 - ✅ Auto-check JavaScript en background
 - ✅ Enhanced logging para debugging
@@ -258,6 +275,7 @@ console.log('✅ DOZO v4.1: Verificación de IDs completada');
 ### Test 1: Guardar Tab "General"
 
 **Steps:**
+
 ```bash
 1. WP Admin → Garantías → Configuración
 2. Tab "General"
@@ -269,6 +287,7 @@ console.log('✅ DOZO v4.1: Verificación de IDs completada');
 ```
 
 **Expected:**
+
 ```
 Console:
 - ✅ No aparece "Nonce duplicado detectado"
@@ -288,6 +307,7 @@ User Message:
 ### Test 2: Guardar Tab "Plantillas"
 
 **Steps:**
+
 ```bash
 1. Tab "Plantillas"
 2. Modificar template
@@ -295,6 +315,7 @@ User Message:
 ```
 
 **Expected:**
+
 ```
 Server Log:
 - ✅ DOZO v4.1: Nonce válido para sección: templates
@@ -310,6 +331,7 @@ User Message:
 ### Test 3: Guardar Tab "Avanzado" (El Problema Original)
 
 **Steps:**
+
 ```bash
 1. Tab "Avanzado"
 2. Modificar cualquier configuración avanzada
@@ -317,6 +339,7 @@ User Message:
 ```
 
 **ANTES (PROBLEMA):**
+
 ```
 User Message:
 - ❌ "Verificación de seguridad falló"
@@ -326,6 +349,7 @@ Server Log:
 ```
 
 **DESPUÉS (ESPERADO):**
+
 ```
 Server Log:
 - ✅ DOZO v4.1: Nonce válido para sección: advanced
@@ -341,6 +365,7 @@ User Message:
 ### Test 4: Auto-Check en Console
 
 **Steps:**
+
 ```bash
 1. Abrir cualquier página del plugin
 2. Console (F12)
@@ -348,6 +373,7 @@ User Message:
 ```
 
 **Expected Console:**
+
 ```
 🧩 DOZO v4.1: Validación histórica de nonces iniciada
 ✅ DOZO v4.1: Validación completada - No se detectaron nonces duplicados (3 nonces únicos)
@@ -361,13 +387,16 @@ User Message:
 ### Test 5: Detección de Duplicados (Si Existieran)
 
 **Simulated Scenario:**
+
 ```html
 <!-- Si existieran nonces duplicados -->
 <input name="nonce1" value="abc123" />
-<input name="nonce2" value="abc123" /> <!-- Mismo valor -->
+<input name="nonce2" value="abc123" />
+<!-- Mismo valor -->
 ```
 
 **Expected Console:**
+
 ```
 🧩 DOZO v4.1: Validación histórica de nonces iniciada
 ⚠️ DOZO v4.1: Nonce duplicado detectado: nonce2 = abc123...
@@ -382,15 +411,15 @@ User Message:
 
 ### Before vs After
 
-| Aspecto | ANTES v3.9 | DESPUÉS v4.1 | Mejora |
-|---------|------------|--------------|--------|
-| **Error "Verificación de seguridad falló"** | ✅ Sí (crítico) | ❌ No | ✅ 100% |
-| **Guardado tab General** | ✅ Funciona | ✅ Funciona | ➖ Igual |
-| **Guardado tab Templates** | ⚠️ Intermitente | ✅ Funciona | ✅ Estable |
-| **Guardado tab Advanced** | ❌ No funciona | ✅ Funciona | ✅ 100% |
-| **Auto-check nonces** | ❌ No | ✅ Automático | ✅ Nuevo |
-| **Enhanced logging** | ❌ No | ✅ Completo | ✅ Debugging |
-| **Mensaje de error** | Genérico | Informativo | ✅ UX |
+| Aspecto                                     | ANTES v3.9      | DESPUÉS v4.1  | Mejora       |
+| ------------------------------------------- | --------------- | ------------- | ------------ |
+| **Error "Verificación de seguridad falló"** | ✅ Sí (crítico) | ❌ No         | ✅ 100%      |
+| **Guardado tab General**                    | ✅ Funciona     | ✅ Funciona   | ➖ Igual     |
+| **Guardado tab Templates**                  | ⚠️ Intermitente | ✅ Funciona   | ✅ Estable   |
+| **Guardado tab Advanced**                   | ❌ No funciona  | ✅ Funciona   | ✅ 100%      |
+| **Auto-check nonces**                       | ❌ No           | ✅ Automático | ✅ Nuevo     |
+| **Enhanced logging**                        | ❌ No           | ✅ Completo   | ✅ Debugging |
+| **Mensaje de error**                        | Genérico        | Informativo   | ✅ UX        |
 
 ### Seguridad
 
@@ -406,6 +435,7 @@ User Message:
 ### Triple Validación
 
 **Nivel 1: Frontend (HTML)**
+
 ```php
 // settings.php - Nonces únicos por tab
 wp_nonce_field('rs_warranty_save_settings', 'rs_warranty_settings_nonce_general');
@@ -414,6 +444,7 @@ wp_nonce_field('rs_warranty_save_settings', 'rs_warranty_settings_nonce_advanced
 ```
 
 **Nivel 2: Backend (PHP)**
+
 ```php
 // class-warranty-admin.php - Validación dinámica
 $nonce_field = 'rs_warranty_settings_nonce_' . $section;
@@ -423,12 +454,13 @@ if (!wp_verify_nonce($_POST[$nonce_field], 'rs_warranty_save_settings')) {
 ```
 
 **Nivel 3: Auto-Check (JavaScript)**
+
 ```javascript
 // nonce-validator.php - Detección automática
-nonces.forEach(el => {
-    if (seen.has(el.value)) {
-        console.warn('⚠️ Nonce duplicado detectado');
-    }
+nonces.forEach((el) => {
+  if (seen.has(el.value)) {
+    console.warn("⚠️ Nonce duplicado detectado");
+  }
 });
 ```
 
@@ -443,11 +475,12 @@ nonces.forEach(el => {
 **Líneas modificadas:** 327-344 (18 líneas)
 
 **Cambios clave:**
+
 ```php
 // ANTES
 $section = isset($_POST['section']) ? sanitize_text_field($_POST['section']) : 'general';
 
-if (!isset($_POST['rs_warranty_settings_nonce']) || 
+if (!isset($_POST['rs_warranty_settings_nonce']) ||
     !wp_verify_nonce($_POST['rs_warranty_settings_nonce'], 'rs_warranty_save_settings')) {
     wp_die('Verificación de seguridad falló');
 }
@@ -477,6 +510,7 @@ error_log(sprintf('✅ DOZO v4.1: Nonce válido para sección: %s', $section));
 **Líneas agregadas:** 131-179 (49 líneas)
 
 **Auto-check completo:**
+
 ```javascript
 add_action('admin_footer', function() {
     global $pagenow;
@@ -485,12 +519,12 @@ add_action('admin_footer', function() {
         <script>
         (function() {
             console.log('🧩 DOZO v4.1: Validación histórica de nonces iniciada');
-            
+
             // Detectar nonces duplicados (valores)
             const nonces = document.querySelectorAll('input[name*="nonce"]');
             const seen = new Map();
             let hasDuplicates = false;
-            
+
             nonces.forEach(el => {
                 const value = el.value;
                 if (value && value.length > 0) {
@@ -501,13 +535,13 @@ add_action('admin_footer', function() {
                     seen.set(value, el.name);
                 }
             });
-            
+
             if (!hasDuplicates) {
                 console.log('✅ DOZO v4.1: Validación completada - No se detectaron nonces duplicados (' + nonces.length + ' nonces únicos)');
             } else {
                 console.error('❌ DOZO v4.1: Se detectaron nonces duplicados. Recarga la página.');
             }
-            
+
             // Verificar IDs únicos
             const ids = {};
             nonces.forEach(el => {
@@ -519,7 +553,7 @@ add_action('admin_footer', function() {
                     }
                 }
             });
-            
+
             console.log('✅ DOZO v4.1: Verificación de IDs completada');
         })();
         </script>
@@ -535,6 +569,7 @@ add_action('admin_footer', function() {
 ### Activación
 
 El auto-check se ejecuta **automáticamente** en:
+
 - Todas las páginas del plugin en admin
 - Sin necesidad de parámetros URL
 - Sin intervención manual
@@ -542,6 +577,7 @@ El auto-check se ejecuta **automáticamente** en:
 ### Console Output
 
 **Estado Saludable:**
+
 ```
 🧩 DOZO v4.1: Validación histórica de nonces iniciada
 ✅ DOZO v4.1: Validación completada - No se detectaron nonces duplicados (3 nonces únicos)
@@ -549,6 +585,7 @@ El auto-check se ejecuta **automáticamente** en:
 ```
 
 **Con Problemas:**
+
 ```
 🧩 DOZO v4.1: Validación histórica de nonces iniciada
 ⚠️ DOZO v4.1: Nonce duplicado detectado: rs_warranty_settings_nonce_advanced = abc123...
@@ -560,11 +597,13 @@ El auto-check se ejecuta **automáticamente** en:
 ### Server Logs (debug.log)
 
 **Guardado Exitoso:**
+
 ```
 [13-Oct-2025 10:30:15 UTC] ✅ DOZO v4.1: Nonce válido para sección: advanced
 ```
 
 **Nonce Inválido:**
+
 ```
 [13-Oct-2025 10:30:15 UTC] ⚠️ DOZO v4.1: Nonce validation failed - Section: advanced, Field: rs_warranty_settings_nonce_advanced, Action: rs_warranty_save_settings
 ```
@@ -610,6 +649,7 @@ El auto-check se ejecuta **automáticamente** en:
 ### Si Sigue Apareciendo "Verificación de Seguridad Falló"
 
 **Check 1: Verificar console logs**
+
 ```javascript
 // Console
 // Expected: "✅ DOZO v4.1: Validación completada"
@@ -617,6 +657,7 @@ El auto-check se ejecuta **automáticamente** en:
 ```
 
 **Check 2: Verificar server logs**
+
 ```bash
 tail -f wp-content/debug.log
 
@@ -629,6 +670,7 @@ tail -f wp-content/debug.log
 ```
 
 **Check 3: Verificar nonce field names**
+
 ```bash
 grep -n "wp_nonce_field.*rs_warranty_save_settings" templates/admin/settings.php
 
@@ -639,6 +681,7 @@ grep -n "wp_nonce_field.*rs_warranty_save_settings" templates/admin/settings.php
 ```
 
 **Check 4: Verificar backend validation**
+
 ```bash
 grep -A5 "DOZO v4.1: Verificar nonce según la sección" includes/class-warranty-admin.php
 
@@ -658,7 +701,7 @@ grep -A5 "DOZO v4.1: Verificar nonce según la sección" includes/class-warranty
 ✅ **Enhanced logging** - Console + server logs informativos  
 ✅ **Error messages** - Mensajes más descriptivos para usuario  
 ✅ **ID validation** - Verificación de IDs únicos (complemento de v3.9)  
-✅ **Triple-layer security** - Frontend + Backend + Auto-check  
+✅ **Triple-layer security** - Frontend + Backend + Auto-check
 
 ### DOZO Score v4.1
 
@@ -714,7 +757,7 @@ El error **"Verificación de seguridad falló"** ha sido completamente eliminado
 ✅ **Performance:** 95%  
 ✅ **UX/UI:** 100% (guardado sin errores)  
 ✅ **Nonce Validation:** 100% (sincronizado)  
-✅ **DOZO Compliance:** 100%  
+✅ **DOZO Compliance:** 100%
 
 ---
 
@@ -723,21 +766,24 @@ El error **"Verificación de seguridad falló"** ha sido completamente eliminado
 ### Quick Commands
 
 **Ver auto-check en console:**
+
 ```javascript
 // Console abre automáticamente en cualquier página del plugin
 // Expected: "🧩 DOZO v4.1: Validación histórica de nonces iniciada"
 ```
 
 **Ver server logs:**
+
 ```bash
 tail -f wp-content/debug.log | grep "DOZO v4.1"
 ```
 
 **Test manual:**
+
 ```javascript
 // Console
-document.querySelectorAll('input[name*="nonce"]').forEach(el => {
-  console.log(el.name, '=', el.value.substring(0, 10) + '...');
+document.querySelectorAll('input[name*="nonce"]').forEach((el) => {
+  console.log(el.name, "=", el.value.substring(0, 10) + "...");
 });
 ```
 
@@ -759,7 +805,4 @@ document.querySelectorAll('input[name*="nonce"]').forEach(el => {
 
 ---
 
-*Este reporte certifica que el Warranty System by RockStage ha sincronizado completamente la validación de nonces entre frontend y backend, eliminando el error "Verificación de seguridad falló", cumpliendo al 100% con la **Condición DOZO v4.1**.*
-
-
-
+_Este reporte certifica que el Warranty System by RockStage ha sincronizado completamente la validación de nonces entre frontend y backend, eliminando el error "Verificación de seguridad falló", cumpliendo al 100% con la **Condición DOZO v4.1**._

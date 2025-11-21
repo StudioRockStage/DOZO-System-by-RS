@@ -8,7 +8,10 @@ function createWindow() {
     width: 1280,
     height: 800,
     webPreferences: { nodeIntegration: true, contextIsolation: false },
-    icon: path.join(__dirname, '../Dashboard/public/assets/rockstage-icon.icns')
+    icon: path.join(
+      __dirname,
+      '../Dashboard/public/assets/rockstage-icon.icns'
+    ),
   });
   win.loadFile(path.join(__dirname, '../Dashboard/public/index.html'));
 }

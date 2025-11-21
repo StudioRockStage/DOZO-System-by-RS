@@ -12,7 +12,12 @@ import crypto from "crypto";
 const BASE = path.resolve(process.env.HOME, "Documents/DOZO System by RS");
 const READY = path.join(BASE, "Empaquetado", "Ready");
 const CONFIG_PATH = path.join(BASE, "Scripts", "ftp-config.json");
-const REPORT = path.join(BASE, "to chat gpt", "Global", "DOZO-PreDeploy-Validation.json");
+const REPORT = path.join(
+  BASE,
+  "to chat gpt",
+  "Global",
+  "DOZO-PreDeploy-Validation.json",
+);
 
 console.log("\n🔍 DOZO Remote Deploy – Validación Local (Fase 11)");
 console.log("═══════════════════════════════════════════════════════════");
@@ -22,7 +27,7 @@ const checks = {
   checks: {},
   status: "pending",
   errors: [],
-  warnings: []
+  warnings: [],
 };
 
 // 1. Verificar estructura de directorios
@@ -30,7 +35,7 @@ console.log("\n📁 Verificando estructura de directorios...");
 checks.checks.directories = {
   readyFolder: fs.existsSync(READY),
   scriptsFolder: fs.existsSync(path.join(BASE, "Scripts")),
-  reportsFolder: fs.existsSync(path.join(BASE, "to chat gpt", "Global"))
+  reportsFolder: fs.existsSync(path.join(BASE, "to chat gpt", "Global")),
 };
 
 if (!checks.checks.directories.readyFolder) {
@@ -40,40 +45,44 @@ if (!checks.checks.directories.readyFolder) {
 // 2. Verificar archivos en Ready/
 console.log("📦 Verificando archivos en Ready/...");
 const readyFiles = fs.existsSync(READY) ? fs.readdirSync(READY) : [];
-const zipFiles = readyFiles.filter(f => f.endsWith(".zip"));
+const zipFiles = readyFiles.filter((f) => f.endsWith(".zip"));
 const hasUpdateJson = readyFiles.includes("update.json");
 
 checks.checks.files = {
   zipCount: zipFiles.length,
   zipFiles: zipFiles,
   updateJsonExists: hasUpdateJson,
-  changelogExists: readyFiles.includes("changelog.txt")
+  changelogExists: readyFiles.includes("changelog.txt"),
 };
 
 if (zipFiles.length === 0) {
   checks.errors.push("No se encontró ningún archivo ZIP en Ready/");
 } else {
-  const latestZip = zipFiles.sort((a, b) => 
-    fs.statSync(path.join(READY, b)).mtimeMs - fs.statSync(path.join(READY, a)).mtimeMs
+  const latestZip = zipFiles.sort(
+    (a, b) =>
+      fs.statSync(path.join(READY, b)).mtimeMs -
+      fs.statSync(path.join(READY, a)).mtimeMs,
   )[0];
-  
+
   const zipPath = path.join(READY, latestZip);
   const stats = fs.statSync(zipPath);
-  
+
   checks.checks.latestZip = {
     filename: latestZip,
     size: stats.size,
     sizeReadable: `${(stats.size / 1024 / 1024).toFixed(2)} MB`,
-    modified: stats.mtime.toISOString()
+    modified: stats.mtime.toISOString(),
   };
-  
-  console.log(`  ✅ ZIP encontrado: ${latestZip} (${checks.checks.latestZip.sizeReadable})`);
-  
+
+  console.log(
+    `  ✅ ZIP encontrado: ${latestZip} (${checks.checks.latestZip.sizeReadable})`,
+  );
+
   // Calcular checksum
   const fileBuffer = fs.readFileSync(zipPath);
-  const hashSum = crypto.createHash('sha256');
+  const hashSum = crypto.createHash("sha256");
   hashSum.update(fileBuffer);
-  checks.checks.latestZip.sha256 = hashSum.digest('hex');
+  checks.checks.latestZip.sha256 = hashSum.digest("hex");
 }
 
 if (!hasUpdateJson) {
@@ -82,22 +91,26 @@ if (!hasUpdateJson) {
   // 3. Validar contenido de update.json
   console.log("📄 Validando update.json...");
   try {
-    const updateJson = JSON.parse(fs.readFileSync(path.join(READY, "update.json"), "utf8"));
+    const updateJson = JSON.parse(
+      fs.readFileSync(path.join(READY, "update.json"), "utf8"),
+    );
     checks.checks.updateJson = {
       valid: true,
       version: updateJson.version,
       name: updateJson.name,
       hasDownloadUrl: !!updateJson.download_url,
-      hasChangelog: !!updateJson.changelog
+      hasChangelog: !!updateJson.changelog,
     };
-    
+
     console.log(`  ✅ update.json válido - Versión: ${updateJson.version}`);
-    
+
     // Verificar consistencia con ZIP
     if (zipFiles.length > 0 && checks.checks.latestZip) {
       const expectedZip = `Warranty_System_v${updateJson.version}.zip`;
       if (checks.checks.latestZip.filename !== expectedZip) {
-        checks.warnings.push(`El nombre del ZIP (${checks.checks.latestZip.filename}) no coincide con la versión en update.json (${expectedZip})`);
+        checks.warnings.push(
+          `El nombre del ZIP (${checks.checks.latestZip.filename}) no coincide con la versión en update.json (${expectedZip})`,
+        );
       }
     }
   } catch (e) {
@@ -117,13 +130,20 @@ if (!fs.existsSync(CONFIG_PATH)) {
     checks.checks.ftpConfig = {
       exists: true,
       host: ftpConfig.host,
-      userConfigured: ftpConfig.user !== "YOUR_FTP_USERNAME" && ftpConfig.user !== "",
-      passwordConfigured: ftpConfig.password !== "YOUR_FTP_PASSWORD" && ftpConfig.password !== "",
-      port: ftpConfig.port || 21
+      userConfigured:
+        ftpConfig.user !== "YOUR_FTP_USERNAME" && ftpConfig.user !== "",
+      passwordConfigured:
+        ftpConfig.password !== "YOUR_FTP_PASSWORD" && ftpConfig.password !== "",
+      port: ftpConfig.port || 21,
     };
-    
-    if (!checks.checks.ftpConfig.userConfigured || !checks.checks.ftpConfig.passwordConfigured) {
-      checks.errors.push("Credenciales FTP no configuradas. Edita Scripts/ftp-config.json");
+
+    if (
+      !checks.checks.ftpConfig.userConfigured ||
+      !checks.checks.ftpConfig.passwordConfigured
+    ) {
+      checks.errors.push(
+        "Credenciales FTP no configuradas. Edita Scripts/ftp-config.json",
+      );
     } else {
       console.log("  ✅ Credenciales FTP configuradas");
     }
@@ -166,4 +186,3 @@ if (checks.warnings.length > 0) {
 fs.writeFileSync(REPORT, JSON.stringify(checks, null, 2));
 console.log(`\n🧾 Reporte guardado: ${REPORT}`);
 console.log("═".repeat(63) + "\n");
-

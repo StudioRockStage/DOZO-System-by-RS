@@ -2,34 +2,38 @@
 
 ## 📌 Información Esencial
 
-| Item | Valor |
-|------|-------|
-| **Plugin Name** | Warranty System RS |
-| **Versión** | 1.0.0 |
-| **Autor** | RockStage Solutions |
-| **Sistema** | DOZO v7.9 |
-| **Estado** | ✅ Base Consolidada |
+| Item            | Valor               |
+| --------------- | ------------------- |
+| **Plugin Name** | Warranty System RS  |
+| **Versión**     | 1.0.0               |
+| **Autor**       | RockStage Solutions |
+| **Sistema**     | DOZO v7.9           |
+| **Estado**      | ✅ Base Consolidada |
 
 ---
 
 ## 📁 Archivos Clave
 
 ### Archivo Principal del Plugin
+
 ```
 /Plugins/Warranty System/warranty-system-rs.php
 ```
 
 ### Build Empaquetado
+
 ```
 /Latest Builds/Warranty_System_RS_v1.0.0.zip
 ```
 
 ### Sistema de Actualizaciones
+
 ```
 /updates/warranty-system/update.json
 ```
 
 ### Bases de Datos DOZO
+
 ```
 /Workflow DB/ActivePlugin.json
 /Workflow DB/Versions.json
@@ -61,12 +65,14 @@
 ## 🔄 Nomenclatura Oficial
 
 ### ✅ Correcto
+
 - `Warranty_System_RS_v1.0.0.zip`
 - `warranty-system-rs.php`
 - Versión: `1.0.0`
 - Text Domain: `rockstage-warranty`
 
 ### ❌ Incorrecto (Legacy)
+
 - ~~`Warranty_System_v7.x.x`~~
 - ~~`rockstage-warranty-system_7.x.x.php`~~
 - ~~Versión 7.x.x~~
@@ -116,4 +122,3 @@ Ver: `DOZO-V1.0.0-CONSOLIDATION-COMPLETE.md`
 
 **Última Actualización**: 2025-10-19  
 **Estado**: 🟢 OPERACIONAL
-

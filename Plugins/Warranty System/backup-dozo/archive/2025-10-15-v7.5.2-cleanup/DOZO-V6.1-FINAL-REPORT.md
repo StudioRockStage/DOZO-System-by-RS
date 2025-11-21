@@ -32,34 +32,36 @@ DOZO Deep Audit v6.1 represents a **major architectural upgrade**, implementing 
 **Key Features:**
 
 **Template Loading:**
+
 ```php
 public function render_claude_template($filename) {
     $template_path = $this->claude_path . $filename;
-    
+
     // Read Claude HTML file
     $content = file_get_contents($template_path);
-    
+
     // Extract body content (remove <!DOCTYPE>, <html>, <head>)
     if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $content, $matches)) {
         $output = $matches[1];
     }
-    
+
     // Wrap with Claude marker for verification
-    return '<div class="rs-claude-template" data-claude-version="6.1">' . 
-           $output . 
+    return '<div class="rs-claude-template" data-claude-version="6.1">' .
+           $output .
            '</div>';
 }
 ```
 
 **Intelligent Fallback:**
+
 ```php
 public function render_warranty_form($atts) {
     // Try Claude template first
-    if (!$this->use_fallback && 
+    if (!$this->use_fallback &&
         file_exists($this->claude_path . 'warranty-verifier-preview.html')) {
         return $this->render_claude_template('warranty-verifier-preview.html');
     }
-    
+
     // Fallback to plugin template
     ob_start();
     include RS_WARRANTY_TEMPLATES_DIR . 'public/warranty-form.php';
@@ -74,16 +76,19 @@ public function render_warranty_form($atts) {
 **New (v6.1):** Shortcodes use Claude HTML templates with fallback
 
 **Shortcode 1: `[rs_warranty_form]`**
+
 - **Source:** `warranty-verifier-preview.html` (Claude)
 - **Fallback:** `templates/public/warranty-form.php` (Plugin)
 - **Use case:** Initial warranty verification form
 
 **Shortcode 2: `[rs_warranty_check]`**
+
 - **Source:** `warranty-verifier-all-states.html` (Claude)
 - **Fallback:** `templates/public/warranty-verifier.php` (Plugin)
 - **Use case:** Complete warranty states (active, expired, not found)
 
 **Example Usage:**
+
 ```html
 <!-- In WordPress page/post editor: -->
 [rs_warranty_form]
@@ -95,6 +100,7 @@ public function render_warranty_form($atts) {
 ### 3. AJAX Integration
 
 **Localized Variables:**
+
 ```php
 wp_localize_script('rs-warranty-public-claude', 'rsWarranty', array(
     'ajax_url' => admin_url('admin-ajax.php'),
@@ -108,18 +114,19 @@ wp_localize_script('rs-warranty-public-claude', 'rsWarranty', array(
 ```
 
 **AJAX Handler:**
+
 ```php
 public function ajax_verify_order() {
     // Verify nonce
     check_ajax_referer('rs_warranty_nonce', '_ajax_nonce');
-    
+
     // Get order
     $order_number = absint($_POST['order_number']);
     $order = wc_get_order($order_number);
-    
+
     // Get warranty info
     $products_html = $this->build_products_html($order);
-    
+
     // Return JSON
     wp_send_json_success(array(
         'html' => $products_html,
@@ -129,18 +136,23 @@ public function ajax_verify_order() {
 ```
 
 **JavaScript (in Claude templates):**
+
 ```javascript
-$('#rs-check-order').on('click', function(){
-    $.post(rsWarranty.ajax_url, {
-        action: 'rs_verify_order',
-        order_number: $('#rs-order-id').val(),
-        _ajax_nonce: rsWarranty.nonce
-    }, function(response){
-        if(response.success){
-            $('#rs-products-list').html(response.data.html);
-            showState('found');
-        }
-    });
+$("#rs-check-order").on("click", function () {
+  $.post(
+    rsWarranty.ajax_url,
+    {
+      action: "rs_verify_order",
+      order_number: $("#rs-order-id").val(),
+      _ajax_nonce: rsWarranty.nonce,
+    },
+    function (response) {
+      if (response.success) {
+        $("#rs-products-list").html(response.data.html);
+        showState("found");
+      }
+    },
+  );
 });
 ```
 
@@ -149,26 +161,30 @@ $('#rs-check-order').on('click', function(){
 **New DOZO Diagnostic Layer:**
 
 ```javascript
-DOZO.claudeTemplateCheck = function() {
-    // Check 1: Claude template markers
-    const hasClaudeMarker = document.querySelector('[data-claude-version="6.1"]') !== null;
-    
-    // Check 2: AJAX variables
-    const hasAjaxVars = typeof window.rsWarranty !== 'undefined';
-    
-    // Check 3: Shortcode content
-    const hasContent = document.querySelector('.rs-claude-template, .warranty-container') !== null;
-    
-    return { hasClaudeMarker, hasAjaxVars, hasContent };
+DOZO.claudeTemplateCheck = function () {
+  // Check 1: Claude template markers
+  const hasClaudeMarker =
+    document.querySelector('[data-claude-version="6.1"]') !== null;
+
+  // Check 2: AJAX variables
+  const hasAjaxVars = typeof window.rsWarranty !== "undefined";
+
+  // Check 3: Shortcode content
+  const hasContent =
+    document.querySelector(".rs-claude-template, .warranty-container") !== null;
+
+  return { hasClaudeMarker, hasAjaxVars, hasContent };
 };
 ```
 
 **Console Command:**
+
 ```javascript
-dozoTestClaudeTemplates()
+dozoTestClaudeTemplates();
 ```
 
 **Expected Output:**
+
 ```
 📄 DOZO Claude HTML Template Integration (v6.1)
   ✅ Plantilla Claude detectada (v6.1)
@@ -183,11 +199,12 @@ dozoTestClaudeTemplates()
 **File:** `rockstage-warranty-system.php`
 
 ```php
-define('RS_CLAUDE_TEMPLATES_PATH', 
+define('RS_CLAUDE_TEMPLATES_PATH',
     dirname(ABSPATH) . '/Claude AI/DISEÑOS Warranty System by RockStage/Shortcodes/');
 ```
 
 **Usage:**
+
 - Centralized path definition
 - Easy to modify if Claude folder moves
 - Used by both Style Manager and HTML Integration classes
@@ -228,10 +245,12 @@ wp-content/plugins/rockstage-warranty-system/
 ### Summary
 
 **Created:** 2 files
+
 - `includes/class-claude-html-integration.php` (new, 300+ lines)
 - `DOZO-V6.1-FINAL-REPORT.md` (this document)
 
 **Modified:** 2 files
+
 - `rockstage-warranty-system.php` (version 6.1.0, new constant, new include)
 - `assets/js/dozo-diagnostic.js` (new template check layer)
 
@@ -349,6 +368,7 @@ cp -r * backup-manual/v5.4-before-v6.1/
 **Option A: External Path (Recommended)**
 
 Verify files exist at:
+
 ```
 /Documents/Claude AI/DISEÑOS Warranty System by RockStage/Shortcodes/
 ├── warranty-verifier-preview.html
@@ -358,20 +378,23 @@ Verify files exist at:
 **Option B: Copy to WordPress (Alternative)**
 
 If external path is not accessible:
+
 ```bash
 cp /Documents/Claude\ AI/DISEÑOS\ Warranty\ System\ by\ RockStage/Shortcodes/*.html \
    /wp-content/plugins/rockstage-warranty-system/templates/claude/
 ```
 
 Then update constant:
+
 ```php
-define('RS_CLAUDE_TEMPLATES_PATH', 
+define('RS_CLAUDE_TEMPLATES_PATH',
     RS_WARRANTY_PLUGIN_DIR . 'templates/claude/');
 ```
 
 ### Step 3: Upload Files
 
 Upload these 2 modified files + 1 new file:
+
 1. `rockstage-warranty-system.php` (v6.1.0, new constant, new include)
 2. `includes/class-claude-html-integration.php` (NEW - 300+ lines)
 3. `assets/js/dozo-diagnostic.js` (template check layer)
@@ -393,6 +416,7 @@ Ctrl + Shift + F5
    - Verify: "RockStage Warranty System v6.1.0"
 
 2. **Create test page:**
+
    ```
    Title: Test Warranty Form
    Content: [rs_warranty_form]
@@ -406,6 +430,7 @@ Ctrl + Shift + F5
    - If not found: ⚠️ Using fallback (check error logs)
 
 4. **Check console:**
+
    ```
    📄 DOZO Claude HTML Template Integration (v6.1)
      ✅ Plantilla Claude detectada (v6.1)
@@ -414,9 +439,10 @@ Ctrl + Shift + F5
    ```
 
 5. **Run diagnostic:**
+
    ```javascript
-   dozoTestClaudeTemplates()
-   
+   dozoTestClaudeTemplates();
+
    // Expected:
    // 📊 Resultado: ✅ PASSED
    // Resumen: 3/3 checks passed
@@ -428,13 +454,14 @@ Ctrl + Shift + F5
    - Should see warranty information
 
 7. **Test fallback:**
+
    ```bash
    # Temporarily rename Claude folder
    mv "/Documents/Claude AI/DISEÑOS Warranty System by RockStage" \
       "/Documents/Claude AI/DISEÑOS Warranty System by RockStage.bak"
-   
+
    # Reload page - should see plugin template (fallback)
-   
+
    # Restore folder
    mv "/Documents/Claude AI/DISEÑOS Warranty System by RockStage.bak" \
       "/Documents/Claude AI/DISEÑOS Warranty System by RockStage"
@@ -446,27 +473,30 @@ Ctrl + Shift + F5
 
 ### Code Metrics
 
-| Metric | v5.4 | v6.1 | Change |
-|--------|------|------|--------|
-| **Plugin Version** | 5.4.0 | 6.1.0 | +1.7.0 (MAJOR) |
-| **Total Lines** | ~8,135 | ~8,500 | +365 (+4.5%) |
-| **PHP Classes** | 13 | 14 | +1 (HTML Integration) |
-| **Shortcode Handlers** | Standard | Claude-powered ✅ | Enhanced |
-| **AJAX Endpoints** | 19 | 20 | +1 (rs_verify_order) |
-| **DOZO Layers** | 5 | 6 | +1 (Template check) |
-| **Template Sources** | 1 (plugin) | 2 (Claude + fallback) | Dual ✅ |
+| Metric                 | v5.4       | v6.1                  | Change                |
+| ---------------------- | ---------- | --------------------- | --------------------- |
+| **Plugin Version**     | 5.4.0      | 6.1.0                 | +1.7.0 (MAJOR)        |
+| **Total Lines**        | ~8,135     | ~8,500                | +365 (+4.5%)          |
+| **PHP Classes**        | 13         | 14                    | +1 (HTML Integration) |
+| **Shortcode Handlers** | Standard   | Claude-powered ✅     | Enhanced              |
+| **AJAX Endpoints**     | 19         | 20                    | +1 (rs_verify_order)  |
+| **DOZO Layers**        | 5          | 6                     | +1 (Template check)   |
+| **Template Sources**   | 1 (plugin) | 2 (Claude + fallback) | Dual ✅               |
 
 ### Feature Expansion
 
 **Shortcode System:**
+
 - **Before:** Static PHP templates
 - **After:** Dynamic Claude HTML + PHP fallback
 
 **Template Management:**
+
 - **Before:** Modify plugin files directly
 - **After:** Update external Claude files (no plugin edit needed)
 
 **Designer Workflow:**
+
 - **Before:** Edit PHP/CSS in plugin → requires FTP
 - **After:** Edit HTML in Claude folder → instant update ✅
 
@@ -477,6 +507,7 @@ Ctrl + Shift + F5
 ### Template Loading Security
 
 **Path Validation:**
+
 ```php
 // Claude path is hardcoded (no user input)
 private $claude_path = RS_CLAUDE_TEMPLATES_PATH;
@@ -488,12 +519,14 @@ if (!file_exists($template_path)) {
 ```
 
 **HTML Sanitization:**
+
 - Claude templates are trusted (designer-created)
 - Content extracted from `<body>` only
 - No user-supplied data in templates
 - AJAX requests use nonce validation
 
 **AJAX Security:**
+
 ```php
 // Nonce verification
 check_ajax_referer('rs_warranty_nonce', '_ajax_nonce');
@@ -513,12 +546,12 @@ $products_html .= esc_html($product->get_name());
 
 ### Template Loading
 
-| Operation | Time | Impact |
-|-----------|------|--------|
-| **Claude template check** | ~5ms | Minimal |
-| **File read (HTML)** | ~10ms | Low |
-| **Regex body extract** | ~3ms | Minimal |
-| **Fallback template** | ~8ms | Low |
+| Operation                 | Time  | Impact  |
+| ------------------------- | ----- | ------- |
+| **Claude template check** | ~5ms  | Minimal |
+| **File read (HTML)**      | ~10ms | Low     |
+| **Regex body extract**    | ~3ms  | Minimal |
+| **Fallback template**     | ~8ms  | Low     |
 
 **Total Added:** ~18ms per shortcode render
 
@@ -537,27 +570,32 @@ $products_html .= esc_html($product->get_name());
 ### Issue 1: Shortcode shows "Error: Template not found"
 
 **Symptoms:**
+
 - Shortcode renders error message instead of form
 
 **Solutions:**
 
 1. **Check Claude path:**
+
    ```php
    // Add to wp-config.php temporarily:
    define('WP_DEBUG', true);
    define('WP_DEBUG_LOG', true);
    ```
+
    - Check `wp-content/debug.log` for:
      - `DOZO v6.1: Claude templates path not found`
      - `DOZO v6.1: Missing Claude templates`
 
 2. **Verify file existence:**
+
    ```bash
    ls "/Documents/Claude AI/DISEÑOS Warranty System by RockStage/Shortcodes/"
    # Should show .html files
    ```
 
 3. **Check permissions:**
+
    ```bash
    ls -la "/Documents/Claude AI/DISEÑOS Warranty System by RockStage/Shortcodes/"
    # Files should be readable (r-- at minimum)
@@ -570,6 +608,7 @@ $products_html .= esc_html($product->get_name());
 ### Issue 2: AJAX not working
 
 **Symptoms:**
+
 - Clicking "verify" button does nothing
 - Console shows "rsWarranty is not defined"
 
@@ -585,6 +624,7 @@ $products_html .= esc_html($product->get_name());
    - Add `[rs_warranty_form]` to page
 
 3. **Check console errors:**
+
    ```javascript
    console.log(window.rsWarranty);
    // Should show: { ajax_url: "...", nonce: "...", strings: {...} }
@@ -599,19 +639,22 @@ $products_html .= esc_html($product->get_name());
 ### Issue 3: Claude marker not found
 
 **Symptoms:**
+
 - `dozoTestClaudeTemplates()` shows: "⚠️ Sin marcador Claude"
 - Template renders but marker missing
 
 **Expected Behavior:**
+
 - This is NORMAL if using fallback template
 - Check error logs to see which template is being used
 
 **Solutions:**
 
 1. **Check if Claude template loaded:**
+
    ```javascript
    // In console:
-   document.querySelector('[data-claude-version]')
+   document.querySelector("[data-claude-version]");
    // Should return element if Claude template used
    ```
 
@@ -629,15 +672,15 @@ $products_html .= esc_html($product->get_name());
 
 ## 🎯 Success Criteria
 
-| Goal | Status |
-|------|--------|
-| Create Claude HTML Integration class | ✅ Complete (300+ lines) |
-| Register smart shortcodes | ✅ Complete ([rs_warranty_form], [rs_warranty_check]) |
-| Implement fallback system | ✅ Complete (auto-switch) |
-| AJAX compatibility | ✅ Complete (localized vars, handler) |
-| Template verification | ✅ Complete (new DOZO layer) |
-| Preserve all v5.4 features | ✅ Complete (100%) |
-| Documentation | ✅ Complete |
+| Goal                                 | Status                                                |
+| ------------------------------------ | ----------------------------------------------------- |
+| Create Claude HTML Integration class | ✅ Complete (300+ lines)                              |
+| Register smart shortcodes            | ✅ Complete ([rs_warranty_form], [rs_warranty_check]) |
+| Implement fallback system            | ✅ Complete (auto-switch)                             |
+| AJAX compatibility                   | ✅ Complete (localized vars, handler)                 |
+| Template verification                | ✅ Complete (new DOZO layer)                          |
+| Preserve all v5.4 features           | ✅ Complete (100%)                                    |
+| Documentation                        | ✅ Complete                                           |
 
 **Overall:** ✅ **7/7 Goals Achieved (100%)**
 
@@ -665,13 +708,13 @@ $products_html .= esc_html($product->get_name());
 
 ### Quality Metrics
 
-| Metric | Target | Actual | Grade |
-|--------|--------|--------|-------|
-| **Integration** | Functional | ✅ Dual-source | ⭐⭐⭐⭐⭐ |
-| **Fallback System** | Automatic | ✅ Intelligent | ⭐⭐⭐⭐⭐ |
-| **AJAX** | Compatible | ✅ Full support | ⭐⭐⭐⭐⭐ |
-| **Performance** | <20ms | ✅ ~18ms | ⭐⭐⭐⭐⭐ |
-| **Documentation** | Complete | ✅ 600+ lines | ⭐⭐⭐⭐⭐ |
+| Metric              | Target     | Actual          | Grade      |
+| ------------------- | ---------- | --------------- | ---------- |
+| **Integration**     | Functional | ✅ Dual-source  | ⭐⭐⭐⭐⭐ |
+| **Fallback System** | Automatic  | ✅ Intelligent  | ⭐⭐⭐⭐⭐ |
+| **AJAX**            | Compatible | ✅ Full support | ⭐⭐⭐⭐⭐ |
+| **Performance**     | <20ms      | ✅ ~18ms        | ⭐⭐⭐⭐⭐ |
+| **Documentation**   | Complete   | ✅ 600+ lines   | ⭐⭐⭐⭐⭐ |
 
 **Overall Grade:** ⭐⭐⭐⭐⭐ **A+ (Excellent)**
 
@@ -728,4 +771,3 @@ Document Version: 1.0
 Last Updated: October 13, 2025  
 Author: DOZO Core Team  
 Classification: Public
-

@@ -59,6 +59,7 @@ ftp@vapedot.mx
 ### Opción 3: Resetear Password FTP
 
 En tu panel de hosting:
+
 1. Ve a "FTP Accounts"
 2. Encuentra el usuario FTP
 3. Haz clic en "Change Password"
@@ -99,22 +100,26 @@ node dozo-phase11.1-update-credentials.js
 ## 🧪 Herramientas de Testing
 
 ### Script 1: Test Detallado
+
 ```bash
 node dozo-phase11.1-update-credentials.js
 ```
 
 Proporciona:
+
 - ✅ Conexión al servidor
 - ✅ Acceso al directorio
 - ✅ Permisos de escritura
 - 📄 Reporte detallado
 
 ### Script 2: Setup Automático
+
 ```bash
 node dozo-phase11.1-ftp-setup.js
 ```
 
 Configura:
+
 - Credenciales FTP
 - Backup cifrado
 - Validación automática
@@ -147,8 +152,8 @@ Si tu servidor soporta FTPS o SFTP:
   "host": "ftp.vapedot.mx",
   "user": "tu_usuario",
   "password": "tu_password",
-  "port": 990,          // Puerto FTPS
-  "secure": true        // Habilitar TLS/SSL
+  "port": 990, // Puerto FTPS
+  "secure": true // Habilitar TLS/SSL
 }
 ```
 
@@ -159,7 +164,7 @@ O para SFTP (requiere módulo diferente):
   "host": "ftp.vapedot.mx",
   "user": "tu_usuario",
   "password": "tu_password",
-  "port": 22,           // Puerto SFTP
+  "port": 22, // Puerto SFTP
   "protocol": "sftp"
 }
 ```
@@ -199,12 +204,14 @@ Si necesitas proceder sin FTP automático, puedes:
    - Via SFTP
 
 2. **Archivos a Subir:**
+
    ```
    Empaquetado/Ready/Warranty_System_v7.7.6.zip
    Empaquetado/Ready/update.json
    ```
 
 3. **Destino:**
+
    ```
    /public_html/updates/warranty-system/
    ```
@@ -233,4 +240,3 @@ Antes de contactar soporte, verifica:
 
 **Última actualización:** 2025-10-18  
 **DOZO System by RockStage Solutions**
-

@@ -3,156 +3,304 @@
 <!-- DOZO v7.2: Design Panel Settings -->
 
 <div class="rs-admin-panel rs-design-panel">
-    <div class="rs-settings-card">
-        <div class="rs-card-header" style="margin-bottom: 24px;">
-            <h2 style="margin: 0; display: flex; align-items: center; gap: 12px;">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: #FF8C00;">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke-width="2"/>
-                </svg>
-                🎨 Configuración de Diseño
-            </h2>
-            <p style="color: #6b7280; margin: 8px 0 0;">Personaliza la apariencia visual del sistema de garantías</p>
-        </div>
-
-        <!-- Theme Selector -->
-        <div class="rs-form-section" style="margin-bottom: 32px;">
-            <h3 style="margin: 0 0 16px; color: #1f2937; font-size: 16px; font-weight: 600;">Tema Visual</h3>
-            <div class="rs-theme-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
-                
-                <!-- Theme 1: RockStage Orange -->
-                <div class="rs-theme-card" data-theme="rockstage-orange" style="border: 2px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.3s;" onclick="selectTheme('rockstage-orange', this)">
-                    <div style="background: linear-gradient(135deg, #FF8C00, #FFA500); height: 80px; border-radius: 8px; margin-bottom: 12px;"></div>
-                    <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600;">RockStage Orange</h4>
-                    <p style="margin: 0; font-size: 12px; color: #6b7280;">Tema oficial de RockStage</p>
-                </div>
-
-                <!-- Theme 2: Minimal Gray -->
-                <div class="rs-theme-card" data-theme="minimal-gray" style="border: 2px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.3s;" onclick="selectTheme('minimal-gray', this)">
-                    <div style="background: linear-gradient(135deg, #6b7280, #9ca3af); height: 80px; border-radius: 8px; margin-bottom: 12px;"></div>
-                    <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600;">Minimal Gray</h4>
-                    <p style="margin: 0; font-size: 12px; color: #6b7280;">Profesional y discreto</p>
-                </div>
-
-                <!-- Theme 3: Corporate Blue -->
-                <div class="rs-theme-card" data-theme="corporate-blue" style="border: 2px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.3s;" onclick="selectTheme('corporate-blue', this)">
-                    <div style="background: linear-gradient(135deg, #3b82f6, #60a5fa); height: 80px; border-radius: 8px; margin-bottom: 12px;"></div>
-                    <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600;">Corporate Blue</h4>
-                    <p style="margin: 0; font-size: 12px; color: #6b7280;">Corporativo y confiable</p>
-                </div>
-
-                <!-- Theme 4: Modern Dark -->
-                <div class="rs-theme-card" data-theme="modern-dark" style="border: 2px solid #e5e7eb; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.3s;" onclick="selectTheme('modern-dark', this)">
-                    <div style="background: linear-gradient(135deg, #1f2937, #374151); height: 80px; border-radius: 8px; margin-bottom: 12px;"></div>
-                    <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600;">Modern Dark</h4>
-                    <p style="margin: 0; font-size: 12px; color: #6b7280;">Elegante y moderno</p>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Preview Section -->
-        <div class="rs-form-section" style="margin-bottom: 32px;">
-            <h3 style="margin: 0 0 16px; color: #1f2937; font-size: 16px; font-weight: 600;">Vista Previa</h3>
-            <div id="designPreview" style="background: #f9fafb; border: 2px dashed #d1d5db; border-radius: 12px; padding: 40px; text-align: center; min-height: 200px;">
-                <p style="color: #6b7280; margin: 0;">Selecciona un tema para ver la vista previa</p>
-            </div>
-        </div>
-
-        <!-- Save Button -->
-        <div class="rs-settings-actions">
-            <button type="button" class="rs-btn rs-btn-primary" onclick="saveDesignSettings()" style="display: inline-flex; align-items: center; gap: 8px;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke-width="2"/>
-                    <polyline points="17 21 17 13 7 13 7 21" stroke-width="2"/>
-                    <polyline points="7 3 7 8 15 8" stroke-width="2"/>
-                </svg>
-                Guardar Diseño
-            </button>
-        </div>
+  <div class="rs-settings-card">
+    <div class="rs-card-header" style="margin-bottom: 24px">
+      <h2 style="margin: 0; display: flex; align-items: center; gap: 12px">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          style="color: #ff8c00"
+        >
+          <path
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+            stroke-width="2"
+          />
+        </svg>
+        🎨 Configuración de Diseño
+      </h2>
+      <p style="color: #6b7280; margin: 8px 0 0">
+        Personaliza la apariencia visual del sistema de garantías
+      </p>
     </div>
+
+    <!-- Theme Selector -->
+    <div class="rs-form-section" style="margin-bottom: 32px">
+      <h3
+        style="
+          margin: 0 0 16px;
+          color: #1f2937;
+          font-size: 16px;
+          font-weight: 600;
+        "
+      >
+        Tema Visual
+      </h3>
+      <div
+        class="rs-theme-grid"
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 16px;
+        "
+      >
+        <!-- Theme 1: RockStage Orange -->
+        <div
+          class="rs-theme-card"
+          data-theme="rockstage-orange"
+          style="
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+          "
+          onclick="selectTheme('rockstage-orange', this)"
+        >
+          <div
+            style="
+              background: linear-gradient(135deg, #ff8c00, #ffa500);
+              height: 80px;
+              border-radius: 8px;
+              margin-bottom: 12px;
+            "
+          ></div>
+          <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600">
+            RockStage Orange
+          </h4>
+          <p style="margin: 0; font-size: 12px; color: #6b7280">
+            Tema oficial de RockStage
+          </p>
+        </div>
+
+        <!-- Theme 2: Minimal Gray -->
+        <div
+          class="rs-theme-card"
+          data-theme="minimal-gray"
+          style="
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+          "
+          onclick="selectTheme('minimal-gray', this)"
+        >
+          <div
+            style="
+              background: linear-gradient(135deg, #6b7280, #9ca3af);
+              height: 80px;
+              border-radius: 8px;
+              margin-bottom: 12px;
+            "
+          ></div>
+          <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600">
+            Minimal Gray
+          </h4>
+          <p style="margin: 0; font-size: 12px; color: #6b7280">
+            Profesional y discreto
+          </p>
+        </div>
+
+        <!-- Theme 3: Corporate Blue -->
+        <div
+          class="rs-theme-card"
+          data-theme="corporate-blue"
+          style="
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+          "
+          onclick="selectTheme('corporate-blue', this)"
+        >
+          <div
+            style="
+              background: linear-gradient(135deg, #3b82f6, #60a5fa);
+              height: 80px;
+              border-radius: 8px;
+              margin-bottom: 12px;
+            "
+          ></div>
+          <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600">
+            Corporate Blue
+          </h4>
+          <p style="margin: 0; font-size: 12px; color: #6b7280">
+            Corporativo y confiable
+          </p>
+        </div>
+
+        <!-- Theme 4: Modern Dark -->
+        <div
+          class="rs-theme-card"
+          data-theme="modern-dark"
+          style="
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+          "
+          onclick="selectTheme('modern-dark', this)"
+        >
+          <div
+            style="
+              background: linear-gradient(135deg, #1f2937, #374151);
+              height: 80px;
+              border-radius: 8px;
+              margin-bottom: 12px;
+            "
+          ></div>
+          <h4 style="margin: 0 0 4px; font-size: 14px; font-weight: 600">
+            Modern Dark
+          </h4>
+          <p style="margin: 0; font-size: 12px; color: #6b7280">
+            Elegante y moderno
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="rs-form-section" style="margin-bottom: 32px">
+      <h3
+        style="
+          margin: 0 0 16px;
+          color: #1f2937;
+          font-size: 16px;
+          font-weight: 600;
+        "
+      >
+        Vista Previa
+      </h3>
+      <div
+        id="designPreview"
+        style="
+          background: #f9fafb;
+          border: 2px dashed #d1d5db;
+          border-radius: 12px;
+          padding: 40px;
+          text-align: center;
+          min-height: 200px;
+        "
+      >
+        <p style="color: #6b7280; margin: 0">
+          Selecciona un tema para ver la vista previa
+        </p>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="rs-settings-actions">
+      <button
+        type="button"
+        class="rs-btn rs-btn-primary"
+        onclick="saveDesignSettings()"
+        style="display: inline-flex; align-items: center; gap: 8px"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+            stroke-width="2"
+          />
+          <polyline points="17 21 17 13 7 13 7 21" stroke-width="2" />
+          <polyline points="7 3 7 8 15 8" stroke-width="2" />
+        </svg>
+        Guardar Diseño
+      </button>
+    </div>
+  </div>
 </div>
 
 <script>
-// DOZO v7.2: Design panel JavaScript
-let selectedTheme = '<?php echo esc_js(get_option('rs_design_theme', 'rockstage-orange')); ?>';
+  // DOZO v7.2: Design panel JavaScript
+  let selectedTheme = '<?php echo esc_js(get_option('rs_design_theme', 'rockstage-orange')); ?>';
 
-function selectTheme(theme, element) {
-    selectedTheme = theme;
-    
-    // Update UI
-    document.querySelectorAll('.rs-theme-card').forEach(card => {
-        card.style.borderColor = '#e5e7eb';
-        card.style.boxShadow = 'none';
-    });
-    
-    element.style.borderColor = '#FF8C00';
-    element.style.boxShadow = '0 0 0 3px rgba(255,140,0,0.1)';
-    
-    // Update preview
-    const preview = document.getElementById('designPreview');
-    const themeNames = {
-        'rockstage-orange': 'RockStage Orange',
-        'minimal-gray': 'Minimal Gray',
-        'corporate-blue': 'Corporate Blue',
-        'modern-dark': 'Modern Dark'
-    };
-    
-    preview.innerHTML = `
-        <div style="max-width: 400px; margin: 0 auto;">
-            <h4 style="margin: 0 0 12px; color: #1f2937;">Tema seleccionado:</h4>
-            <p style="margin: 0; font-size: 18px; font-weight: 600; color: #FF8C00;">${themeNames[theme]}</p>
-            <p style="margin: 12px 0 0; color: #6b7280; font-size: 14px;">Los cambios se aplicarán al guardar la configuración</p>
-        </div>
-    `;
-}
+  function selectTheme(theme, element) {
+      selectedTheme = theme;
 
-function saveDesignSettings() {
-    if (!selectedTheme) {
-        alert('⚠️ Por favor selecciona un tema primero');
-        return;
-    }
-    
-    const btn = event.target.closest('button');
-    const originalHTML = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<svg class="rs-spinner" width="20" height="20" viewBox="0 0 24 24" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"/></svg> Guardando...';
-    
-    jQuery.ajax({
-        url: rsWarrantyAdmin.ajaxUrl,
-        type: 'POST',
-        data: {
-            action: 'rs_save_design_settings',
-            nonce: rsWarrantyAdmin.nonce,
-            theme: selectedTheme,
-            settings: {}
-        },
-        success: function(response) {
-            if (response.success) {
-                alert('✅ Configuración de diseño guardada correctamente');
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-            } else {
-                alert('❌ Error: ' + (response.data.message || 'Error al guardar'));
-                btn.disabled = false;
-                btn.innerHTML = originalHTML;
-            }
-        },
-        error: function() {
-            alert('❌ Error de conexión');
-            btn.disabled = false;
-            btn.innerHTML = originalHTML;
-        }
-    });
-}
+      // Update UI
+      document.querySelectorAll('.rs-theme-card').forEach(card => {
+          card.style.borderColor = '#e5e7eb';
+          card.style.boxShadow = 'none';
+      });
 
-// Initialize on load
-jQuery(document).ready(function($) {
-    // Select current theme
-    const currentTheme = '<?php echo esc_js(get_option('rs_design_theme', 'rockstage-orange')); ?>';
-    const themeCard = document.querySelector('[data-theme="' + currentTheme + '"]');
-    if (themeCard) {
-        selectTheme(currentTheme, themeCard);
-    }
-});
+      element.style.borderColor = '#FF8C00';
+      element.style.boxShadow = '0 0 0 3px rgba(255,140,0,0.1)';
+
+      // Update preview
+      const preview = document.getElementById('designPreview');
+      const themeNames = {
+          'rockstage-orange': 'RockStage Orange',
+          'minimal-gray': 'Minimal Gray',
+          'corporate-blue': 'Corporate Blue',
+          'modern-dark': 'Modern Dark'
+      };
+
+      preview.innerHTML = `
+          <div style="max-width: 400px; margin: 0 auto;">
+              <h4 style="margin: 0 0 12px; color: #1f2937;">Tema seleccionado:</h4>
+              <p style="margin: 0; font-size: 18px; font-weight: 600; color: #FF8C00;">${themeNames[theme]}</p>
+              <p style="margin: 12px 0 0; color: #6b7280; font-size: 14px;">Los cambios se aplicarán al guardar la configuración</p>
+          </div>
+      `;
+  }
+
+  function saveDesignSettings() {
+      if (!selectedTheme) {
+          alert('⚠️ Por favor selecciona un tema primero');
+          return;
+      }
+
+      const btn = event.target.closest('button');
+      const originalHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<svg class="rs-spinner" width="20" height="20" viewBox="0 0 24 24" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"/></svg> Guardando...';
+
+      jQuery.ajax({
+          url: rsWarrantyAdmin.ajaxUrl,
+          type: 'POST',
+          data: {
+              action: 'rs_save_design_settings',
+              nonce: rsWarrantyAdmin.nonce,
+              theme: selectedTheme,
+              settings: {}
+          },
+          success: function(response) {
+              if (response.success) {
+                  alert('✅ Configuración de diseño guardada correctamente');
+                  btn.innerHTML = originalHTML;
+                  btn.disabled = false;
+              } else {
+                  alert('❌ Error: ' + (response.data.message || 'Error al guardar'));
+                  btn.disabled = false;
+                  btn.innerHTML = originalHTML;
+              }
+          },
+          error: function() {
+              alert('❌ Error de conexión');
+              btn.disabled = false;
+              btn.innerHTML = originalHTML;
+          }
+      });
+  }
+
+  // Initialize on load
+  jQuery(document).ready(function($) {
+      // Select current theme
+      const currentTheme = '<?php echo esc_js(get_option('rs_design_theme', 'rockstage-orange')); ?>';
+      const themeCard = document.querySelector('[data-theme="' + currentTheme + '"]');
+      if (themeCard) {
+          selectTheme(currentTheme, themeCard);
+      }
+  });
 </script>
-

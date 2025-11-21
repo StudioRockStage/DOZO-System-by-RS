@@ -5,24 +5,24 @@
  * Flex layout used for buttons block for email editor.
  */
 .is-layout-email-flex {
-	flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 :where(body .is-layout-flex) {
-	gap: var(--wp--style--block-gap, 16px);
+  gap: var(--wp--style--block-gap, 16px);
 }
 
 .is-mobile-preview .is-layout-email-flex {
-	display: block;
+  display: block;
 }
 
 .is-mobile-preview .is-layout-email-flex .block-editor-block-list__block {
-	padding: 5px 0;
-	width: 100%;
+  padding: 5px 0;
+  width: 100%;
 }
 
 .is-mobile-preview .is-layout-email-flex .wp-block-button__link {
-	width: 100%;
+  width: 100%;
 }
 
 /*
@@ -30,78 +30,76 @@
  * This is needed because we disable layout for core/group, core/column and core/columns blocks, and .is-layout-flex is not applied.
  */
 .wp-block-columns:not(.is-not-stacked-on-mobile)
-> .wp-block-column
-> .wp-block:first-child,
+  > .wp-block-column
+  > .wp-block:first-child,
 .wp-block-group > .wp-block:first-child {
-	margin-top: 0;
+  margin-top: 0;
 }
 
-.wp-block-columns:not(.is-not-stacked-on-mobile)
-> .wp-block-column
-> .wp-block,
+.wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column > .wp-block,
 .wp-block-group > .wp-block {
-	margin-bottom: var(--wp--style--block-gap, 16px);
-	margin-top: var(--wp--style--block-gap, 16px);
+  margin-bottom: var(--wp--style--block-gap, 16px);
+  margin-top: var(--wp--style--block-gap, 16px);
 }
 
 .wp-block-columns:not(.is-not-stacked-on-mobile)
-> .wp-block-column
-> .wp-block:not([aria-hidden="true"]):last-of-type,
+  > .wp-block-column
+  > .wp-block:not([aria-hidden="true"]):last-of-type,
 .wp-block-group > .wp-block:not([aria-hidden="true"]):last-of-type {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /*
  * Use box sizing border box for columns that have defined a width (they have flex-basis set).
  */
 .wp-block-columns:not(.is-not-stacked-on-mobile)
-	> .wp-block-column[style*='flex-basis'] {
-	box-sizing: border-box;
+  > .wp-block-column[style*="flex-basis"] {
+  box-sizing: border-box;
 }
 
 /*
  * For the WYSIWYG experience we don't want to display any margins between blocks in the editor
  */
 .wp-block {
-	clear: both;
+  clear: both;
 }
 
 /*
  * Image block enhancements
  */
 .wp-block-image figcaption {
-	/* Resetting the margin for images in the editor to avoid unexpected spacing */
-	margin: 0;
+  /* Resetting the margin for images in the editor to avoid unexpected spacing */
+  margin: 0;
 }
 
 /*
  * Table block enhancements
  */
 .wp-block-table figcaption {
-	/* Center-align table captions like core WordPress */
-	text-align: center;
+  /* Center-align table captions like core WordPress */
+  text-align: center;
 }
 
 /* Ensure bold formatting shows up in table cells and captions in the editor */
 .wp-block-table td strong,
 .wp-block-table th strong,
 .wp-block-table figcaption strong {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .wp-block-image.alignleft,
 .wp-block-image.alignright {
-	margin-inline: 0 0;
-	text-align: center;
+  margin-inline: 0 0;
+  text-align: center;
 }
 
 .wp-block-image.aligncenter {
-	margin-left: auto;
-	margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .wp-block-image.alignright {
-	margin-left: auto;
+  margin-left: auto;
 }
 
 /*
@@ -110,22 +108,22 @@
  */
 ul,
 ol {
-	padding-left: 40px;
+  padding-left: 40px;
 }
 
 /*
  * Override default button border radius which is set in core to 9999px
  */
 .wp-block-button__link {
-	border-radius: 0;
+  border-radius: 0;
 }
 
 /*
  * Mobile preview fixes
  */
 .is-mobile-preview figure > div {
-	max-width: 100% !important;
-	height: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 /*
@@ -134,7 +132,7 @@ ol {
  * We control the gab via different css
  */
 .wp-site-blocks > * {
-	margin-block-start: 0;
+  margin-block-start: 0;
 }
 
 /*
@@ -142,7 +140,7 @@ ol {
  * When user disables the template-lock mode we don't want to show the post title.
  */
 .editor-visual-editor__post-title-wrapper {
-	display: none;
+  display: none;
 }
 
 /*
@@ -150,20 +148,20 @@ ol {
  */
 [data-rich-text-comment],
 [data-rich-text-format-boundary] {
-	border-radius: 2px;
+  border-radius: 2px;
 }
 
 [data-rich-text-comment] {
-	background-color: var(
-		--wp-components-color-accent,
-		var(--wp-admin-theme-color, #3858e9)
-	);
+  background-color: var(
+    --wp-components-color-accent,
+    var(--wp-admin-theme-color, #3858e9)
+  );
 
-	span {
-		color: var(--wp-components-color-accent-inverted, #fff);
-		filter: none;
-		padding: 0 2px;
-	}
+  span {
+    color: var(--wp-components-color-accent-inverted, #fff);
+    filter: none;
+    padding: 0 2px;
+  }
 }
 
 /**
@@ -171,7 +169,7 @@ ol {
  * This is needed because we do not want to have a gap between the social links and also for a WYSIWYG experience.
 */
 .wp-block-social-links.is-layout-flex {
-	gap: 16px !important;
+  gap: 16px !important;
 }
 
 /**
@@ -179,7 +177,7 @@ ol {
  * This is needed because we do not want to have a padding for the social links block particularly for a WYSIWYG experience.
 */
 .wp-block-social-links.has-background {
-	padding-left: 0;
+  padding-left: 0;
 }
 
 /**
@@ -189,8 +187,8 @@ ol {
 :where(.wp-block-social-links:not(.is-style-logos-only)) .wp-social-link-mail,
 :where(.wp-block-social-links:not(.is-style-logos-only)) .wp-social-link-feed,
 :where(.wp-block-social-links:not(.is-style-logos-only)) .wp-social-link-chain {
-	background-color:#000;
-	color:#fff;
+  background-color: #000;
+  color: #fff;
 }
 
 /**
@@ -198,5 +196,5 @@ ol {
  * This is needed because we do want allow scrolling on small screens such as mobile devices.
  */
 .block-editor-iframe__body {
-	overflow-x: auto;
+  overflow-x: auto;
 }

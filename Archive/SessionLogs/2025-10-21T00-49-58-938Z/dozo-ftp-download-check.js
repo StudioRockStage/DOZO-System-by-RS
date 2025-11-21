@@ -19,31 +19,33 @@ async function downloadAndCheck() {
       user: config.user,
       password: config.password,
       port: config.port,
-      secure: config.secure
+      secure: config.secure,
     });
 
-    await client.cd('/public_html/updates/warranty-system/');
-    
-    const tempFile = './update-server.json';
-    await client.downloadTo(tempFile, 'update.json');
-    
+    await client.cd("/public_html/updates/warranty-system/");
+
+    const tempFile = "./update-server.json";
+    await client.downloadTo(tempFile, "update.json");
+
     console.log("✅ Archivo descargado\n");
-    
-    const content = JSON.parse(fs.readFileSync(tempFile, 'utf8'));
-    
+
+    const content = JSON.parse(fs.readFileSync(tempFile, "utf8"));
+
     console.log("📄 Contenido del update.json en servidor:");
     console.log("   Versión:", content.version);
     console.log("   Nombre:", content.name || content.slug);
     console.log("   Download URL:", content.download_url);
     console.log("   Última actualización:", content.last_updated);
-    
+
     console.log("\n📄 Contenido esperado (local):");
-    const local = JSON.parse(fs.readFileSync('./Empaquetado/Ready/update.json', 'utf8'));
+    const local = JSON.parse(
+      fs.readFileSync("./Empaquetado/Ready/update.json", "utf8"),
+    );
     console.log("   Versión:", local.version);
     console.log("   Nombre:", local.name);
     console.log("   Download URL:", local.download_url);
     console.log("   Última actualización:", local.last_updated);
-    
+
     if (content.version === local.version) {
       console.log("\n✅ Las versiones coinciden - El archivo es correcto");
       console.log("\n⚠️  Posible causa del problema:");
@@ -54,9 +56,8 @@ async function downloadAndCheck() {
       console.log("\n⚠️  Las versiones NO coinciden");
       console.log("   El archivo en el servidor es diferente al local");
     }
-    
-    fs.unlinkSync(tempFile);
 
+    fs.unlinkSync(tempFile);
   } catch (error) {
     console.error("❌ Error:", error.message);
   } finally {
@@ -65,4 +66,3 @@ async function downloadAndCheck() {
 }
 
 downloadAndCheck();
-

@@ -1,52 +1,62 @@
 /******/ // The require scope
 /******/ var __webpack_require__ = {};
-/******/ 
+/******/
 /************************************************************************/
 /******/ /* webpack/runtime/define property getters */
 /******/ (() => {
-/******/ 	// define getter functions for harmony exports
-/******/ 	__webpack_require__.d = (exports, definition) => {
-/******/ 		for(var key in definition) {
-/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 			}
-/******/ 		}
-/******/ 	};
-/******/ })();
-/******/ 
+  /******/ // define getter functions for harmony exports
+  /******/ __webpack_require__.d = (exports, definition) => {
+    /******/ for (var key in definition) {
+      /******/ if (
+        __webpack_require__.o(definition, key) &&
+        !__webpack_require__.o(exports, key)
+      ) {
+        /******/ Object.defineProperty(exports, key, {
+          enumerable: true,
+          get: definition[key],
+        });
+        /******/
+      }
+      /******/
+    }
+    /******/
+  };
+  /******/
+})();
+/******/
 /******/ /* webpack/runtime/hasOwnProperty shorthand */
 /******/ (() => {
-/******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ })();
-/******/ 
+  /******/ __webpack_require__.o = (obj, prop) =>
+    Object.prototype.hasOwnProperty.call(obj, prop);
+  /******/
+})();
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  m: () => (/* binding */ setup),
-  L: () => (/* reexport */ speak)
-});
+  m: () => /* binding */ setup,
+  L: () => /* reexport */ speak,
+}); // ./node_modules/@wordpress/a11y/build-module/shared/clear.js
 
-;// ./node_modules/@wordpress/a11y/build-module/shared/clear.js
 /**
  * Clears the a11y-speak-region elements and hides the explanatory text.
  */
 function clear() {
-  const regions = document.getElementsByClassName('a11y-speak-region');
-  const introText = document.getElementById('a11y-speak-intro-text');
+  const regions = document.getElementsByClassName("a11y-speak-region");
+  const introText = document.getElementById("a11y-speak-intro-text");
   for (let i = 0; i < regions.length; i++) {
-    regions[i].textContent = '';
+    regions[i].textContent = "";
   }
 
   // Make sure the explanatory text is hidden from assistive technologies.
   if (introText) {
-    introText.setAttribute('hidden', 'hidden');
+    introText.setAttribute("hidden", "hidden");
   }
-}
+} // ./node_modules/@wordpress/a11y/build-module/shared/filter-message.js
 
-;// ./node_modules/@wordpress/a11y/build-module/shared/filter-message.js
-let previousMessage = '';
+let previousMessage = "";
 
 /**
  * Filter the message to be announced to the screenreader.
@@ -63,25 +73,22 @@ function filterMessage(message) {
    * stripped out and replaced with a space. Browsers will collapse multiple
    * spaces natively.
    */
-  message = message.replace(/<[^<>]+>/g, ' ');
+  message = message.replace(/<[^<>]+>/g, " ");
 
   /*
    * Safari + VoiceOver don't announce repeated, identical strings. We use
    * a `no-break space` to force them to think identical strings are different.
    */
   if (previousMessage === message) {
-    message += '\u00A0';
+    message += "\u00A0";
   }
   previousMessage = message;
   return message;
-}
+} // ./node_modules/@wordpress/a11y/build-module/shared/index.js
 
-;// ./node_modules/@wordpress/a11y/build-module/shared/index.js
 /**
  * Internal dependencies
  */
-
-
 
 /**
  * Allows you to easily announce dynamic interface updates to screen readers using ARIA live regions.
@@ -108,10 +115,10 @@ function speak(message, ariaLive) {
    */
   clear();
   message = filterMessage(message);
-  const introText = document.getElementById('a11y-speak-intro-text');
-  const containerAssertive = document.getElementById('a11y-speak-assertive');
-  const containerPolite = document.getElementById('a11y-speak-polite');
-  if (containerAssertive && ariaLive === 'assertive') {
+  const introText = document.getElementById("a11y-speak-intro-text");
+  const containerAssertive = document.getElementById("a11y-speak-assertive");
+  const containerPolite = document.getElementById("a11y-speak-polite");
+  if (containerAssertive && ariaLive === "assertive") {
     containerAssertive.textContent = message;
   } else if (containerPolite) {
     containerPolite.textContent = message;
@@ -122,15 +129,13 @@ function speak(message, ariaLive) {
    * the 'hidden' HTML attribute.
    */
   if (introText) {
-    introText.removeAttribute('hidden');
+    introText.removeAttribute("hidden");
   }
-}
+} // ./node_modules/@wordpress/a11y/build-module/module/index.js
 
-;// ./node_modules/@wordpress/a11y/build-module/module/index.js
 /**
  * Internal dependencies
  */
-
 
 /**
  * This no-op function is exported to provide compatibility with the `wp-a11y` Script.

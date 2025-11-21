@@ -65,6 +65,7 @@ if (is_admin()) {
 ### **PASO 4: Configurar API Key en WordPress**
 
 **Opción A: Desde el Panel (Fácil)**
+
 1. Ve a WordPress Admin
 2. **RockStage > Desarrollador AI**
 3. Pega tu API Key
@@ -89,7 +90,7 @@ define('RS_CLAUDE_API_KEY', 'sk-ant-api03-TU_API_KEY_AQUI');
 3. Escribe tu primera solicitud:
 
 ```
-"Crea un nuevo diseño minimalista en escala de grises 
+"Crea un nuevo diseño minimalista en escala de grises
 para el verificador de garantía"
 ```
 
@@ -104,6 +105,7 @@ para el verificador de garantía"
 ## 💡 EJEMPLOS DE USO
 
 ### **Ejemplo 1: Nuevo Diseño**
+
 ```
 Crea un diseño moderno para el shortcode del verificador.
 Usa colores en escala de grises y tipografía grande.
@@ -111,6 +113,7 @@ Incluye animaciones sutiles.
 ```
 
 ### **Ejemplo 2: Modificar Estilos**
+
 ```
 Modifica el CSS del formulario actual para que tenga:
 - Más espaciado entre campos
@@ -119,12 +122,14 @@ Modifica el CSS del formulario actual para que tenga:
 ```
 
 ### **Ejemplo 3: Nueva Funcionalidad**
+
 ```
 Agrega un campo de búsqueda de productos en el formulario
 que filtre en tiempo real mientras el usuario escribe.
 ```
 
 ### **Ejemplo 4: Optimización**
+
 ```
 Revisa el JavaScript del formulario y optimízalo:
 - Reduce el tamaño del archivo
@@ -133,6 +138,7 @@ Revisa el JavaScript del formulario y optimízalo:
 ```
 
 ### **Ejemplo 5: Crear Shortcode Nuevo**
+
 ```
 Crea un shortcode [warranty_status] que muestre
 una tarjeta con el estado de una garantía específica.
@@ -159,10 +165,12 @@ En el panel lateral izquierdo verás botones de "Acciones Rápidas":
 ## 💰 COSTOS DE LA API
 
 **Claude Sonnet 4** (Recomendado):
+
 - **Input**: $3 por millón de tokens (~750,000 palabras)
 - **Output**: $15 por millón de tokens
 
 **Ejemplo Real**:
+
 - Conversación típica: ~5,000 tokens
 - Costo: **$0.015 centavos** (menos de 2 centavos)
 - 100 conversaciones: ~$1.50 USD
@@ -199,25 +207,33 @@ Por:
 ## 🛠️ TROUBLESHOOTING
 
 ### **Problema: "API Key no configurada"**
-**Solución**: 
+
+**Solución**:
+
 - Verifica que copiaste la key completa
 - Debe empezar con `sk-ant-api03-`
 - Prueba la conexión
 
 ### **Problema: "Error de conexión"**
+
 **Solución**:
+
 - Verifica tu conexión a internet
 - Revisa que tu servidor permita conexiones HTTPS externas
 - Prueba con: `curl https://api.anthropic.com/v1/messages`
 
 ### **Problema: "El panel no aparece"**
+
 **Solución**:
+
 - Verifica que incluiste el archivo PHP
 - Revisa que los archivos CSS/JS estén en la ruta correcta
 - Limpia el caché de WordPress
 
 ### **Problema: "Claude no responde"**
+
 **Solución**:
+
 - Abre la consola del navegador (F12)
 - Ve a la pestaña "Network"
 - Envía un mensaje
@@ -250,19 +266,23 @@ Por:
 ## 🎯 MEJORES PRÁCTICAS
 
 ### **Sé Específico**
+
 ❌ Malo: "Haz que se vea mejor"
 ✅ Bueno: "Aumenta el tamaño de fuente a 18px y agrega más padding"
 
 ### **Da Contexto**
+
 ❌ Malo: "Crea un formulario"
 ✅ Bueno: "Crea un formulario para el shortcode de verificación que tenga un campo de número de pedido y un botón"
 
 ### **Pide Ejemplos**
+
 ```
 "Dame 3 opciones diferentes de diseño para elegir"
 ```
 
 ### **Itera en Pasos**
+
 ```
 1. "Crea el HTML básico"
 2. "Ahora agrega los estilos CSS"
@@ -274,20 +294,24 @@ Por:
 ## 🚀 FUNCIONALIDADES AVANZADAS
 
 ### **Exportar Conversación**
+
 - Click en el botón "Exportar"
 - Se descarga un archivo .txt con toda la conversación
 - Útil para documentación
 
 ### **Limpiar Chat**
+
 - Click en "Limpiar conversación"
 - Borra el historial (útil para empezar de cero)
 
 ### **Copiar Código**
+
 - Claude marca automáticamente los bloques de código
 - Click en "Copiar Código"
 - Se copia al portapapeles
 
 ### **Aplicar al Plugin**
+
 - Claude puede guardar el código directamente
 - Se guarda como "borrador" primero
 - Revisas antes de activar
@@ -327,6 +351,7 @@ R: Sí, toda la comunicación es HTTPS y tu API Key está protegida.
 Ahora tienes un **asistente de desarrollo AI** directamente en tu WordPress.
 
 **Úsalo para**:
+
 - ✅ Crear diseños nuevos en minutos
 - ✅ Modificar estilos sin tocar CSS manualmente
 - ✅ Generar nuevas funcionalidades

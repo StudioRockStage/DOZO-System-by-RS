@@ -13,7 +13,9 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-console.log('🚀 Iniciando FASE 1 – Core Rebuild & Structure Autodeploy v2.0.0\n');
+console.log(
+  '🚀 Iniciando FASE 1 – Core Rebuild & Structure Autodeploy v2.0.0\n'
+);
 
 // Step 1: Initialize Core Engine
 console.log('1️⃣ Inicializando DOZO Core Engine...');
@@ -29,15 +31,17 @@ const configPath = path.join(__dirname, 'dozo-config.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 console.log(`   ✅ Configuración v${config.systemVersion} cargada`);
 console.log(`   ℹ️  Proyecto: ${config.defaultProject}`);
-console.log(`   ℹ️  AI Sync: ChatGPT=${config.aiSync.chatgpt}, Cursor=${config.aiSync.cursor}, Claude=${config.aiSync.claude}\n`);
+console.log(
+  `   ℹ️  AI Sync: ChatGPT=${config.aiSync.chatgpt}, Cursor=${config.aiSync.cursor}, Claude=${config.aiSync.claude}\n`
+);
 
 // Step 3: Run Autodiagnostic
 console.log('3️⃣ Ejecutando autodiagnóstico del sistema...');
 const { execSync } = await import('child_process');
 try {
-  execSync('node Scripts/dozo-autodiagnostic.js', { 
+  execSync('node Scripts/dozo-autodiagnostic.js', {
     cwd: path.resolve(__dirname, '..'),
-    stdio: 'inherit' 
+    stdio: 'inherit',
   });
   console.log('   ✅ Autodiagnóstico completado\n');
 } catch (error) {
@@ -47,9 +51,9 @@ try {
 // Step 4: Generate Phase 1 Report
 console.log('4️⃣ Generando reporte de FASE 1...');
 try {
-  execSync('node Scripts/dozo-report-phase1.js', { 
+  execSync('node Scripts/dozo-report-phase1.js', {
     cwd: path.resolve(__dirname, '..'),
-    stdio: 'inherit' 
+    stdio: 'inherit',
   });
   console.log('   ✅ Reporte generado\n');
 } catch (error) {
@@ -65,6 +69,3 @@ console.log('🧩 Core Engine operativo');
 console.log('🩺 Autodiagnóstico ejecutado');
 console.log('📊 Reportes generados en DozoCoreResport/');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-
-
-

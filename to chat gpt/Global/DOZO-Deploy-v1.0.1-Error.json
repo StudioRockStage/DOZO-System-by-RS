@@ -1,7 +1,0 @@
-{
-  "action": "Deploy v1.0.1",
-  "status": "failed",
-  "timestamp": "2025-10-19T08:47:03.015Z",
-  "error": "Error al subir archivo después de 3 intentos: Timeout (control socket)",
-  "stack": "Error: Error al subir archivo después de 3 intentos: Timeout (control socket)\n    at uploadToServer (file:///Users/davidalejandroperezrea/Documents/Dozo%20System%20by%20RS/dozo-deploy-remote-v1.0.1.js:167:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async file:///Users/davidalejandroperezrea/Documents/Dozo%20System%20by%20RS/dozo-deploy-remote-v1.0.1.js:374:24"
-}

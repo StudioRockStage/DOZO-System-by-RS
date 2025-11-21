@@ -21,18 +21,14 @@
         "statusCode": 200
       }
     },
-    "zipFiles": [
-      "warranty-system-rs.zip"
-    ],
+    "zipFiles": ["warranty-system-rs.zip"],
     "status": "CHECKED"
   },
   "zipValidation": {
     "sha256": "d62acc4d9040d403d66a9fc9c3fe28e2f98c4f5a93da607a97f9a53b57a45270",
     "size": 277032,
     "sizeReadable": "0.26 MB",
-    "rootFolders": [
-      "warranty-system-rs"
-    ],
+    "rootFolders": ["warranty-system-rs"],
     "rootFolderCorrect": true,
     "directories": {
       "required": {
@@ -148,8 +144,6 @@
     "status": "CHECKED"
   },
   "errors": [],
-  "warnings": [
-    "Tamaño local (0.26 MB) vs remoto (2.73 MB)"
-  ],
+  "warnings": ["Tamaño local (0.26 MB) vs remoto (2.73 MB)"],
   "readiness": "READY_WITH_WARNINGS"
 }

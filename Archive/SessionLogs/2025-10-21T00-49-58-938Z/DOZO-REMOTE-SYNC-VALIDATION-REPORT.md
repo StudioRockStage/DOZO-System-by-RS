@@ -25,10 +25,10 @@ La validación remota del servidor de actualizaciones DOZO se completó exitosam
 
 ### Archivos Encontrados (2):
 
-| Archivo | Tipo | Tamaño | Permisos |
-|---------|------|--------|----------|
-| `update.json` | 📄 File | 188 bytes | 644 |
-| `warranty-system-rs-v1.0.1.zip` | 📄 File | 2.67 MB | 644 |
+| Archivo                         | Tipo    | Tamaño    | Permisos |
+| ------------------------------- | ------- | --------- | -------- |
+| `update.json`                   | 📄 File | 188 bytes | 644      |
+| `warranty-system-rs-v1.0.1.zip` | 📄 File | 2.67 MB   | 644      |
 
 ✅ Conexión establecida correctamente  
 ✅ Acceso al directorio remoto confirmado  
@@ -103,10 +103,10 @@ La validación remota del servidor de actualizaciones DOZO se completó exitosam
 
 Todos los archivos tienen los permisos correctos:
 
-| Archivo | Permisos Actuales | Permisos Esperados | Estado |
-|---------|-------------------|-------------------|---------|
-| `update.json` | 644 | 644 | ✅ Correcto |
-| `warranty-system-rs-v1.0.1.zip` | 644 | 644 | ✅ Correcto |
+| Archivo                         | Permisos Actuales | Permisos Esperados | Estado      |
+| ------------------------------- | ----------------- | ------------------ | ----------- |
+| `update.json`                   | 644               | 644                | ✅ Correcto |
+| `warranty-system-rs-v1.0.1.zip` | 644               | 644                | ✅ Correcto |
 
 ✅ Permisos 644 aplicados correctamente a archivos  
 ✅ Configuración segura implementada  
@@ -228,13 +228,13 @@ El servidor de actualizaciones DOZO está **completamente operativo** y listo pa
 **Panel:** hPanel  
 **Plataforma:** hostinger  
 **Protocolo:** FTP + HTTPS  
-**Framework:** DOZO v7.9 DeepSync  
+**Framework:** DOZO v7.9 DeepSync
 
 ---
 
 **Generado por:** DOZO System by RockStage  
 **Autor:** RockStage Solutions  
-**Fecha de Validación:** October 20, 2025  
+**Fecha de Validación:** October 20, 2025
 
 ---
 
@@ -243,9 +243,8 @@ El servidor de actualizaciones DOZO está **completamente operativo** y listo pa
 ✅ Conexiones cifradas (HTTPS)  
 ✅ Permisos restrictivos (644 para archivos)  
 ✅ Credenciales protegidas  
-✅ Content Security Policy activo  
+✅ Content Security Policy activo
 
 ---
 
 **Estado Final: REMOTE SYNC SUCCESSFUL ✅**
-

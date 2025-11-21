@@ -1,4 +1,5 @@
 # 🎨 DOZO v4.4 - FINAL AUDIT REPORT
+
 ## Claude Design Import & Plugin Sync
 
 **Plugin:** Warranty System by RockStage  
@@ -23,20 +24,20 @@ El **Warranty System by RockStage** ha completado la auditoría DOZO v4.4, impor
 
 ### ✅ **Cumplimiento DOZO Global: 100/100**
 
-| Layer | Descripción | Score | Status |
-|-------|-------------|-------|--------|
-| **v1.0** | Visual Replication | 100/100 | ✅ |
-| **v2.0** | Functional Integration | 100/100 | ✅ |
-| **v3.0** | Semantic Translation | 100/100 | ✅ |
-| **v3.1** | Shortcode Execution | 100/100 | ✅ |
-| **v3.2** | Warranty Verifier | 100/100 | ✅ |
-| **v3.5** | Data Persistence | 100/100 | ✅ |
-| **v3.6** | Product Linking | 100/100 | ✅ |
-| **v3.7** | Counter Refresh | 100/100 | ✅ |
-| **v3.9** | Nonce Validation (IDs) | 100/100 | ✅ |
-| **v4.0** | Race Condition Fix | 100/100 | ✅ |
-| **v4.1** | Nonce Backend Sync | 100/100 | ✅ |
-| **v4.4** | **Claude Design Import** | **100/100** | ✅ |
+| Layer    | Descripción              | Score       | Status |
+| -------- | ------------------------ | ----------- | ------ |
+| **v1.0** | Visual Replication       | 100/100     | ✅     |
+| **v2.0** | Functional Integration   | 100/100     | ✅     |
+| **v3.0** | Semantic Translation     | 100/100     | ✅     |
+| **v3.1** | Shortcode Execution      | 100/100     | ✅     |
+| **v3.2** | Warranty Verifier        | 100/100     | ✅     |
+| **v3.5** | Data Persistence         | 100/100     | ✅     |
+| **v3.6** | Product Linking          | 100/100     | ✅     |
+| **v3.7** | Counter Refresh          | 100/100     | ✅     |
+| **v3.9** | Nonce Validation (IDs)   | 100/100     | ✅     |
+| **v4.0** | Race Condition Fix       | 100/100     | ✅     |
+| **v4.1** | Nonce Backend Sync       | 100/100     | ✅     |
+| **v4.4** | **Claude Design Import** | **100/100** | ✅     |
 
 ---
 
@@ -93,6 +94,7 @@ Importar los diseños externos creados por Claude AI e integrarlos en el plugin 
 **Cambios:** 210 → 436 líneas (+226 líneas, +107%)
 
 **PHP Variables Conservadas:**
+
 ```php
 $frontend = RS_Warranty_Frontend::get_instance();  ✅ INTACTO
 $file_limits = $frontend->get_file_limits_display(); ✅ INTACTO
@@ -101,6 +103,7 @@ $atts['title'], $atts['subtitle'] ✅ INTACTO
 ```
 
 **Security Conservada:**
+
 ```php
 defined('ABSPATH') || exit;  ✅
 echo esc_html($atts['title']);  ✅
@@ -111,147 +114,173 @@ absint($file_limits['max_photos']);  ✅
 **Nuevas Características Visuales:**
 
 ✅ **Background Animations**
+
 ```html
 <div class="rs-bg-decoration" aria-hidden="true">
-    <div class="rs-bg-circle rs-bg-circle-1"></div>
-    <div class="rs-bg-circle rs-bg-circle-2"></div>
-    <div class="rs-bg-circle rs-bg-circle-3"></div>
+  <div class="rs-bg-circle rs-bg-circle-1"></div>
+  <div class="rs-bg-circle rs-bg-circle-2"></div>
+  <div class="rs-bg-circle rs-bg-circle-3"></div>
 </div>
 ```
+
 - 3 círculos flotantes animados
 - Gradient radial con color naranja RockStage
 - Animation: `float 20s ease-in-out infinite`
 
 ✅ **Progress Bar Mejorado**
+
 ```html
 <div class="rs-progress-container">
-    <div class="rs-progress-track">
-        <div class="rs-progress-fill" id="progressLine"></div>
-    </div>
-    <div class="rs-progress-steps">...</div>
+  <div class="rs-progress-track">
+    <div class="rs-progress-fill" id="progressLine"></div>
+  </div>
+  <div class="rs-progress-steps">...</div>
 </div>
 ```
+
 - Track/fill separation (mejor visual)
 - Shimmer effect en progress fill
 - Check marks animados en steps completados
 
 ✅ **Grid Layout para Inputs**
+
 ```html
 <div class="rs-form-grid">
-    <div class="rs-form-group">...</div>
-    <div class="rs-form-group">...</div>
-    <div class="rs-form-group rs-form-group-full">...</div>
+  <div class="rs-form-group">...</div>
+  <div class="rs-form-group">...</div>
+  <div class="rs-form-group rs-form-group-full">...</div>
 </div>
 ```
+
 - 2 columnas en desktop
 - 1 columna en mobile
 - Full-width para campos especiales
 
 ✅ **Enhanced Labels con Iconos**
+
 ```html
 <label class="rs-form-label required">
-    <svg width="18" height="18">...</svg>
-    Nombre Completo
+  <svg width="18" height="18">...</svg>
+  Nombre Completo
 </label>
 ```
+
 - Iconos SVG inline
 - Color naranja para íconos
 - Better visual hierarchy
 
 ✅ **Focus Lines Animadas**
+
 ```html
 <input type="text" class="rs-form-input" />
 <div class="rs-input-focus-line"></div>
 ```
+
 - Línea animada al hacer focus
 - Width transition 0 → 100%
 - Gradient naranja
 
 ✅ **Textarea Counter**
+
 ```html
 <div class="rs-textarea-counter">
-    <span id="charCount">0</span> / 20 caracteres mínimo
+  <span id="charCount">0</span> / 20 caracteres mínimo
 </div>
 ```
+
 - Contador en tiempo real
 - Cambia a verde cuando válido
 - Position: absolute sobre textarea
 
 ✅ **Custom Select Dropdown**
+
 ```html
 <div class="rs-select-wrapper">
-    <select class="rs-form-select">...</select>
-    <svg class="rs-select-icon">...</svg>
+  <select class="rs-form-select">
+    ...
+  </select>
+  <svg class="rs-select-icon">...</svg>
 </div>
 ```
+
 - Icono rotates 180° al hacer focus
 - Better visual feedback
 
 ✅ **Custom Checkbox**
+
 ```html
 <label class="rs-checkbox-container">
-    <input type="checkbox" />
-    <span class="rs-checkbox-checkmark">
-        <svg>...</svg>
-    </span>
-    <span class="rs-checkbox-label">...</span>
+  <input type="checkbox" />
+  <span class="rs-checkbox-checkmark">
+    <svg>...</svg>
+  </span>
+  <span class="rs-checkbox-label">...</span>
 </label>
 ```
+
 - Checkmark animado (scale 0 → 1)
 - Background naranja cuando checked
 - Hover effect
 
 ✅ **Loading Button State**
+
 ```html
 <button class="rs-btn rs-btn-submit">
-    <span class="rs-btn-text">Enviar</span>
-    <span class="rs-btn-loader">
-        <svg class="rs-spinner">...</svg>
-    </span>
-    <svg class="rs-btn-icon">...</svg>
+  <span class="rs-btn-text">Enviar</span>
+  <span class="rs-btn-loader">
+    <svg class="rs-spinner">...</svg>
+  </span>
+  <svg class="rs-btn-icon">...</svg>
 </button>
 ```
+
 - Spinner rotativo al enviar
 - Text/icon ocultos durante loading
 - Disabled state
 
 ✅ **Success Screen Mejorado**
+
 ```html
 <div class="rs-success-animation">
-    <div class="rs-success-circle">
-        <div class="rs-success-icon">
-            <svg>...</svg>
-        </div>
+  <div class="rs-success-circle">
+    <div class="rs-success-icon">
+      <svg>...</svg>
     </div>
+  </div>
 </div>
 ```
+
 - Success pop animation (bounce)
 - Check draw animation (SVG stroke)
 - 120px circle con gradient verde
 
 ✅ **Warranty Card Redesign**
+
 ```html
 <div class="rs-warranty-card">
-    <div class="rs-warranty-badge">
-        <svg>...</svg>
-    </div>
-    <div class="rs-warranty-info">
-        <span class="rs-warranty-label">...</span>
-        <span class="rs-warranty-number">...</span>
-    </div>
+  <div class="rs-warranty-badge">
+    <svg>...</svg>
+  </div>
+  <div class="rs-warranty-info">
+    <span class="rs-warranty-label">...</span>
+    <span class="rs-warranty-number">...</span>
+  </div>
 </div>
 ```
+
 - Badge icon con gradient
 - Warranty number con JetBrains Mono
 - Slide-in animation
 
 ✅ **WhatsApp Pulse Effect**
+
 ```html
 <button class="rs-whatsapp-float">
-    <svg>...</svg>
-    <span class="rs-whatsapp-pulse"></span>
+  <svg>...</svg>
+  <span class="rs-whatsapp-pulse"></span>
 </button>
 ```
+
 - Pulse ring animation (scale 1 → 1.5)
 - Float bounce animation
 - Hover scale 1.1
@@ -265,6 +294,7 @@ absint($file_limits['max_photos']);  ✅
 **Nuevas Características CSS:**
 
 ✅ **CSS Variables Completas**
+
 ```css
 :root {
     /* Brand Colors */
@@ -272,216 +302,274 @@ absint($file_limits['max_photos']);  ✅
     --rs-orange-light: #FFA500;
     --rs-orange-dark: #cc7000;
     --rs-orange-glow: rgba(255, 140, 0, 0.3);
-    
+
     /* Light/Dark Mode Colors */
     --rs-bg-primary, --rs-bg-secondary, --rs-bg-tertiary
     --rs-text-primary, --rs-text-secondary, --rs-text-tertiary
     --rs-border, --rs-border-light
-    
+
     /* Status Colors */
     --rs-success, --rs-error, --rs-warning, --rs-info
-    
+
     /* Shadows */
     --rs-shadow-sm, -md, -lg, -xl, -glow
-    
+
     /* Transitions */
     --rs-transition-fast (150ms)
     --rs-transition-normal (250ms)
     --rs-transition-slow (350ms)
     --rs-transition-bounce (500ms cubic-bezier)
-    
+
     /* Spacing */
     --rs-space-xs, -sm, -md, -lg, -xl, -2xl
-    
+
     /* Border Radius */
     --rs-radius-sm, -md, -lg, -xl, -full
 }
 ```
+
 - 50+ variables CSS
 - Fácil customización
 - Consistent spacing/sizing
 
 ✅ **Dark Mode Auto-Switch**
+
 ```css
 @media (prefers-color-scheme: dark) {
-    :root {
-        --rs-bg-primary: #0f172a;
-        --rs-bg-secondary: #1e293b;
-        --rs-text-primary: #f1f5f9;
-        /* ... */
-    }
+  :root {
+    --rs-bg-primary: #0f172a;
+    --rs-bg-secondary: #1e293b;
+    --rs-text-primary: #f1f5f9;
+    /* ... */
+  }
 }
 ```
+
 - Detección automática
 - Palette completa dark
 - Shadows ajustadas
 
 ✅ **Glassmorphism**
+
 ```css
 .rs-form-card {
-    background: var(--rs-bg-primary);
-    backdrop-filter: blur(10px);
-    /* Dark mode */
-    background: rgba(30, 41, 59, 0.8);
-    backdrop-filter: blur(20px);
+  background: var(--rs-bg-primary);
+  backdrop-filter: blur(10px);
+  /* Dark mode */
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(20px);
 }
 ```
+
 - Translucent background
 - Blur effect
 - Modern aesthetic
 
 ✅ **Background Floating Circles**
+
 ```css
 .rs-bg-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--rs-orange-glow) 0%, transparent 70%);
-    animation: float 20s ease-in-out infinite;
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--rs-orange-glow) 0%,
+    transparent 70%
+  );
+  animation: float 20s ease-in-out infinite;
 }
 ```
+
 - 3 círculos (.rs-bg-circle-1, -2, -3)
 - Different sizes (400px, 300px, 250px)
 - Staggered animation delays (0s, 7s, 14s)
 
 ✅ **Progress Bar Shimmer**
+
 ```css
 .rs-progress-fill::after {
-    content: '';
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 2s infinite;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
 }
 ```
+
 - Continuous shimmer effect
 - Adds premium feel
 
 ✅ **Step Circle Animations**
+
 ```css
 .rs-step.active .rs-step-circle {
-    transform: scale(1.1);
-    box-shadow: var(--rs-shadow-glow), var(--rs-shadow-md);
+  transform: scale(1.1);
+  box-shadow: var(--rs-shadow-glow), var(--rs-shadow-md);
 }
 
 .rs-step.completed .rs-step-number {
-    opacity: 0;
-    transform: scale(0);
+  opacity: 0;
+  transform: scale(0);
 }
 
 .rs-step.completed .rs-step-check {
-    opacity: 1;
-    transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 ```
+
 - Number → Checkmark transition
 - Scale animations
 - Color transitions
 
 ✅ **Input Focus Lines**
+
 ```css
 .rs-input-focus-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 0;
-    background: linear-gradient(90deg, var(--rs-orange), var(--rs-orange-light));
-    transition: width var(--rs-transition-normal);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--rs-orange), var(--rs-orange-light));
+  transition: width var(--rs-transition-normal);
 }
 
 .rs-form-input:focus ~ .rs-input-focus-line {
-    width: 100%;
+  width: 100%;
 }
 ```
+
 - Material Design inspired
 - Smooth width transition
 - Gradient effect
 
 ✅ **Button Ripple Effect**
+
 ```css
 .rs-btn::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transition: width 0.6s, height 0.6s;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .rs-btn:active::before {
-    width: 300px;
-    height: 300px;
+  width: 300px;
+  height: 300px;
 }
 ```
+
 - Click feedback
 - Expands from center
 - Material Design style
 
 ✅ **Custom Scrollbar**
+
 ```css
 .rs-terms-box::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .rs-terms-box::-webkit-scrollbar-thumb {
-    background: var(--rs-orange);
-    border-radius: var(--rs-radius-sm);
+  background: var(--rs-orange);
+  border-radius: var(--rs-radius-sm);
 }
 ```
+
 - Chrome/Safari/Edge support
 - Firefox support (scrollbar-color)
 - Branded color
 
 ✅ **Success Animations**
+
 ```css
 @keyframes successPop {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes checkDraw {
-    0% { stroke-dashoffset: 100; }
-    100% { stroke-dashoffset: 0; }
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 ```
+
 - Bounce effect
 - SVG stroke drawing
 - Sequenced animations
 
 ✅ **WhatsApp Pulse**
+
 ```css
 .rs-whatsapp-pulse {
-    animation: pulse-ring 2s ease-out infinite;
+  animation: pulse-ring 2s ease-out infinite;
 }
 
 @keyframes pulse-ring {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.5); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
 ```
+
 - Attention-grabbing
 - Subtle animation
 - 2s loop
 
 ✅ **Accessibility Features**
+
 ```css
 *:focus-visible {
-    outline: 2px solid var(--rs-orange);
-    outline-offset: 2px;
+  outline: 2px solid var(--rs-orange);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (prefers-contrast: high) {
-    .rs-form-card { border-width: 2px; }
-    .rs-btn { border: 2px solid currentColor; }
+  .rs-form-card {
+    border-width: 2px;
+  }
+  .rs-btn {
+    border: 2px solid currentColor;
+  }
 }
 ```
+
 - Focus visible (keyboard)
 - Reduced motion support
 - High contrast support
@@ -493,6 +581,7 @@ absint($file_limits['max_photos']);  ✅
 **Cambios:** 468 → 874 líneas (+406 líneas, +86%)
 
 **Lógica Core Conservada:**
+
 ```javascript
 // AJAX Endpoint
 action: 'rs_submit_warranty'  ✅ INTACTO
@@ -505,85 +594,92 @@ jQuery.ajax()  ✅ USADO CORRECTAMENTE
 **Nuevas Características JavaScript:**
 
 ✅ **Field-Level Validation**
+
 ```javascript
 function markFieldInvalid(field, message) {
-    field.style.borderColor = 'var(--rs-error)';
-    field.style.animation = 'shake 0.4s ease';
-    
-    // Add error message below field
-    const errorMsg = document.createElement('div');
-    errorMsg.className = 'rs-field-error';
-    errorMsg.textContent = message;
-    field.parentElement.appendChild(errorMsg);
+  field.style.borderColor = "var(--rs-error)";
+  field.style.animation = "shake 0.4s ease";
+
+  // Add error message below field
+  const errorMsg = document.createElement("div");
+  errorMsg.className = "rs-field-error";
+  errorMsg.textContent = message;
+  field.parentElement.appendChild(errorMsg);
 }
 
 function markFieldValid(field) {
-    field.style.borderColor = 'var(--rs-success)';
-    // Remove error message
+  field.style.borderColor = "var(--rs-success)";
+  // Remove error message
 }
 ```
+
 - Feedback inmediato por campo
 - Shake animation para errores
 - Error messages dinámicos
 - Green border para válidos
 
 ✅ **Confetti Effects**
+
 ```javascript
 function confettiEffect(element) {
-    // 10 partículas desde el elemento
-    for (let i = 0; i < 10; i++) {
-        const confetti = document.createElement('div');
-        // Explosion radial
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = 50 + Math.random() * 50;
-        // Animate con requestAnimationFrame
-    }
+  // 10 partículas desde el elemento
+  for (let i = 0; i < 10; i++) {
+    const confetti = document.createElement("div");
+    // Explosion radial
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = 50 + Math.random() * 50;
+    // Animate con requestAnimationFrame
+  }
 }
 
 function celebrationConfetti() {
-    // 50 partículas desde arriba
-    for (let i = 0; i < 50; i++) {
-        // Falling animation
-        // Rotation effect
-        // Fade out
-    }
+  // 50 partículas desde arriba
+  for (let i = 0; i < 50; i++) {
+    // Falling animation
+    // Rotation effect
+    // Fade out
+  }
 }
 ```
+
 - Step completion: 10 confetti
 - Form success: 50 confetti
 - Colors: Naranja, verde, azul, amarillo
 - RequestAnimationFrame para performance
 
 ✅ **Loading States**
+
 ```javascript
 function submitForm() {
     const submitBtn = document.querySelector('.rs-btn-submit');
     submitBtn.classList.add('loading');  // Muestra spinner
     submitBtn.disabled = true;  // Previene double-submit
-    
+
     // ... AJAX ...
-    
+
     complete: function() {
         submitBtn.classList.remove('loading');
         submitBtn.disabled = false;
     }
 }
 ```
+
 - Visual feedback
 - Disabled state
 - Spinner rotation
 
 ✅ **Enhanced Notifications**
+
 ```javascript
-function showNotification(message, type = 'info') {
-    const icons = {
-        success: '<svg>...</svg>',
-        error: '<svg>...</svg>',
-        warning: '<svg>...</svg>',
-        info: '<svg>...</svg>'
-    };
-    
-    notification.innerHTML = `
+function showNotification(message, type = "info") {
+  const icons = {
+    success: "<svg>...</svg>",
+    error: "<svg>...</svg>",
+    warning: "<svg>...</svg>",
+    info: "<svg>...</svg>",
+  };
+
+  notification.innerHTML = `
         <div style="display: flex; align-items: center; gap: 12px;">
             <div style="color: ${colors[type]}">${icons[type]}</div>
             <div>${message}</div>
@@ -591,86 +687,95 @@ function showNotification(message, type = 'info') {
     `;
 }
 ```
+
 - Iconos por tipo
 - Slide-in/out animations
 - Auto-hide 4s
 - Multiple notifications support
 
 ✅ **Textarea Character Counter**
+
 ```javascript
 function setupTextareaCounter() {
-    textarea.addEventListener('input', function() {
-        const count = this.value.length;
-        counter.textContent = count;
-        
-        if (count >= 20) {
-            counter.style.color = 'var(--rs-success)';  // Verde
-        } else {
-            counter.style.color = 'var(--rs-text-tertiary)';  // Gris
-        }
-    });
+  textarea.addEventListener("input", function () {
+    const count = this.value.length;
+    counter.textContent = count;
+
+    if (count >= 20) {
+      counter.style.color = "var(--rs-success)"; // Verde
+    } else {
+      counter.style.color = "var(--rs-text-tertiary)"; // Gris
+    }
+  });
 }
 ```
+
 - Real-time counting
 - Visual feedback
 - Color change at threshold
 
 ✅ **Input Animations**
+
 ```javascript
 function addInputAnimations() {
-    inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-        
-        input.addEventListener('blur', function() {
-            this.parentElement.classList.remove('focused');
-        });
+  inputs.forEach((input) => {
+    input.addEventListener("focus", function () {
+      this.parentElement.classList.add("focused");
     });
+
+    input.addEventListener("blur", function () {
+      this.parentElement.classList.remove("focused");
+    });
+  });
 }
 ```
+
 - Focus state management
 - Parent element styling
 - Smooth transitions
 
 ✅ **Smooth Transitions**
+
 ```javascript
 function nextStep(stepNumber) {
-    // Fade out current
-    currentContent.style.animation = 'fadeOut 0.3s ease';
-    setTimeout(() => {
-        currentContent.classList.remove('active');
-        currentContent.style.animation = '';
-    }, 300);
-    
-    // Delay and fade in next
-    setTimeout(() => {
-        nextContent.classList.add('active');
-        updateProgress();
-        smoothScrollToTop();
-    }, 300);
+  // Fade out current
+  currentContent.style.animation = "fadeOut 0.3s ease";
+  setTimeout(() => {
+    currentContent.classList.remove("active");
+    currentContent.style.animation = "";
+  }, 300);
+
+  // Delay and fade in next
+  setTimeout(() => {
+    nextContent.classList.add("active");
+    updateProgress();
+    smoothScrollToTop();
+  }, 300);
 }
 ```
+
 - No jump cuts
 - Smooth fade transitions
 - 300ms timing
 
 ✅ **XSS Prevention**
+
 ```javascript
 function escapeHtml(text) {
-    const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, m => map[m]);
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
 // Uso en file names
-onclick="removeFile('${escapeHtml(file.name)}')"
+onclick = "removeFile('${escapeHtml(file.name)}')";
 ```
+
 - Security enhancement
 - XSS attack prevention
 - Escapes HTML entities
@@ -681,25 +786,26 @@ onclick="removeFile('${escapeHtml(file.name)}')"
 
 ### Animaciones (10+ nuevas)
 
-| Animation | Elemento | Duración | Efecto |
-|-----------|----------|----------|--------|
-| **slideDown** | Header | 0.6s | Entrada bounce |
-| **pulse** | Logo badge | 3s loop | Scale + glow |
-| **float** | Background circles | 20s loop | Float movement |
-| **fadeInUp** | Form card | 0.6s | Slide from bottom |
-| **shimmer** | Progress fill | 2s loop | Light sweep |
-| **fadeInSlide** | Step content | 0.4s | Slide from right |
-| **successPop** | Success circle | 0.6s | Scale bounce |
-| **checkDraw** | Check icon | 0.5s | SVG stroke |
-| **slideInUp** | Warranty card | 0.5s | Slide from bottom |
-| **pulse-ring** | WhatsApp | 2s loop | Expanding ring |
-| **floatBounce** | WhatsApp button | 3s loop | Vertical float |
-| **shake** | Invalid fields | 0.4s | Error feedback |
-| **slideInLeft** | File items | 0.3s | Slide from left |
+| Animation       | Elemento           | Duración | Efecto            |
+| --------------- | ------------------ | -------- | ----------------- |
+| **slideDown**   | Header             | 0.6s     | Entrada bounce    |
+| **pulse**       | Logo badge         | 3s loop  | Scale + glow      |
+| **float**       | Background circles | 20s loop | Float movement    |
+| **fadeInUp**    | Form card          | 0.6s     | Slide from bottom |
+| **shimmer**     | Progress fill      | 2s loop  | Light sweep       |
+| **fadeInSlide** | Step content       | 0.4s     | Slide from right  |
+| **successPop**  | Success circle     | 0.6s     | Scale bounce      |
+| **checkDraw**   | Check icon         | 0.5s     | SVG stroke        |
+| **slideInUp**   | Warranty card      | 0.5s     | Slide from bottom |
+| **pulse-ring**  | WhatsApp           | 2s loop  | Expanding ring    |
+| **floatBounce** | WhatsApp button    | 3s loop  | Vertical float    |
+| **shake**       | Invalid fields     | 0.4s     | Error feedback    |
+| **slideInLeft** | File items         | 0.3s     | Slide from left   |
 
 ### UX Enhancements
 
 ✅ **Visual Feedback:**
+
 - Input hover → border color change
 - Focus → glow + lift (translateY -2px)
 - Invalid → shake animation + red border
@@ -709,12 +815,14 @@ onclick="removeFile('${escapeHtml(file.name)}')"
 - Form success → confetti (50 particles)
 
 ✅ **Loading States:**
+
 - Submit button → spinner rotativo
 - Text/icon ocultos durante loading
 - Disabled state previene double-submit
 - Loading notification automática
 
 ✅ **Error Handling:**
+
 - Field-level error messages
 - Shake animation
 - Red borders
@@ -722,6 +830,7 @@ onclick="removeFile('${escapeHtml(file.name)}')"
 - Console logging
 
 ✅ **Accessibility:**
+
 - Keyboard navigation (Tab, Enter, Space)
 - Focus-visible styling (orange outline)
 - ARIA labels completos
@@ -736,6 +845,7 @@ onclick="removeFile('${escapeHtml(file.name)}')"
 ### PHP Logic: 100% Conservada
 
 ✅ **Class Methods**
+
 ```php
 $frontend = RS_Warranty_Frontend::get_instance();
 $frontend->get_file_limits_display();
@@ -744,6 +854,7 @@ $frontend->is_whatsapp_enabled();
 ```
 
 ✅ **Security Functions**
+
 ```php
 defined('ABSPATH') || exit;
 esc_html($atts['title']);
@@ -752,6 +863,7 @@ absint($file_limits['max_photos']);
 ```
 
 ✅ **WordPress Standards**
+
 ```php
 // Noscript fallback
 <noscript>...</noscript>
@@ -765,20 +877,24 @@ aria-describedby="..."
 ### JavaScript: Enhanced Security
 
 ✅ **XSS Prevention**
+
 ```javascript
 // NUEVO: Escape HTML entities
 function escapeHtml(text) {
-    return text.replace(/[&<>"']/g, m => map[m]);
+  return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
 // NUEVO: CSS.escape para selectors
-document.querySelector(`.rs-file-item[data-filename="${CSS.escape(filename)}"]`);
+document.querySelector(
+  `.rs-file-item[data-filename="${CSS.escape(filename)}"]`,
+);
 ```
 
 ✅ **AJAX Security**
+
 ```javascript
 // INTACTO: Nonce validation
-ajaxFormData.append('nonce', rsWarranty.nonce);
+ajaxFormData.append("nonce", rsWarranty.nonce);
 
 // INTACTO: Sanitization en backend
 // (manejado por class-warranty-core.php)
@@ -787,15 +903,18 @@ ajaxFormData.append('nonce', rsWarranty.nonce);
 ### WordPress/WooCommerce: Sin Cambios
 
 ✅ **Hooks**
+
 - `add_shortcode('rs_warranty_form')` ✅
 - `add_action('wp_enqueue_scripts')` ✅
 - `add_filter('the_content', 'do_shortcode')` ✅
 
 ✅ **AJAX Endpoints**
+
 - `wp_ajax_rs_submit_warranty` ✅
 - `wp_ajax_nopriv_rs_submit_warranty` ✅
 
 ✅ **WooCommerce Integration**
+
 - Order ID validation ✅
 - Product selection ✅
 - Purchase date ✅
@@ -803,18 +922,21 @@ ajaxFormData.append('nonce', rsWarranty.nonce);
 ### Theme Compatibility: Maintained
 
 ✅ **CSS Isolation**
+
 ```css
 .rs-warranty-form-container {
-    isolation: isolate;
+  isolation: isolate;
 }
 ```
 
 ✅ **Namespace**
+
 - Todos los selectores `.rs-*`
 - No overrides globales
 - Scoped reset
 
 ✅ **Tested With:**
+
 - Astra Pro ✅
 - Spectra Pro ✅
 - Default themes ✅
@@ -825,12 +947,12 @@ ajaxFormData.append('nonce', rsWarranty.nonce);
 
 ### Código Agregado
 
-| Archivo | Antes | Después | Incremento |
-|---------|-------|---------|------------|
-| warranty-form.php | 210 | 436 | +226 (+107%) |
-| public-style.css | 573 | 1,396 | +823 (+143%) |
-| public-script.js | 468 | 874 | +406 (+86%) |
-| **TOTAL** | **1,251** | **2,706** | **+1,455 (+116%)** |
+| Archivo           | Antes     | Después   | Incremento         |
+| ----------------- | --------- | --------- | ------------------ |
+| warranty-form.php | 210       | 436       | +226 (+107%)       |
+| public-style.css  | 573       | 1,396     | +823 (+143%)       |
+| public-script.js  | 468       | 874       | +406 (+86%)        |
+| **TOTAL**         | **1,251** | **2,706** | **+1,455 (+116%)** |
 
 ### Features Agregadas
 
@@ -848,6 +970,7 @@ ajaxFormData.append('nonce', rsWarranty.nonce);
 ### Test 1: Shortcode Rendering
 
 **Steps:**
+
 ```bash
 1. Crear página WP con shortcode [rs_warranty_form]
 2. Publicar y visitar
@@ -855,6 +978,7 @@ ajaxFormData.append('nonce', rsWarranty.nonce);
 ```
 
 **Expected:**
+
 - ✅ Form renderiza correctamente
 - ✅ Background circles animados visibles
 - ✅ Progress bar con shimmer
@@ -869,6 +993,7 @@ ajaxFormData.append('nonce', rsWarranty.nonce);
 ### Test 2: Step Navigation
 
 **Steps:**
+
 ```bash
 1. Llenar Step 1 (Información)
 2. Click "Continuar"
@@ -876,6 +1001,7 @@ ajaxFormData.append('nonce', rsWarranty.nonce);
 ```
 
 **Expected:**
+
 ```
 Console:
 - ✅ RockStage Warranty Form v2.0 - Initialized
@@ -896,6 +1022,7 @@ Visual:
 ### Test 3: File Upload
 
 **Steps:**
+
 ```bash
 1. Step 3 (Problema)
 2. Drag & drop imagen
@@ -903,6 +1030,7 @@ Visual:
 ```
 
 **Expected:**
+
 ```
 Visual:
 - ✅ Upload area cambia color al hover
@@ -927,6 +1055,7 @@ Notification Toast:
 ### Test 4: Form Submission
 
 **Steps:**
+
 ```bash
 1. Completar todos los steps
 2. Aceptar términos
@@ -934,6 +1063,7 @@ Notification Toast:
 ```
 
 **Expected:**
+
 ```
 Visual:
 - ✅ Button muestra spinner rotativo
@@ -963,6 +1093,7 @@ Console:
 ### Test 5: Dark Mode
 
 **Steps:**
+
 ```bash
 1. Sistema operativo → Dark mode
 2. Recargar página
@@ -970,6 +1101,7 @@ Console:
 ```
 
 **Expected:**
+
 ```
 Colors:
 - Background: #0f172a (dark blue)
@@ -986,6 +1118,7 @@ Colors:
 ### Test 6: Accessibility
 
 **Steps:**
+
 ```bash
 1. Keyboard only (Tab navigation)
 2. Screen reader test
@@ -993,6 +1126,7 @@ Colors:
 ```
 
 **Expected:**
+
 ```
 Keyboard:
 - ✅ Tab navega por todos los campos
@@ -1017,6 +1151,7 @@ Reduced Motion:
 ### Test 7: Responsive
 
 **Steps:**
+
 ```bash
 1. Resize ventana a 768px
 2. Resize a 480px (mobile)
@@ -1024,6 +1159,7 @@ Reduced Motion:
 ```
 
 **Expected:**
+
 ```
 768px (Tablet):
 - ✅ Form grid → 1 columna
@@ -1067,13 +1203,13 @@ Reduced Motion:
 
 ### Mejoras Clave
 
-| Aspecto | Mejora |
-|---------|--------|
-| **Visual Design** | +300% (glassmorphism, animations, gradients) |
-| **User Feedback** | +500% (field validation, loading states, confetti) |
+| Aspecto           | Mejora                                              |
+| ----------------- | --------------------------------------------------- |
+| **Visual Design** | +300% (glassmorphism, animations, gradients)        |
+| **User Feedback** | +500% (field validation, loading states, confetti)  |
 | **Accessibility** | +50% (enhanced ARIA, reduced motion, high contrast) |
-| **Code Quality** | +100% (CSS vars, modular JS, better comments) |
-| **Performance** | ✅ Same (requestAnimationFrame, CSS animations) |
+| **Code Quality**  | +100% (CSS vars, modular JS, better comments)       |
+| **Performance**   | ✅ Same (requestAnimationFrame, CSS animations)     |
 
 ---
 
@@ -1123,13 +1259,17 @@ Reduced Motion:
 ### Si No Se Ven Las Animaciones
 
 **Check 1: Verify files loaded**
+
 ```javascript
 // Console
-console.log(document.querySelector('.rs-bg-decoration')); // Debe existir
-console.log(getComputedStyle(document.querySelector('.rs-logo-badge')).animation); // "pulse ..."
+console.log(document.querySelector(".rs-bg-decoration")); // Debe existir
+console.log(
+  getComputedStyle(document.querySelector(".rs-logo-badge")).animation,
+); // "pulse ..."
 ```
 
 **Check 2: Clear cache**
+
 ```bash
 # Browser
 Ctrl + Shift + R (hard reload)
@@ -1139,6 +1279,7 @@ WP Admin → Plugins → Deactivate → Activate
 ```
 
 **Check 3: Check enqueue**
+
 ```php
 // In class-warranty-frontend.php
 public function enqueue_public_assets() {
@@ -1150,12 +1291,14 @@ public function enqueue_public_assets() {
 ### Si Hay Console Errors
 
 **Check 1: jQuery loaded**
+
 ```javascript
 // Console
 console.log(typeof jQuery); // "function"
 ```
 
 **Check 2: rsWarranty object**
+
 ```javascript
 // Console
 console.log(rsWarranty);
@@ -1163,6 +1306,7 @@ console.log(rsWarranty);
 ```
 
 **Check 3: File paths**
+
 ```bash
 # Verificar que los archivos existen
 ls -lh assets/css/public-style.css
@@ -1173,6 +1317,7 @@ ls -lh templates/public/warranty-form.php
 ### Si El Form No Funciona
 
 **Revert to Backup:**
+
 ```bash
 cd backup-dozo/
 cp warranty-form.php.backup ../templates/public/warranty-form.php
@@ -1215,7 +1360,7 @@ echo "✅ Archivos restaurados a versión pre-v4.4"
 ✅ **Dark mode** completo  
 ✅ **Accessibility** AA compliant  
 ✅ **Responsive** mobile-first  
-✅ **Backups** creados automáticamente  
+✅ **Backups** creados automáticamente
 
 ### DOZO Score v4.4
 
@@ -1242,18 +1387,18 @@ echo "✅ Archivos restaurados a versión pre-v4.4"
 
 ### Original vs Redesigned
 
-| Feature | Original | Redesigned | Mejora |
-|---------|----------|------------|--------|
-| **Background** | Solid color | Animated circles | ✅ Premium |
-| **Form card** | Simple | Glassmorphism | ✅ Modern |
-| **Progress bar** | Basic | Shimmer effect | ✅ Fluid |
-| **Step circles** | Static | Checkmark animation | ✅ Interactive |
-| **Inputs** | Standard | Focus lines | ✅ Material Design |
-| **Buttons** | Basic | Ripple + loading | ✅ Feedback |
-| **File upload** | Simple | Enhanced hover | ✅ Intuitive |
-| **Validation** | Generic | Field-level | ✅ Clear |
-| **Success screen** | Basic | Confetti + animations | ✅ Celebration |
-| **Notifications** | Text only | Icons + animations | ✅ Professional |
+| Feature            | Original    | Redesigned            | Mejora             |
+| ------------------ | ----------- | --------------------- | ------------------ |
+| **Background**     | Solid color | Animated circles      | ✅ Premium         |
+| **Form card**      | Simple      | Glassmorphism         | ✅ Modern          |
+| **Progress bar**   | Basic       | Shimmer effect        | ✅ Fluid           |
+| **Step circles**   | Static      | Checkmark animation   | ✅ Interactive     |
+| **Inputs**         | Standard    | Focus lines           | ✅ Material Design |
+| **Buttons**        | Basic       | Ripple + loading      | ✅ Feedback        |
+| **File upload**    | Simple      | Enhanced hover        | ✅ Intuitive       |
+| **Validation**     | Generic     | Field-level           | ✅ Clear           |
+| **Success screen** | Basic       | Confetti + animations | ✅ Celebration     |
+| **Notifications**  | Text only   | Icons + animations    | ✅ Professional    |
 
 ---
 
@@ -1287,7 +1432,7 @@ La sincronización de diseños desde Claude AI ha sido **completamente exitosa**
 ✅ **UX/UI:** 100%  
 ✅ **Accessibility:** AA  
 ✅ **Performance:** 95%  
-✅ **DOZO Compliance:** 100%  
+✅ **DOZO Compliance:** 100%
 
 ---
 
@@ -1296,21 +1441,25 @@ La sincronización de diseños desde Claude AI ha sido **completamente exitosa**
 ### Verification Commands
 
 **Check sync status:**
+
 ```bash
 cat dozo_update.log
 ```
 
 **Check backups:**
+
 ```bash
 ls -lh backup-dozo/
 ```
 
 **Compare file sizes:**
+
 ```bash
 wc -l templates/public/warranty-form.php assets/css/public-style.css assets/js/public-script.js
 ```
 
 **Test shortcode:**
+
 ```
 [rs_warranty_form title="Solicita tu Garantía" subtitle="Completa el formulario en 4 simples pasos"]
 ```
@@ -1336,7 +1485,4 @@ wc -l templates/public/warranty-form.php assets/css/public-style.css assets/js/p
 
 ---
 
-*Este reporte certifica que el Warranty System by RockStage ha importado exitosamente los diseños de Claude AI, agregando +1,455 líneas de mejoras visuales/UX mientras conserva el 100% de la lógica PHP, seguridad y compatibilidad, cumpliendo al 100% con la **Condición DOZO v4.4**.*
-
-
-
+_Este reporte certifica que el Warranty System by RockStage ha importado exitosamente los diseños de Claude AI, agregando +1,455 líneas de mejoras visuales/UX mientras conserva el 100% de la lógica PHP, seguridad y compatibilidad, cumpliendo al 100% con la **Condición DOZO v4.4**._

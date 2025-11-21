@@ -25,7 +25,7 @@ const OFFICIAL = {
   author: "RockStage Solutions",
   version: "1.0.0",
   zipName: "Warranty_System_RS_v1.0.0.zip",
-  folderName: "warranty-system-rs"
+  folderName: "warranty-system-rs",
 };
 
 function sha256(filePath) {
@@ -36,7 +36,7 @@ function sha256(filePath) {
 }
 
 function ensureDirs() {
-  [GLOBAL, LATEST].forEach(d => {
+  [GLOBAL, LATEST].forEach((d) => {
     if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
   });
 }
@@ -46,16 +46,16 @@ function findMainPHP() {
   const candidates = [
     "warranty-system-rs.php",
     "rockstage-warranty-system.php",
-    "warranty-system.php"
+    "warranty-system.php",
   ];
-  
+
   for (const candidate of candidates) {
     const fullPath = path.join(PLUGINS_DIR, candidate);
     if (fs.existsSync(fullPath)) {
       return { path: fullPath, name: candidate };
     }
   }
-  
+
   // Search for any PHP file with plugin headers
   const files = fs.readdirSync(PLUGINS_DIR);
   for (const file of files) {
@@ -67,25 +67,37 @@ function findMainPHP() {
       }
     }
   }
-  
+
   return null;
 }
 
 function updatePHPHeaders(phpPath) {
   console.log(`   📝 Actualizando: ${path.basename(phpPath)}`);
   let content = fs.readFileSync(phpPath, "utf8");
-  
+
   const originalContent = content;
-  
+
   // Update headers
   content = content
-    .replace(/^\s*\*\s*Plugin Name:\s*.*$/mi, ` * Plugin Name: ${OFFICIAL.pluginName}`)
-    .replace(/^\s*\*\s*Author:\s*.*$/mi, ` * Author: ${OFFICIAL.author}`)
-    .replace(/^\s*\*\s*Version:\s*.*$/mi, ` * Version: ${OFFICIAL.version}`)
-    .replace(/define\(\s*['"]RS_WARRANTY_VERSION['"]\s*,\s*['"][^'"]+['"]\s*\)/g, `define('RS_WARRANTY_VERSION', '${OFFICIAL.version}')`)
-    .replace(/define\(\s*['"]RS_WARRANTY_PLUGIN_NAME['"]\s*,\s*['"][^'"]+['"]\s*\)/g, `define('RS_WARRANTY_PLUGIN_NAME', '${OFFICIAL.pluginName}')`)
-    .replace(/define\(\s*['"]RS_WARRANTY_AUTHOR['"]\s*,\s*['"][^'"]+['"]\s*\)/g, `define('RS_WARRANTY_AUTHOR', '${OFFICIAL.author}')`);
-  
+    .replace(
+      /^\s*\*\s*Plugin Name:\s*.*$/im,
+      ` * Plugin Name: ${OFFICIAL.pluginName}`,
+    )
+    .replace(/^\s*\*\s*Author:\s*.*$/im, ` * Author: ${OFFICIAL.author}`)
+    .replace(/^\s*\*\s*Version:\s*.*$/im, ` * Version: ${OFFICIAL.version}`)
+    .replace(
+      /define\(\s*['"]RS_WARRANTY_VERSION['"]\s*,\s*['"][^'"]+['"]\s*\)/g,
+      `define('RS_WARRANTY_VERSION', '${OFFICIAL.version}')`,
+    )
+    .replace(
+      /define\(\s*['"]RS_WARRANTY_PLUGIN_NAME['"]\s*,\s*['"][^'"]+['"]\s*\)/g,
+      `define('RS_WARRANTY_PLUGIN_NAME', '${OFFICIAL.pluginName}')`,
+    )
+    .replace(
+      /define\(\s*['"]RS_WARRANTY_AUTHOR['"]\s*,\s*['"][^'"]+['"]\s*\)/g,
+      `define('RS_WARRANTY_AUTHOR', '${OFFICIAL.author}')`,
+    );
+
   if (content !== originalContent) {
     fs.writeFileSync(phpPath, content, "utf8");
     console.log(`   ✅ Headers actualizados`);
@@ -99,9 +111,9 @@ function updatePHPHeaders(phpPath) {
 function createZipFromSource() {
   const zip = new AdmZip();
   const zipPath = path.join(LATEST, OFFICIAL.zipName);
-  
+
   console.log(`   📦 Empaquetando desde: ${PLUGINS_DIR}`);
-  
+
   // Add all files from the plugin directory to the ZIP
   // Exclude certain files/folders
   const excludePatterns = [
@@ -109,24 +121,24 @@ function createZipFromSource() {
     /^\.dozo_lock$/,
     /^node_modules/,
     /^\.git/,
-    /\.log$/
+    /\.log$/,
   ];
-  
+
   function addDirectory(dirPath, zipPath = "") {
     const items = fs.readdirSync(dirPath);
-    
+
     for (const item of items) {
       const fullPath = path.join(dirPath, item);
       const relativePath = zipPath ? path.join(zipPath, item) : item;
       const targetPath = path.join(OFFICIAL.folderName, relativePath);
-      
+
       // Check if should exclude
-      if (excludePatterns.some(pattern => pattern.test(item))) {
+      if (excludePatterns.some((pattern) => pattern.test(item))) {
         continue;
       }
-      
+
       const stats = fs.statSync(fullPath);
-      
+
       if (stats.isDirectory()) {
         addDirectory(fullPath, relativePath);
       } else {
@@ -134,12 +146,12 @@ function createZipFromSource() {
       }
     }
   }
-  
+
   addDirectory(PLUGINS_DIR);
-  
+
   zip.writeZip(zipPath);
   console.log(`   ✅ ZIP creado: ${OFFICIAL.zipName}`);
-  
+
   return zipPath;
 }
 
@@ -151,12 +163,12 @@ function createZipFromSource() {
   // 1. Find and update main PHP file
   console.log("🔍 Localizando archivo PHP principal...");
   const mainPHP = findMainPHP();
-  
+
   if (!mainPHP) {
     console.error("❌ No se encontró el archivo PHP principal");
     process.exit(1);
   }
-  
+
   console.log(`✅ Encontrado: ${mainPHP.name}\n`);
 
   // 2. Update PHP headers
@@ -173,7 +185,9 @@ function createZipFromSource() {
 
   console.log(`\n📊 Información del Build:`);
   console.log(`   Archivo: ${OFFICIAL.zipName}`);
-  console.log(`   Tamaño: ${(zipSize / 1024 / 1024).toFixed(2)} MB (${zipSize.toLocaleString()} bytes)`);
+  console.log(
+    `   Tamaño: ${(zipSize / 1024 / 1024).toFixed(2)} MB (${zipSize.toLocaleString()} bytes)`,
+  );
   console.log(`   SHA-256: ${zipSha.substring(0, 32)}...`);
   console.log(`   Ubicación: ${zipPath}`);
 
@@ -187,14 +201,14 @@ function createZipFromSource() {
     mainPHP: {
       file: mainPHP.name,
       path: mainPHP.path,
-      updated
+      updated,
     },
     build: {
       zipName: OFFICIAL.zipName,
       zipPath,
       zipSize,
       zipSizeMB: parseFloat((zipSize / 1024 / 1024).toFixed(2)),
-      sha256: zipSha
+      sha256: zipSha,
     },
     sourceDirectory: PLUGINS_DIR,
     timestamp: new Date().toISOString(),
@@ -203,8 +217,8 @@ function createZipFromSource() {
       "Headers actualizados a v1.0.0",
       "ZIP creado desde código fuente",
       "Checksum SHA-256 calculado",
-      "Reporte generado"
-    ]
+      "Reporte generado",
+    ],
   };
 
   fs.writeFileSync(REPORT, JSON.stringify(report, null, 2), "utf8");
@@ -213,4 +227,3 @@ function createZipFromSource() {
   console.log(`🧾 Reporte: ${REPORT}`);
   console.log(`\n🎉 Warranty_System_RS_v1.0.0.zip listo para distribución\n`);
 })();
-

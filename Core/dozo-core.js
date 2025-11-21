@@ -19,19 +19,27 @@ export const DOZO = {
 
   checkStructure() {
     const dirs = [
-      'Core', 'Modules', 'Scripts', 'Backups', 'Logs',
-      'Reports', 'Dashboard/public', 'DozoCoreResport', 'Integration', 'AI-Link'
+      'Core',
+      'Modules',
+      'Scripts',
+      'Backups',
+      'Logs',
+      'Reports',
+      'Dashboard/public',
+      'DozoCoreResport',
+      'Integration',
+      'AI-Link',
     ];
     for (const d of dirs) {
       const p = path.resolve(d);
       if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
     }
-    fs.appendFileSync(this.logFile, `[${new Date().toISOString()}] 🧱 Estructura verificada y/o creada\n`);
-  }
+    fs.appendFileSync(
+      this.logFile,
+      `[${new Date().toISOString()}] 🧱 Estructura verificada y/o creada\n`
+    );
+  },
 };
 
 DOZO.init();
 DOZO.checkStructure();
-
-
-

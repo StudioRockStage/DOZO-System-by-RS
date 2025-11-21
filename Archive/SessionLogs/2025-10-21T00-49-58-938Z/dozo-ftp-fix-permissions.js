@@ -20,16 +20,13 @@ async function fixPermissions() {
       user: config.user,
       password: config.password,
       port: config.port,
-      secure: config.secure
+      secure: config.secure,
     });
 
     await client.cd(config.remotePath);
-    
-    const filesToFix = [
-      'update.json',
-      'Warranty_System_v7.7.6.zip'
-    ];
-    
+
+    const filesToFix = ["update.json", "Warranty_System_v7.7.6.zip"];
+
     for (const file of filesToFix) {
       try {
         // CHMOD 644 (lectura para todos, escritura solo para owner)
@@ -41,7 +38,6 @@ async function fixPermissions() {
     }
 
     console.log("\n✅ Proceso de corrección completado");
-
   } catch (error) {
     console.error("❌ Error:", error.message);
   } finally {
@@ -50,4 +46,3 @@ async function fixPermissions() {
 }
 
 fixPermissions();
-

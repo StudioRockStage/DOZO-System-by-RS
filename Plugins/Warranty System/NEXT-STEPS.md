@@ -85,6 +85,7 @@ cd /path/to/wordpress/wp-content/plugins/
 ```
 
 **What Happens on Activation**:
+
 - ✅ Creates 4 custom database tables
 - ✅ Sets default options
 - ✅ Creates `/wp-content/uploads/rockstage-warranties/` directory
@@ -92,6 +93,7 @@ cd /path/to/wordpress/wp-content/plugins/
 - ✅ Flushes rewrite rules
 
 **Check for Activation Success**:
+
 - [ ] No error messages shown
 - [ ] Menu "Garantías" appears in WordPress admin
 - [ ] Tables created: `wp_rs_warranties`, `wp_rs_warranty_files`, `wp_rs_warranty_notes`, `wp_rs_warranty_rma`
@@ -101,21 +103,25 @@ cd /path/to/wordpress/wp-content/plugins/
 Navigate to: **WordPress Admin > Garantías > Configuración**
 
 **Tab 1: General**
+
 - [ ] Set warranty email address
 - [ ] Configure SMTP (if using external mail service)
 - [ ] Test email sending
 
 **Tab 2: Categorías**
+
 - [ ] Check product categories imported from WooCommerce
 - [ ] Set warranty days for each category (default: 365)
 - [ ] Save configuration
 
 **Tab 3: Plantillas**
+
 - [ ] Review 4 email templates
 - [ ] Customize text if needed (optional)
 - [ ] Save changes
 
 **Tab 4: Avanzado**
+
 - [ ] Enable/disable RMA system
 - [ ] Configure WhatsApp integration (optional)
 - [ ] Set file upload limits
@@ -204,7 +210,8 @@ Navigate to: **Your Site > Warranty Request Page**
 - [ ] Success screen appears with warranty number
 - [ ] WhatsApp button works (if configured)
 
-**Expected Result**: 
+**Expected Result**:
+
 - Warranty created in database
 - Email sent to customer
 - Email sent to admin team
@@ -214,6 +221,7 @@ Navigate to: **Your Site > Warranty Request Page**
 #### Test 6: WooCommerce Integration
 
 **Create a test order in WooCommerce**:
+
 1. Create a product
 2. Place an order
 3. Complete the order
@@ -300,11 +308,13 @@ Test on:
 ### Issue: Plugin won't activate
 
 **Possible Causes**:
+
 - WooCommerce not installed/activated
 - PHP version < 7.4
 - Database error
 
 **Solution**:
+
 1. Check WordPress debug.log
 2. Verify WooCommerce is active
 3. Verify PHP version with `php -v`
@@ -313,6 +323,7 @@ Test on:
 ### Issue: Tables not created
 
 **Solution**:
+
 ```php
 // Manually run table creation
 // In WordPress admin: Tools > Site Health > Info > Database
@@ -323,11 +334,13 @@ wp eval "RS_Warranty_Database::get_instance()->create_tables();"
 ### Issue: Email not sending
 
 **Possible Causes**:
+
 - WordPress mail() function blocked by host
 - SMTP not configured
 - Email address invalid
 
 **Solution**:
+
 1. Install "WP Mail SMTP" plugin
 2. Configure in Garantías > Configuración > General > Enable SMTP
 3. Test with "Send Test Email" button
@@ -335,11 +348,13 @@ wp eval "RS_Warranty_Database::get_instance()->create_tables();"
 ### Issue: File upload not working
 
 **Possible Causes**:
+
 - Upload directory not writable
 - PHP upload_max_filesize too small
 - File type not allowed
 
 **Solution**:
+
 1. Check directory permissions: `/wp-content/uploads/rockstage-warranties/`
 2. Increase PHP limits in `php.ini`:
    ```ini
@@ -351,11 +366,13 @@ wp eval "RS_Warranty_Database::get_instance()->create_tables();"
 ### Issue: AJAX not working
 
 **Possible Causes**:
+
 - JavaScript error (check console)
 - Nonce expired
 - Capability check failed
 
 **Solution**:
+
 1. Open browser console (F12)
 2. Look for errors
 3. Clear browser cache
@@ -364,11 +381,13 @@ wp eval "RS_Warranty_Database::get_instance()->create_tables();"
 ### Issue: Styles not loading
 
 **Possible Causes**:
+
 - Theme conflict
 - Asset enqueue error
 - Cache plugin
 
 **Solution**:
+
 1. Disable all other plugins temporarily
 2. Switch to default WordPress theme
 3. Clear all caches (browser, plugin, server)
@@ -405,6 +424,7 @@ The plugin runs a daily cron job: `rs_warranty_daily_update`
 **Purpose**: Update `days_until_expiration` for all warranties
 
 **Check Status**:
+
 ```bash
 # Via WP-CLI
 wp cron event list --format=table | grep rs_warranty
@@ -445,33 +465,37 @@ When updating the plugin in the future:
 
 ### Documentation Files
 
-| File | Purpose |
-|------|---------|
-| `README.md` | Installation & quick start |
-| `CHANGELOG.md` | Version history & fixes |
-| `QA-DEEP-REPORT.md` | Executive audit report |
-| `DOZO-INTEGRATION-REPORT.md` | Technical integration details |
-| `DOZO-CHECKLIST-FINAL.md` | Complete verification checklist |
-| `DOZO-FINAL-AUDIT.json` | Machine-readable audit data |
-| `NEXT-STEPS.md` | This file |
+| File                         | Purpose                         |
+| ---------------------------- | ------------------------------- |
+| `README.md`                  | Installation & quick start      |
+| `CHANGELOG.md`               | Version history & fixes         |
+| `QA-DEEP-REPORT.md`          | Executive audit report          |
+| `DOZO-INTEGRATION-REPORT.md` | Technical integration details   |
+| `DOZO-CHECKLIST-FINAL.md`    | Complete verification checklist |
+| `DOZO-FINAL-AUDIT.json`      | Machine-readable audit data     |
+| `NEXT-STEPS.md`              | This file                       |
 
 ### Key Files for Reference
 
 **Core Functionality**:
+
 - `includes/class-warranty-core.php` - Main logic + AJAX
 - `includes/class-warranty-database.php` - Database operations
 - `includes/class-warranty-email.php` - Email system
 
 **Admin Interface**:
+
 - `templates/admin/dashboard.php` - Main dashboard
 - `templates/admin/create-warranty.php` - Create/edit form
 - `templates/admin/detail-view.php` - Individual warranty view
 - `templates/admin/settings.php` - Configuration panel
 
 **Public Interface**:
+
 - `templates/public/warranty-form.php` - Public submission form
 
 **Assets**:
+
 - `assets/css/admin-style.css` - Admin styles
 - `assets/css/public-style.css` - Public styles
 - `assets/js/admin-script.js` - Admin JavaScript
@@ -558,6 +582,3 @@ Plugin is considered successfully deployed when:
 ---
 
 _¡Éxito con el deployment! El plugin está completamente listo para producción._
-
-
-

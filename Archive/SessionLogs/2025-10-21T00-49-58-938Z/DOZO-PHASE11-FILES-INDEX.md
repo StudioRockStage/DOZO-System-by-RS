@@ -9,56 +9,62 @@
 ## 🚀 Scripts de Deployment
 
 ### Phase 11 - Remote Deploy
-| Archivo | Tamaño | Comando | Propósito |
-|---------|--------|---------|-----------|
-| `dozo-phase11-remote-deploy.js` | 3.3K | `npm run deploy` | Deploy remoto completo |
-| `dozo-phase11-validate-local.js` | 6.0K | `npm run validate` | Validación pre-deployment |
-| `dozo-phase11-deploy-dryrun.js` | 6.8K | `npm run deploy:dryrun` | Simulación de deployment |
+
+| Archivo                          | Tamaño | Comando                 | Propósito                 |
+| -------------------------------- | ------ | ----------------------- | ------------------------- |
+| `dozo-phase11-remote-deploy.js`  | 3.3K   | `npm run deploy`        | Deploy remoto completo    |
+| `dozo-phase11-validate-local.js` | 6.0K   | `npm run validate`      | Validación pre-deployment |
+| `dozo-phase11-deploy-dryrun.js`  | 6.8K   | `npm run deploy:dryrun` | Simulación de deployment  |
 
 ### Phase 11.1 - Secure FTP Setup
-| Archivo | Tamaño | Comando | Propósito |
-|---------|--------|---------|-----------|
-| `dozo-phase11.1-ftp-setup.js` | 2.9K | `npm run ftp:setup` | Setup automático FTP |
-| `dozo-phase11.1-update-credentials.js` | 5.8K | `npm run ftp:test` | Test de credenciales |
+
+| Archivo                                | Tamaño | Comando             | Propósito            |
+| -------------------------------------- | ------ | ------------------- | -------------------- |
+| `dozo-phase11.1-ftp-setup.js`          | 2.9K   | `npm run ftp:setup` | Setup automático FTP |
+| `dozo-phase11.1-update-credentials.js` | 5.8K   | `npm run ftp:test`  | Test de credenciales |
 
 ### Core Scripts
-| Archivo | Tamaño | Comando | Propósito |
-|---------|--------|---------|-----------|
-| `dozo-network-unlock.js` | 2.2K | `npm run network-unlock` | Configuración de red |
-| `package.json` | 481B | - | Configuración NPM |
+
+| Archivo                  | Tamaño | Comando                  | Propósito            |
+| ------------------------ | ------ | ------------------------ | -------------------- |
+| `dozo-network-unlock.js` | 2.2K   | `npm run network-unlock` | Configuración de red |
+| `package.json`           | 481B   | -                        | Configuración NPM    |
 
 ---
 
 ## 📖 Documentación
 
 ### Guías Principales
-| Archivo | Líneas | Propósito |
-|---------|--------|-----------|
-| `DOZO-PHASE11-DEPLOYMENT-GUIDE.md` | 300+ | Guía completa de deployment |
-| `DOZO-PHASE11-FINAL-STATUS.md` | 400+ | Status report completo |
-| `DOZO-FTP-TROUBLESHOOTING.md` | 200+ | Solución de problemas FTP |
+
+| Archivo                            | Líneas | Propósito                   |
+| ---------------------------------- | ------ | --------------------------- |
+| `DOZO-PHASE11-DEPLOYMENT-GUIDE.md` | 300+   | Guía completa de deployment |
+| `DOZO-PHASE11-FINAL-STATUS.md`     | 400+   | Status report completo      |
+| `DOZO-FTP-TROUBLESHOOTING.md`      | 200+   | Solución de problemas FTP   |
 
 ### Referencias Rápidas
-| Archivo | Propósito |
-|---------|-----------|
-| `QUICK-DEPLOY-REFERENCE.md` | Comandos principales |
-| `NEXT-STEPS-SIMPLE.md` | Guía simple de 4 pasos |
-| `DOZO-PHASE11-FILES-INDEX.md` | Este archivo (índice) |
+
+| Archivo                       | Propósito              |
+| ----------------------------- | ---------------------- |
+| `QUICK-DEPLOY-REFERENCE.md`   | Comandos principales   |
+| `NEXT-STEPS-SIMPLE.md`        | Guía simple de 4 pasos |
+| `DOZO-PHASE11-FILES-INDEX.md` | Este archivo (índice)  |
 
 ### Documentación Específica
-| Archivo | Propósito |
-|---------|-----------|
+
+| Archivo                        | Propósito         |
+| ------------------------------ | ----------------- |
 | `Scripts/README-FTP-CONFIG.md` | Configuración FTP |
 
 ---
 
 ## ⚙️ Archivos de Configuración
 
-| Archivo | Ubicación | Propósito | Permisos |
-|---------|-----------|-----------|----------|
-| `ftp-config.json` | `Scripts/` | Credenciales FTP | 600 |
-| `config.json` | `.cursor/` | Permisos de red | - |
-| `FTP-Encrypted.json` | `Backup/Network/` | Backup cifrado | - |
+| Archivo              | Ubicación         | Propósito        | Permisos |
+| -------------------- | ----------------- | ---------------- | -------- |
+| `ftp-config.json`    | `Scripts/`        | Credenciales FTP | 600      |
+| `config.json`        | `.cursor/`        | Permisos de red  | -        |
+| `FTP-Encrypted.json` | `Backup/Network/` | Backup cifrado   | -        |
 
 ---
 
@@ -66,16 +72,16 @@
 
 Ubicación: `to chat gpt/Global/`
 
-| Archivo | Estado | Información |
-|---------|--------|-------------|
-| `DOZO-Network-Report.json` | ✅ | Red configurada |
-| `DOZO-PreDeploy-Validation.json` | ✅ | Archivos validados |
-| `DOZO-Phase11-Setup-Complete.json` | ✅ | Setup Phase 11 |
-| `DOZO-Phase11.1-Complete.json` | ✅ | Setup Phase 11.1 |
-| `DOZO-FTP-Ready.json` | ⚠️ | Estado FTP |
-| `DOZO-FTP-Test-Report.json` | ⚠️ | Test detallado |
-| `DOZO-DryRun-Report.json` | ✅ | Simulación OK |
-| `DOZO-RemoteDeploy-Report.json` | ⏳ | Pendiente (post-deploy) |
+| Archivo                            | Estado | Información             |
+| ---------------------------------- | ------ | ----------------------- |
+| `DOZO-Network-Report.json`         | ✅     | Red configurada         |
+| `DOZO-PreDeploy-Validation.json`   | ✅     | Archivos validados      |
+| `DOZO-Phase11-Setup-Complete.json` | ✅     | Setup Phase 11          |
+| `DOZO-Phase11.1-Complete.json`     | ✅     | Setup Phase 11.1        |
+| `DOZO-FTP-Ready.json`              | ⚠️     | Estado FTP              |
+| `DOZO-FTP-Test-Report.json`        | ⚠️     | Test detallado          |
+| `DOZO-DryRun-Report.json`          | ✅     | Simulación OK           |
+| `DOZO-RemoteDeploy-Report.json`    | ⏳     | Pendiente (post-deploy) |
 
 ---
 
@@ -83,11 +89,11 @@ Ubicación: `to chat gpt/Global/`
 
 Ubicación: `Empaquetado/Ready/`
 
-| Archivo | Tamaño | Estado |
-|---------|--------|--------|
-| `Warranty_System_v7.7.6.zip` | 2.75 MB | ✅ Listo |
-| `update.json` | 426 B | ✅ Válido |
-| `changelog.txt` | - | ✅ Presente |
+| Archivo                      | Tamaño  | Estado      |
+| ---------------------------- | ------- | ----------- |
+| `Warranty_System_v7.7.6.zip` | 2.75 MB | ✅ Listo    |
+| `update.json`                | 426 B   | ✅ Válido   |
+| `changelog.txt`              | -       | ✅ Presente |
 
 ---
 
@@ -99,7 +105,7 @@ npm run validate           # Validar archivos locales
 npm run ftp:test          # Probar conexión FTP
 npm run deploy:dryrun     # Simular deployment
 
-# Setup & Deployment  
+# Setup & Deployment
 npm run ftp:setup         # Configurar FTP
 npm run deploy            # Deploy REAL
 npm run network-unlock    # Reconfigurar red
@@ -160,18 +166,22 @@ DOZO System by RS/
 ## 🎯 Archivos por Prioridad
 
 ### Empieza por aquí
+
 1. **`NEXT-STEPS-SIMPLE.md`** - Guía rápida de 4 pasos
 2. **`QUICK-DEPLOY-REFERENCE.md`** - Comandos principales
 
 ### Para configuración
+
 3. **`Scripts/ftp-config.json`** - Actualizar credenciales
 4. **`Scripts/README-FTP-CONFIG.md`** - Instrucciones FTP
 
 ### Para troubleshooting
+
 5. **`DOZO-FTP-TROUBLESHOOTING.md`** - Problemas FTP
 6. **`DOZO-PHASE11-FINAL-STATUS.md`** - Status completo
 
 ### Para referencia completa
+
 7. **`DOZO-PHASE11-DEPLOYMENT-GUIDE.md`** - Guía exhaustiva
 
 ---
@@ -206,4 +216,4 @@ DOZO System by RS/
 
 ---
 
-*DOZO System by RockStage Solutions - Phase 11 & 11.1*
+_DOZO System by RockStage Solutions - Phase 11 & 11.1_

@@ -30,7 +30,7 @@ app.use(express.static(path.join(root, "Dashboard", "public")));
 
 const PORT = 9090;
 app.listen(PORT, () => {
-  console.log(`🚀 DOZO Release Dashboard corriendo en http://localhost:${PORT}`);
+  console.log(
+    `🚀 DOZO Release Dashboard corriendo en http://localhost:${PORT}`,
+  );
 });
-
-

@@ -20,7 +20,7 @@ const requiredPaths = [
   'AppBuild/public',
   'AppBuild/assets',
   'AppBuild/scripts',
-  'DistributionBuild'
+  'DistributionBuild',
 ];
 
 let allExists = true;
@@ -78,9 +78,9 @@ if (fs.existsSync(iconPath)) {
 console.log('4️⃣ Generando reporte de FASE 5...');
 const { execSync } = await import('child_process');
 try {
-  execSync('node Scripts/dozo-report-phase5.js', { 
+  execSync('node Scripts/dozo-report-phase5.js', {
     cwd: path.resolve(__dirname, '..'),
-    stdio: 'inherit' 
+    stdio: 'inherit',
   });
   console.log('   ✅ Reporte generado\n');
 } catch (error) {
@@ -100,6 +100,3 @@ console.log('💡 Para construir la aplicación:');
 console.log('   npm install');
 console.log('   npm run build');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-
-
-

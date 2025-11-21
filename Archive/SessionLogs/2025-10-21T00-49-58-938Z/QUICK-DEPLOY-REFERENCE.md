@@ -74,6 +74,7 @@ Ubicación: `to chat gpt/Global/`
 ## 🔧 Comandos Disponibles
 
 ### Testing & Validación
+
 ```bash
 npm run validate       # Validar archivos locales
 npm run ftp:test       # Probar conexión FTP
@@ -81,6 +82,7 @@ npm run deploy:dryrun  # Simular deployment
 ```
 
 ### Setup & Deployment
+
 ```bash
 npm run ftp:setup      # Configurar credenciales FTP
 npm run deploy         # Ejecutar deployment REAL
@@ -115,4 +117,3 @@ npm run network-unlock # Reconfigurar red
 **Sistema:** ✅ LISTO  
 **Bloqueador:** ⚠️ Credenciales FTP  
 **Tiempo para deployment:** < 15 min (una vez corregidas credenciales)
-

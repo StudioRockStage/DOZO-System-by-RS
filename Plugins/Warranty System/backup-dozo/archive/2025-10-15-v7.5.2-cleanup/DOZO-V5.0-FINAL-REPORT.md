@@ -1,4 +1,5 @@
 # 🤖 DOZO v5.0 - FINAL AUDIT REPORT
+
 ## Claude AI Developer Integration (Stable)
 
 **Plugin:** Warranty System by RockStage  
@@ -25,23 +26,23 @@ Esta es una **actualización mayor** que transforma el plugin en un sistema:
 
 ### ✅ **Cumplimiento DOZO Global: 100/100**
 
-| Layer | Descripción | Score | Status |
-|-------|-------------|-------|--------|
-| **v1.0** | Visual Replication | 100/100 | ✅ |
-| **v2.0** | Functional Integration | 100/100 | ✅ |
-| **v3.0** | Semantic Translation | 100/100 | ✅ |
-| **v3.1** | Shortcode Execution | 100/100 | ✅ |
-| **v3.2** | Warranty Verifier | 100/100 | ✅ |
-| **v3.5** | Data Persistence | 100/100 | ✅ |
-| **v3.6** | Product Linking | 100/100 | ✅ |
-| **v3.7** | Counter Refresh | 100/100 | ✅ |
-| **v3.9** | Nonce Validation (IDs) | 100/100 | ✅ |
-| **v4.0** | Race Condition Fix | 100/100 | ✅ |
-| **v4.1** | Nonce Backend Sync | 100/100 | ✅ |
-| **v4.4** | Claude Design Import | 100/100 | ✅ |
-| **v4.8** | Adaptive Diagnostic | 100/100 | ✅ |
-| **v4.9** | Reaper & Self-Healing | 100/100 | ✅ |
-| **v5.0** | **Claude AI Developer** | **100/100** | ✅ |
+| Layer    | Descripción             | Score       | Status |
+| -------- | ----------------------- | ----------- | ------ |
+| **v1.0** | Visual Replication      | 100/100     | ✅     |
+| **v2.0** | Functional Integration  | 100/100     | ✅     |
+| **v3.0** | Semantic Translation    | 100/100     | ✅     |
+| **v3.1** | Shortcode Execution     | 100/100     | ✅     |
+| **v3.2** | Warranty Verifier       | 100/100     | ✅     |
+| **v3.5** | Data Persistence        | 100/100     | ✅     |
+| **v3.6** | Product Linking         | 100/100     | ✅     |
+| **v3.7** | Counter Refresh         | 100/100     | ✅     |
+| **v3.9** | Nonce Validation (IDs)  | 100/100     | ✅     |
+| **v4.0** | Race Condition Fix      | 100/100     | ✅     |
+| **v4.1** | Nonce Backend Sync      | 100/100     | ✅     |
+| **v4.4** | Claude Design Import    | 100/100     | ✅     |
+| **v4.8** | Adaptive Diagnostic     | 100/100     | ✅     |
+| **v4.9** | Reaper & Self-Healing   | 100/100     | ✅     |
+| **v5.0** | **Claude AI Developer** | **100/100** | ✅     |
 
 ---
 
@@ -140,20 +141,20 @@ WordPress Admin
 ```php
 public function handle_chat() {
     check_ajax_referer('rs_claude_dev_nonce', 'nonce');
-    
+
     if (!current_user_can('manage_options')) {
         wp_send_json_error('Permisos insuficientes');
     }
-    
+
     $message = sanitize_textarea_field($_POST['message']);
     $conversation_history = json_decode(stripslashes($_POST['history']), true) ?: array();
-    
+
     // Obtener API Key
     $api_key = get_option('rs_claude_api_key');
-    
+
     // Contexto del sistema
     $system_context = $this->get_system_context();
-    
+
     // Llamar a Claude API
     $response = wp_remote_post('https://api.anthropic.com/v1/messages', array(
         'headers' => array(
@@ -169,7 +170,7 @@ public function handle_chat() {
         )),
         'timeout' => 60
     ));
-    
+
     wp_send_json_success(array(
         'response' => $body['content'][0]['text'],
         'usage' => $body['usage']
@@ -178,6 +179,7 @@ public function handle_chat() {
 ```
 
 **Features:**
+
 - ✅ Conversación contextual (historial completo)
 - ✅ System prompt con info del plugin
 - ✅ Model: Claude Sonnet 4 (último modelo)
@@ -193,23 +195,24 @@ public function handle_chat() {
 
 ```html
 <button class="rs-quick-btn" data-prompt="...">
-    <span class="dashicons dashicons-art"></span>
-    Nuevo Diseño
+  <span class="dashicons dashicons-art"></span>
+  Nuevo Diseño
 </button>
 ```
 
 **Botones Disponibles:**
 
-| Icon | Acción | Prompt |
-|------|--------|--------|
-| 🎨 | **Nuevo Diseño** | "Crea un nuevo diseño moderno en escala de grises..." |
-| ✏️ | **Modificar Estilo** | "Modifica el formulario actual para que tenga un estilo más minimalista..." |
-| 💬 | **Agregar Chatbot** | "Agrega una nueva funcionalidad: chatbot de soporte..." |
-| 📊 | **Nuevo Shortcode** | "Crea un shortcode nuevo que muestre un contador..." |
-| ⚡ | **Optimizar JS** | "Optimiza el código JavaScript del formulario..." |
-| ⭐ | **Ideas UX** | "Dame 5 ideas de mejoras UX..." |
+| Icon | Acción               | Prompt                                                                      |
+| ---- | -------------------- | --------------------------------------------------------------------------- |
+| 🎨   | **Nuevo Diseño**     | "Crea un nuevo diseño moderno en escala de grises..."                       |
+| ✏️   | **Modificar Estilo** | "Modifica el formulario actual para que tenga un estilo más minimalista..." |
+| 💬   | **Agregar Chatbot**  | "Agrega una nueva funcionalidad: chatbot de soporte..."                     |
+| 📊   | **Nuevo Shortcode**  | "Crea un shortcode nuevo que muestre un contador..."                        |
+| ⚡   | **Optimizar JS**     | "Optimiza el código JavaScript del formulario..."                           |
+| ⭐   | **Ideas UX**         | "Dame 5 ideas de mejoras UX..."                                             |
 
 **Funcionalidad:**
+
 - Click en botón → Prompt se agrega automáticamente al textarea
 - Usuario puede editar antes de enviar
 - Accelera workflows comunes
@@ -220,7 +223,7 @@ public function handle_chat() {
 
 **Backend:** `class-claude-developer-panel.php` (líneas 402-447)
 
-```php
+````php
 private function get_system_context() {
     return "Eres un asistente de desarrollo experto en WordPress, PHP, JavaScript, CSS y HTML.
 
@@ -251,9 +254,10 @@ CUANDO GENERES CÓDIGO:
 
 Responde SIEMPRE en español y con código listo para copiar y pegar.";
 }
-```
+````
 
 **Características:**
+
 - ✅ Claude conoce la estructura del plugin
 - ✅ Claude usa clases CSS existentes
 - ✅ Claude genera código compatible
@@ -266,27 +270,28 @@ Responde SIEMPRE en español y con código listo para copiar y pegar.";
 
 **Frontend:** `claude-developer.js` (líneas 248-279)
 
-```javascript
+````javascript
 processMarkdown(text) {
     // Convertir bloques de código
     text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
         return `<pre><code class="language-${language}">${this.escapeHtml(code)}</code></pre>`;
     });
-    
+
     // Convertir código inline
     text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-    
+
     // Convertir negritas
     text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    
+
     // Convertir listas
     text = text.replace(/^\* (.+)$/gm, '<li>$1</li>');
-    
+
     return text;
 }
-```
+````
 
 **Resultado:**
+
 - ✅ Código con syntax highlighting
 - ✅ Listas numeradas/con viñetas
 - ✅ Negritas/itálicas
@@ -301,25 +306,22 @@ processMarkdown(text) {
 
 ```html
 <div class="rs-code-actions">
-    <button onclick="ClaudeDeveloper.copyCode(this)">
-        📋 Copiar Código
-    </button>
-    <button onclick="ClaudeDeveloper.previewCode(this)">
-        👁️ Vista Previa
-    </button>
-    <button onclick="ClaudeDeveloper.applyCode(this)">
-        ⬇️ Aplicar al Plugin
-    </button>
+  <button onclick="ClaudeDeveloper.copyCode(this)">📋 Copiar Código</button>
+  <button onclick="ClaudeDeveloper.previewCode(this)">👁️ Vista Previa</button>
+  <button onclick="ClaudeDeveloper.applyCode(this)">
+    ⬇️ Aplicar al Plugin
+  </button>
 </div>
 ```
 
 **copyCode():**
+
 ```javascript
 copyCode(button) {
     const code = $message.find('pre code').text();
     navigator.clipboard.writeText(code);
     showNotice('✅ Código copiado al portapapeles', 'success');
-    
+
     // Feedback visual
     $btn.html('<span class="dashicons dashicons-yes"></span> ¡Copiado!');
     setTimeout(() => $btn.html(originalHtml), 2000);
@@ -327,19 +329,20 @@ copyCode(button) {
 ```
 
 **applyCode():**
+
 ```javascript
 applyCode(button) {
     const code = $message.find('pre code').text();
-    
+
     if (!confirm('¿Seguro que quieres aplicar este código?')) {
         return;
     }
-    
+
     // Detectar tipo automáticamente
     let fileType = 'php';
     if (code.includes('{') && code.includes('color:')) fileType = 'css';
     if (code.includes('function') && code.includes('const')) fileType = 'js';
-    
+
     $.ajax({
         action: 'rs_claude_apply_code',
         code: code,
@@ -354,10 +357,10 @@ applyCode(button) {
 ```php
 public function apply_code() {
     check_ajax_referer('rs_claude_dev_nonce', 'nonce');
-    
+
     $code = stripslashes($_POST['code']);
     $file_type = sanitize_text_field($_POST['file_type']);
-    
+
     // Guardar como draft (seguridad)
     $draft_id = uniqid('draft_');
     update_option('rs_code_draft_' . $draft_id, array(
@@ -366,7 +369,7 @@ public function apply_code() {
         'action' => $action,
         'created' => current_time('mysql')
     ));
-    
+
     wp_send_json_success(array(
         'draft_id' => $draft_id,
         'preview_url' => add_query_arg('rs_preview_draft', $draft_id, home_url())
@@ -375,6 +378,7 @@ public function apply_code() {
 ```
 
 **Resultado:**
+
 - ✅ Código se guarda como borrador primero
 - ✅ Preview URL para revisar antes de aplicar
 - ✅ Sin modificaciones destructivas
@@ -388,36 +392,34 @@ public function apply_code() {
 
 ```html
 <div class="rs-claude-card">
-    <h3>Configuración API</h3>
-    
-    <!-- Status -->
-    <?php if (!$has_key): ?>
-        <div class="rs-notice rs-notice-warning">
-            ⚠️ Necesitas configurar tu API Key de Anthropic
-        </div>
-    <?php else: ?>
-        <div class="rs-notice rs-notice-success">
-            ✅ API Key configurada correctamente
-        </div>
+  <h3>Configuración API</h3>
+
+  <!-- Status -->
+  <?php if (!$has_key): ?>
+  <div class="rs-notice rs-notice-warning">
+    ⚠️ Necesitas configurar tu API Key de Anthropic
+  </div>
+  <?php else: ?>
+  <div class="rs-notice rs-notice-success">
+    ✅ API Key configurada correctamente
+  </div>
+  <?php endif; ?>
+
+  <!-- Form -->
+  <form id="rs-api-key-form">
+    <input
+      type="password"
+      id="claude_api_key"
+      value="<?php echo $api_key ? str_repeat('•', 20) : ''; ?>"
+      placeholder="sk-ant-api03-..."
+    />
+
+    <button type="submit">Guardar API Key</button>
+
+    <?php if ($has_key): ?>
+    <button type="button" id="test-api-key">Probar Conexión</button>
     <?php endif; ?>
-    
-    <!-- Form -->
-    <form id="rs-api-key-form">
-        <input 
-            type="password" 
-            id="claude_api_key" 
-            value="<?php echo $api_key ? str_repeat('•', 20) : ''; ?>"
-            placeholder="sk-ant-api03-..."
-        >
-        
-        <button type="submit">Guardar API Key</button>
-        
-        <?php if ($has_key): ?>
-        <button type="button" id="test-api-key">
-            Probar Conexión
-        </button>
-        <?php endif; ?>
-    </form>
+  </form>
 </div>
 ```
 
@@ -426,25 +428,26 @@ public function apply_code() {
 ```php
 public function save_api_key() {
     check_ajax_referer('rs_claude_dev_nonce', 'nonce');
-    
+
     if (!current_user_can('manage_options')) {
         wp_send_json_error('Permisos insuficientes');
     }
-    
+
     $api_key = sanitize_text_field($_POST['api_key']);
-    
+
     // Validar formato básico
     if (!preg_match('/^sk-ant-api03-/', $api_key)) {
         wp_send_json_error('Formato de API Key inválido');
     }
-    
+
     update_option('rs_claude_api_key', $api_key);
-    
+
     wp_send_json_success('API Key guardada correctamente');
 }
 ```
 
 **Seguridad:**
+
 - ✅ Stored en `wp_options` (encriptado por WordPress)
 - ✅ Capability check: `manage_options`
 - ✅ Nonce verification
@@ -455,6 +458,7 @@ public function save_api_key() {
 **Opción Alternativa (Más Segura):**
 
 En `wp-config.php`:
+
 ```php
 define('RS_CLAUDE_API_KEY', 'sk-ant-api03-...');
 ```
@@ -468,82 +472,87 @@ define('RS_CLAUDE_API_KEY', 'sk-ant-api03-...');
 **Ubicación:** `assets/css/claude-developer.css` (571 líneas)
 
 ✅ **Layout Responsivo:**
+
 ```css
 .rs-claude-container {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 20px;
-    height: calc(100vh - 160px);
-    max-height: 900px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+  height: calc(100vh - 160px);
+  max-height: 900px;
 }
 
 @media (max-width: 960px) {
-    .rs-claude-container {
-        grid-template-columns: 1fr;
-        height: auto;
-    }
+  .rs-claude-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 }
 ```
 
 ✅ **Chat Messages:**
+
 ```css
 .rs-message {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-    animation: slideUp 0.3s ease;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  animation: slideUp 0.3s ease;
 }
 
 .rs-message-assistant .rs-message-avatar {
-    background: linear-gradient(135deg, #2271b1, #135e96);
-    color: white;
+  background: linear-gradient(135deg, #2271b1, #135e96);
+  color: white;
 }
 
 .rs-message-user .rs-message-avatar {
-    background: #646970;
-    color: white;
+  background: #646970;
+  color: white;
 }
 ```
 
 ✅ **Code Blocks:**
+
 ```css
 .rs-message-text pre {
-    background: #1d2327;
-    color: #f6f7f7;
-    padding: 16px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 12px 0;
+  background: #1d2327;
+  color: #f6f7f7;
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 12px 0;
 }
 
 .rs-message-text code {
-    background: #f6f7f7;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
+  background: #f6f7f7;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
 }
 ```
 
 ✅ **Custom Scrollbar:**
+
 ```css
 .rs-chat-messages::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .rs-chat-messages::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
+  background: #c1c1c1;
+  border-radius: 4px;
 }
 ```
 
 ✅ **Status Indicators:**
+
 ```css
 .rs-status-online {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #00a32a;
-    animation: pulse 2s infinite;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00a32a;
+  animation: pulse 2s infinite;
 }
 ```
 
@@ -554,40 +563,43 @@ define('RS_CLAUDE_API_KEY', 'sk-ant-api03-...');
 **Ubicación:** `assets/js/claude-developer.js` (559 líneas)
 
 ✅ **Conversation Management:**
+
 ```javascript
 const ClaudeDeveloper = {
-    conversationHistory: [],
-    isProcessing: false,
-    
-    sendMessage() {
-        // Agregar al historial
-        this.conversationHistory.push({ role: 'user', content: message });
-        this.conversationHistory.push({ role: 'assistant', content: response });
-        
-        // Guardar en localStorage
-        this.saveConversationHistory();
-    }
+  conversationHistory: [],
+  isProcessing: false,
+
+  sendMessage() {
+    // Agregar al historial
+    this.conversationHistory.push({ role: "user", content: message });
+    this.conversationHistory.push({ role: "assistant", content: response });
+
+    // Guardar en localStorage
+    this.saveConversationHistory();
+  },
 };
 ```
 
 ✅ **Auto-Scroll:**
+
 ```javascript
 setupAutoScroll() {
     const observer = new MutationObserver(() => {
         this.scrollToBottom();
     });
-    
+
     observer.observe($messages, { childList: true });
 }
 ```
 
 ✅ **Loading States:**
+
 ```javascript
 setLoadingState(loading) {
     if (loading) {
         $btn.find('.rs-send-text').hide();
         $btn.find('.rs-loading-text').show();
-        
+
         // Typing indicator
         $('#rs-chat-messages').append(`
             <div class="rs-typing-indicator">
@@ -599,12 +611,13 @@ setLoadingState(loading) {
 ```
 
 ✅ **Export Conversation:**
+
 ```javascript
 exportChat() {
     const text = this.conversationHistory.map(msg => {
         return `${msg.role.toUpperCase()}:\n${msg.content}\n\n---\n\n`;
     }).join('');
-    
+
     const blob = new Blob([text], { type: 'text/plain' });
     const a = document.createElement('a');
     a.download = `claude-conversation-${Date.now()}.txt`;
@@ -622,8 +635,8 @@ exportChat() {
 1. Usuario abre panel: RockStage → Desarrollador AI
 
 2. Escribe en chat:
-   "Crea un diseño minimalista en escala de grises 
-   para el verificador de garantía. Usa tipografía 
+   "Crea un diseño minimalista en escala de grises
+   para el verificador de garantía. Usa tipografía
    grande y animaciones sutiles."
 
 3. Click "Enviar" o Ctrl+Enter
@@ -663,22 +676,25 @@ exportChat() {
 
 ### Modelo: Claude Sonnet 4
 
-| Tipo | Precio | Aproximado |
-|------|--------|------------|
-| **Input** | $3 / 1M tokens | ~750,000 palabras |
+| Tipo       | Precio          | Aproximado        |
+| ---------- | --------------- | ----------------- |
+| **Input**  | $3 / 1M tokens  | ~750,000 palabras |
 | **Output** | $15 / 1M tokens | ~750,000 palabras |
 
 ### Costo Real por Conversación
 
 **Conversación Típica:**
+
 - Input: ~1,000 tokens (tu prompt + contexto)
 - Output: ~4,000 tokens (respuesta de Claude)
 - **Costo:** ~$0.015 USD (1.5 centavos)
 
 **100 Conversaciones:**
+
 - **Costo:** ~$1.50 USD
 
 **1,000 Conversaciones:**
+
 - **Costo:** ~$15 USD
 
 **Conclusión:** ✅ Muy económico para desarrollo
@@ -690,30 +706,37 @@ exportChat() {
 ### Medidas Implementadas
 
 ✅ **Capability Checks:**
+
 ```php
 if (!current_user_can('manage_options')) {
     wp_send_json_error('Permisos insuficientes');
 }
 ```
+
 - Solo administradores pueden acceder
 - Verificación en cada AJAX request
 
 ✅ **Nonce Verification:**
+
 ```php
 check_ajax_referer('rs_claude_dev_nonce', 'nonce');
 ```
+
 - Previene CSRF attacks
 - Nonce único por sesión
 
 ✅ **Input Sanitization:**
+
 ```php
 $message = sanitize_textarea_field($_POST['message']);
 $api_key = sanitize_text_field($_POST['api_key']);
 ```
+
 - Sanitización de todos los inputs
 - Previene XSS
 
 ✅ **Code Drafts:**
+
 ```php
 // Código NO se aplica directamente
 // Se guarda como "draft" primero
@@ -722,14 +745,17 @@ update_option('rs_code_draft_' . $draft_id, array(
     'type' => $file_type
 ));
 ```
+
 - Previene cambios accidentales
 - Review antes de aplicar
 
 ✅ **API Key Storage:**
+
 ```php
 update_option('rs_claude_api_key', $api_key);
 // Encriptado por WordPress automáticamente
 ```
+
 - Stored en database encriptado
 - Masked en UI
 - Opción de usar wp-config.php
@@ -740,22 +766,22 @@ update_option('rs_claude_api_key', $api_key);
 
 ### Código Agregado (v5.0)
 
-| Archivo | Líneas | Descripción |
-|---------|--------|-------------|
-| `class-claude-developer-panel.php` | 510 | Backend completo |
-| `claude-developer.css` | 571 | Diseño del panel |
-| `claude-developer.js` | 559 | Chat + funcionalidad |
-| `INSTALL-CLAUDE-PANEL.md` | 354 | Guía instalación |
-| **TOTAL** | **1,994 líneas** | **Sistema completo** |
+| Archivo                            | Líneas           | Descripción          |
+| ---------------------------------- | ---------------- | -------------------- |
+| `class-claude-developer-panel.php` | 510              | Backend completo     |
+| `claude-developer.css`             | 571              | Diseño del panel     |
+| `claude-developer.js`              | 559              | Chat + funcionalidad |
+| `INSTALL-CLAUDE-PANEL.md`          | 354              | Guía instalación     |
+| **TOTAL**                          | **1,994 líneas** | **Sistema completo** |
 
 ### Código Total del Plugin (v1.0 → v5.0)
 
-| Versión | Código Total | Incremento |
-|---------|--------------|------------|
-| v1.0 | ~5,000 líneas | Base |
-| v4.8 | ~5,458 líneas | +458 (DOZO diagnostic) |
-| v4.9 | ~5,869 líneas | +411 (Reaper + Self-Healing) |
-| v5.0 | ~7,863 líneas | +1,994 (Claude AI) |
+| Versión | Código Total  | Incremento                   |
+| ------- | ------------- | ---------------------------- |
+| v1.0    | ~5,000 líneas | Base                         |
+| v4.8    | ~5,458 líneas | +458 (DOZO diagnostic)       |
+| v4.9    | ~5,869 líneas | +411 (Reaper + Self-Healing) |
+| v5.0    | ~7,863 líneas | +1,994 (Claude AI)           |
 
 **Total incremento:** +57% desde v1.0
 
@@ -766,6 +792,7 @@ update_option('rs_claude_api_key', $api_key);
 ### Test 1: Panel Visible
 
 **Steps:**
+
 ```bash
 1. Upload archivos
 2. Clear cache
@@ -774,6 +801,7 @@ update_option('rs_claude_api_key', $api_key);
 ```
 
 **Expected:**
+
 ```
 ✅ Panel se carga
 ✅ Layout 2 columnas (sidebar + chat)
@@ -788,6 +816,7 @@ update_option('rs_claude_api_key', $api_key);
 ### Test 2: Configurar API Key
 
 **Steps:**
+
 ```bash
 1. Pegar API Key de Anthropic
 2. Click "Guardar API Key"
@@ -795,6 +824,7 @@ update_option('rs_claude_api_key', $api_key);
 ```
 
 **Expected:**
+
 ```
 ✅ "API Key guardada correctamente"
 ✅ Página recarga
@@ -809,12 +839,14 @@ update_option('rs_claude_api_key', $api_key);
 ### Test 3: Probar Conexión
 
 **Steps:**
+
 ```bash
 1. Click "Probar Conexión"
 2. Observar loading state
 ```
 
 **Expected:**
+
 ```
 Loading: "⏳ Probando..."
 Success: "✅ Conexión exitosa con Claude AI"
@@ -828,12 +860,14 @@ Console: Response con "Conexión exitosa ✅"
 ### Test 4: Enviar Mensaje
 
 **Steps:**
+
 ```bash
 1. Escribir en textarea: "Hola Claude, preséntate"
 2. Click "Enviar" o Ctrl+Enter
 ```
 
 **Expected:**
+
 ```
 Chat:
 - Mensaje del usuario aparece (avatar gris)
@@ -853,12 +887,14 @@ Console:
 ### Test 5: Acciones Rápidas
 
 **Steps:**
+
 ```bash
 1. Click en "🎨 Nuevo Diseño"
 2. Verificar textarea
 ```
 
 **Expected:**
+
 ```
 Textarea se llena con:
 "Crea un nuevo diseño moderno en escala de grises para el verificador de garantía..."
@@ -874,12 +910,14 @@ Usuario puede editar antes de enviar
 ### Test 6: Copiar Código
 
 **Steps:**
+
 ```bash
 1. Claude responde con código
 2. Click "📋 Copiar Código"
 ```
 
 **Expected:**
+
 ```
 ✅ Notificación: "Código copiado al portapapeles"
 ✅ Botón cambia a "¡Copiado!" por 2s
@@ -894,24 +932,26 @@ Usuario puede editar antes de enviar
 ### Test 7: Exportar Conversación
 
 **Steps:**
+
 ```bash
 1. Tener al menos 2 mensajes en chat
 2. Click botón "Exportar" (header)
 ```
 
 **Expected:**
+
 ```
 ✅ Descarga archivo: claude-conversation-[timestamp].txt
 ✅ Contiene toda la conversación
 ✅ Formato:
    USER:
    [mensaje]
-   
+
    ---
-   
+
    ASSISTANT:
    [respuesta]
-   
+
    ---
 ```
 
@@ -922,12 +962,14 @@ Usuario puede editar antes de enviar
 ### Test 8: Limpiar Chat
 
 **Steps:**
+
 ```bash
 1. Click botón "Limpiar" (header)
 2. Confirmar en prompt
 ```
 
 **Expected:**
+
 ```
 ✅ Prompt: "¿Estás seguro...?"
 ✅ Chat se limpia
@@ -944,28 +986,31 @@ Usuario puede editar antes de enviar
 ### Ejemplo 1: Modificar Color del Formulario
 
 **Prompt:**
+
 ```
-Modifica el color principal del formulario de naranja (#FF8C00) 
-a un azul oscuro (#1e3a8a). Actualiza todas las variables CSS 
+Modifica el color principal del formulario de naranja (#FF8C00)
+a un azul oscuro (#1e3a8a). Actualiza todas las variables CSS
 necesarias y los gradientes.
 ```
 
 **Claude Responde:**
+
 ```css
 :root {
-    --rs-orange: #1e3a8a;
-    --rs-orange-light: #3b82f6;
-    --rs-orange-dark: #1e40af;
-    --rs-orange-glow: rgba(30, 58, 138, 0.3);
+  --rs-orange: #1e3a8a;
+  --rs-orange-light: #3b82f6;
+  --rs-orange-dark: #1e40af;
+  --rs-orange-glow: rgba(30, 58, 138, 0.3);
 }
 
 /* Los gradientes se actualizan automáticamente */
 .rs-logo-badge {
-    background: linear-gradient(135deg, var(--rs-orange), var(--rs-orange-dark));
+  background: linear-gradient(135deg, var(--rs-orange), var(--rs-orange-dark));
 }
 ```
 
 **Instrucciones:**
+
 1. Copia el código
 2. Pega en `public-style.css` líneas 7-13
 3. Guarda y recarga
@@ -975,31 +1020,31 @@ necesarias y los gradientes.
 ### Ejemplo 2: Agregar Contador de Caracteres
 
 **Prompt:**
+
 ```
-Agrega un contador de caracteres al textarea de descripción 
-del problema que muestre "X/500 caracteres" y cambie a rojo 
+Agrega un contador de caracteres al textarea de descripción
+del problema que muestre "X/500 caracteres" y cambie a rojo
 cuando pase de 500.
 ```
 
 **Claude Responde:**
+
 ```html
 <!-- HTML -->
-<div class="rs-char-counter">
-    <span id="charCount">0</span>/500 caracteres
-</div>
+<div class="rs-char-counter"><span id="charCount">0</span>/500 caracteres</div>
 ```
 
 ```javascript
 // JavaScript
-$('#description').on('input', function() {
-    const count = this.value.length;
-    $('#charCount').text(count);
-    
-    if (count > 500) {
-        $('#charCount').css('color', '#ef4444');
-    } else {
-        $('#charCount').css('color', '#6b7280');
-    }
+$("#description").on("input", function () {
+  const count = this.value.length;
+  $("#charCount").text(count);
+
+  if (count > 500) {
+    $("#charCount").css("color", "#ef4444");
+  } else {
+    $("#charCount").css("color", "#6b7280");
+  }
 });
 ```
 
@@ -1008,6 +1053,7 @@ $('#description').on('input', function() {
 ### Ejemplo 3: Crear Shortcode Nuevo
 
 **Prompt:**
+
 ```
 Crea un shortcode [warranty_stats] que muestre:
 - Total de garantías activas
@@ -1016,6 +1062,7 @@ Crea un shortcode [warranty_stats] que muestre:
 ```
 
 **Claude Responde:**
+
 ```php
 // class-warranty-frontend.php
 add_shortcode('warranty_stats', array($this, 'render_warranty_stats'));
@@ -1023,10 +1070,10 @@ add_shortcode('warranty_stats', array($this, 'render_warranty_stats'));
 public function render_warranty_stats() {
     global $wpdb;
     $table = $wpdb->prefix . 'rs_warranties';
-    
+
     $active = $wpdb->get_var("SELECT COUNT(*) FROM $table WHERE status = 'activa'");
     $avg_days = $wpdb->get_var("SELECT AVG(days_remaining) FROM $table WHERE status = 'activa'");
-    
+
     ob_start();
     ?>
     <div class="rs-warranty-stats-widget">
@@ -1109,18 +1156,21 @@ public function render_warranty_stats() {
 ### Si el Menú No Aparece
 
 **Check 1: Verificar archivo incluido**
+
 ```bash
 grep "class-claude-developer-panel" rockstage-warranty-system.php
 # Debe aparecer en línea ~135
 ```
 
 **Check 2: Verificar método correcto**
+
 ```bash
 grep "add_admin_menu" includes/class-claude-developer-panel.php
 # Debe aparecer (no add_developer_menu)
 ```
 
 **Check 3: Clear cache**
+
 ```bash
 # Desactivar → Activar plugin
 WP Admin → Plugins → Deactivate → Activate
@@ -1129,16 +1179,19 @@ WP Admin → Plugins → Deactivate → Activate
 ### Si API Key No Funciona
 
 **Check 1: Formato**
+
 ```
 Debe empezar con: sk-ant-api03-
 ```
 
 **Check 2: Créditos**
+
 ```
 console.anthropic.com → Verificar balance
 ```
 
 **Check 3: Permisos servidor**
+
 ```bash
 # Verificar que servidor permite HTTPS externas
 curl -I https://api.anthropic.com/v1/messages
@@ -1148,6 +1201,7 @@ curl -I https://api.anthropic.com/v1/messages
 ### Si Claude No Responde
 
 **Check 1: Console de navegador**
+
 ```javascript
 // F12 → Console
 // Debe mostrar request a admin-ajax.php
@@ -1155,12 +1209,14 @@ curl -I https://api.anthropic.com/v1/messages
 ```
 
 **Check 2: Error_log de WordPress**
+
 ```bash
 tail -f wp-content/debug.log
 # Verificar errores de API
 ```
 
 **Check 3: Timeout**
+
 ```php
 // En class-claude-developer-panel.php línea 380
 'timeout' => 60  // Aumentar si necesario
@@ -1182,7 +1238,7 @@ tail -f wp-content/debug.log
 ✅ **Auto-scroll** - MutationObserver  
 ✅ **Loading States** - Typing indicator, spinner  
 ✅ **Responsive** - Mobile-friendly  
-✅ **v4.9 Conservado** - Reaper + Self-Healing intactos  
+✅ **v4.9 Conservado** - Reaper + Self-Healing intactos
 
 ### DOZO Score v5.0
 
@@ -1214,7 +1270,7 @@ tail -f wp-content/debug.log
 **v4.4:** Importación de diseños Claude AI  
 **v4.8:** Sistema de autodiagnóstico inteligente  
 **v4.9:** Reaper + Self-Healing (auto-mantenimiento)  
-**v5.0:** 🤖 **Claude AI Developer Integration** (IA integrada)  
+**v5.0:** 🤖 **Claude AI Developer Integration** (IA integrada)
 
 ### Resultado Final
 
@@ -1226,7 +1282,7 @@ El **Warranty System by RockStage** es ahora un plugin:
 ✅ **Auto-diagnosticado** - 14 tests automáticos  
 ✅ **Auto-regulado** - Adaptive Intelligence  
 ✅ **Visualmente premium** - Diseños Claude AI  
-✅ **Completamente funcional** - 100% DOZO compliant  
+✅ **Completamente funcional** - 100% DOZO compliant
 
 ### Ready for Production
 
@@ -1237,7 +1293,7 @@ El **Warranty System by RockStage** es ahora un plugin:
 ✅ **Diagnostic System:** 100%  
 ✅ **Self-Healing:** 100%  
 ✅ **Claude AI Integration:** 100%  
-✅ **DOZO Compliance:** 100%  
+✅ **DOZO Compliance:** 100%
 
 ---
 
@@ -1246,6 +1302,7 @@ El **Warranty System by RockStage** es ahora un plugin:
 ### Quick Start Claude AI
 
 **1. Obtener API Key:**
+
 ```
 https://console.anthropic.com/
 → API Keys → Create Key
@@ -1253,6 +1310,7 @@ https://console.anthropic.com/
 ```
 
 **2. Configurar:**
+
 ```
 WP Admin → RockStage → Desarrollador AI
 → Pegar API Key
@@ -1261,6 +1319,7 @@ WP Admin → RockStage → Desarrollador AI
 ```
 
 **3. Usar:**
+
 ```
 Escribe: "Crea un diseño X"
 → Enviar
@@ -1272,17 +1331,20 @@ Escribe: "Crea un diseño X"
 ### Comandos Útiles
 
 **Ver conversación guardada:**
+
 ```javascript
-const history = JSON.parse(localStorage.getItem('rs_claude_conversation'));
+const history = JSON.parse(localStorage.getItem("rs_claude_conversation"));
 console.log(history);
 ```
 
 **Limpiar localStorage:**
+
 ```javascript
-localStorage.removeItem('rs_claude_conversation');
+localStorage.removeItem("rs_claude_conversation");
 ```
 
 **Test API manualmente:**
+
 ```bash
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: sk-ant-api03-..." \
@@ -1312,5 +1374,4 @@ curl https://api.anthropic.com/v1/messages \
 
 ---
 
-*Este reporte certifica que el Warranty System by RockStage v5.0.0 integra un Panel de Desarrollador con Claude AI directamente en WordPress Admin, permitiendo generar código, modificar diseños, y optimizar el plugin mediante IA, mientras conserva el 100% del sistema DOZO v4.9 (Reaper, Self-Healing, Autodiagnóstico), cumpliendo al 100% con la **Condición DOZO v5.0**.*
-
+_Este reporte certifica que el Warranty System by RockStage v5.0.0 integra un Panel de Desarrollador con Claude AI directamente en WordPress Admin, permitiendo generar código, modificar diseños, y optimizar el plugin mediante IA, mientras conserva el 100% del sistema DOZO v4.9 (Reaper, Self-Healing, Autodiagnóstico), cumpliendo al 100% con la **Condición DOZO v5.0**._

@@ -3,6 +3,7 @@
 ## ✅ Sistema Configurado y Listo
 
 ### Fase 11: Remote Deploy Sync & Validation (v7.9)
+
 **Autor:** RockStage Solutions  
 **Ecosistema:** DOZO System by RS
 
@@ -64,6 +65,7 @@ node dozo-phase11-validate-local.js
 ```
 
 Esto verificará:
+
 - ✅ Estructura de directorios
 - ✅ Archivos ZIP y update.json
 - ✅ Credenciales FTP configuradas
@@ -117,14 +119,17 @@ El script ejecutará automáticamente:
 ## 📊 Archivos de Reporte Generados
 
 ### Pre-Deployment
+
 - **Ubicación:** `to chat gpt/Global/DOZO-PreDeploy-Validation.json`
 - **Contenido:** Validación completa pre-deployment
 
 ### Post-Deployment
+
 - **Ubicación:** `to chat gpt/Global/DOZO-RemoteDeploy-Report.json`
 - **Contenido:** Resultados del deployment y validación HTTP
 
 ### Network Configuration
+
 - **Ubicación:** `to chat gpt/Global/DOZO-Network-Report.json`
 - **Contenido:** Estado de conectividad de red
 
@@ -133,27 +138,33 @@ El script ejecutará automáticamente:
 ## 🔧 Scripts Disponibles
 
 ### `dozo-phase11-remote-deploy.js`
+
 **Propósito:** Deployment completo al servidor remoto
 
 **Características:**
+
 - Upload automático vía FTP
 - Validación HTTP post-deployment
 - Generación de reportes
 - Manejo de errores robusto
 
 ### `dozo-phase11-validate-local.js`
+
 **Propósito:** Validación pre-deployment sin tocar el servidor
 
 **Características:**
+
 - Verifica archivos locales
 - Valida configuración FTP
 - Calcula checksums SHA256
 - Detecta inconsistencias
 
 ### `dozo-network-unlock.js`
+
 **Propósito:** Habilitar conexiones de red en Cursor AI
 
 **Características:**
+
 - Configura permisos de red
 - Prueba conectividad FTP
 - Habilita protocolos (HTTP, HTTPS, FTP, SFTP)
@@ -163,15 +174,18 @@ El script ejecutará automáticamente:
 ## 🎯 Destino del Deployment
 
 ### Servidor
+
 - **Host:** ftp.vapedot.mx
 - **Puerto:** 21
 - **Protocolo:** FTP (no seguro)
 
 ### Directorios
+
 - **Remote Path:** `/public_html/updates/warranty-system/`
 - **Public URL:** `https://updates.vapedot.mx/warranty-system/`
 
 ### Archivos Deployados
+
 1. `Warranty_System_v7.7.6.zip` - Plugin completo
 2. `update.json` - Metadata de actualización
 
@@ -180,22 +194,29 @@ El script ejecutará automáticamente:
 ## ❌ Troubleshooting
 
 ### Error: "Credenciales FTP no configuradas"
+
 **Solución:** Edita `Scripts/ftp-config.json` con tus credenciales reales
 
 ### Error: "No se encontró ningún ZIP"
+
 **Solución:** Verifica que exista un ZIP en `Empaquetado/Ready/`
 
 ### Error: "Falta update.json"
+
 **Solución:** Asegúrate de que `update.json` esté en `Empaquetado/Ready/`
 
 ### Error de Conexión FTP
+
 **Soluciones:**
+
 - Verifica host, usuario y password
 - Confirma que el servidor FTP esté activo
 - Revisa permisos de firewall
 
 ### Error HTTP 404 en Validación
+
 **Soluciones:**
+
 - Espera unos segundos (propagación del servidor)
 - Verifica la ruta remota `/public_html/updates/warranty-system/`
 - Confirma permisos del directorio en el servidor
@@ -258,12 +279,12 @@ Phase 11 → Remote Deploy Sync ✨ (ACTUAL)
 **DOZO System by RockStage Solutions**
 
 Para soporte técnico o consultas:
+
 - Revisa los archivos de log en `Logs/`
 - Consulta reportes en `to chat gpt/Global/`
 - Verifica documentación en `/Plugins/Warranty System/`
 
 ---
 
-*Última actualización: 2025-10-18*  
-*Versión del sistema: DOZO v7.9 - Phase 11*
-
+_Última actualización: 2025-10-18_  
+_Versión del sistema: DOZO v7.9 - Phase 11_

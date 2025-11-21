@@ -10,9 +10,11 @@
 ## 📦 Cambios Implementados
 
 ### Archivos Nuevos
+
 - `assets/js/admin-categories.js` (350 líneas)
 
 ### Archivos Modificados
+
 - `includes/class-warranty-core.php` (+ 2 métodos, 1 hook)
 - `includes/class-warranty-admin.php` (+ enqueue JS)
 
@@ -21,22 +23,25 @@
 ## 🔧 Cómo Funciona Ahora
 
 ### 1. Guardado de Categorías
+
 ```javascript
 // FIXED: Ahora usa .is(':checked') en lugar de .hasClass('active')
-const active = $('#categoryActiveToggle').is(':checked');
+const active = $("#categoryActiveToggle").is(":checked");
 ```
 
 ### 2. Refrescado Automático
+
 ```javascript
 // NO más location.reload()!
 rsReloadCategoryTable(); // Solo actualiza la tabla vía AJAX
 ```
 
 ### 3. Estadísticas en Tiempo Real
+
 ```javascript
 // Se actualizan automáticamente tras cada operación
-$('#activeCount').text(response.data.active_count);
-$('#inactiveCount').text(response.data.inactive_count);
+$("#activeCount").text(response.data.active_count);
+$("#inactiveCount").text(response.data.inactive_count);
 ```
 
 ---
@@ -74,4 +79,3 @@ Si algo no funciona:
 ## 📚 Para Más Info
 
 Ver: `DOZO-V3.5-FINAL-REPORT.md` (si existe)
-

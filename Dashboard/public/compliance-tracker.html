@@ -1,623 +1,648 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOZO Compliance Tracker v1.3.0 | RockStage Solutions</title>
-    <meta name="description" content="Sistema de seguimiento de cumplimiento WordPress - RockStage Solutions">
-    <meta name="author" content="RockStage Solutions - DOZO System v7.9">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta
+      name="description"
+      content="Sistema de seguimiento de cumplimiento WordPress - RockStage Solutions"
+    />
+    <meta name="author" content="RockStage Solutions - DOZO System v7.9" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        /* ========================================
+      /* ========================================
            DOZO COMPLIANCE TRACKER v1.3.0 - OFFICIAL
            RockStage Design System
            Diseño: Propuesta B - Compacto
            Estado: PRODUCTION READY ✅
            ======================================== */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --rs-primary: #78413F;
-            --rs-secondary: #080B0E;
-            --rs-neutral-dark: #393E40;
-            --rs-neutral-light: #A68281;
-            --rs-accent: #733A38;
-            --rs-bg: #0a0b0e;
-            --rs-text: #FFFFFF;
-        }
-        
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --rs-primary: #78413f;
+        --rs-secondary: #080b0e;
+        --rs-neutral-dark: #393e40;
+        --rs-neutral-light: #a68281;
+        --rs-accent: #733a38;
+        --rs-bg: #0a0b0e;
+        --rs-text: #ffffff;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--rs-bg);
+        color: var(--rs-text);
+        margin: 0;
+        display: grid;
+        grid-template-areas: "header header" "sidebar main";
+        grid-template-columns: 320px 1fr;
+        grid-template-rows: auto 1fr;
+        min-height: 100vh;
+      }
+
+      .header {
+        grid-area: header;
+        background: var(--rs-secondary);
+        padding: 20px 32px;
+        border-bottom: 2px solid var(--rs-primary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+
+      .logo span {
+        font-size: 12px;
+        color: var(--rs-neutral-light);
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .search-bar {
+        flex: 1;
+        max-width: 500px;
+        margin: 0 32px;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 12px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+        font-size: 14px;
+        font-family: inherit;
+      }
+
+      .search-bar input:focus {
+        outline: none;
+        border-color: var(--rs-primary);
+      }
+
+      .search-bar input::placeholder {
+        color: var(--rs-neutral-light);
+      }
+
+      .header-actions button {
+        padding: 10px 20px;
+        background: var(--rs-primary);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: inherit;
+      }
+
+      .header-actions button:hover {
+        background: var(--rs-accent);
+        transform: translateY(-2px);
+      }
+
+      .sidebar {
+        grid-area: sidebar;
+        background: var(--rs-secondary);
+        padding: 24px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        overflow-y: auto;
+      }
+
+      .sidebar-section {
+        margin-bottom: 32px;
+      }
+
+      .sidebar-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        color: var(--rs-primary);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid rgba(120, 65, 63, 0.3);
+      }
+
+      .filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .filter-item {
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .filter-item:hover,
+      .filter-item.active {
+        background: rgba(120, 65, 63, 0.15);
+        border-color: var(--rs-primary);
+      }
+
+      .filter-count {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 16px;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .stat-value {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 32px;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: var(--rs-neutral-light);
+        text-transform: uppercase;
+      }
+
+      .score-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: conic-gradient(
+          var(--rs-primary) 85%,
+          rgba(255, 255, 255, 0.1) 85%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        position: relative;
+      }
+
+      .score-inner {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: var(--rs-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .score-value {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 36px;
+        color: var(--rs-primary);
+        letter-spacing: 1px;
+      }
+
+      .score-label {
+        font-size: 10px;
+        color: var(--rs-neutral-light);
+        text-transform: uppercase;
+      }
+
+      .main {
+        grid-area: main;
+        padding: 32px;
+        overflow-y: auto;
+      }
+
+      .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .main-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 8px;
+      }
+
+      .view-btn {
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+      }
+
+      .view-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .view-btn.active {
+        background: var(--rs-primary);
+        border-color: var(--rs-primary);
+      }
+
+      .table-container {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background: rgba(120, 65, 63, 0.2);
+      }
+
+      th {
+        padding: 16px 20px;
+        text-align: left;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--rs-primary);
+        font-weight: 700;
+      }
+
+      tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: background 0.2s ease;
+      }
+
+      tbody tr:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      td {
+        padding: 18px 20px;
+        font-size: 14px;
+      }
+
+      .check-name {
+        font-weight: 600;
+        color: white;
+      }
+
+      .status-badge {
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: inline-block;
+      }
+
+      .status-passed {
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+      }
+
+      .status-warning {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+      }
+
+      .status-failed {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+      }
+
+      .priority-badge {
+        padding: 4px 12px;
+        background: rgba(120, 65, 63, 0.2);
+        border: 1px solid var(--rs-primary);
+        border-radius: 6px;
+        font-size: 11px;
+        color: var(--rs-primary);
+        text-transform: uppercase;
+      }
+
+      .action-icons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .icon-btn {
+        width: 32px;
+        height: 32px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .icon-btn:hover {
+        background: rgba(120, 65, 63, 0.2);
+        border-color: var(--rs-primary);
+      }
+
+      @media (max-width: 1024px) {
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--rs-bg);
-            color: var(--rs-text);
-            margin: 0;
-            display: grid;
-            grid-template-areas: "header header" "sidebar main";
-            grid-template-columns: 320px 1fr;
-            grid-template-rows: auto 1fr;
-            min-height: 100vh;
+          grid-template-areas: "header" "main";
+          grid-template-columns: 1fr;
         }
-        
-        .header {
-            grid-area: header;
-            background: var(--rs-secondary);
-            padding: 20px 32px;
-            border-bottom: 2px solid var(--rs-primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
-            letter-spacing: 2px;
-        }
-        
-        .logo span {
-            font-size: 12px;
-            color: var(--rs-neutral-light);
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-        
-        .search-bar {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 32px;
-        }
-        
-        .search-bar input {
-            width: 100%;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 14px;
-            font-family: inherit;
-        }
-        
-        .search-bar input:focus {
-            outline: none;
-            border-color: var(--rs-primary);
-        }
-        
-        .search-bar input::placeholder {
-            color: var(--rs-neutral-light);
-        }
-        
-        .header-actions button {
-            padding: 10px 20px;
-            background: var(--rs-primary);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        
-        .header-actions button:hover {
-            background: var(--rs-accent);
-            transform: translateY(-2px);
-        }
-        
+
         .sidebar {
-            grid-area: sidebar;
-            background: var(--rs-secondary);
-            padding: 24px;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            overflow-y: auto;
+          display: none;
         }
-        
-        .sidebar-section {
-            margin-bottom: 32px;
+
+        .search-bar {
+          margin: 16px 0 0 0;
         }
-        
-        .sidebar-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 18px;
-            letter-spacing: 1.5px;
-            color: var(--rs-primary);
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid rgba(120, 65, 63, 0.3);
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
         }
-        
-        .filter-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .filter-item {
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-item:hover,
-        .filter-item.active {
-            background: rgba(120, 65, 63, 0.15);
-            border-color: var(--rs-primary);
-        }
-        
-        .filter-count {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        
-        .stat-box {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 16px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .stat-value {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 32px;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: var(--rs-neutral-light);
-            text-transform: uppercase;
-        }
-        
-        .score-circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: conic-gradient(var(--rs-primary) 85%, rgba(255, 255, 255, 0.1) 85%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            position: relative;
-        }
-        
-        .score-inner {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: var(--rs-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .score-value {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 36px;
-            color: var(--rs-primary);
-            letter-spacing: 1px;
-        }
-        
-        .score-label {
-            font-size: 10px;
-            color: var(--rs-neutral-light);
-            text-transform: uppercase;
-        }
-        
-        .main {
-            grid-area: main;
-            padding: 32px;
-            overflow-y: auto;
-        }
-        
-        .main-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        
-        .main-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
-            letter-spacing: 2px;
-        }
-        
-        .view-toggle {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .view-btn {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        
-        .view-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .view-btn.active {
-            background: var(--rs-primary);
-            border-color: var(--rs-primary);
-        }
-        
-        .table-container {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        thead {
-            background: rgba(120, 65, 63, 0.2);
-        }
-        
-        th {
-            padding: 16px 20px;
-            text-align: left;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--rs-primary);
-            font-weight: 700;
-        }
-        
-        tbody tr {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.2s ease;
-        }
-        
-        tbody tr:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-        
-        td {
-            padding: 18px 20px;
-            font-size: 14px;
-        }
-        
-        .check-name {
-            font-weight: 600;
-            color: white;
-        }
-        
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-block;
-        }
-        
-        .status-passed {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22C55E;
-        }
-        
-        .status-warning {
-            background: rgba(245, 158, 11, 0.2);
-            color: #F59E0B;
-        }
-        
-        .status-failed {
-            background: rgba(239, 68, 68, 0.2);
-            color: #EF4444;
-        }
-        
-        .priority-badge {
-            padding: 4px 12px;
-            background: rgba(120, 65, 63, 0.2);
-            border: 1px solid var(--rs-primary);
-            border-radius: 6px;
-            font-size: 11px;
-            color: var(--rs-primary);
-            text-transform: uppercase;
-        }
-        
-        .action-icons {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .icon-btn {
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .icon-btn:hover {
-            background: rgba(120, 65, 63, 0.2);
-            border-color: var(--rs-primary);
-        }
-        
-        @media (max-width: 1024px) {
-            body {
-                grid-template-areas: "header" "main";
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                display: none;
-            }
-            
-            .search-bar {
-                margin: 16px 0 0 0;
-            }
-            
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    
+  </head>
+  <body>
     <header class="header">
-        <div class="logo">
-            <h1>DOZO COMPLIANCE TRACKER</h1>
-            <span>RockStage Solutions • v1.3.0</span>
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="🔍 Buscar validaciones...">
-        </div>
-        <div class="header-actions">
-            <button>🔄 Ejecutar Audit</button>
-        </div>
+      <div class="logo">
+        <h1>DOZO COMPLIANCE TRACKER</h1>
+        <span>RockStage Solutions • v1.3.0</span>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="🔍 Buscar validaciones..." />
+      </div>
+      <div class="header-actions">
+        <button>🔄 Ejecutar Audit</button>
+      </div>
     </header>
-    
+
     <aside class="sidebar">
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">Score General</h3>
-            <div class="score-circle">
-                <div class="score-inner">
-                    <div class="score-value">85%</div>
-                    <div class="score-label">Cumplimiento</div>
-                </div>
-            </div>
-            <div style="text-align: center; color: var(--rs-neutral-light); font-size: 13px;">
-                17/20 validaciones pasadas
-            </div>
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Score General</h3>
+        <div class="score-circle">
+          <div class="score-inner">
+            <div class="score-value">85%</div>
+            <div class="score-label">Cumplimiento</div>
+          </div>
         </div>
-        
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">Filtros por Estado</h3>
-            <div class="filter-list">
-                <div class="filter-item active">
-                    <span>Todos</span>
-                    <span class="filter-count">20</span>
-                </div>
-                <div class="filter-item">
-                    <span>✅ Passed</span>
-                    <span class="filter-count">17</span>
-                </div>
-                <div class="filter-item">
-                    <span>⚠️ Warning</span>
-                    <span class="filter-count">2</span>
-                </div>
-                <div class="filter-item">
-                    <span>❌ Failed</span>
-                    <span class="filter-count">1</span>
-                </div>
-            </div>
+        <div
+          style="
+            text-align: center;
+            color: var(--rs-neutral-light);
+            font-size: 13px;
+          "
+        >
+          17/20 validaciones pasadas
         </div>
-        
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">Categorías</h3>
-            <div class="filter-list">
-                <div class="filter-item">
-                    <span>Seguridad</span>
-                    <span class="filter-count">6</span>
-                </div>
-                <div class="filter-item">
-                    <span>Permisos</span>
-                    <span class="filter-count">4</span>
-                </div>
-                <div class="filter-item">
-                    <span>Estructura</span>
-                    <span class="filter-count">5</span>
-                </div>
-                <div class="filter-item">
-                    <span>Performance</span>
-                    <span class="filter-count">5</span>
-                </div>
-            </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Filtros por Estado</h3>
+        <div class="filter-list">
+          <div class="filter-item active">
+            <span>Todos</span>
+            <span class="filter-count">20</span>
+          </div>
+          <div class="filter-item">
+            <span>✅ Passed</span>
+            <span class="filter-count">17</span>
+          </div>
+          <div class="filter-item">
+            <span>⚠️ Warning</span>
+            <span class="filter-count">2</span>
+          </div>
+          <div class="filter-item">
+            <span>❌ Failed</span>
+            <span class="filter-count">1</span>
+          </div>
         </div>
-        
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">Última Auditoría</h3>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-value" style="color: #22C55E;">17</div>
-                    <div class="stat-label">Passed</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" style="color: #F59E0B;">2</div>
-                    <div class="stat-label">Warning</div>
-                </div>
-            </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Categorías</h3>
+        <div class="filter-list">
+          <div class="filter-item">
+            <span>Seguridad</span>
+            <span class="filter-count">6</span>
+          </div>
+          <div class="filter-item">
+            <span>Permisos</span>
+            <span class="filter-count">4</span>
+          </div>
+          <div class="filter-item">
+            <span>Estructura</span>
+            <span class="filter-count">5</span>
+          </div>
+          <div class="filter-item">
+            <span>Performance</span>
+            <span class="filter-count">5</span>
+          </div>
         </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Última Auditoría</h3>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value" style="color: #22c55e">17</div>
+            <div class="stat-label">Passed</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" style="color: #f59e0b">2</div>
+            <div class="stat-label">Warning</div>
+          </div>
+        </div>
+      </div>
     </aside>
-    
+
     <main class="main">
-        <div class="main-header">
-            <h2 class="main-title">Validaciones de Cumplimiento</h2>
-            <div class="view-toggle">
-                <button class="view-btn active">📋 Checklist</button>
-                <button class="view-btn">📊 Reporte</button>
-                <button class="view-btn">📈 Historial</button>
-            </div>
+      <div class="main-header">
+        <h2 class="main-title">Validaciones de Cumplimiento</h2>
+        <div class="view-toggle">
+          <button class="view-btn active">📋 Checklist</button>
+          <button class="view-btn">📊 Reporte</button>
+          <button class="view-btn">📈 Historial</button>
         </div>
-        
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Estado</th>
-                        <th>Validación</th>
-                        <th>Categoría</th>
-                        <th>Prioridad</th>
-                        <th>Última Verificación</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-passed">✅ Passed</span>
-                        </td>
-                        <td class="check-name">WordPress Version Compliance</td>
-                        <td style="color: var(--rs-neutral-light);">Seguridad</td>
-                        <td>
-                            <span class="priority-badge">High</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2025-10-23 14:30</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver Detalles">👁️</button>
-                                <button class="icon-btn" title="Revalidar">🔄</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-warning">⚠️ Warning</span>
-                        </td>
-                        <td class="check-name">File Permissions Check</td>
-                        <td style="color: var(--rs-neutral-light);">Permisos</td>
-                        <td>
-                            <span class="priority-badge">Medium</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2025-10-23 14:30</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver Problema">🔍</button>
-                                <button class="icon-btn" title="Corregir">🔧</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-passed">✅ Passed</span>
-                        </td>
-                        <td class="check-name">Plugin Structure Validation</td>
-                        <td style="color: var(--rs-neutral-light);">Estructura</td>
-                        <td>
-                            <span class="priority-badge">High</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2025-10-23 14:30</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver Detalles">👁️</button>
-                                <button class="icon-btn" title="Revalidar">🔄</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-failed">❌ Failed</span>
-                        </td>
-                        <td class="check-name">Database Optimization</td>
-                        <td style="color: var(--rs-neutral-light);">Performance</td>
-                        <td>
-                            <span class="priority-badge">Medium</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2025-10-23 14:30</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver Error">🚨</button>
-                                <button class="icon-btn" title="Optimizar">⚡</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-passed">✅ Passed</span>
-                        </td>
-                        <td class="check-name">Security Headers Check</td>
-                        <td style="color: var(--rs-neutral-light);">Seguridad</td>
-                        <td>
-                            <span class="priority-badge">High</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2025-10-23 14:30</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver Detalles">👁️</button>
-                                <button class="icon-btn" title="Revalidar">🔄</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="status-badge status-warning">⚠️ Warning</span>
-                        </td>
-                        <td class="check-name">Assets Minification</td>
-                        <td style="color: var(--rs-neutral-light);">Performance</td>
-                        <td>
-                            <span class="priority-badge">Low</span>
-                        </td>
-                        <td style="color: var(--rs-neutral-light); font-size: 13px;">2025-10-23 14:30</td>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" title="Ver Detalle">👁️</button>
-                                <button class="icon-btn" title="Minificar">⚡</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Estado</th>
+              <th>Validación</th>
+              <th>Categoría</th>
+              <th>Prioridad</th>
+              <th>Última Verificación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="status-badge status-passed">✅ Passed</span>
+              </td>
+              <td class="check-name">WordPress Version Compliance</td>
+              <td style="color: var(--rs-neutral-light)">Seguridad</td>
+              <td>
+                <span class="priority-badge">High</span>
+              </td>
+              <td style="color: var(--rs-neutral-light); font-size: 13px">
+                2025-10-23 14:30
+              </td>
+              <td>
+                <div class="action-icons">
+                  <button class="icon-btn" title="Ver Detalles">👁️</button>
+                  <button class="icon-btn" title="Revalidar">🔄</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="status-badge status-warning">⚠️ Warning</span>
+              </td>
+              <td class="check-name">File Permissions Check</td>
+              <td style="color: var(--rs-neutral-light)">Permisos</td>
+              <td>
+                <span class="priority-badge">Medium</span>
+              </td>
+              <td style="color: var(--rs-neutral-light); font-size: 13px">
+                2025-10-23 14:30
+              </td>
+              <td>
+                <div class="action-icons">
+                  <button class="icon-btn" title="Ver Problema">🔍</button>
+                  <button class="icon-btn" title="Corregir">🔧</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="status-badge status-passed">✅ Passed</span>
+              </td>
+              <td class="check-name">Plugin Structure Validation</td>
+              <td style="color: var(--rs-neutral-light)">Estructura</td>
+              <td>
+                <span class="priority-badge">High</span>
+              </td>
+              <td style="color: var(--rs-neutral-light); font-size: 13px">
+                2025-10-23 14:30
+              </td>
+              <td>
+                <div class="action-icons">
+                  <button class="icon-btn" title="Ver Detalles">👁️</button>
+                  <button class="icon-btn" title="Revalidar">🔄</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="status-badge status-failed">❌ Failed</span>
+              </td>
+              <td class="check-name">Database Optimization</td>
+              <td style="color: var(--rs-neutral-light)">Performance</td>
+              <td>
+                <span class="priority-badge">Medium</span>
+              </td>
+              <td style="color: var(--rs-neutral-light); font-size: 13px">
+                2025-10-23 14:30
+              </td>
+              <td>
+                <div class="action-icons">
+                  <button class="icon-btn" title="Ver Error">🚨</button>
+                  <button class="icon-btn" title="Optimizar">⚡</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="status-badge status-passed">✅ Passed</span>
+              </td>
+              <td class="check-name">Security Headers Check</td>
+              <td style="color: var(--rs-neutral-light)">Seguridad</td>
+              <td>
+                <span class="priority-badge">High</span>
+              </td>
+              <td style="color: var(--rs-neutral-light); font-size: 13px">
+                2025-10-23 14:30
+              </td>
+              <td>
+                <div class="action-icons">
+                  <button class="icon-btn" title="Ver Detalles">👁️</button>
+                  <button class="icon-btn" title="Revalidar">🔄</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="status-badge status-warning">⚠️ Warning</span>
+              </td>
+              <td class="check-name">Assets Minification</td>
+              <td style="color: var(--rs-neutral-light)">Performance</td>
+              <td>
+                <span class="priority-badge">Low</span>
+              </td>
+              <td style="color: var(--rs-neutral-light); font-size: 13px">
+                2025-10-23 14:30
+              </td>
+              <td>
+                <div class="action-icons">
+                  <button class="icon-btn" title="Ver Detalle">👁️</button>
+                  <button class="icon-btn" title="Minificar">⚡</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
-    
+
     <script>
-        console.log('✅ DOZO Compliance Tracker v1.3.0 - Initialized');
-        console.log('📋 RockStage Design System');
+      console.log("✅ DOZO Compliance Tracker v1.3.0 - Initialized");
+      console.log("📋 RockStage Design System");
     </script>
-    
-</body>
+  </body>
 </html>

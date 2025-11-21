@@ -12,7 +12,12 @@ import fetch from "node-fetch";
 
 const BASE = path.resolve(process.env.HOME, "Documents/DOZO System by RS");
 const READY = path.join(BASE, "Empaquetado", "Ready");
-const REPORT = path.join(BASE, "to chat gpt", "Global", "DOZO-RemoteDeploy-Report.json");
+const REPORT = path.join(
+  BASE,
+  "to chat gpt",
+  "Global",
+  "DOZO-RemoteDeploy-Report.json",
+);
 const CONFIG_PATH = path.join(BASE, "Scripts", "ftp-config.json");
 
 async function main() {
@@ -20,21 +25,28 @@ async function main() {
   console.log("═══════════════════════════════════════════════════════════");
 
   if (!fs.existsSync(CONFIG_PATH)) {
-    throw new Error("No se encontró ftp-config.json. Verifica tus credenciales FTP en /Scripts/");
+    throw new Error(
+      "No se encontró ftp-config.json. Verifica tus credenciales FTP en /Scripts/",
+    );
   }
 
   const cfg = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
   const client = new ftp.Client(30000);
   client.ftp.verbose = false;
 
-  const files = fs.readdirSync(READY).filter(f => f.endsWith(".zip"));
+  const files = fs.readdirSync(READY).filter((f) => f.endsWith(".zip"));
   if (!files.length) throw new Error("No se encontró ningún ZIP en Ready/");
-  const latestZip = files.sort((a, b) => fs.statSync(path.join(READY, b)).mtimeMs - fs.statSync(path.join(READY, a)).mtimeMs)[0];
+  const latestZip = files.sort(
+    (a, b) =>
+      fs.statSync(path.join(READY, b)).mtimeMs -
+      fs.statSync(path.join(READY, a)).mtimeMs,
+  )[0];
 
   const localZipPath = path.join(READY, latestZip);
   const localJsonPath = path.join(READY, "update.json");
 
-  if (!fs.existsSync(localJsonPath)) throw new Error("Falta update.json en Ready/");
+  if (!fs.existsSync(localJsonPath))
+    throw new Error("Falta update.json en Ready/");
 
   const remoteDir = "/public_html/updates/warranty-system/";
   const publicBase = "https://updates.vapedot.mx/warranty-system";
@@ -90,4 +102,3 @@ async function main() {
 main().catch((err) => {
   console.error("❌ Error:", err.message);
 });
-

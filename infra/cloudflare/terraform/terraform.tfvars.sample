@@ -1,0 +1,20 @@
+# Cloudflare API Token
+# Get your token from: https://dash.cloudflare.com/profile/api-tokens
+# Required permissions: R2:Edit, Workers:Edit, Zone:Edit
+cloudflare_api_token = "YOUR_API_TOKEN"
+
+# Cloudflare Account ID
+# Find it in your Cloudflare dashboard URL or in the right sidebar
+cloudflare_account_id = "YOUR_ACCOUNT_ID"
+
+# Cloudflare Zone ID for rockstage.mx
+# Find it in your domain's Overview page in Cloudflare dashboard
+cloudflare_zone_id = "YOUR_ZONE_ID"
+
+# Optional: Override defaults if needed
+# r2_bucket_name = "dozo-updates"
+# worker_script_name = "dozo-updates-worker"
+# subdomain = "updates"
+# domain = "rockstage.mx"
+
+

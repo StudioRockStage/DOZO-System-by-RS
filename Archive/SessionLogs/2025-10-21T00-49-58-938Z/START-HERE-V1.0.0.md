@@ -46,6 +46,7 @@ El plugin ya tiene integrado el sistema de actualizaciones DOZO:
 - **Archivo de configuración**: `/updates/warranty-system/update.json`
 
 **Para activar las actualizaciones automáticas**:
+
 1. Sube el ZIP a tu servidor en la URL configurada
 2. Asegúrate de que `update.json` esté accesible
 3. WordPress verificará automáticamente nuevas versiones
@@ -54,12 +55,12 @@ El plugin ya tiene integrado el sistema de actualizaciones DOZO:
 
 ## 📂 Archivos Importantes
 
-| Archivo | Ubicación | Propósito |
-|---------|-----------|-----------|
-| **Plugin ZIP** | `/Latest Builds/Warranty_System_RS_v1.0.0.zip` | Distribución principal |
-| **Código Fuente** | `/Plugins/Warranty System/` | Desarrollo y edición |
-| **Update Config** | `/updates/warranty-system/update.json` | Sistema de actualizaciones |
-| **Validation Report** | `/to chat gpt/Global/DOZO-Validation-Report.json` | Reporte de validación |
+| Archivo               | Ubicación                                         | Propósito                  |
+| --------------------- | ------------------------------------------------- | -------------------------- |
+| **Plugin ZIP**        | `/Latest Builds/Warranty_System_RS_v1.0.0.zip`    | Distribución principal     |
+| **Código Fuente**     | `/Plugins/Warranty System/`                       | Desarrollo y edición       |
+| **Update Config**     | `/updates/warranty-system/update.json`            | Sistema de actualizaciones |
+| **Validation Report** | `/to chat gpt/Global/DOZO-Validation-Report.json` | Reporte de validación      |
 
 ---
 
@@ -127,11 +128,13 @@ RS_WARRANTY_AUTHOR         = 'RockStage Solutions'
 ### Opción B: Distribución
 
 1. Sube `Warranty_System_RS_v1.0.0.zip` a:
+
    ```
    https://updates.vapedot.mx/warranty-system/
    ```
 
 2. Asegúrate de que `update.json` esté accesible en:
+
    ```
    https://updates.vapedot.mx/warranty-system/update.json
    ```
@@ -182,16 +185,19 @@ Estos previenen modificaciones no autorizadas.
 ## 🛠️ Comandos Útiles
 
 ### Validar el sistema
+
 ```bash
 node dozo-validate-v1.0.0.js
 ```
 
 ### Reconstruir el ZIP
+
 ```bash
 node dozo-build-v1.0.0-from-source.js
 ```
 
 ### Ver reportes
+
 ```bash
 # Reporte de validación
 cat "to chat gpt/Global/DOZO-Validation-Report.json"
@@ -239,4 +245,3 @@ Tu plugin Warranty System RS v1.0.0 está construido, validado y listo para usar
 **DOZO System v7.9** | **© 2025 RockStage Solutions**
 
 </div>
-

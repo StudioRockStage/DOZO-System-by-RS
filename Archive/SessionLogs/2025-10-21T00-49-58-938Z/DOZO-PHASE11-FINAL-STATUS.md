@@ -19,32 +19,32 @@ El sistema de deployment remoto está **completamente funcional** y listo para u
 
 ### Scripts de Deployment (7 archivos)
 
-| Script | Tamaño | Propósito | Estado |
-|--------|--------|-----------|--------|
-| `dozo-phase11-remote-deploy.js` | 3.3K | Deploy remoto completo | ✅ Listo |
-| `dozo-phase11-validate-local.js` | 6.0K | Validación pre-deployment | ✅ Listo |
-| `dozo-phase11-deploy-dryrun.js` | 6.8K | Simulación de deployment | ✅ Listo |
-| `dozo-phase11.1-ftp-setup.js` | 2.9K | Setup automático FTP | ✅ Ejecutado |
-| `dozo-phase11.1-update-credentials.js` | 5.8K | Test de credenciales FTP | ✅ Listo |
-| `dozo-network-unlock.js` | 2.2K | Configuración de red | ✅ Ejecutado |
-| `package.json` | 481B | Configuración NPM | ✅ Configurado |
+| Script                                 | Tamaño | Propósito                 | Estado         |
+| -------------------------------------- | ------ | ------------------------- | -------------- |
+| `dozo-phase11-remote-deploy.js`        | 3.3K   | Deploy remoto completo    | ✅ Listo       |
+| `dozo-phase11-validate-local.js`       | 6.0K   | Validación pre-deployment | ✅ Listo       |
+| `dozo-phase11-deploy-dryrun.js`        | 6.8K   | Simulación de deployment  | ✅ Listo       |
+| `dozo-phase11.1-ftp-setup.js`          | 2.9K   | Setup automático FTP      | ✅ Ejecutado   |
+| `dozo-phase11.1-update-credentials.js` | 5.8K   | Test de credenciales FTP  | ✅ Listo       |
+| `dozo-network-unlock.js`               | 2.2K   | Configuración de red      | ✅ Ejecutado   |
+| `package.json`                         | 481B   | Configuración NPM         | ✅ Configurado |
 
 ### Documentación (4 archivos)
 
-| Documento | Propósito |
-|-----------|-----------|
-| `DOZO-PHASE11-DEPLOYMENT-GUIDE.md` | Guía completa de deployment |
-| `QUICK-DEPLOY-REFERENCE.md` | Referencia rápida de comandos |
-| `DOZO-FTP-TROUBLESHOOTING.md` | Solución de problemas FTP |
-| `Scripts/README-FTP-CONFIG.md` | Instrucciones de configuración |
+| Documento                          | Propósito                      |
+| ---------------------------------- | ------------------------------ |
+| `DOZO-PHASE11-DEPLOYMENT-GUIDE.md` | Guía completa de deployment    |
+| `QUICK-DEPLOY-REFERENCE.md`        | Referencia rápida de comandos  |
+| `DOZO-FTP-TROUBLESHOOTING.md`      | Solución de problemas FTP      |
+| `Scripts/README-FTP-CONFIG.md`     | Instrucciones de configuración |
 
 ### Archivos de Configuración
 
-| Archivo | Estado | Nota |
-|---------|--------|------|
-| `.cursor/config.json` | ✅ Creado | Permisos de red habilitados |
-| `Scripts/ftp-config.json` | ⚠️ Configurado | Credenciales requieren verificación |
-| `Backup/Network/FTP-Encrypted.json` | ✅ Creado | Backup cifrado de credenciales |
+| Archivo                             | Estado         | Nota                                |
+| ----------------------------------- | -------------- | ----------------------------------- |
+| `.cursor/config.json`               | ✅ Creado      | Permisos de red habilitados         |
+| `Scripts/ftp-config.json`           | ⚠️ Configurado | Credenciales requieren verificación |
+| `Backup/Network/FTP-Encrypted.json` | ✅ Creado      | Backup cifrado de credenciales      |
 
 ---
 
@@ -95,14 +95,14 @@ El sistema de deployment remoto está **completamente funcional** y listo para u
 
 Todos los reportes están en: `to chat gpt/Global/`
 
-| Reporte | Estado | Información |
-|---------|--------|-------------|
-| `DOZO-Network-Report.json` | ✅ | Conexión FTP alcanzable |
-| `DOZO-PreDeploy-Validation.json` | ✅ | Archivos locales validados |
-| `DOZO-Phase11-Setup-Complete.json` | ✅ | Setup de Phase 11 completo |
-| `DOZO-FTP-Ready.json` | ⚠️ | FTP config - credenciales incorrectas |
-| `DOZO-FTP-Test-Report.json` | ⚠️ | Test detallado de conexión |
-| `DOZO-DryRun-Report.json` | ✅ | Simulación exitosa |
+| Reporte                            | Estado | Información                           |
+| ---------------------------------- | ------ | ------------------------------------- |
+| `DOZO-Network-Report.json`         | ✅     | Conexión FTP alcanzable               |
+| `DOZO-PreDeploy-Validation.json`   | ✅     | Archivos locales validados            |
+| `DOZO-Phase11-Setup-Complete.json` | ✅     | Setup de Phase 11 completo            |
+| `DOZO-FTP-Ready.json`              | ⚠️     | FTP config - credenciales incorrectas |
+| `DOZO-FTP-Test-Report.json`        | ⚠️     | Test detallado de conexión            |
+| `DOZO-DryRun-Report.json`          | ✅     | Simulación exitosa                    |
 
 ---
 
@@ -156,6 +156,7 @@ Error: 530 Login incorrect
 ### Solución
 
 **Opción 1: Verificar con tu proveedor de hosting**
+
 - Accede a cPanel / Plesk
 - Ve a "FTP Accounts"
 - Verifica o resetea las credenciales
@@ -163,11 +164,13 @@ Error: 530 Login incorrect
 **Opción 2: Probar formatos alternativos**
 
 Algunos servidores aceptan diferentes formatos de usuario:
+
 - `u461169968` (sin dominio)
 - `u461169968@vapedot.mx` (con @)
 - `ftp@vapedot.mx` (email)
 
 **Opción 3: Usar FileZilla para confirmar**
+
 1. Descarga FileZilla
 2. Conecta manualmente a `ftp.vapedot.mx:21`
 3. Usa las credenciales que funcionen
@@ -176,11 +179,13 @@ Algunos servidores aceptan diferentes formatos de usuario:
 ### Actualizar Credenciales
 
 1. **Edita el archivo:**
+
    ```bash
    nano Scripts/ftp-config.json
    ```
 
 2. **Actualiza los valores:**
+
    ```json
    {
      "host": "ftp.vapedot.mx",
@@ -193,6 +198,7 @@ Algunos servidores aceptan diferentes formatos de usuario:
    ```
 
 3. **Prueba la conexión:**
+
    ```bash
    npm run ftp:test
    ```
@@ -237,11 +243,11 @@ Algunos servidores aceptan diferentes formatos de usuario:
 
 ### Local (Empaquetado/Ready/)
 
-| Archivo | Tamaño | SHA256 | Estado |
-|---------|--------|--------|--------|
-| `Warranty_System_v7.7.6.zip` | 2.75 MB | `b1ecd42...e1c860b` | ✅ Listo |
-| `update.json` | 426 B | - | ✅ Válido |
-| `changelog.txt` | - | - | ✅ Presente |
+| Archivo                      | Tamaño  | SHA256              | Estado      |
+| ---------------------------- | ------- | ------------------- | ----------- |
+| `Warranty_System_v7.7.6.zip` | 2.75 MB | `b1ecd42...e1c860b` | ✅ Listo    |
+| `update.json`                | 426 B   | -                   | ✅ Válido   |
+| `changelog.txt`              | -       | -                   | ✅ Presente |
 
 ### Remoto (Destino)
 
@@ -302,12 +308,12 @@ Phase 11.1 ✅ FTP Secure Setup
 
 ### Problemas Comunes
 
-| Problema | Solución | Documento |
-|----------|----------|-----------|
-| FTP 530 Login Incorrect | Ver DOZO-FTP-TROUBLESHOOTING.md | ✅ |
-| No se encuentra ZIP | Verificar Empaquetado/Ready/ | - |
-| Error de permisos | Verificar chmod del directorio | - |
-| Timeout FTP | Verificar firewall/puerto 21 | ✅ |
+| Problema                | Solución                        | Documento |
+| ----------------------- | ------------------------------- | --------- |
+| FTP 530 Login Incorrect | Ver DOZO-FTP-TROUBLESHOOTING.md | ✅        |
+| No se encuentra ZIP     | Verificar Empaquetado/Ready/    | -         |
+| Error de permisos       | Verificar chmod del directorio  | -         |
+| Timeout FTP             | Verificar firewall/puerto 21    | ✅        |
 
 ### Documentación
 
@@ -363,6 +369,5 @@ npm run deploy
 
 ---
 
-*DOZO System by RockStage Solutions*  
-*Phase 11 & 11.1 - Remote Deploy Sync & Validation*
-
+_DOZO System by RockStage Solutions_  
+_Phase 11 & 11.1 - Remote Deploy Sync & Validation_
