@@ -23,15 +23,9 @@ const workflowDB = path.join(root, 'Workflow DB');
 const telemetryFile = path.join(workflowDB, 'AppSyncTelemetry.json');
 const commitsFile = path.join(workflowDB, 'AppSyncCommits.json');
 
-console.log(
-  chalk.cyan('═══════════════════════════════════════════════════════')
-);
-console.log(
-  chalk.bold.white('🧩 FASE 16.3 – Live WebSocket Event Bridge v2.6.3')
-);
-console.log(
-  chalk.cyan('═══════════════════════════════════════════════════════')
-);
+console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
+console.log(chalk.bold.white('🧩 FASE 16.3 – Live WebSocket Event Bridge v2.6.3'));
+console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
 
 const PORT = 9091;
 let lastHash = null;
@@ -163,14 +157,8 @@ wss.on('connection', ws => {
 });
 
 server.listen(PORT, () => {
-  console.log(
-    chalk.cyan(`📡 WebSocket Bridge activo en ws://localhost:${PORT}`)
-  );
-  console.log(
-    chalk.yellow(
-      '🧠 Monitoreando AppSyncTelemetry.json y AppSyncCommits.json...'
-    )
-  );
+  console.log(chalk.cyan(`📡 WebSocket Bridge activo en ws://localhost:${PORT}`));
+  console.log(chalk.yellow('🧠 Monitoreando AppSyncTelemetry.json y AppSyncCommits.json...'));
   console.log(chalk.magenta('📨 Enviando eventos a Dashboard en tiempo real'));
 
   generateReport();
@@ -180,21 +168,13 @@ server.listen(PORT, () => {
     monitorCommits();
   }, 10000);
 
-  console.log(
-    chalk.cyan('═══════════════════════════════════════════════════════')
-  );
-  console.log(
-    chalk.green.bold('✅ Live WebSocket Event Bridge iniciado correctamente')
-  );
-  console.log(
-    chalk.cyan('═══════════════════════════════════════════════════════')
-  );
+  console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
+  console.log(chalk.green.bold('✅ Live WebSocket Event Bridge iniciado correctamente'));
+  console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
   console.log(chalk.white(`🔗 URL: ws://localhost:${PORT}`));
   console.log(chalk.white(`📊 Estado: LIVE_EVENT_BRIDGE_OK`));
   console.log(chalk.white(`⏱️  Monitoreo cada 10 segundos`));
-  console.log(
-    chalk.cyan('═══════════════════════════════════════════════════════')
-  );
+  console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
 });
 
 process.on('SIGINT', () => {

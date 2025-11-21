@@ -21,22 +21,17 @@ const report = {
 
 // 1️⃣ Sincronizar todos los módulos del sistema
 try {
-  execSync(
-    "git add . && git commit -m '🧩 DOZO Final Sync FASE 10' && git push",
-    { stdio: 'inherit' }
-  );
+  execSync("git add . && git commit -m '🧩 DOZO Final Sync FASE 10' && git push", {
+    stdio: 'inherit',
+  });
   report.pasos.push('✔️ Repositorio sincronizado con GitHub');
 } catch {
-  console.warn(
-    '⚠️ No se pudo realizar push a GitHub (posible falta de token).'
-  );
+  console.warn('⚠️ No se pudo realizar push a GitHub (posible falta de token).');
   report.pasos.push('⚠️ Push remoto omitido');
 }
 
 // 2️⃣ Empaquetar el sistema completo
-const output = fs.createWriteStream(
-  `./DistributionBuild/DOZO-System-v2.0.0.zip`
-);
+const output = fs.createWriteStream(`./DistributionBuild/DOZO-System-v2.0.0.zip`);
 const archive = archiver('zip', { zlib: { level: 9 } });
 
 archive.pipe(output);

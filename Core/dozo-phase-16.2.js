@@ -20,13 +20,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = process.cwd();
 
-console.log(
-  chalk.cyan('═══════════════════════════════════════════════════════')
-);
+console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
 console.log(chalk.bold.white('🧩 FASE 16.2 – AppSync Telemetry Bridge v2.6.2'));
-console.log(
-  chalk.cyan('═══════════════════════════════════════════════════════')
-);
+console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
 
 const workflowDir = path.join(root, 'Workflow DB');
 if (!fs.existsSync(workflowDir)) {
@@ -42,9 +38,7 @@ function run(cmd) {
 }
 
 async function main() {
-  const spinner = ora(
-    chalk.yellow('🔍 Obteniendo información del repositorio...')
-  ).start();
+  const spinner = ora(chalk.yellow('🔍 Obteniendo información del repositorio...')).start();
 
   const pkgPath = path.join(root, 'package.json');
   let pkg = {
@@ -79,9 +73,7 @@ async function main() {
   fs.writeFileSync(telemetryPath, JSON.stringify(telemetryData, null, 2));
   console.log(chalk.blue(`📁 Telemetría guardada en: ${telemetryPath}`));
 
-  const spinner2 = ora(
-    chalk.yellow('📡 Sincronizando con GitHub API...')
-  ).start();
+  const spinner2 = ora(chalk.yellow('📡 Sincronizando con GitHub API...')).start();
 
   try {
     const response = await fetch(
@@ -102,9 +94,7 @@ async function main() {
       console.log(chalk.blue(`📁 Commits guardados en: ${commitsPath}`));
 
       const reportPath = path.join(workflowDir, 'Phase16.2-Report.md');
-      const commitMessages = commits
-        .map(c => `- ${c.commit.message.split('\n')[0]}`)
-        .join('\n');
+      const commitMessages = commits.map(c => `- ${c.commit.message.split('\n')[0]}`).join('\n');
 
       const reportContent = `# 🧩 DOZO System – Phase 16.2 Report
 **Fecha:** ${new Date().toLocaleDateString('es-ES')}  
@@ -126,9 +116,7 @@ ${commitMessages}
       fs.writeFileSync(reportPath, reportContent);
       console.log(chalk.blue(`📄 Reporte generado: ${reportPath}`));
     } else {
-      spinner2.warn(
-        chalk.yellow(`⚠️  GitHub API respondió con status ${response.status}`)
-      );
+      spinner2.warn(chalk.yellow(`⚠️  GitHub API respondió con status ${response.status}`));
       console.log(chalk.gray('   Continuando sin datos de commits remotos...'));
     }
   } catch {
@@ -136,21 +124,13 @@ ${commitMessages}
     console.log(chalk.gray('   Motivo: Connection failed'));
   }
 
-  console.log(
-    chalk.cyan('═══════════════════════════════════════════════════════')
-  );
+  console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
   console.log(chalk.green.bold('✅ AppSync Telemetry Bridge completado'));
-  console.log(
-    chalk.cyan('═══════════════════════════════════════════════════════')
-  );
+  console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
   console.log(chalk.white(`📊 Telemetría: ${telemetryPath}`));
   console.log(chalk.white(`📡 Estado: ${telemetryData.status}`));
-  console.log(
-    chalk.white(`🔗 Repositorio: https://github.com/${telemetryData.repo}`)
-  );
-  console.log(
-    chalk.cyan('═══════════════════════════════════════════════════════')
-  );
+  console.log(chalk.white(`🔗 Repositorio: https://github.com/${telemetryData.repo}`));
+  console.log(chalk.cyan('═══════════════════════════════════════════════════════'));
 }
 
 main().catch(err => {

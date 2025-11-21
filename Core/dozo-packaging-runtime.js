@@ -33,10 +33,7 @@ const pkg = {
   type: 'module',
   scripts: { start: 'electron .' },
 };
-fs.writeFileSync(
-  path.join(appDir, 'package.json'),
-  JSON.stringify(pkg, null, 2)
-);
+fs.writeFileSync(path.join(appDir, 'package.json'), JSON.stringify(pkg, null, 2));
 
 // 3️⃣ main.js
 const mainJS = `
@@ -71,10 +68,7 @@ app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(
 fs.writeFileSync(path.join(appDir, 'main.js'), mainJS);
 
 // 4️⃣ Icono
-const iconSrc = path.join(
-  baseDir,
-  'Dashboard/public/assets/rockstage-icon.icns'
-);
+const iconSrc = path.join(baseDir, 'Dashboard/public/assets/rockstage-icon.icns');
 if (fs.existsSync(iconSrc)) {
   fs.copyFileSync(iconSrc, path.join(appDir, 'icon.icns'));
   console.log('✅ Icono RockStage añadido');

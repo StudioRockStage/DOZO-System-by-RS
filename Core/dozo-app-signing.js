@@ -5,10 +5,7 @@ import crypto from 'crypto';
 
 const HOME = process.env.HOME || process.env.USERPROFILE;
 const baseDir = path.resolve(HOME, 'Documents/DOZO System by RS');
-const dmgPath = path.join(
-  baseDir,
-  'DistributionBuild/DOZO-Control-Center-RockStage-1.0.0.dmg'
-);
+const dmgPath = path.join(baseDir, 'DistributionBuild/DOZO-Control-Center-RockStage-1.0.0.dmg');
 const globalDir = path.join(baseDir, 'to chat gpt', 'Global');
 fs.mkdirSync(globalDir, { recursive: true });
 
@@ -55,17 +52,14 @@ try {
 const certName = 'Developer ID Application: RockStage Solutions';
 try {
   console.log('⚙️ Intentando firmar con certificado Apple Developer...');
-  execSync(
-    `codesign --deep --force --verify --verbose --sign "${certName}" "${dmgPath}"`,
-    { stdio: 'inherit' }
-  );
+  execSync(`codesign --deep --force --verify --verbose --sign "${certName}" "${dmgPath}"`, {
+    stdio: 'inherit',
+  });
   console.log('✅ Firma completada');
   report.steps.push('App firmada correctamente');
 } catch {
   console.warn('⚠️ No se encontró certificado válido o firma omitida');
-  report.warnings.push(
-    'Firma omitida: no se detectó certificado Apple Developer válido'
-  );
+  report.warnings.push('Firma omitida: no se detectó certificado Apple Developer válido');
 }
 
 // 4️⃣ Validación post-firma
@@ -76,9 +70,7 @@ try {
   console.log('✅ Validación de firma completada correctamente');
   report.steps.push('Validación completada');
 } catch {
-  report.errors.push(
-    'Error en validación de firma (puede ser omitido si no hay certificado)'
-  );
+  report.errors.push('Error en validación de firma (puede ser omitido si no hay certificado)');
 }
 
 // 5️⃣ Guardar reporte

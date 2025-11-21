@@ -2,9 +2,7 @@ import fs from 'fs';
 import https from 'https';
 import { execSync } from 'child_process';
 
-console.log(
-  '🚀 Iniciando FASE 9 – Universal Distribution & Update Bridge v2.0.0'
-);
+console.log('🚀 Iniciando FASE 9 – Universal Distribution & Update Bridge v2.0.0');
 
 const versionFile = './DistributionBuild/update.json';
 const repo = 'RockStageSolutions/DOZO-Control-Center';
@@ -27,17 +25,12 @@ console.log('✅ update.json generado correctamente.');
 
 // Intentar sincronizar con GitHub
 try {
-  execSync(
-    `git add . && git commit -m "🚀 DOZO AutoUpdate FASE 9 – Sync" && git push`,
-    {
-      stdio: 'inherit',
-    }
-  );
+  execSync(`git add . && git commit -m "🚀 DOZO AutoUpdate FASE 9 – Sync" && git push`, {
+    stdio: 'inherit',
+  });
   console.log('✅ Sincronización GitHub completada.');
 } catch {
-  console.warn(
-    '⚠️ No se pudo conectar o realizar push a GitHub. Requiere token configurado.'
-  );
+  console.warn('⚠️ No se pudo conectar o realizar push a GitHub. Requiere token configurado.');
 }
 
 // Verificar última versión en GitHub Releases
@@ -55,9 +48,7 @@ https
     res.on('end', () => {
       try {
         const json = JSON.parse(data);
-        console.log(
-          `📦 Última versión publicada: ${json.tag_name || 'No disponible'}`
-        );
+        console.log(`📦 Última versión publicada: ${json.tag_name || 'No disponible'}`);
         const report = {
           fase: 9,
           version: '2.0.0',

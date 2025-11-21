@@ -62,16 +62,11 @@ if (fs.existsSync(releaseDir)) {
     const version = versionMatch ? versionMatch[1] : 'unknown';
 
     // Buscar archivo de hash correspondiente
-    const hashFiles = files.filter(
-      f => f.includes('SHA256') && f.includes(version)
-    );
+    const hashFiles = files.filter(f => f.includes('SHA256') && f.includes(version));
     let hash = null;
 
     if (hashFiles.length > 0) {
-      const hashContent = fs.readFileSync(
-        path.join(releaseDir, hashFiles[0]),
-        'utf8'
-      );
+      const hashContent = fs.readFileSync(path.join(releaseDir, hashFiles[0]), 'utf8');
       const hashMatch = hashContent.match(/SHA-256:\s*([a-f0-9]{64})/i);
       if (hashMatch) {
         hash = hashMatch[1];
@@ -130,15 +125,11 @@ for (let i = 1; i <= 14; i++) {
 
   if (fs.existsSync(reportDir)) {
     const files = fs.readdirSync(reportDir);
-    const phaseFiles = files.filter(
-      f => f.includes(`fase-${i}`) && f.endsWith('.json')
-    );
+    const phaseFiles = files.filter(f => f.includes(`fase-${i}`) && f.endsWith('.json'));
 
     phaseFiles.forEach(file => {
       try {
-        const content = JSON.parse(
-          fs.readFileSync(path.join(reportDir, file), 'utf8')
-        );
+        const content = JSON.parse(fs.readFileSync(path.join(reportDir, file), 'utf8'));
         phaseReports.push({
           file: file,
           timestamp: content.timestamp || content.fecha || null,
@@ -745,10 +736,7 @@ report.summary = {
   serverCreated: true,
 };
 
-const reportPath = path.join(
-  reportDir,
-  `DistributionSystem/reporte-fase-15-${timestamp}.json`
-);
+const reportPath = path.join(reportDir, `DistributionSystem/reporte-fase-15-${timestamp}.json`);
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
 console.log(`   ✅ Reporte JSON: reporte-fase-15-${timestamp}.json`);
@@ -768,13 +756,9 @@ const releasesSection = releases
   )
   .join('\n');
 
-const phasesTable = phases
-  .map(p => `| ${p.phase} | ${p.reportCount} | ${p.status} |`)
-  .join('\n');
+const phasesTable = phases.map(p => `| ${p.phase} | ${p.reportCount} | ${p.status} |`).join('\n');
 
-const stepsSection = report.steps
-  .map((step, i) => `${i + 1}. ${step}`)
-  .join('\n');
+const stepsSection = report.steps.map((step, i) => `${i + 1}. ${step}`).join('\n');
 
 const mdReport = `# 🧩 DOZO FASE 15 – Public Sync & Release Dashboard
 
@@ -838,10 +822,7 @@ ${stepsSection}
 **Build ID:** ${timestamp}
 `;
 
-const mdPath = path.join(
-  reportDir,
-  `DistributionSystem/reporte-fase-15-${timestamp}.md`
-);
+const mdPath = path.join(reportDir, `DistributionSystem/reporte-fase-15-${timestamp}.md`);
 fs.writeFileSync(mdPath, mdReport);
 console.log(`   ✅ Reporte MD: reporte-fase-15-${timestamp}.md`);
 console.log('');

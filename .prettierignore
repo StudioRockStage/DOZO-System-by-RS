@@ -1,0 +1,41 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+*.min.js
+package-lock.json
+.git/
+public/
+coverage/
+DistributionBuild/
+Backup/
+Archive/
+DozoCoreReport/
+Latest Builds/
+PublicRelease/
+warranty-system-rs-clean/
+ChatGPT AI/
+Claude AI/
+Integration/
+Workflow/
+Workflow DB/
+Shared/
+Modules/
+Logs/
+Reports/
+AutoSync/
+Diagnostics/
+DashboardTelemetry/
+DOZO Core/
+Empaquetado/
+GitSync/
+Global/
+Latest Updates/
+release/
+server/
+updates/
+wp-updater/
+wordpress/
+Plugins/
+

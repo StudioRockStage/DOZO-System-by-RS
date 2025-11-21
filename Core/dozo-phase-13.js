@@ -196,10 +196,7 @@ console.log('');
 
 // 6️⃣ Verificar archivos generados
 console.log('🔍 PASO 6: Verificando archivos generados...');
-const expectedDmg = path.join(
-  distDir,
-  `DOZO-Control-Center-RockStage-${pkg.version}.dmg`
-);
+const expectedDmg = path.join(distDir, `DOZO-Control-Center-RockStage-${pkg.version}.dmg`);
 const macAppPath = path.join(distDir, 'mac');
 
 let dmgPath = null;
@@ -270,9 +267,7 @@ if (dmgGenerated && dmgPath) {
         buildReport.signed = false;
       }
     } else {
-      console.log(
-        "   ⚠️  No se encontró certificado 'Developer ID Application'"
-      );
+      console.log("   ⚠️  No se encontró certificado 'Developer ID Application'");
       console.log('   ℹ️  Build continuará sin firma digital (unsigned)');
       buildReport.signed = false;
       buildReport.warnings.push('No hay certificado válido - build unsigned');
@@ -323,8 +318,7 @@ console.log('');
 // 9️⃣ Reporte final
 console.log('🔍 PASO 9: Generando reportes finales...');
 
-buildReport.estado =
-  buildReport.errors.length === 0 ? 'COMPLETADA' : 'COMPLETADA_CON_ERRORES';
+buildReport.estado = buildReport.errors.length === 0 ? 'COMPLETADA' : 'COMPLETADA_CON_ERRORES';
 buildReport.summary = {
   dmgGenerated: dmgGenerated,
   signed: signed,
@@ -636,9 +630,7 @@ console.log('');
 if (!signed) {
   console.log('⚠️  IMPORTANTE: El DMG no está firmado digitalmente');
   console.log('   Para firmar después, ejecuta:');
-  console.log(
-    `   codesign --sign "Developer ID Application" --deep --force "${dmgPath}"`
-  );
+  console.log(`   codesign --sign "Developer ID Application" --deep --force "${dmgPath}"`);
   console.log('');
 }
 

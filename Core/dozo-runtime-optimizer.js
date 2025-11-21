@@ -17,10 +17,7 @@ const reportFile = path.join(
   `DOZO-Runtime-Optimizer-Report-${new Date().toISOString().replace(/[:.]/g, '-')}.json`
 );
 
-const iconPath = path.join(
-  baseDir,
-  'Dashboard/public/assets/rockstage-icon.icns'
-);
+const iconPath = path.join(baseDir, 'Dashboard/public/assets/rockstage-icon.icns');
 const _pkgJson = path.join(appDir, 'package.json');
 
 console.log('══════════════════════════════════════════════════════════════');
@@ -48,9 +45,7 @@ if (fs.existsSync(iconPath)) {
   }
 } else {
   console.log('⚠️ No se encontró icono RockStage en assets/');
-  report.warnings.push(
-    'Falta icono rockstage-icon.icns en /Dashboard/public/assets/'
-  );
+  report.warnings.push('Falta icono rockstage-icon.icns en /Dashboard/public/assets/');
 }
 
 // 2️⃣ Optimizar Electron App
@@ -66,10 +61,7 @@ try {
 // 3️⃣ Configurar auto-launch macOS
 try {
   console.log('⚙️ Configurando auto-launch en macOS...');
-  const plistPath = path.join(
-    os.homedir(),
-    'Library/LaunchAgents/com.rockstage.dozo.plist'
-  );
+  const plistPath = path.join(os.homedir(), 'Library/LaunchAgents/com.rockstage.dozo.plist');
   const plistContent = `<?xml version="1.0" encoding="UTF-8"?>
   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">

@@ -13,9 +13,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-console.log(
-  '🚀 Iniciando FASE 1 – Core Rebuild & Structure Autodeploy v2.0.0\n'
-);
+console.log('🚀 Iniciando FASE 1 – Core Rebuild & Structure Autodeploy v2.0.0\n');
 
 // Step 1: Initialize Core Engine
 console.log('1️⃣ Inicializando DOZO Core Engine...');

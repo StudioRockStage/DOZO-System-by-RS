@@ -132,9 +132,7 @@ try {
     } catch {
       console.log('   ⚠️  Error al configurar remoto');
       console.log('   💡 Configura manualmente con:');
-      console.log(
-        '      git remote add origin git@github.com:usuario/repo.git'
-      );
+      console.log('      git remote add origin git@github.com:usuario/repo.git');
       report.warnings.push('No se pudo configurar remoto automáticamente');
     }
   }
@@ -202,10 +200,7 @@ const newChangelogEntry = `
 `;
 
 const changelog = existingChangelog
-  ? existingChangelog.replace(
-      /^# Changelog/i,
-      `# Changelog\n${newChangelogEntry}`
-    )
+  ? existingChangelog.replace(/^# Changelog/i, `# Changelog\n${newChangelogEntry}`)
   : `# Changelog\n\nTodas las versiones notables del DOZO System están documentadas aquí.\n${newChangelogEntry}`;
 
 fs.writeFileSync(changelogPath, changelog);
@@ -296,15 +291,11 @@ if (report.git.remoteConfigured && report.git.committed) {
     console.log('      1. Configurar SSH:');
     console.log('         gh auth login');
     console.log('      2. O usar HTTPS con token:');
-    console.log(
-      '         git remote set-url origin https://github.com/usuario/repo.git'
-    );
+    console.log('         git remote set-url origin https://github.com/usuario/repo.git');
     console.log('');
 
     report.git.pushed = false;
-    report.warnings.push(
-      'Push a GitHub no completado - requiere autenticación'
-    );
+    report.warnings.push('Push a GitHub no completado - requiere autenticación');
   }
 } else {
   console.log('   ⚠️  Push omitido:');
@@ -332,9 +323,7 @@ const syncMetadata = {
   },
   releases: {
     available: fs.existsSync(path.join(root, 'PublicRelease'))
-      ? fs
-          .readdirSync(path.join(root, 'PublicRelease'))
-          .filter(f => f.endsWith('.dmg')).length
+      ? fs.readdirSync(path.join(root, 'PublicRelease')).filter(f => f.endsWith('.dmg')).length
       : 0,
   },
   phases: {
@@ -347,9 +336,7 @@ const syncMetadata = {
 const coreReportDir = path.join(root, 'DozoCoreReport');
 if (fs.existsSync(coreReportDir)) {
   const allFiles = fs.readdirSync(coreReportDir);
-  const reportFiles = allFiles.filter(
-    f => f.startsWith('reporte-') && f.endsWith('.json')
-  );
+  const reportFiles = allFiles.filter(f => f.startsWith('reporte-') && f.endsWith('.json'));
   syncMetadata.phases.reports = reportFiles.length;
 }
 
@@ -362,8 +349,7 @@ console.log('');
 // PASO 10 – Generar reportes finales
 console.log('🔍 PASO 10: Generando reportes finales...');
 
-report.status =
-  report.errors.length === 0 ? 'COMPLETADA' : 'COMPLETADA_CON_ERRORES';
+report.status = report.errors.length === 0 ? 'COMPLETADA' : 'COMPLETADA_CON_ERRORES';
 report.summary = {
   gitInitialized: report.git.initialized,
   remoteConfigured: report.git.remoteConfigured,
@@ -376,25 +362,16 @@ report.summary = {
 };
 
 // Reporte JSON
-const jsonReportPath = path.join(
-  reportDir,
-  `reporte-fase-16-${timestamp}.json`
-);
+const jsonReportPath = path.join(reportDir, `reporte-fase-16-${timestamp}.json`);
 fs.writeFileSync(jsonReportPath, JSON.stringify(report, null, 2));
 console.log(`   ✅ Reporte JSON: reporte-fase-16-${timestamp}.json`);
 
 // Reporte Markdown
-const stepsSection = report.steps
-  .map((step, i) => `${i + 1}. ${step}`)
-  .join('\n');
+const stepsSection = report.steps.map((step, i) => `${i + 1}. ${step}`).join('\n');
 const warningsSection =
-  report.warnings.length > 0
-    ? report.warnings.map(w => `- ${w}`).join('\n')
-    : 'Ninguna';
+  report.warnings.length > 0 ? report.warnings.map(w => `- ${w}`).join('\n') : 'Ninguna';
 const errorsSection =
-  report.errors.length > 0
-    ? report.errors.map(e => `- ${e}`).join('\n')
-    : 'Ninguno';
+  report.errors.length > 0 ? report.errors.map(e => `- ${e}`).join('\n') : 'Ninguno';
 
 const mdReport = `# 🧩 DOZO FASE 16 – GitHub Live Sync & AppSync Integration
 
@@ -766,12 +743,8 @@ console.log('══════════════════════�
 console.log('');
 console.log('📊 Resumen:');
 console.log(`   Estado: ${report.status}`);
-console.log(
-  `   Git inicializado: ${report.git.initialized ? '✅ Sí' : '❌ No'}`
-);
-console.log(
-  `   Remoto configurado: ${report.git.remoteConfigured ? '✅ Sí' : '❌ No'}`
-);
+console.log(`   Git inicializado: ${report.git.initialized ? '✅ Sí' : '❌ No'}`);
+console.log(`   Remoto configurado: ${report.git.remoteConfigured ? '✅ Sí' : '❌ No'}`);
 console.log(`   Commit creado: ${report.git.committed ? '✅ Sí' : '❌ No'}`);
 console.log(`   Push a GitHub: ${report.git.pushed ? '✅ Sí' : '⚠️ No'}`);
 console.log(

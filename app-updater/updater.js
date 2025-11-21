@@ -22,9 +22,7 @@ class DozoUpdater {
    * Initialize auto-updater
    */
   initialize() {
-    console.log(
-      `[DOZO Updater] Initialized - Current version: ${this.currentVersion}`
-    );
+    console.log(`[DOZO Updater] Initialized - Current version: ${this.currentVersion}`);
 
     // Check for updates on startup
     setTimeout(() => this.checkForUpdates(), 5000);
@@ -46,10 +44,7 @@ class DozoUpdater {
 
     try {
       console.log('[DOZO Updater] Checking for updates...');
-      const updateInfo = await checkForUpdates(
-        UPDATE_ENDPOINT,
-        this.currentVersion
-      );
+      const updateInfo = await checkForUpdates(UPDATE_ENDPOINT, this.currentVersion);
 
       if (updateInfo.available) {
         this.updateAvailable = updateInfo;

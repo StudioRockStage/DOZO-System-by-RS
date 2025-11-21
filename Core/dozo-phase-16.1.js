@@ -40,9 +40,7 @@ try {
 
   if (!repoExists) {
     console.log(`🆕 Repositorio ${repoName} no existe. Creando...`);
-    run(
-      `gh repo create StudioRockStage/${repoName} --public --source=. --remote=origin --push`
-    );
+    run(`gh repo create StudioRockStage/${repoName} --public --source=. --remote=origin --push`);
     console.log(`✅ Repositorio ${repoName} creado exitosamente.`);
   } else {
     console.log(`✅ Repositorio ${repoName} ya existe. Continuando...`);

@@ -17,9 +17,7 @@ if (!fs.existsSync(reportDir)) {
 const dashboardDir = './DashboardTelemetry';
 if (!fs.existsSync(dashboardDir)) {
   console.error('❌ Error: El directorio DashboardTelemetry no existe');
-  console.log(
-    'Por favor, asegúrate de que todos los archivos del dashboard estén creados.'
-  );
+  console.log('Por favor, asegúrate de que todos los archivos del dashboard estén creados.');
   process.exit(1);
 }
 
@@ -145,8 +143,7 @@ ${report.dashboard.features.map(f => `- ✅ ${f}`).join('\n')}
 |---------|--------|------|--------|
 ${Object.entries(fileHashes)
   .map(
-    ([file, info]) =>
-      `| ${file} | ${info.status} | ${info.hash || 'N/A'} | ${info.size || 'N/A'} |`
+    ([file, info]) => `| ${file} | ${info.status} | ${info.hash || 'N/A'} | ${info.size || 'N/A'} |`
   )
   .join('\n')}
 

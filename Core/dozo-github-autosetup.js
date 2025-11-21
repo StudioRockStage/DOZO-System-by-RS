@@ -192,7 +192,7 @@ console.log('');
 console.log('🔍 PASO 5: Gestionando token personal de GitHub...');
 
 const tokenPath = path.join(os.homedir(), '.dozo_github_token');
-  const _tokenStored = false;
+const _tokenStored = false;
 
 if (fs.existsSync(tokenPath)) {
   console.log('   ✅ Token personal ya existe en:');
@@ -203,9 +203,7 @@ if (fs.existsSync(tokenPath)) {
   console.log('   ⚠️  Token personal no encontrado');
   console.log('');
   console.log('   💡 Para crear un token personal:');
-  console.log(
-    '      1. Abre: https://github.com/settings/tokens/new?scopes=repo,workflow'
-  );
+  console.log('      1. Abre: https://github.com/settings/tokens/new?scopes=repo,workflow');
   console.log('      2. Genera un token con scopes: repo, workflow');
   console.log('      3. Copia el token generado');
   console.log('');
@@ -316,9 +314,7 @@ if (report.validation.remoteConfigured && report.validation.gitConfigured) {
     console.log('');
 
     report.validation.pushSuccessful = false;
-    report.warnings.push(
-      'Push a GitHub no completado - puede requerir configuración adicional'
-    );
+    report.warnings.push('Push a GitHub no completado - puede requerir configuración adicional');
   }
 } else {
   console.log('   ⚠️  Push omitido (configuración incompleta)');
@@ -344,23 +340,17 @@ console.log('');
 // PASO 9: Generar reporte
 console.log('🔍 PASO 9: Generando reporte de configuración...');
 
-report.status =
-  report.errors.length === 0 ? 'COMPLETADO' : 'COMPLETADO_CON_ERRORES';
+report.status = report.errors.length === 0 ? 'COMPLETADO' : 'COMPLETADO_CON_ERRORES';
 report.summary = {
   allChecksComplete: Object.values(report.validation).every(v => v === true),
-  checksCompleted: Object.values(report.validation).filter(v => v === true)
-    .length,
+  checksCompleted: Object.values(report.validation).filter(v => v === true).length,
   totalChecks: Object.keys(report.validation).length,
   errors: report.errors.length,
   warnings: report.warnings.length,
-  readyForSync:
-    report.validation.authenticated && report.validation.remoteConfigured,
+  readyForSync: report.validation.authenticated && report.validation.remoteConfigured,
 };
 
-const reportPath = path.join(
-  reportDir,
-  `github-autosetup-report-${timestamp}.json`
-);
+const reportPath = path.join(reportDir, `github-autosetup-report-${timestamp}.json`);
 fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
 console.log(`   ✅ Reporte JSON generado:`);
 console.log(`      ${reportPath}`);
@@ -439,10 +429,7 @@ ${
 **Build ID:** ${timestamp}
 `;
 
-const mdReportPath = path.join(
-  reportDir,
-  `github-autosetup-report-${timestamp}.md`
-);
+const mdReportPath = path.join(reportDir, `github-autosetup-report-${timestamp}.md`);
 fs.writeFileSync(mdReportPath, mdReport);
 console.log(`   ✅ Reporte MD generado:`);
 console.log(`      ${mdReportPath}`);
@@ -460,15 +447,9 @@ console.log(
 );
 console.log(`   GitHub CLI: ${report.validation.ghCliInstalled ? '✅' : '❌'}`);
 console.log(`   Autenticado: ${report.validation.authenticated ? '✅' : '❌'}`);
-console.log(
-  `   Git configurado: ${report.validation.gitConfigured ? '✅' : '❌'}`
-);
-console.log(
-  `   Remoto configurado: ${report.validation.remoteConfigured ? '✅' : '❌'}`
-);
-console.log(
-  `   Push exitoso: ${report.validation.pushSuccessful ? '✅' : '⚠️'}`
-);
+console.log(`   Git configurado: ${report.validation.gitConfigured ? '✅' : '❌'}`);
+console.log(`   Remoto configurado: ${report.validation.remoteConfigured ? '✅' : '❌'}`);
+console.log(`   Push exitoso: ${report.validation.pushSuccessful ? '✅' : '⚠️'}`);
 console.log(
   `   Listo para sync: ${report.summary.readyForSync ? '✅ Sí' : '⚠️ Requiere configuración'}`
 );
@@ -480,9 +461,7 @@ if (report.summary.readyForSync) {
   console.log('🎯 Próximos pasos:');
   console.log('   1. Ejecutar: npm run phase-16');
   console.log('   2. Ejecutar: npm run validate-github');
-  console.log(
-    '   3. Verificar en: https://github.com/StudioRockStage/dozo-control-center'
-  );
+  console.log('   3. Verificar en: https://github.com/StudioRockStage/dozo-control-center');
 } else {
   console.log('⚠️  Configuración incompleta');
   console.log('');

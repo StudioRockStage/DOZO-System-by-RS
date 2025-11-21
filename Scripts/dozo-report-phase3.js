@@ -12,8 +12,7 @@ const report = {
   fase: '3',
   version: '2.0.0',
   estado: 'COMPLETADA',
-  resumen:
-    'Framework de diagnóstico y reparación automática implementado exitosamente.',
+  resumen: 'Framework de diagnóstico y reparación automática implementado exitosamente.',
   timestamp: ts,
 };
 

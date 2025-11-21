@@ -30,9 +30,7 @@ const test = {
   },
 
   summary() {
-    console.log(
-      `\n📊 Test Results: ${this.passed} passed, ${this.failed} failed\n`
-    );
+    console.log(`\n📊 Test Results: ${this.passed} passed, ${this.failed} failed\n`);
     return this.failed === 0;
   },
 };
@@ -82,10 +80,7 @@ function testLocalManifest() {
 
   if (manifest.wordpress) {
     test.assert(manifest.wordpress.url !== undefined, 'WordPress URL defined');
-    test.assert(
-      manifest.wordpress.file !== undefined,
-      'WordPress file defined'
-    );
+    test.assert(manifest.wordpress.file !== undefined, 'WordPress file defined');
   }
 }
 
@@ -99,10 +94,7 @@ function testReleaseDirectory() {
 
   if (fs.existsSync(RELEASE_DIR)) {
     const files = fs.readdirSync(RELEASE_DIR);
-    test.assert(
-      files.length >= 0,
-      `Release directory accessible (${files.length} files)`
-    );
+    test.assert(files.length >= 0, `Release directory accessible (${files.length} files)`);
   }
 }
 
@@ -118,14 +110,8 @@ async function testRemoteManifest() {
 
     const manifest = JSON.parse(data);
     test.assert(manifest.version !== undefined, 'Remote manifest has version');
-    test.assert(
-      manifest.desktop !== undefined,
-      'Remote manifest has desktop section'
-    );
-    test.assert(
-      manifest.wordpress !== undefined,
-      'Remote manifest has wordpress section'
-    );
+    test.assert(manifest.desktop !== undefined, 'Remote manifest has desktop section');
+    test.assert(manifest.wordpress !== undefined, 'Remote manifest has wordpress section');
 
     console.log(`   Current version: ${manifest.version}`);
   } catch {
@@ -154,10 +140,7 @@ function testVersionComparison() {
   test.assert(compareVersions('1.0.0', '2.0.0') < 0, '1.0.0 < 2.0.0');
   test.assert(compareVersions('1.5.0', '1.5.0') === 0, '1.5.0 === 1.5.0');
   test.assert(compareVersions('1.0.1', '1.0.0') > 0, '1.0.1 > 1.0.0');
-  test.assert(
-    compareVersions('v2.0.0', '1.0.0') > 0,
-    'v2.0.0 > 1.0.0 (with v prefix)'
-  );
+  test.assert(compareVersions('v2.0.0', '1.0.0') > 0, 'v2.0.0 > 1.0.0 (with v prefix)');
 }
 
 /**
@@ -187,14 +170,8 @@ function testRollbackCapability() {
     test.assert(manifest.rollback !== undefined, 'Rollback section exists');
 
     if (manifest.rollback) {
-      test.assert(
-        manifest.rollback.previousVersion !== undefined,
-        'Previous version tracked'
-      );
-      test.assert(
-        manifest.rollback.enabled !== undefined,
-        'Rollback enabled flag exists'
-      );
+      test.assert(manifest.rollback.previousVersion !== undefined, 'Previous version tracked');
+      test.assert(manifest.rollback.enabled !== undefined, 'Rollback enabled flag exists');
     }
   }
 }

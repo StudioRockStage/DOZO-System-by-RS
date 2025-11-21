@@ -86,7 +86,13 @@
     "release:rollback": "node scripts/release.js rollback",
     "release:test": "node scripts/test-release.js",
     "release:plugin": "php scripts/publish-plugin.php",
-    "ui:open": "node 'Claude AI/UI/open-viewer.js'"
+    "ui:open": "node 'Claude AI/UI/open-viewer.js'",
+    "lint": "eslint app-updater/**/*.js AppBuild/**/*.js Core/**/*.js Scripts/**/*.js infra/**/*.js --max-warnings 0",
+    "lint:fix": "eslint app-updater/**/*.js AppBuild/**/*.js Core/**/*.js Scripts/**/*.js infra/**/*.js --fix",
+    "format": "prettier --write app-updater/**/*.js AppBuild/**/*.js Core/**/*.js Scripts/**/*.js infra/**/*.js .github/**/*.yml *.json *.md",
+    "format:check": "prettier --check app-updater/**/*.js AppBuild/**/*.js Core/**/*.js Scripts/**/*.js infra/**/*.js .github/**/*.yml *.json *.md",
+    "quality": "npm run lint && npm run format:check",
+    "quality:fix": "npm run lint:fix && npm run format"
   },
   "dependencies": {
     "archiver": "^7.0.1",

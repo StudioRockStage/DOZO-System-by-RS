@@ -12,8 +12,7 @@ const report = {
   fase: '4',
   version: '2.0.0',
   estado: 'COMPLETADA',
-  resumen:
-    'AutoSync y Plugin Intelligence Manager implementados correctamente.',
+  resumen: 'AutoSync y Plugin Intelligence Manager implementados correctamente.',
   timestamp: ts,
 };
 

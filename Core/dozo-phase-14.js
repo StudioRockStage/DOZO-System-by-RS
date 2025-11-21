@@ -89,9 +89,7 @@ if (fs.existsSync(distDir)) {
     };
     report.steps.push('DMG localizado: ' + dmgs[0]);
   } else {
-    console.error(
-      '   ❌ No se encontró ningún archivo DMG en DistributionBuild/'
-    );
+    console.error('   ❌ No se encontró ningún archivo DMG en DistributionBuild/');
     report.errors.push('No se encontró archivo DMG');
   }
 } else {
@@ -106,10 +104,7 @@ if (!dmgPath || !fs.existsSync(dmgPath)) {
   console.error('');
 
   report.estado = 'ERROR_DMG_NOT_FOUND';
-  const errorReportPath = path.join(
-    reportDir,
-    `reporte-fase-14-${timestamp}.json`
-  );
+  const errorReportPath = path.join(reportDir, `reporte-fase-14-${timestamp}.json`);
   fs.writeFileSync(errorReportPath, JSON.stringify(report, null, 2));
 
   process.exit(1);
@@ -142,9 +137,7 @@ try {
   } else {
     console.log("   ⚠️  No se encontró certificado 'Developer ID Application'");
     console.log('   ℹ️  La firma digital será omitida');
-    report.warnings.push(
-      'No hay certificado Developer ID Application disponible'
-    );
+    report.warnings.push('No hay certificado Developer ID Application disponible');
   }
 } catch {
   console.log('   ⚠️  No se pudo verificar certificados');
@@ -170,16 +163,14 @@ if (certificateAvailable) {
     console.log('   ✅ Firma digital aplicada exitosamente');
     report.codesigning.successful = true;
     report.steps.push(
-      'DMG firmado digitalmente con ' +
-        (certificateName || 'Developer ID Application')
+      'DMG firmado digitalmente con ' + (certificateName || 'Developer ID Application')
     );
 
     // Verificar la firma
     try {
-      const _verifyOutput = execSync(
-        `codesign -dv --verbose=4 "${dmgPath}" 2>&1`,
-        { encoding: 'utf8' }
-      );
+      const _verifyOutput = execSync(`codesign -dv --verbose=4 "${dmgPath}" 2>&1`, {
+        encoding: 'utf8',
+      });
       console.log('   ✅ Firma verificada correctamente');
       report.codesigning.verified = true;
     } catch {
@@ -269,9 +260,7 @@ if (appleIdConfigured && report.codesigning.successful) {
     console.log('      1. Configurar variables de entorno:');
     console.log("         export APPLE_ID='tu@email.com'");
     console.log("         export APPLE_TEAM_ID='XXXXXXXXXX'");
-    console.log(
-      '      2. Crear contraseña específica de app en appleid.apple.com'
-    );
+    console.log('      2. Crear contraseña específica de app en appleid.apple.com');
     console.log('      3. Guardar en keychain:');
     console.log('         xcrun notarytool store-credentials AC_PASSWORD \\');
     console.log('           --apple-id tu@email.com \\');
@@ -345,10 +334,7 @@ try {
   // Copiar hash
   const hashFile = path.join(reportDir, `DOZO-DMG-SHA256-v${dmgVersion}.txt`);
   if (fs.existsSync(hashFile)) {
-    fs.copyFileSync(
-      hashFile,
-      path.join(releaseDir, `SHA256-v${dmgVersion}.txt`)
-    );
+    fs.copyFileSync(hashFile, path.join(releaseDir, `SHA256-v${dmgVersion}.txt`));
     console.log('   ✅ Hash SHA-256 copiado');
   }
 
@@ -451,15 +437,11 @@ report.summary = {
   errors: report.errors.length,
   warnings: report.warnings.length,
   steps: report.steps.length,
-  readyForPublicRelease:
-    report.codesigning.successful && report.notarization.successful,
+  readyForPublicRelease: report.codesigning.successful && report.notarization.successful,
 };
 
 // Reporte JSON
-const jsonReportPath = path.join(
-  reportDir,
-  `reporte-fase-14-${timestamp}.json`
-);
+const jsonReportPath = path.join(reportDir, `reporte-fase-14-${timestamp}.json`);
 fs.writeFileSync(jsonReportPath, JSON.stringify(report, null, 2));
 console.log(`   ✅ Reporte JSON: reporte-fase-14-${timestamp}.json`);
 
@@ -884,13 +866,9 @@ console.log('');
 console.log('📊 Resumen:');
 console.log(`   Estado: ${report.estado}`);
 console.log(`   Firmado: ${report.codesigning.successful ? '✅ Sí' : '⚠️ No'}`);
-console.log(
-  `   Notarizado: ${report.notarization.successful ? '✅ Sí' : '⚠️ No'}`
-);
+console.log(`   Notarizado: ${report.notarization.successful ? '✅ Sí' : '⚠️ No'}`);
 console.log(`   Publicado: ${report.release.published ? '✅ Sí' : '❌ No'}`);
-console.log(
-  `   Listo para público: ${report.summary.readyForPublicRelease ? '✅ Sí' : '⚠️ No'}`
-);
+console.log(`   Listo para público: ${report.summary.readyForPublicRelease ? '✅ Sí' : '⚠️ No'}`);
 console.log('');
 
 if (report.release.published) {

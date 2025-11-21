@@ -6,14 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 const root = path.resolve('.');
-const requiredDirs = [
-  'Core',
-  'Modules',
-  'Scripts',
-  'Logs',
-  'Dashboard/public',
-  'Reports',
-];
+const requiredDirs = ['Core', 'Modules', 'Scripts', 'Logs', 'Dashboard/public', 'Reports'];
 const missing = requiredDirs.filter(d => !fs.existsSync(path.join(root, d)));
 
 const report = {

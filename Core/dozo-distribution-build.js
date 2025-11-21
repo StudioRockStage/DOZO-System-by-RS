@@ -18,10 +18,7 @@ const globalDir = path.join(baseDir, 'to chat gpt', 'Global');
 const distDir = path.join(baseDir, 'DistributionBuild');
 fs.mkdirSync(distDir, { recursive: true });
 
-const iconPath = path.join(
-  baseDir,
-  'Dashboard/public/assets/rockstage-icon.icns'
-);
+const iconPath = path.join(baseDir, 'Dashboard/public/assets/rockstage-icon.icns');
 const reportFile = path.join(
   globalDir,
   `DOZO-DistributionReport-${new Date().toISOString().replace(/[:.]/g, '-')}.json`
@@ -41,8 +38,7 @@ const report = {
 
 // 1️⃣ Verificar recursos
 try {
-  if (!fs.existsSync(iconPath))
-    throw new Error('No se encontró rockstage-icon.icns');
+  if (!fs.existsSync(iconPath)) throw new Error('No se encontró rockstage-icon.icns');
   console.log('✅ Icono RockStage encontrado');
   report.steps.push('Icono verificado');
 } catch {
@@ -67,8 +63,7 @@ const buildPkg = {
   productName: 'DOZO Control Center – RockStage',
   version: '1.0.0',
   author: 'RockStage Solutions',
-  description:
-    'Sistema avanzado de monitoreo y desarrollo de plugins WordPress.',
+  description: 'Sistema avanzado de monitoreo y desarrollo de plugins WordPress.',
   main: 'main.js',
   build: {
     appId: 'com.rockstage.dozo',
@@ -87,10 +82,7 @@ const buildPkg = {
     },
   },
 };
-fs.writeFileSync(
-  path.join(appDir, 'package.json'),
-  JSON.stringify(buildPkg, null, 2)
-);
+fs.writeFileSync(path.join(appDir, 'package.json'), JSON.stringify(buildPkg, null, 2));
 
 // 4️⃣ Ejecutar build
 try {

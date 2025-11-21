@@ -26,16 +26,13 @@ console.log('🔐 Hash SHA256 generado correctamente');
 // Intentar firma digital
 let signStatus = 'No firmado';
 try {
-  execSync(
-    `codesign --sign "Developer ID Application" "${appPath}" --deep --force --verbose`,
-    { stdio: 'inherit' }
-  );
+  execSync(`codesign --sign "Developer ID Application" "${appPath}" --deep --force --verbose`, {
+    stdio: 'inherit',
+  });
   signStatus = 'Firmado correctamente con certificado Developer ID Application';
   console.log('✅ Firma digital completada');
 } catch {
-  console.warn(
-    '⚠️ No se encontró certificado válido. Se omitió la firma digital.'
-  );
+  console.warn('⚠️ No se encontró certificado válido. Se omitió la firma digital.');
 }
 
 // Generar reporte final

@@ -1,9 +1,7 @@
 import fs from 'fs';
 import { execSync } from 'child_process';
 
-console.log(
-  '🚀 Iniciando FASE 7 – GitHub Integration & AutoCommit Engine v2.0.0'
-);
+console.log('🚀 Iniciando FASE 7 – GitHub Integration & AutoCommit Engine v2.0.0');
 
 const configPath = './github-config.json';
 let config;

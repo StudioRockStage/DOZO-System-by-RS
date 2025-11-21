@@ -3,9 +3,7 @@ import os from 'os';
 import crypto from 'crypto';
 import path from 'path';
 
-console.log(
-  '🚀 Iniciando FASE 11 – Post-Deployment Validation & Telemetry v2.1.0'
-);
+console.log('🚀 Iniciando FASE 11 – Post-Deployment Validation & Telemetry v2.1.0');
 
 const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 const timestampISO = new Date().toISOString();
@@ -37,10 +35,7 @@ function collectStats() {
     totalMemGB: (os.totalmem() / 1024 ** 3).toFixed(2),
     freeMemGB: (os.freemem() / 1024 ** 3).toFixed(2),
     usedMemGB: ((os.totalmem() - os.freemem()) / 1024 ** 3).toFixed(2),
-    memoryUsagePercent: (
-      ((os.totalmem() - os.freemem()) / os.totalmem()) *
-      100
-    ).toFixed(2),
+    memoryUsagePercent: (((os.totalmem() - os.freemem()) / os.totalmem()) * 100).toFixed(2),
     uptimeHours: (os.uptime() / 3600).toFixed(2),
     platform: os.platform(),
     release: os.release(),
@@ -53,8 +48,7 @@ function collectStats() {
 // 🔍 Función para verificar integridad de directorios
 function checkDirectoryIntegrity(dirPath) {
   try {
-    if (!fs.existsSync(dirPath))
-      return { status: 'MISSING', files: 0, size: 0 };
+    if (!fs.existsSync(dirPath)) return { status: 'MISSING', files: 0, size: 0 };
 
     let fileCount = 0;
     let totalSize = 0;
@@ -136,9 +130,7 @@ const healthAnalysis = {
 // Verificar uso de memoria
 if (parseFloat(metrics.memoryUsagePercent) > 80) {
   healthAnalysis.warnings.push('Alto uso de memoria del sistema');
-  healthAnalysis.recommendations.push(
-    'Considerar cerrar aplicaciones innecesarias'
-  );
+  healthAnalysis.recommendations.push('Considerar cerrar aplicaciones innecesarias');
 }
 
 // Verificar integridad de directorios críticos
@@ -150,9 +142,7 @@ Object.entries(integrity.directories).forEach(([dir, info]) => {
 });
 
 if (healthAnalysis.warnings.length === 0) {
-  healthAnalysis.recommendations.push(
-    'Sistema operando en condiciones óptimas'
-  );
+  healthAnalysis.recommendations.push('Sistema operando en condiciones óptimas');
 } else if (healthAnalysis.warnings.length > 3) {
   healthAnalysis.overallStatus = 'NEEDS_ATTENTION';
 }
@@ -268,9 +258,7 @@ ${Object.entries(integrity.directories)
 
 | Fase | Reportes | Estado |
 |------|----------|--------|
-${previousPhases
-  .map(p => `| Fase ${p.phase} | ${p.reportCount} | ${p.status} |`)
-  .join('\n')}
+${previousPhases.map(p => `| Fase ${p.phase} | ${p.reportCount} | ${p.status} |`).join('\n')}
 
 ---
 

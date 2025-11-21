@@ -44,6 +44,10 @@ export default [
       'no-useless-escape': 'error',
       'no-empty': 'warn',
     },
+    linterOptions: {
+      noInlineConfig: false,
+      reportUnusedDisableDirectives: false,
+    },
     ignores: [
       '**/node_modules/**',
       '**/DistributionBuild/**',
@@ -78,6 +82,8 @@ export default [
       '**/server/**',
       '**/updates/**',
       '**/wp-updater/**',
+      '**/*.yml',
+      '**/*.yaml',
     ],
   },
 ];

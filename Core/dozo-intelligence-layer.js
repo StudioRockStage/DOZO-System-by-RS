@@ -23,11 +23,7 @@ const PORT = 9092;
 const HOME = process.env.HOME || process.env.USERPROFILE;
 const baseDir = path.resolve(HOME, 'Documents/DOZO System by RS');
 const globalDir = path.join(baseDir, 'to chat gpt', 'Global');
-const latestBuildsDir = path.join(
-  baseDir,
-  'Latest Builds',
-  'Warranty System RS'
-);
+const latestBuildsDir = path.join(baseDir, 'Latest Builds', 'Warranty System RS');
 const reportPath = path.join(
   globalDir,
   `DOZO-Intelligence-Report-${new Date().toISOString().replace(/[:.]/g, '-')}.json`
@@ -49,8 +45,7 @@ function writeReport(entry) {
 // 🔒 Middleware de autenticación simple
 app.use((req, res, next) => {
   const token = req.headers['x-dozo-token'];
-  if (token !== AUTH_TOKEN)
-    return res.status(403).json({ error: 'Acceso no autorizado' });
+  if (token !== AUTH_TOKEN) return res.status(403).json({ error: 'Acceso no autorizado' });
   next();
 });
 
@@ -61,8 +56,7 @@ app.post('/api/validate', (req, res) => {
   try {
     const { target } = req.body;
     const zip = path.join(latestBuildsDir, 'warranty-system-rs.zip');
-    if (!fs.existsSync(zip))
-      throw new Error('No se encontró ZIP para validar.');
+    if (!fs.existsSync(zip)) throw new Error('No se encontró ZIP para validar.');
 
     execSync(`unzip -t "${zip}"`);
     writeReport({ action: 'validate', status: 'OK', target });
@@ -134,12 +128,7 @@ app.get('/api/status', (req, res) => {
     status: 'ACTIVE',
     uptime: process.uptime(),
     version: '1.0.0',
-    endpoints: [
-      '/api/validate',
-      '/api/rollback',
-      '/api/deploy',
-      '/api/cleanup',
-    ],
+    endpoints: ['/api/validate', '/api/rollback', '/api/deploy', '/api/cleanup'],
   });
 });
 
