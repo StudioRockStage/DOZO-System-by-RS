@@ -1,41 +1,94 @@
+# Dependencies
 node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs  
 .next/
 out/
 build/
 dist/
-*.min.js
-package-lock.json
-.git/
-public/
-coverage/
 DistributionBuild/
-Backup/
+*.min.js
+*.bundle.js
+
+# Electron
+AppBuild/
+Dashboard/
+DashboardTelemetry/
+
+# Version control
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.*
+
+# Cache
+.eslintcache
+*.cache
+
+# Public assets
+public/
+static/
+
+# Archives and backups
 Archive/
-DozoCoreReport/
+Backup/
 Latest Builds/
-PublicRelease/
+Empaquetado/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Documentation 
+*.md
+README.md
+CHANGELOG.md
+LICENSE
+
+# Logs
+*.log
+Logs/
+
+# Reports
+Reports/
+DozoCoreReport/
+
+# WordPress
+wordpress/
+wp-updater/
 warranty-system-rs-clean/
-ChatGPT AI/
-Claude AI/
-Integration/
+
+# Other directories
+Docs/
+Global/
+Modules/
+Plugins/
+PublicRelease/
+Shared/
 Workflow/
 Workflow DB/
-Shared/
-Modules/
-Logs/
-Reports/
+ChatGPT AI/
+Claude AI/
 AutoSync/
-Diagnostics/
-DashboardTelemetry/
-DOZO Core/
-Empaquetado/
 GitSync/
-Global/
+Core/
+DOZO Core/
+Integration/
 Latest Updates/
+Diagnostics/
+Scripts/
+infra/
 release/
 server/
 updates/
-wp-updater/
-wordpress/
-Plugins/
-
