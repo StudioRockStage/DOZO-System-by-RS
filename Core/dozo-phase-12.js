@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import crypto from 'crypto';
 
 console.log('🚀 Iniciando FASE 12 – AI Telemetry Dashboard v2.2.0');

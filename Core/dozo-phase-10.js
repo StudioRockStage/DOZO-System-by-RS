@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { execSync } from 'child_process';
-import path from 'path';
 import archiver from 'archiver';
 
 console.log('🚀 Iniciando FASE 10 – Final Sync & Deployment v2.0.0');
@@ -27,7 +26,7 @@ try {
     { stdio: 'inherit' }
   );
   report.pasos.push('✔️ Repositorio sincronizado con GitHub');
-} catch (err) {
+} catch {
   console.warn(
     '⚠️ No se pudo realizar push a GitHub (posible falta de token).'
   );

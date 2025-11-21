@@ -57,11 +57,8 @@ class DozoUpdater {
       } else {
         console.log('[DOZO Updater] No updates available');
       }
-    } catch (error) {
-      console.error(
-        '[DOZO Updater] Error checking for updates:',
-        error.message
-      );
+    } catch {
+      console.error('[DOZO Updater] Error checking for updates');
     } finally {
       this.checkInProgress = false;
     }

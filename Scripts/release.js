@@ -32,8 +32,8 @@ function uploadToR2(filePath, remoteName) {
     execSync(cmd, { stdio: 'inherit' });
     console.log(`✅ Uploaded: ${remoteName}`);
     return true;
-  } catch (error) {
-    console.error(`❌ Upload failed: ${error.message}`);
+  } catch {
+    console.error('❌ Upload failed');
     return false;
   }
 }

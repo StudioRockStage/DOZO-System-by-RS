@@ -67,8 +67,8 @@ https
         };
         fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
         console.log(`✅ Reporte FASE 9 generado: ${reportPath}`);
-      } catch (e) {
-        console.error('❌ Error al analizar respuesta de GitHub:', e);
+      } catch {
+        console.error('❌ Error al analizar respuesta de GitHub');
       }
     });
   })

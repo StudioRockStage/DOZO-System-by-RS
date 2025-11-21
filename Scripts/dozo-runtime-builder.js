@@ -26,6 +26,6 @@ try {
   } else {
     console.error('❌ Error: no se generó la carpeta DistributionBuild.');
   }
-} catch (e) {
-  console.error('❌ Error en el proceso de build:', e.message);
+} catch {
+  console.error('❌ Error en el proceso de build');
 }

@@ -33,7 +33,7 @@ async function handleRequest(request, env) {
         'Content-Disposition': `attachment; filename="${getFileName(objectKey)}"`,
       },
     });
-  } catch (e) {
+  } catch {
     return new Response('Internal Server Error', { status: 500 });
   }
 }

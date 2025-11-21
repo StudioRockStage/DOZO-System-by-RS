@@ -91,10 +91,10 @@ export async function applyUpdate(updateInfo) {
     }
 
     return downloadPath;
-  } catch (error) {
+  } catch (_error) {
     if (fs.existsSync(downloadPath)) {
       fs.unlinkSync(downloadPath);
     }
-    throw new Error(`Failed to apply update: ${error.message}`);
+    throw new Error('Failed to apply update');
   }
 }

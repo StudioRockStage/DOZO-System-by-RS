@@ -9,7 +9,6 @@ Objetivo:
 
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
 
 const baseDir = path.resolve(process.env.HOME, 'Documents/DOZO System by RS');
 const dashboardDir = path.join(baseDir, 'Dashboard', 'public');

@@ -42,7 +42,6 @@ const report = {
 console.log('🔍 PASO 1: Verificando repositorio Git...');
 
 try {
-  const gitStatus = execSync('git status', { encoding: 'utf8' });
   console.log('   ✅ Repositorio Git detectado');
   report.git.initialized = true;
   report.steps.push('Repositorio Git verificado');
@@ -54,10 +53,10 @@ try {
     }).trim();
     console.log(`   📍 Branch actual: ${currentBranch}`);
     report.git.branch = currentBranch;
-  } catch (branchErr) {
+  } catch {
     console.log('   ℹ️  No se pudo obtener el branch actual');
   }
-} catch (gitErr) {
+} catch {
   console.log('   ⚠️  Repositorio Git no inicializado');
   console.log('   ⚙️  Inicializando repositorio...');
 
@@ -68,9 +67,9 @@ try {
     report.git.initialized = true;
     report.git.branch = 'main';
     report.steps.push('Repositorio Git inicializado');
-  } catch (initErr) {
-    console.error('   ❌ Error al inicializar repositorio:', initErr.message);
-    report.errors.push('Error inicializando Git: ' + initErr.message);
+  } catch {
+    console.error('   ❌ Error al inicializar repositorio');
+    report.errors.push('Error inicializando Git');
   }
 }
 console.log('');
@@ -94,7 +93,7 @@ try {
     email: gitUserEmail,
   };
   report.steps.push('Configuración de Git verificada');
-} catch (configErr) {
+} catch {
   console.log('   ⚠️  Configuración de Git no encontrada');
   console.log('   💡 Configura con:');
   console.log('      git config user.name "Tu Nombre"');
@@ -130,7 +129,7 @@ try {
       report.git.remoteConfigured = true;
       report.git.remoteUrl = defaultRemote;
       report.steps.push('Remoto GitHub configurado');
-    } catch (remoteErr) {
+    } catch {
       console.log('   ⚠️  Error al configurar remoto');
       console.log('   💡 Configura manualmente con:');
       console.log(
@@ -139,7 +138,7 @@ try {
       report.warnings.push('No se pudo configurar remoto automáticamente');
     }
   }
-} catch (remoteCheckErr) {
+} catch {
   console.log('   ⚠️  No se pudo verificar remotos');
   report.warnings.push('No se pudo verificar configuración de remotos');
 }
@@ -163,9 +162,9 @@ try {
     description: pkg.description,
   };
   report.steps.push('Información de versión recopilada');
-} catch (pkgErr) {
-  console.error('   ❌ Error leyendo package.json:', pkgErr.message);
-  report.errors.push('Error leyendo package.json: ' + pkgErr.message);
+} catch {
+  console.error('   ❌ Error leyendo package.json');
+  report.errors.push('Error leyendo package.json');
 }
 console.log('');
 
@@ -229,12 +228,12 @@ try {
     const fileCount = statusShort.split('\n').filter(l => l.trim()).length;
     console.log(`   📝 Archivos modificados/nuevos: ${fileCount}`);
     report.git.filesStaged = fileCount;
-  } catch (statusErr) {
+  } catch {
     console.log('   ℹ️  No se pudo obtener lista de archivos');
   }
-} catch (addErr) {
-  console.error('   ❌ Error al agregar archivos:', addErr.message);
-  report.errors.push('Error en git add: ' + addErr.message);
+} catch {
+  console.error('   ❌ Error al agregar archivos');
+  report.errors.push('Error en git add');
 }
 console.log('');
 
@@ -259,7 +258,7 @@ try {
   report.git.commitMessage = commitMsg;
   report.steps.push('Commit creado con éxito');
 } catch (commitErr) {
-  if (commitErr.message.includes('nothing to commit')) {
+  if (commitErr && commitErr.message && commitErr.message.includes('nothing to commit')) {
     console.log('   ℹ️  No hay cambios para commitear');
     report.git.committed = false;
     report.warnings.push('No hay cambios nuevos para commit');
@@ -283,7 +282,7 @@ if (report.git.remoteConfigured && report.git.committed) {
     console.log('   ✅ Sincronización con GitHub completada');
     report.git.pushed = true;
     report.steps.push('Push a GitHub exitoso');
-  } catch (pushErr) {
+  } catch {
     console.log('');
     console.log('   ⚠️  No se pudo realizar push a GitHub');
     console.log('');

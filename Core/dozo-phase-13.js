@@ -1,7 +1,6 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 
 console.log('═══════════════════════════════════════════════════════');
 console.log('🧩 FASE 13 – Stable Build & DMG Sign v2.3.0');
@@ -47,11 +46,9 @@ try {
     execSync('npm install --save-dev electron-builder', { stdio: 'inherit' });
     console.log('   ✅ electron-builder instalado');
     buildReport.steps.push('electron-builder instalado correctamente');
-  } catch (err) {
-    console.error('   ❌ Error instalando electron-builder:', err.message);
-    buildReport.errors.push(
-      'Error instalando electron-builder: ' + err.message
-    );
+  } catch {
+    console.error('   ❌ Error instalando electron-builder');
+    buildReport.errors.push('Error instalando electron-builder');
   }
 }
 console.log('');
@@ -65,9 +62,9 @@ try {
   pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
   console.log(`   ✅ package.json cargado (versión: ${pkg.version})`);
   buildReport.steps.push('package.json cargado correctamente');
-} catch (err) {
-  console.error('   ❌ Error leyendo package.json:', err.message);
-  buildReport.errors.push('Error leyendo package.json: ' + err.message);
+} catch {
+  console.error('   ❌ Error leyendo package.json');
+  buildReport.errors.push('Error leyendo package.json');
   process.exit(1);
 }
 
@@ -173,10 +170,8 @@ try {
   }
   console.log('   ✅ Directorio de distribución limpio');
   buildReport.steps.push('Builds anteriores limpiados');
-} catch (err) {
-  console.warn(
-    `   ⚠️  No se pudieron limpiar builds anteriores: ${err.message}`
-  );
+} catch {
+  console.warn('   ⚠️  No se pudieron limpiar builds anteriores');
   buildReport.warnings.push('No se pudieron limpiar builds anteriores');
 }
 console.log('');
@@ -191,10 +186,10 @@ try {
   console.log('');
   console.log('   ✅ Build completado exitosamente');
   buildReport.steps.push('electron-builder ejecutado correctamente');
-} catch (err) {
+} catch {
   console.error('');
-  console.error('   ❌ Error durante el build:', err.message);
-  buildReport.errors.push('Error durante electron-builder: ' + err.message);
+  console.error('   ❌ Error durante el build');
+  buildReport.errors.push('Error durante electron-builder');
   buildReport.estado = 'ERROR_BUILD';
 }
 console.log('');
@@ -269,9 +264,9 @@ if (dmgGenerated && dmgPath) {
         signed = true;
         buildReport.signed = true;
         buildReport.steps.push('DMG firmado digitalmente');
-      } catch (signErr) {
-        console.warn(`   ⚠️  Error al firmar: ${signErr.message}`);
-        buildReport.warnings.push('Error al firmar DMG: ' + signErr.message);
+      } catch {
+        console.warn('   ⚠️  Error al firmar');
+        buildReport.warnings.push('Error al firmar DMG');
         buildReport.signed = false;
       }
     } else {
@@ -282,7 +277,7 @@ if (dmgGenerated && dmgPath) {
       buildReport.signed = false;
       buildReport.warnings.push('No hay certificado válido - build unsigned');
     }
-  } catch (err) {
+  } catch (_err) {
     console.warn('   ⚠️  No se pudo verificar certificados');
     buildReport.warnings.push('No se pudo verificar certificados');
     buildReport.signed = false;
@@ -316,8 +311,8 @@ Firmado: ${signed ? 'Sí' : 'No'}
 
     buildReport.sha256 = hash;
     buildReport.steps.push('Hash SHA-256 generado y guardado');
-  } catch (err) {
-    console.warn(`   ⚠️  No se pudo generar hash SHA-256: ${err.message}`);
+  } catch {
+    console.warn('   ⚠️  No se pudo generar hash SHA-256');
     buildReport.warnings.push('No se pudo generar hash SHA-256');
   }
 } else {

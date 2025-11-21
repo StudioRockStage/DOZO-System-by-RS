@@ -23,8 +23,6 @@ const PORT = 9092;
 const HOME = process.env.HOME || process.env.USERPROFILE;
 const baseDir = path.resolve(HOME, 'Documents/DOZO System by RS');
 const globalDir = path.join(baseDir, 'to chat gpt', 'Global');
-const workflowDir = path.join(baseDir, 'Workflow DB');
-const reportsDir = path.join(baseDir, 'Archive', 'SessionLogs');
 const latestBuildsDir = path.join(
   baseDir,
   'Latest Builds',
@@ -69,9 +67,9 @@ app.post('/api/validate', (req, res) => {
     execSync(`unzip -t "${zip}"`);
     writeReport({ action: 'validate', status: 'OK', target });
     res.json({ result: 'Validación exitosa', target });
-  } catch (e) {
-    writeReport({ action: 'validate', status: 'ERROR', message: e.message });
-    res.status(500).json({ error: e.message });
+  } catch {
+    writeReport({ action: 'validate', status: 'ERROR', message: 'Validation failed' });
+    res.status(500).json({ error: 'Validation failed' });
   }
 });
 
@@ -88,9 +86,9 @@ app.post('/api/rollback', (req, res) => {
     execSync(`cp -R "${src}/." "${baseDir}/"`);
     writeReport({ action: 'rollback', status: 'OK', backup: lastBackup });
     res.json({ result: 'Rollback completado', backup: lastBackup });
-  } catch (e) {
-    writeReport({ action: 'rollback', status: 'ERROR', message: e.message });
-    res.status(500).json({ error: e.message });
+  } catch {
+    writeReport({ action: 'rollback', status: 'ERROR', message: 'Rollback failed' });
+    res.status(500).json({ error: 'Rollback failed' });
   }
 });
 
@@ -104,9 +102,9 @@ app.post('/api/deploy', (req, res) => {
     execSync(`echo "Simulando instalación desde ${zip}"`);
     writeReport({ action: 'deploy', status: 'OK' });
     res.json({ result: 'Deploy simulado correctamente' });
-  } catch (e) {
-    writeReport({ action: 'deploy', status: 'ERROR', message: e.message });
-    res.status(500).json({ error: e.message });
+  } catch {
+    writeReport({ action: 'deploy', status: 'ERROR', message: 'Deploy failed' });
+    res.status(500).json({ error: 'Deploy failed' });
   }
 });
 
@@ -122,9 +120,9 @@ app.post('/api/cleanup', (req, res) => {
     }
     writeReport({ action: 'cleanup', status: 'OK' });
     res.json({ result: 'Limpieza completada' });
-  } catch (e) {
-    writeReport({ action: 'cleanup', status: 'ERROR', message: e.message });
-    res.status(500).json({ error: e.message });
+  } catch {
+    writeReport({ action: 'cleanup', status: 'ERROR', message: 'Cleanup failed' });
+    res.status(500).json({ error: 'Cleanup failed' });
   }
 });
 

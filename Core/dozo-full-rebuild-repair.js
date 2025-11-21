@@ -11,7 +11,6 @@ import { execSync } from 'child_process';
 // 🔍 Configuración base
 const baseDir = path.resolve(process.env.HOME, 'Documents/DOZO System by RS');
 const appBuildDir = path.join(baseDir, 'AppBuild');
-const dmgDir = path.join(baseDir, 'DistributionBuild');
 const globalDir = path.join(baseDir, 'to chat gpt', 'Global');
 fs.mkdirSync(globalDir, { recursive: true });
 
@@ -73,7 +72,7 @@ try {
     stdio: 'inherit',
   });
   report.actions.push('Rebuild completado');
-} catch (err) {
+} catch {
   report.errors.push('Error al ejecutar el rebuild');
 }
 

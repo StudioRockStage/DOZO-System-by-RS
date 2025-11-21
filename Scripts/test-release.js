@@ -6,10 +6,9 @@
  */
 
 import fs from 'fs';
-import path from 'path';
 import https from 'https';
 
-const TEST_VERSION = '0.0.1';
+const _TEST_VERSION = '0.0.1';
 const RELEASE_DIR = './release/releases';
 const MANIFEST_URL = 'https://updates.rockstage.mx/manifest.json';
 
@@ -129,8 +128,8 @@ async function testRemoteManifest() {
     );
 
     console.log(`   Current version: ${manifest.version}`);
-  } catch (error) {
-    test.assert(false, `CDN access failed: ${error.message}`);
+  } catch {
+    test.assert(false, 'CDN access failed');
   }
 }
 
@@ -170,8 +169,8 @@ async function testUpdateEndpoint() {
   try {
     const data = await fetchUrl('https://updates.rockstage.mx/');
     test.assert(data.includes('DOZO'), 'Root endpoint accessible');
-  } catch (error) {
-    test.assert(false, `Endpoint failed: ${error.message}`);
+  } catch {
+    test.assert(false, 'Endpoint failed');
   }
 }
 

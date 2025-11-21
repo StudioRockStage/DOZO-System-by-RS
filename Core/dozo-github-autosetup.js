@@ -2,7 +2,6 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import readline from 'readline';
 
 console.log('═══════════════════════════════════════════════════════');
 console.log('🧩 DOZO GitHub AutoSetup Script v2.0.0 – Extended Secure Edition');
@@ -49,7 +48,7 @@ try {
   console.log(`      ${ghVersion.split('\n')[0]}`);
   report.validation.ghCliInstalled = true;
   report.steps.push('GitHub CLI verificado');
-} catch (ghErr) {
+} catch {
   console.log('   ⚠️  GitHub CLI no encontrado');
   console.log('');
   console.log('   💡 Para instalar GitHub CLI:');
@@ -78,7 +77,7 @@ if (report.validation.ghCliInstalled) {
       report.validation.authenticated = true;
       report.steps.push('GitHub CLI ya autenticado');
     }
-  } catch (authCheckErr) {
+  } catch {
     console.log('   ⚠️  No estás autenticado con GitHub CLI');
     console.log('   🔐 Iniciando proceso de autenticación...');
     console.log('');
@@ -89,9 +88,9 @@ if (report.validation.ghCliInstalled) {
       console.log('   ✅ Autenticación completada correctamente');
       report.validation.authenticated = true;
       report.steps.push('Autenticación con GitHub completada');
-    } catch (authErr) {
-      console.error('   ❌ Error durante la autenticación:', authErr.message);
-      report.errors.push('Error en autenticación: ' + authErr.message);
+    } catch {
+      console.error('   ❌ Error durante la autenticación');
+      report.errors.push('Error en autenticación');
       report.validation.authenticated = false;
     }
   }
@@ -114,7 +113,7 @@ try {
     currentEmail = execSync('git config user.email', {
       encoding: 'utf8',
     }).trim();
-  } catch (checkErr) {
+  } catch {
     // No hay configuración, se configurará
   }
 
@@ -140,9 +139,9 @@ try {
 
   report.validation.gitConfigured = true;
   report.steps.push('Identidad Git configurada');
-} catch (configErr) {
-  console.error('   ❌ Error al configurar Git:', configErr.message);
-  report.errors.push('Error configurando Git: ' + configErr.message);
+} catch {
+  console.error('   ❌ Error al configurar Git');
+  report.errors.push('Error configurando Git');
   report.validation.gitConfigured = false;
 }
 console.log('');
@@ -182,9 +181,9 @@ try {
     report.validation.remoteConfigured = true;
     report.steps.push('Remoto GitHub configurado');
   }
-} catch (remoteErr) {
-  console.error('   ❌ Error con el remoto:', remoteErr.message);
-  report.errors.push('Error configurando remoto: ' + remoteErr.message);
+} catch {
+  console.error('   ❌ Error con el remoto');
+  report.errors.push('Error configurando remoto');
   report.validation.remoteConfigured = false;
 }
 console.log('');
@@ -193,12 +192,11 @@ console.log('');
 console.log('🔍 PASO 5: Gestionando token personal de GitHub...');
 
 const tokenPath = path.join(os.homedir(), '.dozo_github_token');
-let tokenStored = false;
+  const _tokenStored = false;
 
 if (fs.existsSync(tokenPath)) {
   console.log('   ✅ Token personal ya existe en:');
   console.log(`      ${tokenPath}`);
-  tokenStored = true;
   report.validation.tokenStored = true;
   report.steps.push('Token personal verificado');
 } else {
@@ -230,15 +228,14 @@ if (fs.existsSync(tokenPath)) {
           }
         );
         console.log('   ✅ Token guardado en Keychain de macOS');
-      } catch (keychainErr) {
+      } catch {
         console.log('   ⚠️  No se pudo guardar en Keychain (puede ya existir)');
       }
 
-      tokenStored = true;
       report.validation.tokenStored = true;
       report.steps.push('Token personal creado y guardado');
     }
-  } catch (tokenErr) {
+  } catch {
     console.log('   ⚠️  No se pudo obtener token automáticamente');
     console.log('   💡 Puedes crearlo manualmente después');
     report.warnings.push('Token personal no creado automáticamente');
@@ -271,7 +268,7 @@ try {
   }
 
   report.steps.push('Estado del repositorio verificado');
-} catch (statusErr) {
+} catch {
   console.log('   ⚠️  No se pudo verificar estado del repositorio');
   report.warnings.push('No se pudo verificar git status');
 }
@@ -292,7 +289,7 @@ if (report.validation.remoteConfigured && report.validation.gitConfigured) {
         stdio: 'pipe',
       });
       console.log('   ✅ Pull ejecutado (sincronización con remoto)');
-    } catch (pullErr) {
+    } catch {
       // Si falla el pull, puede ser porque el repo está vacío o no hay branch main
       console.log('   ℹ️  Pull omitido (posible repositorio nuevo)');
     }
@@ -304,7 +301,7 @@ if (report.validation.remoteConfigured && report.validation.gitConfigured) {
     console.log('   ✅ Push exitoso a GitHub remoto');
     report.validation.pushSuccessful = true;
     report.steps.push('Push a GitHub exitoso');
-  } catch (pushErr) {
+  } catch {
     console.log('');
     console.log('   ⚠️  No se pudo hacer push automático');
     console.log('');
@@ -339,7 +336,7 @@ try {
 
   report.finalStatus = finalStatus;
   report.steps.push('Estado final verificado');
-} catch (statusErr) {
+} catch {
   console.log('   ⚠️  No se pudo obtener git status');
 }
 console.log('');

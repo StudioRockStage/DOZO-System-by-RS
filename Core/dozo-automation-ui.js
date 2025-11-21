@@ -42,9 +42,9 @@ async function callEndpoint(endpoint) {
     const data = await res.json();
     report.actions.push({ endpoint, status: 'OK', response: data });
     return data;
-  } catch (err) {
-    report.errors.push({ endpoint, error: err.message });
-    return { error: err.message };
+  } catch {
+    report.errors.push({ endpoint, error: 'Request failed' });
+    return { error: 'Request failed' };
   }
 }
 

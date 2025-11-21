@@ -23,8 +23,8 @@ function hashFile(filePath) {
     if (!fs.existsSync(filePath)) return null;
     const data = fs.readFileSync(filePath);
     return crypto.createHash('sha256').update(data).digest('hex');
-  } catch (err) {
-    return `ERROR: ${err.message}`;
+  } catch {
+    return 'ERROR: Failed to read file';
   }
 }
 
@@ -81,8 +81,8 @@ function checkDirectoryIntegrity(dirPath) {
       sizeKB: (totalSize / 1024).toFixed(2),
       sizeMB: (totalSize / (1024 * 1024)).toFixed(2),
     };
-  } catch (err) {
-    return { status: 'ERROR', error: err.message };
+  } catch {
+    return { status: 'ERROR', error: 'Failed to get directory info' };
   }
 }
 

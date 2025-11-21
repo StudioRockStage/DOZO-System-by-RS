@@ -23,8 +23,8 @@ const root = process.cwd();
 function run(cmd, options = {}) {
   try {
     return execSync(cmd, { stdio: 'pipe', encoding: 'utf8', ...options });
-  } catch (err) {
-    console.error(`❌ Error al ejecutar: ${cmd}\n${err.message}`);
+  } catch {
+    console.error(`❌ Error al ejecutar: ${cmd}`);
     process.exit(1);
   }
 }
@@ -77,7 +77,7 @@ try {
   console.log('✅ FASE 16.1 COMPLETADA – Repositorio sincronizado con GitHub');
   console.log(`📂 Repositorio: ${repoUrl}`);
   console.log('═══════════════════════════════════════════════════════');
-} catch (err) {
-  console.error('❌ Error general durante la sincronización:', err.message);
+} catch {
+  console.error('❌ Error general durante la sincronización');
   process.exit(1);
 }

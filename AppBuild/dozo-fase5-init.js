@@ -83,7 +83,7 @@ try {
     stdio: 'inherit',
   });
   console.log('   ✅ Reporte generado\n');
-} catch (error) {
+} catch {
   console.log('   ⚠️  Error al generar reporte\n');
 }
 

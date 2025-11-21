@@ -37,7 +37,7 @@ function fetchManifest(url) {
         res.on('end', () => {
           try {
             resolve(JSON.parse(data));
-          } catch (error) {
+          } catch {
             reject(new Error('Invalid JSON response'));
           }
         });
@@ -74,7 +74,7 @@ export async function checkForUpdates(endpoint, currentVersion) {
       available: false,
       currentVersion,
     };
-  } catch (error) {
-    throw new Error(`Failed to check for updates: ${error.message}`);
+  } catch {
+    throw new Error('Failed to check for updates');
   }
 }

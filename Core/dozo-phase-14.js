@@ -1,7 +1,6 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 
 console.log('═══════════════════════════════════════════════════════');
 console.log('🧩 FASE 14 – App Notarization & Public Release v2.4.0');
@@ -147,9 +146,9 @@ try {
       'No hay certificado Developer ID Application disponible'
     );
   }
-} catch (err) {
+} catch {
   console.log('   ⚠️  No se pudo verificar certificados');
-  report.warnings.push('No se pudo verificar certificados: ' + err.message);
+  report.warnings.push('No se pudo verificar certificados');
 }
 console.log('');
 
@@ -177,19 +176,19 @@ if (certificateAvailable) {
 
     // Verificar la firma
     try {
-      const verifyOutput = execSync(
+      const _verifyOutput = execSync(
         `codesign -dv --verbose=4 "${dmgPath}" 2>&1`,
         { encoding: 'utf8' }
       );
       console.log('   ✅ Firma verificada correctamente');
       report.codesigning.verified = true;
-    } catch (verifyErr) {
+    } catch {
       console.warn('   ⚠️  No se pudo verificar la firma');
       report.warnings.push('No se pudo verificar la firma aplicada');
     }
-  } catch (signErr) {
-    console.error('   ❌ Error al firmar:', signErr.message);
-    report.errors.push('Error al firmar DMG: ' + signErr.message);
+  } catch {
+    console.error('   ❌ Error al firmar');
+    report.errors.push('Error al firmar DMG');
     report.codesigning.successful = false;
   }
 } else {
@@ -246,20 +245,20 @@ if (appleIdConfigured && report.codesigning.successful) {
       console.log('   ✅ Ticket de notarización aplicado (stapled)');
       report.notarization.ticketStapled = true;
       report.steps.push('Ticket de notarización aplicado al DMG');
-    } catch (stapleErr) {
-      console.warn('   ⚠️  No se pudo aplicar el ticket:', stapleErr.message);
+    } catch {
+      console.warn('   ⚠️  No se pudo aplicar el ticket');
       report.warnings.push('No se pudo aplicar ticket de notarización');
       report.notarization.ticketStapled = false;
     }
-  } catch (notarizeErr) {
+  } catch {
     console.error('');
-    console.error('   ❌ Error durante la notarización:', notarizeErr.message);
+    console.error('   ❌ Error durante la notarización');
     console.error('   ℹ️  Posibles causas:');
     console.error('      - Contraseña incorrecta en keychain');
     console.error('      - Sin conexión a internet');
     console.error('      - DMG no firmado correctamente');
     console.error('      - Credenciales de Apple ID incorrectas');
-    report.errors.push('Error en notarización: ' + notarizeErr.message);
+    report.errors.push('Error en notarización');
     report.notarization.successful = false;
   }
 } else {
@@ -326,9 +325,9 @@ El resultado debe coincidir con: ${hash}
 
   report.release.sha256 = hash;
   report.steps.push('Hash SHA-256 generado y guardado');
-} catch (hashErr) {
-  console.error('   ❌ Error generando hash:', hashErr.message);
-  report.errors.push('Error generando hash SHA-256: ' + hashErr.message);
+} catch {
+  console.error('   ❌ Error generando hash');
+  report.errors.push('Error generando hash SHA-256');
 }
 console.log('');
 
@@ -426,9 +425,9 @@ Debe coincidir con el hash en \`SHA256-v${dmgVersion}.txt\`
 
   console.log(`   📦 Tamaño final: ${releaseSizeMB} MB`);
   console.log(`   📂 Ubicación: PublicRelease/${releaseDmgName}`);
-} catch (pubErr) {
-  console.error('   ❌ Error al publicar:', pubErr.message);
-  report.errors.push('Error al publicar en PublicRelease: ' + pubErr.message);
+} catch {
+  console.error('   ❌ Error al publicar');
+  report.errors.push('Error al publicar en PublicRelease');
   report.release.published = false;
 }
 console.log('');

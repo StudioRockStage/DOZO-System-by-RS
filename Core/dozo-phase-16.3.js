@@ -60,8 +60,8 @@ function monitorTelemetry() {
       const telemetry = JSON.parse(fs.readFileSync(telemetryFile, 'utf8'));
       broadcast('telemetry_update', telemetry);
       console.log(chalk.green('✅ Evento emitido: telemetry_update'));
-    } catch (err) {
-      console.log(chalk.red(`❌ Error leyendo telemetría: ${err.message}`));
+    } catch {
+      console.log(chalk.red('❌ Error leyendo telemetría'));
     }
   }
 }
@@ -76,8 +76,8 @@ function monitorCommits() {
         broadcast('commit_update', { commit: commits[0].commit.message });
         console.log(chalk.magenta('📝 Último commit emitido al Dashboard'));
       }
-    } catch (err) {
-      console.log(chalk.red(`❌ Error leyendo commits: ${err.message}`));
+    } catch {
+      console.log(chalk.red('❌ Error leyendo commits'));
     }
   }
 }
@@ -157,8 +157,8 @@ wss.on('connection', ws => {
     console.log(chalk.yellow('📡 Cliente desconectado del Event Bridge'));
   });
 
-  ws.on('error', err => {
-    console.log(chalk.red(`❌ Error en conexión WebSocket: ${err.message}`));
+  ws.on('error', () => {
+    console.log(chalk.red('❌ Error en conexión WebSocket'));
   });
 });
 

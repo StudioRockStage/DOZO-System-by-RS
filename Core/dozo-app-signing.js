@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 import crypto from 'crypto';
-import os from 'os';
 
 const HOME = process.env.HOME || process.env.USERPROFILE;
 const baseDir = path.resolve(HOME, 'Documents/DOZO System by RS');
@@ -34,9 +33,9 @@ try {
   if (!fs.existsSync(dmgPath)) throw new Error('Archivo .dmg no encontrado');
   console.log('✅ Instalador detectado:', dmgPath);
   report.steps.push('DMG encontrado');
-} catch (err) {
-  console.error('❌', err.message);
-  report.errors.push(err.message);
+} catch {
+  console.error('❌ Error procesando DMG');
+  report.errors.push('Error procesando DMG');
 }
 
 // 2️⃣ Calcular checksum SHA-256
@@ -48,7 +47,7 @@ try {
   console.log('🔐 Checksum SHA-256:', hex);
   report.steps.push('Checksum generado');
   report.checksum = hex;
-} catch (err) {
+} catch {
   report.errors.push('Error generando checksum');
 }
 
@@ -62,7 +61,7 @@ try {
   );
   console.log('✅ Firma completada');
   report.steps.push('App firmada correctamente');
-} catch (err) {
+} catch {
   console.warn('⚠️ No se encontró certificado válido o firma omitida');
   report.warnings.push(
     'Firma omitida: no se detectó certificado Apple Developer válido'
@@ -76,7 +75,7 @@ try {
   });
   console.log('✅ Validación de firma completada correctamente');
   report.steps.push('Validación completada');
-} catch (err) {
+} catch {
   report.errors.push(
     'Error en validación de firma (puede ser omitido si no hay certificado)'
   );

@@ -21,7 +21,7 @@ const iconPath = path.join(
   baseDir,
   'Dashboard/public/assets/rockstage-icon.icns'
 );
-const pkgJson = path.join(appDir, 'package.json');
+const _pkgJson = path.join(appDir, 'package.json');
 
 console.log('══════════════════════════════════════════════════════════════');
 console.log('🧩 DOZO Control Center – FASE 6: Runtime Optimizer v1.0.0');
@@ -43,8 +43,8 @@ if (fs.existsSync(iconPath)) {
     fs.copyFileSync(iconPath, path.join(appDir, 'icon.icns'));
     console.log('✅ Icono RockStage detectado e integrado');
     report.icon_found = true;
-  } catch (err) {
-    report.errors.push(`Error copiando icono: ${err.message}`);
+  } catch {
+    report.errors.push('Error copiando icono');
   }
 } else {
   console.log('⚠️ No se encontró icono RockStage en assets/');
@@ -59,7 +59,7 @@ try {
   execSync('npm cache clean --force', { cwd: appDir });
   execSync('npm prune --production', { cwd: appDir });
   report.optimizations.push('Cache y dependencias optimizadas');
-} catch (err) {
+} catch (_err) {
   report.warnings.push('Error durante la optimización de dependencias');
 }
 
@@ -90,8 +90,8 @@ try {
   execSync(`launchctl load -w "${plistPath}"`);
   report.optimizations.push('Auto-launch configurado correctamente');
   console.log('✅ Auto-launch DOZO configurado');
-} catch (err) {
-  report.errors.push(`Error configurando auto-launch: ${err.message}`);
+} catch {
+  report.errors.push('Error configurando auto-launch');
 }
 
 // 4️⃣ Generar reporte de rendimiento

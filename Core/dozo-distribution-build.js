@@ -10,7 +10,6 @@ Objetivo:
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
-import os from 'os';
 
 const HOME = process.env.HOME || process.env.USERPROFILE;
 const baseDir = path.resolve(HOME, 'Documents/DOZO System by RS');
@@ -46,9 +45,9 @@ try {
     throw new Error('No se encontró rockstage-icon.icns');
   console.log('✅ Icono RockStage encontrado');
   report.steps.push('Icono verificado');
-} catch (err) {
-  console.error('⚠️', err.message);
-  report.warnings.push(err.message);
+} catch {
+  console.error('⚠️ Error procesando icono');
+  report.warnings.push('Error procesando icono');
 }
 
 // 2️⃣ Instalar electron-builder si falta
@@ -58,7 +57,7 @@ try {
     stdio: 'inherit',
   });
   report.steps.push('Electron-builder verificado');
-} catch (err) {
+} catch {
   report.errors.push('Error instalando electron-builder');
 }
 
@@ -101,7 +100,7 @@ try {
     stdio: 'inherit',
   });
   report.steps.push('Empaquetado completado');
-} catch (err) {
+} catch {
   report.errors.push('Error durante el build de distribución');
 }
 

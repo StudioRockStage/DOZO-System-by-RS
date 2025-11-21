@@ -8,7 +8,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
 
 const COLORS = {
   reset: '\x1b[0m',

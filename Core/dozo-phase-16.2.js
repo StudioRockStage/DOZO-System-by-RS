@@ -36,7 +36,7 @@ if (!fs.existsSync(workflowDir)) {
 function run(cmd) {
   try {
     return execSync(cmd, { encoding: 'utf8', stdio: 'pipe' }).trim();
-  } catch (err) {
+  } catch (_err) {
     return null;
   }
 }
@@ -131,9 +131,9 @@ ${commitMessages}
       );
       console.log(chalk.gray('   Continuando sin datos de commits remotos...'));
     }
-  } catch (err) {
+  } catch {
     spinner2.fail(chalk.red('❌ Error al conectar con GitHub API'));
-    console.log(chalk.gray(`   Motivo: ${err.message}`));
+    console.log(chalk.gray('   Motivo: Connection failed'));
   }
 
   console.log(

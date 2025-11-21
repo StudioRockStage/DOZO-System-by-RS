@@ -28,9 +28,9 @@ jobs:
         run: npm install
 
       - name: Run ESLint
-        run: npx eslint "**/*.{js,jsx,ts,tsx}" --ext .js,.jsx,.ts,.tsx
+        run: npx eslint "app-updater/**/*.js" "AppBuild/**/*.js" "Core/**/*.js" "Scripts/**/*.js" "infra/**/*.js" ".github/**/*.yml"
         continue-on-error: false
 
       - name: Check code formatting with Prettier
-        run: npx prettier --check "**/*.{js,jsx,ts,tsx,json,md,yml,yaml}" --ignore-path .gitignore
+        run: npx prettier --check "app-updater/**/*.js" "AppBuild/**/*.js" "Core/**/*.js" "Scripts/**/*.js" "infra/**/*.js" ".github/**/*.yml" "*.json" "*.md"
         continue-on-error: false

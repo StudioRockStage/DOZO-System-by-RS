@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 
 console.log('═══════════════════════════════════════════════════════');
 console.log('🧩 FASE 15 – Public Sync & Release Dashboard v2.5.3');
@@ -13,7 +12,7 @@ const root = process.cwd();
 const dashboardDir = path.join(root, 'Dashboard', 'public', 'releases');
 const releaseDir = path.join(root, 'PublicRelease');
 const reportDir = path.join(root, 'DozoCoreReport');
-const distDir = path.join(root, 'DistributionBuild');
+const _distDir = path.join(root, 'DistributionBuild');
 const serverDir = path.join(root, 'server');
 const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 const timestampISO = new Date().toISOString();
@@ -145,7 +144,7 @@ for (let i = 1; i <= 14; i++) {
           timestamp: content.timestamp || content.fecha || null,
           estado: content.estado || content.status || 'unknown',
         });
-      } catch (err) {
+      } catch (_err) {
         console.warn(`   ⚠️  Error leyendo ${file}`);
       }
     });
@@ -286,8 +285,8 @@ app.get("/api/releases", (req, res) => {
       fs.readFileSync(path.join(releasesPath, "versions.json"), "utf8")
     );
     res.json(versions);
-  } catch (err) {
-    res.status(500).json({ error: "Error loading releases", message: err.message });
+  } catch {
+    res.status(500).json({ error: 'Error loading releases', message: 'Failed to load releases' });
   }
 });
 
@@ -297,7 +296,7 @@ app.get("/api/hashes", (req, res) => {
       fs.readFileSync(path.join(releasesPath, "hashes.json"), "utf8")
     );
     res.json(hashes);
-  } catch (err) {
+  } catch (_err) {
     res.status(500).json({ error: "Error loading hashes", message: err.message });
   }
 });
@@ -308,7 +307,7 @@ app.get("/api/logs", (req, res) => {
       fs.readFileSync(path.join(releasesPath, "release-logs.json"), "utf8")
     );
     res.json(logs);
-  } catch (err) {
+  } catch (_err) {
     res.status(500).json({ error: "Error loading logs", message: err.message });
   }
 });
@@ -319,7 +318,7 @@ app.get("/api/phases", (req, res) => {
       fs.readFileSync(path.join(releasesPath, "phases.json"), "utf8")
     );
     res.json(phases);
-  } catch (err) {
+  } catch (_err) {
     res.status(500).json({ error: "Error loading phases", message: err.message });
   }
 });
@@ -710,7 +709,7 @@ const htmlCode = `<!DOCTYPE html>
           logsContainer.innerHTML = '<p class="info">No hay logs disponibles</p>';
         }
 
-      } catch (error) {
+      } catch (_error) {
         console.error('Error loading dashboard:', error);
         document.querySelectorAll('.loading').forEach(el => {
           el.textContent = 'Error cargando datos';
